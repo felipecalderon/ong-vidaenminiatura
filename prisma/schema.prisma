@@ -1,0 +1,132 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Rol {
+  USUARIO
+  AUTOR
+  ADMINISTRADOR
+}
+
+enum EstadoUsuario {
+  ACTIVO
+  SUSPENDIDO
+}
+
+enum EstadoPeticion {
+  BORRADOR
+  PUBLICADA
+  CERRADA
+  ARCHIVADA
+}
+
+enum EstadoNoticia {
+  BORRADOR
+  PUBLICADA
+  ARCHIVADA
+}
+
+model usuario {
+  id                  String        @id @default(uuid()) @db.Uuid
+  auth0_id            String        @unique
+  correo              String        @unique
+  nombre              String
+  nickname            String?
+  given_name          String?
+  family_name         String?
+  picture             String?
+  email_verified      Boolean?
+  rol                 Rol           @default(USUARIO)
+  estado              EstadoUsuario @default(ACTIVO)
+  fecha_creacion      DateTime      @default(now())
+  fecha_actualizacion DateTime      @updatedAt
+
+  peticiones peticion[]
+  noticias   noticia[] @relation("AutorNoticias")
+  firmas     firma[]
+
+  @@index([rol])
+  @@index([estado])
+}
+
+model categoria {
+  id             String     @id @default(uuid()) @db.Uuid
+  nombre         String     @unique
+  slug           String     @unique
+  descripcion    String?
+  color          String?
+  activo         Boolean    @default(true)
+  fecha_creacion DateTime   @default(now())
+  fecha_actualizacion DateTime @updatedAt
+
+  peticiones peticion[]
+  noticias   noticia[]
+
+  @@index([activo])
+}
+
+model peticion {
+  id                  String         @id @default(uuid()) @db.Uuid
+  titulo              String
+  slug                String         @unique
+  resumen             String
+  contenido           String
+  estado              EstadoPeticion @default(BORRADOR)
+  cantidad_firmas     Int            @default(0)
+  categoria_id        String         @db.Uuid
+  usuario_id          String         @db.Uuid
+  fecha_publicacion   DateTime?
+  fecha_creacion      DateTime       @default(now())
+  fecha_actualizacion DateTime       @updatedAt
+
+  categoria categoria @relation(fields: [categoria_id], references: [id], onDelete: Restrict)
+  usuario   usuario   @relation(fields: [usuario_id], references: [id], onDelete: Restrict)
+  firmas    firma[]
+
+  @@index([estado, fecha_publicacion])
+  @@index([categoria_id])
+  @@index([usuario_id])
+  @@index([usuario_id, fecha_creacion])
+  @@index([cantidad_firmas])
+}
+
+model firma {
+  id             String   @id @default(uuid()) @db.Uuid
+  usuario_id     String   @db.Uuid
+  peticion_id    String   @db.Uuid
+  fecha_creacion DateTime @default(now())
+
+  usuario  usuario  @relation(fields: [usuario_id], references: [id], onDelete: Restrict)
+  peticion peticion @relation(fields: [peticion_id], references: [id], onDelete: Cascade)
+
+  @@unique([usuario_id, peticion_id])
+  @@index([usuario_id])
+  @@index([peticion_id])
+}
+
+model noticia {
+  id                  String         @id @default(uuid()) @db.Uuid
+  titulo              String
+  slug                String         @unique
+  resumen             String
+  contenido           String
+  estado              EstadoNoticia  @default(BORRADOR)
+  categoria_id        String         @db.Uuid
+  autor_id            String         @db.Uuid
+  fecha_publicacion   DateTime?
+  fecha_creacion      DateTime       @default(now())
+  fecha_actualizacion DateTime       @updatedAt
+
+  categoria categoria @relation(fields: [categoria_id], references: [id], onDelete: Restrict)
+  autor     usuario   @relation("AutorNoticias", fields: [autor_id], references: [id], onDelete: Restrict)
+
+  @@index([estado, fecha_publicacion])
+  @@index([categoria_id])
+  @@index([autor_id])
+  @@index([autor_id, fecha_creacion])
+}
