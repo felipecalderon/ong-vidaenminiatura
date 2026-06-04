@@ -1,5 +1,6 @@
 import { Bug, Menu } from "lucide-react";
 import Link from "next/link";
+import { AccountAccess } from "@/components/account-access";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
@@ -8,9 +9,11 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import type { UsuarioAutenticadoResumen } from "@/features/usuarios/types";
 
 interface HeaderProps {
   currentTheme: "light" | "dark";
+  usuarioAutenticado: UsuarioAutenticadoResumen | null;
 }
 
 const navLinks = [
@@ -20,7 +23,7 @@ const navLinks = [
   { href: "/nosotros", label: "Nosotros" },
 ];
 
-export function Header({ currentTheme }: HeaderProps) {
+export function Header({ currentTheme, usuarioAutenticado }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b-4 border-black bg-secondary dark:border-white">
       <div className="container mx-auto px-4">
@@ -48,6 +51,7 @@ export function Header({ currentTheme }: HeaderProps) {
 
           <div className="flex items-center gap-2">
             <ThemeToggle currentTheme={currentTheme} />
+            <AccountAccess usuario={usuarioAutenticado} variant="desktop" />
 
             <Link href="/peticiones/crear" className="hidden sm:block">
               <Button className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
@@ -56,21 +60,19 @@ export function Header({ currentTheme }: HeaderProps) {
             </Link>
 
             <Sheet>
-              <SheetTrigger asChild className="md:hidden">
-                <Button
-                  variant="outline"
-                  size="icon"
-                  className="border-2 border-black dark:border-white"
-                >
-                  <Menu className="h-5 w-5" />
-                  <span className="sr-only">Abrir menú</span>
-                </Button>
+              <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-md border-2 border-black bg-background shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] md:hidden">
+                <Menu className="h-5 w-5" />
+                <span className="sr-only">Abrir menú</span>
               </SheetTrigger>
               <SheetContent
                 side="right"
                 className="border-l-4 border-black bg-background dark:border-white"
               >
                 <div className="mt-8 flex flex-col gap-4">
+                  <AccountAccess
+                    usuario={usuarioAutenticado}
+                    variant="mobile"
+                  />
                   {navLinks.map((link) => (
                     <SheetClose asChild key={link.href}>
                       <Link

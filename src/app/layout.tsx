@@ -3,6 +3,7 @@ import { Figtree, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
 import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
@@ -32,7 +33,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const currentTheme = await getTheme();
+  const [currentTheme, usuarioAutenticado] = await Promise.all([
+    getTheme(),
+    obtenerUsuarioAutenticado(),
+  ]);
 
   return (
     <html
@@ -49,7 +53,10 @@ export default async function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground">
         <div className="flex min-h-screen flex-col">
-          <Header currentTheme={currentTheme} />
+          <Header
+            currentTheme={currentTheme}
+            usuarioAutenticado={usuarioAutenticado}
+          />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
