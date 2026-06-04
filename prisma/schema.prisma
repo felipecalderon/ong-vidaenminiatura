@@ -76,8 +76,10 @@ model peticion {
   slug                String         @unique
   resumen             String
   contenido           String
+  imagen              String?
   estado              EstadoPeticion @default(BORRADOR)
   cantidad_firmas     Int            @default(0)
+  meta_firmas         Int            @default(1000)
   categoria_id        String         @db.Uuid
   usuario_id          String         @db.Uuid
   fecha_publicacion   DateTime?
@@ -115,6 +117,7 @@ model noticia {
   slug                String         @unique
   resumen             String
   contenido           String
+  imagen              String?
   estado              EstadoNoticia  @default(BORRADOR)
   categoria_id        String         @db.Uuid
   autor_id            String         @db.Uuid
@@ -130,3 +133,4 @@ model noticia {
   @@index([autor_id])
   @@index([autor_id, fecha_creacion])
 }
+

@@ -3,10 +3,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import type { Noticia } from "@/lib/mock-data";
+
+interface NoticiaCardNoticia {
+  id: string;
+  slug: string;
+  titulo: string;
+  resumen: string;
+  imagen: string | null;
+  fecha_publicacion: Date | null;
+  categoria: { nombre: string; color: string | null } | null;
+  autor: { nombre: string } | null;
+}
 
 interface NoticiaCardProps {
-  noticia: Noticia;
+  noticia: NoticiaCardNoticia;
   featured?: boolean;
 }
 
@@ -28,7 +38,10 @@ export function NoticiaCard({ noticia, featured = false }: NoticiaCardProps) {
           className={`relative overflow-hidden ${featured ? "md:w-1/2 aspect-[4/3] md:aspect-auto" : "aspect-video"}`}
         >
           <Image
-            src={noticia.imagen}
+            src={
+              noticia.imagen ??
+              "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&h=400&fit=crop"
+            }
             alt={noticia.titulo}
             fill
             className="object-cover group-hover:scale-105 transition-transform duration-300"

@@ -1,0 +1,54 @@
+import type { Metadata } from "next";
+import { NoticiaCard } from "@/features/noticias/components/noticia-card";
+import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries";
+
+export const metadata: Metadata = {
+  title: "Noticias",
+  description:
+    "Mantente informado sobre conservación de insectos y arácnidos. Artículos y novedades de la Fundación InsectosVivos.",
+};
+
+export default async function NoticiasPage() {
+  const noticias = await obtenerListaNoticiasPublicadas();
+
+  return (
+    <div className="container mx-auto px-4 py-12">
+      <div className="space-y-4 mb-12">
+        <div className="inline-block bg-primary text-primary-foreground px-4 py-2 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] font-bold">
+          📰 Últimas Noticias
+        </div>
+        <h1 className="text-4xl md:text-5xl font-bold">
+          Actualidad en conservación
+        </h1>
+        <p className="text-lg text-muted-foreground max-w-2xl">
+          Artículos, victorias y descubrimientos sobre el mundo de los insectos
+          y arácnidos que merecen ser conocidos.
+        </p>
+      </div>
+
+      {noticias.length === 0 ? (
+        <div className="p-12 text-center border-4 border-black dark:border-white bg-muted">
+          <p className="text-xl font-semibold">
+            No hay noticias publicadas todavía.
+          </p>
+          <p className="text-muted-foreground mt-2">
+            ¡Vuelve pronto para estar informado!
+          </p>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {noticias.map((noticia) => (
+            <NoticiaCard
+              key={noticia.id}
+              noticia={{
+                ...noticia,
+                categoria: noticia.categoria ?? null,
+                autor: noticia.autor ?? null,
+              }}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
