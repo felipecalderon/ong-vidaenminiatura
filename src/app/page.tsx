@@ -1,13 +1,13 @@
-import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight, Bug, Leaf, Shield, Users } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import {
-  getPeticionesPublicadas,
-  getNoticiasPublicadas,
-} from "@/lib/mock-data";
-import { PeticionCard } from "@/features/peticiones/components/peticion-card";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
+import { PeticionCard } from "@/features/peticiones/components/peticion-card";
+import {
+  getNoticiasPublicadas,
+  getPeticionesPublicadas,
+} from "@/lib/mock-data";
 
 export default function HomePage() {
   const peticiones = getPeticionesPublicadas().slice(0, 4);
@@ -86,9 +86,9 @@ export default function HomePage() {
               { icon: Shield, value: "25+", label: "Peticiones activas" },
               { icon: Bug, value: "12", label: "Victorias logradas" },
               { icon: Leaf, value: "100+", label: "Especies protegidas" },
-            ].map((stat, index) => (
+            ].map((stat) => (
               <div
-                key={index}
+                key={stat.label}
                 className="p-6 bg-card border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] text-center"
               >
                 <stat.icon className="h-8 w-8 mx-auto mb-2 text-primary" />
@@ -230,9 +230,9 @@ export default function HomePage() {
                 src: "https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=300&h=300&fit=crop",
                 alt: "Mariquita",
               },
-            ].map((img, index) => (
+            ].map((img) => (
               <div
-                key={index}
+                key={img.alt}
                 className="aspect-square relative border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] transition-all"
               >
                 <Image

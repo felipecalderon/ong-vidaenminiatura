@@ -1,18 +1,21 @@
 "use client";
 
-import { useState, useTransition } from "react";
 import { Check, Loader2 } from "lucide-react";
+import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
 
 interface SignPetitionFormProps {
   peticionId: string;
   peticionTitulo: string;
 }
 
-export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFormProps) {
+export function SignPetitionForm({
+  peticionId,
+  peticionTitulo,
+}: SignPetitionFormProps) {
   const [isPending, startTransition] = useTransition();
   const [signed, setSigned] = useState(false);
   const [showForm, setShowForm] = useState(false);
@@ -21,7 +24,7 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
     e.preventDefault();
     startTransition(async () => {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1500));
       setSigned(true);
     });
   };
@@ -34,7 +37,8 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
         </div>
         <h3 className="text-2xl font-bold mb-2">¡Gracias por firmar!</h3>
         <p className="text-muted-foreground">
-          Tu firma ha sido registrada. Comparte esta petición para aumentar su impacto.
+          Tu firma ha sido registrada. Comparte esta petición para aumentar su
+          impacto.
         </p>
       </div>
     );
@@ -53,11 +57,14 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-6 border-4 border-black dark:border-white bg-card">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 p-6 border-4 border-black dark:border-white bg-card"
+    >
       <h3 className="text-xl font-bold border-b-2 border-black dark:border-white pb-2">
         Firmar petición
       </h3>
-      
+
       <div className="space-y-2">
         <Label htmlFor="nombre" className="font-semibold">
           Nombre completo *
@@ -70,7 +77,7 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
           className="border-2 border-black dark:border-white"
         />
       </div>
-      
+
       <div className="space-y-2">
         <Label htmlFor="email" className="font-semibold">
           Correo electrónico *
@@ -84,7 +91,7 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
           className="border-2 border-black dark:border-white"
         />
       </div>
-      
+
       <div className="space-y-2">
         <Label htmlFor="comentario" className="font-semibold">
           Comentario (opcional)
@@ -96,30 +103,36 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
           className="border-2 border-black dark:border-white"
         />
       </div>
-      
+
       <div className="flex items-start gap-3">
-        <Checkbox 
-          id="publico" 
+        <Checkbox
+          id="publico"
           name="publico"
           className="border-2 border-black dark:border-white mt-1"
         />
-        <Label htmlFor="publico" className="text-sm text-muted-foreground cursor-pointer">
+        <Label
+          htmlFor="publico"
+          className="text-sm text-muted-foreground cursor-pointer"
+        >
           Mostrar mi nombre públicamente en la lista de firmantes
         </Label>
       </div>
-      
+
       <div className="flex items-start gap-3">
-        <Checkbox 
-          id="newsletter" 
+        <Checkbox
+          id="newsletter"
           name="newsletter"
           defaultChecked
           className="border-2 border-black dark:border-white mt-1"
         />
-        <Label htmlFor="newsletter" className="text-sm text-muted-foreground cursor-pointer">
+        <Label
+          htmlFor="newsletter"
+          className="text-sm text-muted-foreground cursor-pointer"
+        >
           Recibir actualizaciones sobre esta petición y otras causas similares
         </Label>
       </div>
-      
+
       <Button
         type="submit"
         size="lg"
@@ -135,9 +148,10 @@ export function SignPetitionForm({ peticionId, peticionTitulo }: SignPetitionFor
           "Confirmar firma"
         )}
       </Button>
-      
+
       <p className="text-xs text-muted-foreground text-center">
-        Al firmar, aceptas nuestros términos de servicio y política de privacidad.
+        Al firmar, aceptas nuestros términos de servicio y política de
+        privacidad.
       </p>
     </form>
   );

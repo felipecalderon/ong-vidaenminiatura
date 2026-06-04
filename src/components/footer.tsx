@@ -1,5 +1,5 @@
+import { Bug, Globe, Heart, Mail, MessageCircle, Rss } from "lucide-react";
 import Link from "next/link";
-import { Bug, Heart, Mail, Twitter, Facebook, Instagram } from "lucide-react";
 
 export function Footer() {
   return (
@@ -15,7 +15,8 @@ export function Footer() {
               <span className="font-bold text-xl">InsectosVivos</span>
             </Link>
             <p className="text-muted-foreground">
-              Fundación dedicada a la protección y conservación de insectos y arácnidos en todo el mundo.
+              Fundación dedicada a la protección y conservación de insectos y
+              arácnidos en todo el mundo.
             </p>
           </div>
 
@@ -26,22 +27,34 @@ export function Footer() {
             </h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/peticiones" className="hover:text-primary hover:underline transition-colors">
+                <Link
+                  href="/peticiones"
+                  className="hover:text-primary hover:underline transition-colors"
+                >
                   Peticiones Activas
                 </Link>
               </li>
               <li>
-                <Link href="/noticias" className="hover:text-primary hover:underline transition-colors">
+                <Link
+                  href="/noticias"
+                  className="hover:text-primary hover:underline transition-colors"
+                >
                   Blog y Noticias
                 </Link>
               </li>
               <li>
-                <Link href="/nosotros" className="hover:text-primary hover:underline transition-colors">
+                <Link
+                  href="/nosotros"
+                  className="hover:text-primary hover:underline transition-colors"
+                >
                   Sobre Nosotros
                 </Link>
               </li>
               <li>
-                <Link href="/peticiones/crear" className="hover:text-primary hover:underline transition-colors">
+                <Link
+                  href="/peticiones/crear"
+                  className="hover:text-primary hover:underline transition-colors"
+                >
                   Crear Petición
                 </Link>
               </li>
@@ -56,13 +69,17 @@ export function Footer() {
             <ul className="space-y-2">
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:info@insectosvivos.org" className="hover:text-primary hover:underline">
+                <a
+                  href="mailto:info@insectosvivos.org"
+                  className="hover:text-primary hover:underline"
+                >
                   info@insectosvivos.org
                 </a>
               </li>
               <li className="mt-4">
                 <p className="text-muted-foreground text-sm">
-                  Av. de la Naturaleza 123<br />
+                  Av. de la Naturaleza 123
+                  <br />
                   Ciudad Verde, CP 12345
                 </p>
               </li>
@@ -72,29 +89,29 @@ export function Footer() {
           {/* Social */}
           <div>
             <h3 className="font-bold text-lg mb-4 border-b-2 border-black dark:border-white pb-2">
-              Síguenos
+              Canales
             </h3>
             <div className="flex gap-2">
               <a
-                href="#"
+                href="/noticias"
                 className="p-2 border-2 border-black dark:border-white bg-card hover:bg-primary hover:text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
-                aria-label="Twitter"
+                aria-label="Noticias"
               >
-                <Twitter className="h-5 w-5" />
+                <Rss className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="/peticiones"
                 className="p-2 border-2 border-black dark:border-white bg-card hover:bg-primary hover:text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
-                aria-label="Facebook"
+                aria-label="Peticiones"
               >
-                <Facebook className="h-5 w-5" />
+                <Globe className="h-5 w-5" />
               </a>
               <a
-                href="#"
+                href="/nosotros"
                 className="p-2 border-2 border-black dark:border-white bg-card hover:bg-primary hover:text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
-                aria-label="Instagram"
+                aria-label="Nosotros"
               >
-                <Instagram className="h-5 w-5" />
+                <MessageCircle className="h-5 w-5" />
               </a>
             </div>
           </div>
@@ -103,10 +120,12 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-8 pt-8 border-t-2 border-black dark:border-white flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} InsectosVivos. Todos los derechos reservados.
+            © {new Date().getFullYear()} InsectosVivos. Todos los derechos
+            reservados.
           </p>
           <p className="text-sm flex items-center gap-1">
-            Hecho con <Heart className="h-4 w-4 text-primary fill-primary" /> para los insectos
+            Hecho con <Heart className="h-4 w-4 text-primary fill-primary" />{" "}
+            para los insectos
           </p>
         </div>
       </div>
