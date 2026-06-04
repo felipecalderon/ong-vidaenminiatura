@@ -89,6 +89,7 @@ const RUTAS_BACKOFFICE = [
   /^\/dashboard(?:\/|$)/,
   /^\/admin(?:\/|$)/,
   /^\/backoffice(?:\/|$)/,
+  /^\/administracion(?:\/|$)/,
 ];
 
 const RUTAS_CONTENIDO = [

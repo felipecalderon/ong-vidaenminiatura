@@ -1,9 +1,13 @@
 import "server-only";
 
+import { EstadoUsuario, Rol } from "@/generated/prisma/enums";
 import {
+  actualizarEstadoUsuario,
+  actualizarRolUsuario,
   actualizarUsuarioPorAuth0Id,
   crearUsuarioAuth0,
   obtenerUsuarioPorAuth0Id,
+  obtenerUsuarioPorId,
 } from "../repositories";
 import type { PerfilAuth0Usuario, Usuario } from "../types";
 
@@ -144,4 +148,59 @@ export async function asegurarUsuarioDesdeAuth0(
   }
 
   return actualizarUsuarioPorAuth0Id(perfilNormalizado.auth0_id, actualizacion);
+}
+
+export async function cambiarRolUsuario(
+  operadorId: string,
+  usuarioId: string,
+  nuevoRol: Rol,
+): Promise<Usuario> {
+  const operador = await obtenerUsuarioPorId(operadorId);
+  if (
+    !operador ||
+    operador.rol !== Rol.ADMINISTRADOR ||
+    operador.estado !== EstadoUsuario.ACTIVO
+  ) {
+    throw new Error("No autorizado");
+  }
+
+  const usuario = await obtenerUsuarioPorId(usuarioId);
+  if (!usuario) {
+    throw new Error("Usuario no encontrado");
+  }
+
+  return actualizarRolUsuario(usuarioId, nuevoRol);
+}
+
+export async function cambiarEstadoUsuario(
+  operadorId: string,
+  usuarioId: string,
+  nuevoEstado: EstadoUsuario,
+): Promise<Usuario> {
+  const operador = await obtenerUsuarioPorId(operadorId);
+  if (
+    !operador ||
+    operador.rol !== Rol.ADMINISTRADOR ||
+    operador.estado !== EstadoUsuario.ACTIVO
+  ) {
+    throw new Error("No autorizado");
+  }
+
+  if (operadorId === usuarioId) {
+    throw new Error("No puedes cambiar tu propio estado");
+  }
+
+  const usuario = await obtenerUsuarioPorId(usuarioId);
+  if (!usuario) {
+    throw new Error("Usuario no encontrado");
+  }
+
+  return cambiarEstadoUsuarioValido(usuarioId, nuevoEstado);
+}
+
+async function cambiarEstadoUsuarioValido(
+  usuarioId: string,
+  nuevoEstado: EstadoUsuario,
+): Promise<Usuario> {
+  return actualizarEstadoUsuario(usuarioId, nuevoEstado);
 }

@@ -1,6 +1,13 @@
 "use client";
 
-import { ChevronDown, LogIn, LogOut, ShieldAlert, User2 } from "lucide-react";
+import {
+  ChevronDown,
+  ClipboardList,
+  LogIn,
+  LogOut,
+  ShieldAlert,
+  User2,
+} from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -131,6 +138,17 @@ function DesktopAccountAccess({
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link
+            href="/peticiones/mis-peticiones"
+            className="flex w-full items-center gap-2"
+          >
+            <ClipboardList className="size-4" />
+            {usuario.rol === "ADMINISTRADOR"
+              ? "Gestión de Peticiones"
+              : "Mis Peticiones"}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link
             href="/auth/logout?returnTo=/"
             className="flex w-full items-center gap-2"
           >
@@ -187,8 +205,19 @@ function MobileAccountAccess({
       </div>
       <SheetClose asChild>
         <Link
-          href="/auth/logout?returnTo=/"
+          href="/peticiones/mis-peticiones"
           className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border-2 border-black bg-background px-4 py-2 font-semibold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+        >
+          <ClipboardList className="size-4" />
+          {usuario.rol === "ADMINISTRADOR"
+            ? "Gestión de Peticiones"
+            : "Mis Peticiones"}
+        </Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link
+          href="/auth/logout?returnTo=/"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border-2 border-black bg-background px-4 py-2 font-semibold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
         >
           <LogOut className="size-4" />
           Cerrar sesión

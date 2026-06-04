@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
@@ -14,6 +14,13 @@ export type ActionState = {
   success: boolean;
   error?: string;
   fieldErrors?: Record<string, string[]>;
+  fields?: {
+    titulo?: string;
+    resumen?: string;
+    contenido?: string;
+    meta_firmas?: number;
+    categoriaId?: string;
+  };
 };
 
 export async function crearPeticionAction(
@@ -26,42 +33,60 @@ export async function crearPeticionAction(
     return { success: false, error: "No autorizado. Inicia sesión primero." };
   }
 
-  // Obtener el archivo de imagen
-  const imagenFile = formData.get("imagen") as File | null;
-  let imagenUrl: string | undefined;
-
-  if (imagenFile && imagenFile.size > 0) {
-    try {
-      imagenUrl = await subirImagenACloudinary(imagenFile);
-    } catch (_e) {
-      return {
-        success: false,
-        error: "Error al subir la imagen a la nube.",
-      };
-    }
-  }
-
-  const rawData = {
+  const fields = {
     titulo: formData.get("titulo") as string,
     resumen: formData.get("resumen") as string,
     contenido: formData.get("contenido") as string,
-    imagen: imagenUrl,
     meta_firmas: Number(formData.get("meta_firmas")),
     categoriaId: formData.get("categoriaId") as string,
   };
 
-  const parseResult = crearPeticionSchema.safeParse(rawData);
+  // Validar campos primero (sin imagen) para evitar subir la imagen a Cloudinary si hay errores de validación
+  const parseResult = crearPeticionSchema.safeParse({
+    ...fields,
+    imagen: null, // temporalmente null para validación inicial
+  });
 
   if (!parseResult.success) {
     return {
       success: false,
       error: "Datos de formulario inválidos.",
       fieldErrors: parseResult.error.flatten().fieldErrors,
+      fields,
+    };
+  }
+
+  // Obtener el archivo de imagen
+  const imagenFile = formData.get("imagen") as File | null;
+  let imagenUrl: string | undefined;
+
+  // Como la imagen destaca es obligatoria en la creación, validamos que exista
+  if (!imagenFile || imagenFile.size === 0) {
+    return {
+      success: false,
+      error: "La imagen destacada es requerida.",
+      fieldErrors: {
+        imagen: ["La imagen destacada es requerida."],
+      },
+      fields,
     };
   }
 
   try {
-    const peticion = await crearNuevaPeticion(usuario.id, parseResult.data);
+    imagenUrl = await subirImagenACloudinary(imagenFile);
+  } catch (_e) {
+    return {
+      success: false,
+      error: "Error al subir la imagen a la nube.",
+      fields,
+    };
+  }
+
+  try {
+    const peticion = await crearNuevaPeticion(usuario.id, {
+      ...parseResult.data,
+      imagen: imagenUrl,
+    });
     revalidatePath("/");
     revalidatePath("/peticiones");
 
@@ -75,6 +100,7 @@ export async function crearPeticionAction(
     return {
       success: false,
       error: errorMsg,
+      fields,
     };
   }
 }
@@ -183,6 +209,31 @@ export async function publicarPeticionAction(
   } catch (error) {
     const errorMsg =
       error instanceof Error ? error.message : "Error al publicar.";
+    return { success: false, error: errorMsg };
+  }
+}
+
+export async function eliminarPeticionAction(
+  id: string,
+): Promise<{ success: boolean; error?: string }> {
+  const usuario = await obtenerUsuarioAutenticado();
+
+  if (!usuario || !usuario.acceso.puedeAcceder) {
+    return { success: false, error: "No autorizado." };
+  }
+
+  try {
+    const { eliminarPeticionExistente } = await import("../services");
+    await eliminarPeticionExistente(id, usuario.id, usuario.rol);
+
+    revalidatePath("/");
+    revalidatePath("/peticiones");
+    revalidatePath("/peticiones/mis-peticiones");
+
+    return { success: true };
+  } catch (error) {
+    const errorMsg =
+      error instanceof Error ? error.message : "Error al eliminar.";
     return { success: false, error: errorMsg };
   }
 }

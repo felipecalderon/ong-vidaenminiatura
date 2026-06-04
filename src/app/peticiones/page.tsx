@@ -46,7 +46,14 @@ export default async function PeticionesPage() {
                 ...peticion,
                 imagen: peticion.imagen ?? "",
                 meta_firmas: peticion.meta_firmas ?? 1000,
-                categoria: peticion.categoria ?? undefined,
+                fecha_publicacion: peticion.fecha_publicacion ?? undefined,
+                categoria: peticion.categoria
+                  ? {
+                      ...peticion.categoria,
+                      descripcion: peticion.categoria.descripcion ?? undefined,
+                      color: peticion.categoria.color ?? undefined,
+                    }
+                  : undefined,
               }}
             />
           ))}

@@ -3,8 +3,12 @@ import "server-only";
 import { cache } from "react";
 import { auth0 } from "@/lib/auth0";
 import { resolverAccesoUsuario } from "../access";
-import { obtenerUsuarioPorAuth0Id } from "../repositories";
+import { listarUsuarios, obtenerUsuarioPorAuth0Id } from "../repositories";
 import type { UsuarioAutenticadoResumen } from "../types";
+
+export const obtenerTodosLosUsuarios = cache(async () => {
+  return listarUsuarios();
+});
 
 export const obtenerUsuarioAutenticado = cache(
   async (): Promise<UsuarioAutenticadoResumen | null> => {

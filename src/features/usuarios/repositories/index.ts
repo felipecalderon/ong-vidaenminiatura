@@ -1,7 +1,7 @@
 import "server-only";
 
 import type { Prisma } from "@/generated/prisma/client";
-import { Rol } from "@/generated/prisma/enums";
+import { type EstadoUsuario, Rol } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import type { Usuario } from "../types";
 
@@ -53,5 +53,39 @@ export async function actualizarUsuarioPorAuth0Id(
   return prisma.usuario.update({
     where: { auth0_id: auth0Id },
     data: input as Prisma.usuarioUpdateInput,
+  });
+}
+
+export async function listarUsuarios(): Promise<Usuario[]> {
+  return prisma.usuario.findMany({
+    orderBy: {
+      fecha_creacion: "desc",
+    },
+  });
+}
+
+export async function actualizarEstadoUsuario(
+  id: string,
+  estado: EstadoUsuario,
+): Promise<Usuario> {
+  return prisma.usuario.update({
+    where: { id },
+    data: { estado },
+  });
+}
+
+export async function actualizarRolUsuario(
+  id: string,
+  rol: Rol,
+): Promise<Usuario> {
+  return prisma.usuario.update({
+    where: { id },
+    data: { rol },
+  });
+}
+
+export async function obtenerUsuarioPorId(id: string): Promise<Usuario | null> {
+  return prisma.usuario.findUnique({
+    where: { id },
   });
 }

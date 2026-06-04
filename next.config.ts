@@ -7,9 +7,14 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+      },
     ],
   },
   reactCompiler: true,
+  allowedDevOrigins: ["192.168.1.66"],
 };
 
 export default nextConfig;

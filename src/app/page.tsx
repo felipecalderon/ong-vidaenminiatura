@@ -177,7 +177,22 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {noticias.map((noticia) => (
-              <NoticiaCard key={noticia.id} noticia={noticia} />
+              <NoticiaCard
+                key={noticia.id}
+                noticia={{
+                  ...noticia,
+                  fecha_publicacion: noticia.fecha_publicacion ?? null,
+                  categoria: noticia.categoria
+                    ? {
+                        nombre: noticia.categoria.nombre,
+                        color: noticia.categoria.color ?? null,
+                      }
+                    : null,
+                  autor: noticia.autor
+                    ? { nombre: noticia.autor.nombre }
+                    : null,
+                }}
+              />
             ))}
           </div>
         </div>

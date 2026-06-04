@@ -2,6 +2,7 @@ import "server-only";
 
 import { cache } from "react";
 import { prisma } from "@/lib/prisma";
+import { listarTodasLasCategorias } from "../repositories";
 
 export const obtenerCategoriasActivas = cache(async () => {
   return prisma.categoria.findMany({
@@ -12,4 +13,8 @@ export const obtenerCategoriasActivas = cache(async () => {
       nombre: "asc",
     },
   });
+});
+
+export const obtenerTodasLasCategorias = cache(async () => {
+  return listarTodasLasCategorias();
 });

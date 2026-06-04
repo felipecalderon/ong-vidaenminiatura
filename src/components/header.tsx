@@ -1,4 +1,4 @@
-import { Bug, Menu } from "lucide-react";
+import { Bug, Menu, Settings } from "lucide-react";
 import Link from "next/link";
 import { AccountAccess } from "@/components/account-access";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -53,6 +53,23 @@ export function Header({ currentTheme, usuarioAutenticado }: HeaderProps) {
             <ThemeToggle currentTheme={currentTheme} />
             <AccountAccess usuario={usuarioAutenticado} variant="desktop" />
 
+            {usuarioAutenticado?.acceso.esAdministrador && (
+              <Link
+                href="/administracion"
+                className="hidden sm:block"
+                title="Administración"
+              >
+                <Button
+                  variant="outline"
+                  size="icon"
+                  className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                >
+                  <Settings className="h-5 w-5" />
+                  <span className="sr-only">Administración</span>
+                </Button>
+              </Link>
+            )}
+
             <Link href="/peticiones/crear" className="hidden sm:block">
               <Button className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
                 Crear Petición
@@ -83,6 +100,19 @@ export function Header({ currentTheme, usuarioAutenticado }: HeaderProps) {
                       </Link>
                     </SheetClose>
                   ))}
+                  {usuarioAutenticado?.acceso.esAdministrador && (
+                    <SheetClose asChild>
+                      <Link href="/administracion">
+                        <Button
+                          variant="outline"
+                          className="w-full gap-2 border-2 border-black py-6 text-lg font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                        >
+                          <Settings className="h-5 w-5" />
+                          Administración
+                        </Button>
+                      </Link>
+                    </SheetClose>
+                  )}
                   <SheetClose asChild>
                     <Link href="/peticiones/crear">
                       <Button className="w-full border-2 border-black py-6 text-lg font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">

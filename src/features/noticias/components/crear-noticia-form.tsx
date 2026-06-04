@@ -44,7 +44,6 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
   return (
     <form
       action={formAction}
-      encType="multipart/form-data"
       className="space-y-6 max-w-2xl mx-auto p-8 border-4 border-black dark:border-white bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
     >
       <h2 className="text-3xl font-bold border-b-4 border-black dark:border-white pb-3 mb-6">

@@ -49,7 +49,7 @@ export function NoticiaCard({ noticia, featured = false }: NoticiaCardProps) {
           {noticia.categoria && (
             <Badge
               className="absolute top-4 left-4 border-2 border-black dark:border-white font-bold"
-              style={{ backgroundColor: noticia.categoria.color }}
+              style={{ backgroundColor: noticia.categoria.color ?? undefined }}
             >
               {noticia.categoria.nombre}
             </Badge>

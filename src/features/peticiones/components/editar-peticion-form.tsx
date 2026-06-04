@@ -14,32 +14,42 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { type ActionState, crearPeticionAction } from "../actions";
-import { crearPeticionSchema } from "../schemas/crear-peticion.schema";
+import { type ActionState, editarPeticionAction } from "../actions";
+import { editarPeticionSchema } from "../schemas/editar-peticion.schema";
 
-interface CrearPeticionFormProps {
+interface EditarPeticionFormProps {
+  peticion: {
+    id: string;
+    titulo: string;
+    resumen: string;
+    contenido: string;
+    meta_firmas: number;
+    categoriaId: string;
+    imagen: string | null;
+  };
   categorias: {
     id: string;
     nombre: string;
   }[];
+  onSuccess?: () => void;
 }
 
 const initialState: ActionState = {
   success: false,
 };
 
-export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
+export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPeticionFormProps) {
   const [state, formAction, isPending] = useActionState(
-    crearPeticionAction,
+    editarPeticionAction,
     initialState,
   );
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(peticion.imagen);
   const [clientErrors, setClientErrors] = useState<Record<string, string[]>>(
     {},
   );
 
   const validateField = (
-    name: keyof typeof crearPeticionSchema.shape,
+    name: keyof typeof editarPeticionSchema.shape,
     value: string | number,
   ) => {
     let parsedValue: string | number = value;
@@ -47,7 +57,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
       parsedValue = Number(value);
     }
 
-    const fieldSchema = crearPeticionSchema.shape[name];
+    const fieldSchema = editarPeticionSchema.shape[name];
     if (!fieldSchema) return;
 
     const result = fieldSchema.safeParse(parsedValue);
@@ -70,28 +80,24 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
     if (file) {
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
-      setClientErrors((prev) => {
-        const next = { ...prev };
-        delete next.imagen;
-        return next;
-      });
     } else {
-      setPreviewUrl(null);
+      setPreviewUrl(peticion.imagen);
     }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     const formData = new FormData(e.currentTarget);
     const data = {
+      id: formData.get("id") as string,
       titulo: formData.get("titulo") as string,
       resumen: formData.get("resumen") as string,
       contenido: formData.get("contenido") as string,
       meta_firmas: Number(formData.get("meta_firmas")),
       categoriaId: formData.get("categoriaId") as string,
-      imagen: null,
+      imagen: previewUrl, // Usado solo para pasar validación de Zod
     };
 
-    const result = crearPeticionSchema.safeParse(data);
+    const result = editarPeticionSchema.safeParse(data);
     const errors: Record<string, string[]> = {};
 
     if (!result.success) {
@@ -107,11 +113,6 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
       }
     }
 
-    const imagenFile = formData.get("imagen") as File | null;
-    if (!imagenFile || imagenFile.size === 0) {
-      errors.imagen = ["La imagen destacada es requerida."];
-    }
-
     if (Object.keys(errors).length > 0) {
       e.preventDefault();
       setClientErrors(errors);
@@ -123,15 +124,18 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
     return clientErrors[name]?.[0] || state.fieldErrors?.[name]?.[0];
   };
 
+  // The Server Action handles redirection, but if we're in a modal, the redirect might close the modal anyway.
+  // Wait, `editarPeticionAction` calls `redirect(`/peticiones/${peticion.slug}`)` on success.
+  // This will reload the page to the petition detail. That's fine.
+
   return (
     <form
       action={formAction}
       onSubmit={handleSubmit}
-      className="space-y-6 max-w-2xl mx-auto p-8 border-4 border-black dark:border-white bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+      className="space-y-6"
     >
-      <h2 className="text-3xl font-bold border-b-4 border-black dark:border-white pb-3 mb-6">
-        Nueva Petición
-      </h2>
+      <input type="hidden" name="id" value={peticion.id} />
+      <input type="hidden" name="imagenExistente" value={peticion.imagen || ""} />
 
       {state.error && (
         <div className="p-4 border-2 border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
@@ -147,8 +151,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         <Input
           id="titulo"
           name="titulo"
-          placeholder="Ej. Salvemos a las abejas de la pradera"
-          defaultValue={state.fields?.titulo}
+          defaultValue={state.fields?.titulo ?? peticion.titulo}
           onChange={(e) => validateField("titulo", e.target.value)}
           onBlur={(e) => validateField("titulo", e.target.value)}
           required
@@ -168,7 +171,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         </Label>
         <Select
           name="categoriaId"
-          defaultValue={state.fields?.categoriaId}
+          defaultValue={state.fields?.categoriaId ?? peticion.categoriaId}
           onValueChange={(val) => validateField("categoriaId", val)}
           required
         >
@@ -198,8 +201,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         <Textarea
           id="resumen"
           name="resumen"
-          placeholder="Describe brevemente la causa (entre 50 y 500 caracteres)."
-          defaultValue={state.fields?.resumen}
+          defaultValue={state.fields?.resumen ?? peticion.resumen}
           onChange={(e) => validateField("resumen", e.target.value)}
           onBlur={(e) => validateField("resumen", e.target.value)}
           required
@@ -221,48 +223,16 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         <Textarea
           id="contenido"
           name="contenido"
-          placeholder="Explica la problemática, los objetivos y por qué la gente debería firmar (mínimo 100 caracteres)."
-          defaultValue={state.fields?.contenido}
+          defaultValue={state.fields?.contenido ?? peticion.contenido}
           onChange={(e) => validateField("contenido", e.target.value)}
           onBlur={(e) => validateField("contenido", e.target.value)}
           required
-          rows={8}
+          rows={5}
           className="border-2 border-black dark:border-white text-base"
         />
         {getFieldError("contenido") && (
           <p className="text-red-600 text-sm font-semibold">
             {getFieldError("contenido")}
-          </p>
-        )}
-      </div>
-
-      {/* Imagen */}
-      <div className="space-y-2">
-        <Label htmlFor="imagen" className="text-lg font-bold">
-          Imagen destacada *
-        </Label>
-        <Input
-          id="imagen"
-          name="imagen"
-          type="file"
-          accept="image/*"
-          required
-          onChange={handleImageChange}
-          className="border-2 border-black dark:border-white text-base bg-background file:mr-4 file:py-1 file:px-4 file:border-2 file:border-black file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
-        />
-        {previewUrl && (
-          <div className="relative aspect-video w-full mt-4 border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
-            <Image
-              src={previewUrl}
-              alt="Previsualización de la imagen"
-              fill
-              className="object-cover"
-            />
-          </div>
-        )}
-        {getFieldError("imagen") && (
-          <p className="text-red-600 text-sm font-semibold">
-            {getFieldError("imagen")}
           </p>
         )}
       </div>
@@ -276,7 +246,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           id="meta_firmas"
           name="meta_firmas"
           type="number"
-          defaultValue={state.fields?.meta_firmas ?? 1000}
+          defaultValue={state.fields?.meta_firmas ?? peticion.meta_firmas}
           onChange={(e) => validateField("meta_firmas", e.target.value)}
           onBlur={(e) => validateField("meta_firmas", e.target.value)}
           required
@@ -290,18 +260,43 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         )}
       </div>
 
+      {/* Imagen */}
+      <div className="space-y-2">
+        <Label htmlFor="imagen" className="text-lg font-bold">
+          Imagen destacada (Opcional, dejar vacío para mantener la actual)
+        </Label>
+        <Input
+          id="imagen"
+          name="imagen"
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className="w-full overflow-hidden text-ellipsis border-2 border-black dark:border-white text-base bg-background file:mr-4 file:py-1 file:px-4 file:border-2 file:border-black file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+        />
+        {previewUrl && (
+          <div className="relative aspect-video w-full mt-4 border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+            <Image
+              src={previewUrl}
+              alt="Previsualización de la imagen"
+              fill
+              className="object-cover"
+            />
+          </div>
+        )}
+      </div>
+
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full text-xl font-bold py-6 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all disabled:opacity-50"
+        className="w-full text-lg font-bold py-6 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all disabled:opacity-50"
       >
         {isPending ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Creando petición...
+            Guardando...
           </>
         ) : (
-          "Crear Petición en Borrador"
+          "Guardar Cambios"
         )}
       </Button>
     </form>

@@ -52,6 +52,37 @@ export async function listarPeticionesPublicadas() {
   });
 }
 
+export async function listarTodasLasPeticiones() {
+  return prisma.peticion.findMany({
+    orderBy: {
+      fecha_creacion: "desc",
+    },
+    include: {
+      categoria: true,
+      usuario: {
+        select: {
+          id: true,
+          nombre: true,
+        },
+      },
+    },
+  });
+}
+
+export async function listarPeticionesPorUsuario(usuarioId: string) {
+  return prisma.peticion.findMany({
+    where: {
+      usuario_id: usuarioId,
+    },
+    orderBy: {
+      fecha_creacion: "desc",
+    },
+    include: {
+      categoria: true,
+    },
+  });
+}
+
 export async function crearPeticion(
   usuarioId: string,
   slug: string,
@@ -117,5 +148,11 @@ export async function incrementarContadorFirmas(
         increment: 1,
       },
     },
+  });
+}
+
+export async function eliminarPeticion(id: string) {
+  return prisma.peticion.delete({
+    where: { id },
   });
 }
