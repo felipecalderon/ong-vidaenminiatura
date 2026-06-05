@@ -38,7 +38,11 @@ const initialState: ActionState = {
   success: false,
 };
 
-export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPeticionFormProps) {
+export function EditarPeticionForm({
+  peticion,
+  categorias,
+  onSuccess,
+}: EditarPeticionFormProps) {
   const [state, formAction, isPending] = useActionState(
     editarPeticionAction,
     initialState,
@@ -125,20 +129,20 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
   };
 
   // The Server Action handles redirection, but if we're in a modal, the redirect might close the modal anyway.
-  // Wait, `editarPeticionAction` calls `redirect(`/peticiones/${peticion.slug}`)` on success.
+  // Wait,`editarPeticionAction` calls`redirect(`/peticiones/${peticion.slug}`)` on success.
   // This will reload the page to the petition detail. That's fine.
 
   return (
-    <form
-      action={formAction}
-      onSubmit={handleSubmit}
-      className="space-y-6"
-    >
+    <form action={formAction} onSubmit={handleSubmit} className="space-y-6">
       <input type="hidden" name="id" value={peticion.id} />
-      <input type="hidden" name="imagenExistente" value={peticion.imagen || ""} />
+      <input
+        type="hidden"
+        name="imagenExistente"
+        value={peticion.imagen || ""}
+      />
 
       {state.error && (
-        <div className="p-4 border-2 border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
+        <div className="p-4 border border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
           {state.error}
         </div>
       )}
@@ -155,7 +159,7 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
           onChange={(e) => validateField("titulo", e.target.value)}
           onBlur={(e) => validateField("titulo", e.target.value)}
           required
-          className="border-2 border-black dark:border-white text-base py-6"
+          className="border border-outline-variant text-base py-6"
         />
         {getFieldError("titulo") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -175,10 +179,10 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
           onValueChange={(val) => validateField("categoriaId", val)}
           required
         >
-          <SelectTrigger className="border-2 border-black dark:border-white py-6 text-base bg-background">
+          <SelectTrigger className="border border-outline-variant py-6 text-base bg-background">
             <SelectValue placeholder="Selecciona una categoría" />
           </SelectTrigger>
-          <SelectContent className="border-2 border-black bg-background dark:border-white">
+          <SelectContent className="border border-outline-variant bg-background">
             {categorias.map((c) => (
               <SelectItem key={c.id} value={c.id}>
                 {c.nombre}
@@ -206,7 +210,7 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
           onBlur={(e) => validateField("resumen", e.target.value)}
           required
           rows={3}
-          className="border-2 border-black dark:border-white text-base"
+          className="border border-outline-variant text-base"
         />
         {getFieldError("resumen") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -228,7 +232,7 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
           onBlur={(e) => validateField("contenido", e.target.value)}
           required
           rows={5}
-          className="border-2 border-black dark:border-white text-base"
+          className="border border-outline-variant text-base"
         />
         {getFieldError("contenido") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -251,7 +255,7 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
           onBlur={(e) => validateField("meta_firmas", e.target.value)}
           required
           min={10}
-          className="border-2 border-black dark:border-white text-base py-6"
+          className="border border-outline-variant text-base py-6"
         />
         {getFieldError("meta_firmas") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -271,10 +275,10 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="w-full overflow-hidden text-ellipsis border-2 border-black dark:border-white text-base bg-background file:mr-4 file:py-1 file:px-4 file:border-2 file:border-black file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+          className="w-full overflow-hidden text-ellipsis border border-outline-variant text-base bg-background file:mr-4 file:py-1 file:px-4 file:border file:border-outline-variant file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
         />
         {previewUrl && (
-          <div className="relative aspect-video w-full mt-4 border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+          <div className="relative aspect-video w-full mt-4 border border-outline-variant overflow-hidden dark:">
             <Image
               src={previewUrl}
               alt="Previsualización de la imagen"
@@ -288,7 +292,7 @@ export function EditarPeticionForm({ peticion, categorias, onSuccess }: EditarPe
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full text-lg font-bold py-6 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] transition-all disabled:opacity-50"
+        className="w-full text-lg font-bold py-6 border border-outline-variant dark: hover: transition-all disabled:opacity-50"
       >
         {isPending ? (
           <>

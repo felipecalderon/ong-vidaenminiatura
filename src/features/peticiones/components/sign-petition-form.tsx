@@ -35,7 +35,7 @@ export function SignPetitionForm({
 
   if (!usuarioAutenticado) {
     return (
-      <div className="p-6 border-4 border-black dark:border-white bg-muted text-center space-y-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+      <div className="p-6 border border-outline-variant bg-muted text-center space-y-4 dark:">
         <h3 className="text-xl font-bold">Únete y firma esta causa</h3>
         <p className="text-sm text-muted-foreground">
           Necesitas iniciar sesión con tu cuenta para poder firmar esta petición
@@ -44,7 +44,7 @@ export function SignPetitionForm({
         <Button
           asChild
           size="lg"
-          className="w-full font-bold text-lg py-6 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+          className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: transition-all"
         >
           <Link href="/auth/login">Iniciar sesión</Link>
         </Button>
@@ -54,8 +54,8 @@ export function SignPetitionForm({
 
   if (signed) {
     return (
-      <div className="p-6 border-4 border-black dark:border-white bg-secondary text-center shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
-        <div className="w-16 h-16 mx-auto mb-4 bg-primary border-2 border-black dark:border-white flex items-center justify-center">
+      <div className="p-6 border border-outline-variant bg-secondary text-center dark:">
+        <div className="w-16 h-16 mx-auto mb-4 bg-primary border border-outline-variant flex items-center justify-center">
           <Check className="h-8 w-8 text-primary-foreground" />
         </div>
         <h3 className="text-2xl font-bold mb-2">¡Gracias por firmar!</h3>
@@ -68,8 +68,8 @@ export function SignPetitionForm({
   }
 
   return (
-    <div className="space-y-4 p-6 border-4 border-black dark:border-white bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
-      <h3 className="text-xl font-bold border-b-2 border-black dark:border-white pb-2">
+    <div className="space-y-4 p-6 border border-outline-variant bg-card dark:">
+      <h3 className="text-xl font-bold border-b border-outline-variant pb-2">
         Firmar petición
       </h3>
       <p className="text-sm text-muted-foreground">
@@ -78,7 +78,7 @@ export function SignPetitionForm({
       </p>
 
       {error && (
-        <div className="p-3 border-2 border-red-600 bg-red-100 text-red-800 text-sm font-semibold">
+        <div className="p-3 border border-red-600 bg-red-100 text-red-800 text-sm font-semibold">
           {error}
         </div>
       )}
@@ -86,7 +86,7 @@ export function SignPetitionForm({
       <Button
         onClick={handleSign}
         disabled={isPending}
-        className="w-full font-bold text-lg py-6 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: transition-all disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isPending ? (
           <>

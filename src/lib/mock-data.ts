@@ -362,7 +362,7 @@ export const noticias: Noticia[] = [
     slug: "nueva-especie-abeja-amazonas",
     resumen:
       "Científicos han identificado una nueva especie de abeja con propiedades de polinización únicas que podría ser clave para la conservación.",
-    contenido: `Un equipo de entomólogos ha descubierto una nueva especie de abeja en las profundidades del Amazonas brasileño. La especie, provisionalmente llamada "Apis amazonica", presenta características únicas que la distinguen de cualquier otra abeja conocida.
+    contenido: `Un equipo de entomólogos ha descubierto una nueva especie de abeja en las profundidades del Amazonas brasileño. La especie, provisionalmente llamada"Apis amazonica", presenta características únicas que la distinguen de cualquier otra abeja conocida.
 
 ## Características únicas
 
@@ -370,7 +370,7 @@ La nueva especie tiene un patrón de coloración iridiscente que los científico
 
 ## Importancia para la conservación
 
-"Este descubrimiento nos recuerda cuánto nos falta por conocer sobre la biodiversidad de nuestro planeta", comentó la Dra. Elena Vásquez, líder del equipo de investigación. "Cada nueva especie que encontramos es una pieza más del rompecabezas ecológico".
+"Este descubrimiento nos recuerda cuánto nos falta por conocer sobre la biodiversidad de nuestro planeta", comentó la Dra. Elena Vásquez, líder del equipo de investigación."Cada nueva especie que encontramos es una pieza más del rompecabezas ecológico".
 
 ## Próximos pasos
 
@@ -396,14 +396,14 @@ El equipo planea realizar estudios más detallados sobre el comportamiento y la 
 
 Los tres químicos prohibidos son:
 - Imidacloprid
-- Clothianidin  
+- Clothianidin 
 - Thiamethoxam
 
 Estos compuestos habían sido vinculados con el síndrome de colapso de colonias que ha diezmado las poblaciones de abejas en todo el mundo.
 
 ## Reacciones
 
-"Esta es una victoria que costó años de trabajo, miles de firmas y la persistencia de muchos activistas", declaró María García, directora de la Fundación Insectos Vivos. "Pero es solo el comienzo. Debemos seguir luchando por alternativas más seguras".
+"Esta es una victoria que costó años de trabajo, miles de firmas y la persistencia de muchos activistas", declaró María García, directora de la Fundación Insectos Vivos."Pero es solo el comienzo. Debemos seguir luchando por alternativas más seguras".
 
 ## Implementación
 
@@ -443,14 +443,14 @@ La prohibición entrará en vigor en seis meses, dando tiempo a los agricultores
 
 ## Consejos importantes
 
-1. **Evita los pesticidas**: Incluso los productos "orgánicos" pueden ser dañinos para los insectos.
+1. **Evita los pesticidas**: Incluso los productos"orgánicos"pueden ser dañinos para los insectos.
 2. **Proporciona agua**: Un plato poco profundo con piedras donde los insectos puedan posarse.
-3. **Deja áreas "desordenadas"**: Los insectos necesitan lugares para anidar y refugiarse.
+3. **Deja áreas"desordenadas"**: Los insectos necesitan lugares para anidar y refugiarse.
 4. **Planta en grupos**: Las abejas y mariposas prefieren grandes manchas de la misma flor.
 
 ## Hoteles para insectos
 
-Considera instalar un "hotel de insectos" con tubos de bambú y bloques de madera perforados para las abejas solitarias.`,
+Considera instalar un"hotel de insectos"con tubos de bambú y bloques de madera perforados para las abejas solitarias.`,
     imagen:
       "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop",
     estado: "PUBLICADA",
@@ -476,7 +476,7 @@ Considera instalar un "hotel de insectos" con tubos de bambú y bloques de mader
 
 ## Cambiando percepciones
 
-"La aracnofobia es uno de los miedos más comunes, pero está basada en malentendidos", explica el Dr. Roberto Sánchez, coautor del estudio. "La mayoría de las arañas son completamente inofensivas para los humanos y extremadamente beneficiosas".
+"La aracnofobia es uno de los miedos más comunes, pero está basada en malentendidos", explica el Dr. Roberto Sánchez, coautor del estudio."La mayoría de las arañas son completamente inofensivas para los humanos y extremadamente beneficiosas".
 
 ## Cómo convivir con arañas
 
@@ -536,7 +536,7 @@ Los científicos señalan varios factores contribuyentes:
 
 ## El poder de la acción colectiva
 
-La petición "Detener la deforestación en el bosque de las luciérnagas" reunió más de 21,000 firmas en nuestra plataforma, lo que llamó la atención de los medios nacionales e internacionales.
+La petición"Detener la deforestación en el bosque de las luciérnagas"reunió más de 21,000 firmas en nuestra plataforma, lo que llamó la atención de los medios nacionales e internacionales.
 
 ## Qué significa esta protección
 
@@ -547,7 +547,7 @@ La petición "Detener la deforestación en el bosque de las luciérnagas" reuni�
 
 ## Mensaje de agradecimiento
 
-"Cada firma contó. Cada persona que compartió la petición contribuyó a este logro", expresó María García en representación de todos los activistas. "Esto demuestra que juntos podemos proteger nuestro patrimonio natural".
+"Cada firma contó. Cada persona que compartió la petición contribuyó a este logro", expresó María García en representación de todos los activistas."Esto demuestra que juntos podemos proteger nuestro patrimonio natural".
 
 ## El trabajo continúa
 

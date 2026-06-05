@@ -25,7 +25,7 @@ export default async function AdministracionPage() {
 
   return (
     <div className="container mx-auto py-8 px-4">
-      <div className="mb-8 border-4 border-black bg-primary/10 p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:bg-primary-foreground/10 dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+      <div className="mb-8 border border-outline-variant bg-primary/10 p-6 dark:bg-primary-foreground/10 dark:">
         <h1 className="text-3xl font-extrabold text-foreground uppercase tracking-wider">
           Panel de Administración
         </h1>

@@ -53,7 +53,7 @@ export default async function NoticiaDetailPage({
       <Button
         variant="outline"
         asChild
-        className="mb-8 border-2 border-black dark:border-white font-semibold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+        className="mb-8 border border-outline-variant font-semibold dark: hover: dark:hover: transition-all"
       >
         <Link href="/noticias">
           <ArrowLeft className="mr-2 h-4 w-4" />
@@ -65,7 +65,7 @@ export default async function NoticiaDetailPage({
       <div className="space-y-4 mb-8">
         {noticia.categoria && (
           <Badge
-            className="border-2 border-black dark:border-white font-bold"
+            className="border border-outline-variant font-bold"
             style={{
               backgroundColor: noticia.categoria.color ?? undefined,
             }}
@@ -82,7 +82,7 @@ export default async function NoticiaDetailPage({
           {noticia.resumen}
         </p>
 
-        <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground pt-2 border-t-2 border-black dark:border-white">
+        <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground pt-2 border-t border-outline-variant">
           {formattedDate && (
             <span className="flex items-center gap-2 font-medium">
               <Calendar className="h-4 w-4" />
@@ -100,7 +100,7 @@ export default async function NoticiaDetailPage({
 
       {/* Image */}
       {noticia.imagen && (
-        <div className="relative aspect-video w-full mb-10 border-4 border-black dark:border-white overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+        <div className="relative aspect-video w-full mb-10 border border-outline-variant overflow-hidden dark:">
           <Image
             src={noticia.imagen}
             alt={noticia.titulo}

@@ -18,7 +18,7 @@ export function ThemeToggle({ currentTheme }: ThemeToggleProps) {
         type="submit"
         variant="outline"
         size="icon"
-        className="border-2 border-black dark:border-white"
+        className="border border-outline-variant"
       >
         <Icon className="h-5 w-5" />
         <span className="sr-only">

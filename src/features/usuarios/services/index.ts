@@ -38,7 +38,7 @@ function resolverNombreBase(perfil: PerfilAuth0Usuario): string | null {
   ].filter((parte): parte is string => Boolean(parte));
 
   if (partesNombre.length > 0) {
-    return partesNombre.join(" ");
+    return partesNombre.join("");
   }
 
   return null;

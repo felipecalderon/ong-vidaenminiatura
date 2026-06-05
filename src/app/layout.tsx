@@ -4,7 +4,6 @@ import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
-import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
@@ -33,10 +32,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [currentTheme, usuarioAutenticado] = await Promise.all([
-    getTheme(),
-    obtenerUsuarioAutenticado(),
-  ]);
+  const usuarioAutenticado = await obtenerUsuarioAutenticado();
 
   return (
     <html
@@ -48,15 +44,12 @@ export default async function RootLayout({
         geistMono.variable,
         "font-sans",
         figtree.variable,
-        currentTheme === "dark" && "dark",
+        "dark",
       )}
     >
-      <body className="min-h-full bg-background text-foreground">
+      <body className="min-h-full bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
         <div className="flex min-h-screen flex-col">
-          <Header
-            currentTheme={currentTheme}
-            usuarioAutenticado={usuarioAutenticado}
-          />
+          <Header usuarioAutenticado={usuarioAutenticado} />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>

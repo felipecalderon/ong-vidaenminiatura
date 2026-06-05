@@ -30,7 +30,7 @@ interface AccountAccessProps {
 
 function obtenerIniciales(nombre: string): string {
   return nombre
-    .split(" ")
+    .split("")
     .filter(Boolean)
     .slice(0, 2)
     .map((parte) => parte[0]?.toUpperCase() ?? "")
@@ -62,9 +62,11 @@ function AvatarCuenta({
   const initials = obtenerIniciales(usuario.nombre);
 
   return (
-    <Avatar className={cn("size-9 border border-black/10", className)}>
+    <Avatar
+      className={cn("size-9 border border-outline-variant/10", className)}
+    >
       <AvatarImage alt={usuario.nombre} src={usuario.picture ?? undefined} />
-      <AvatarFallback className="bg-primary text-primary-foreground text-xs font-bold">
+      <AvatarFallback className="bg-primary text-on-primary text-xs font-bold">
         {initials || <User2 className="size-4" />}
       </AvatarFallback>
     </Avatar>
@@ -77,7 +79,7 @@ function LoginButton() {
       asChild
       variant="outline"
       size="icon"
-      className="border-2 border-black dark:border-white"
+      className="border border-outline-variant"
     >
       <Link href="/auth/login">
         <LogIn className="size-4" />
@@ -99,7 +101,7 @@ function DesktopAccountAccess({
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="max-w-[14rem] border-2 border-black px-3 font-semibold dark:border-white"
+          className="max-w-[14rem] border border-outline-variant px-3 font-semibold"
         >
           <AvatarCuenta usuario={usuario} />
           <span className="hidden max-w-28 truncate sm:inline">
@@ -178,7 +180,7 @@ function MobileAccountAccess({
   const esSuspendida = usuario.estado === "SUSPENDIDO";
 
   return (
-    <div className="rounded-2xl border-2 border-black bg-card p-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+    <div className="rounded-2xl border border-outline-variant bg-card p-4 dark:">
       <div className="flex items-center gap-3">
         <AvatarCuenta usuario={usuario} className="size-11" />
         <div className="min-w-0">
@@ -206,7 +208,7 @@ function MobileAccountAccess({
       <SheetClose asChild>
         <Link
           href="/peticiones/mis-peticiones"
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border-2 border-black bg-background px-4 py-2 font-semibold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
         >
           <ClipboardList className="size-4" />
           {usuario.rol === "ADMINISTRADOR"
@@ -217,7 +219,7 @@ function MobileAccountAccess({
       <SheetClose asChild>
         <Link
           href="/auth/logout?returnTo=/"
-          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border-2 border-black bg-background px-4 py-2 font-semibold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
         >
           <LogOut className="size-4" />
           Cerrar sesión
@@ -238,7 +240,7 @@ function MobileAnonymousAccess() {
     <SheetClose asChild>
       <Link
         href="/auth/login"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border-2 border-black bg-primary px-4 py-3 font-bold text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+        className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-outline-variant bg-primary px-4 py-3 font-bold text-primary-foreground transition-all hover: dark: dark:hover:"
       >
         <LogIn className="size-4" />
         Iniciar sesión

@@ -44,14 +44,14 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
   return (
     <form
       action={formAction}
-      className="space-y-6 max-w-2xl mx-auto p-8 border-4 border-black dark:border-white bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+      className="space-y-6 max-w-2xl mx-auto p-8 border border-outline-variant bg-card dark:"
     >
-      <h2 className="text-3xl font-bold border-b-4 border-black dark:border-white pb-3 mb-6">
+      <h2 className="text-3xl font-bold border-b border-outline-variant pb-3 mb-6">
         Nueva Noticia
       </h2>
 
       {state.error && (
-        <div className="p-4 border-2 border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
+        <div className="p-4 border border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
           {state.error}
         </div>
       )}
@@ -66,7 +66,7 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           name="titulo"
           placeholder="Ej. Descubren nueva especie de abeja en el Amazonas"
           required
-          className="border-2 border-black dark:border-white text-base py-6"
+          className="border border-outline-variant text-base py-6"
         />
         {state.fieldErrors?.titulo && (
           <p className="text-red-600 text-sm font-semibold">
@@ -81,10 +81,10 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           Categoría *
         </Label>
         <Select name="categoriaId" required>
-          <SelectTrigger className="border-2 border-black dark:border-white py-6 text-base bg-background">
+          <SelectTrigger className="border border-outline-variant py-6 text-base bg-background">
             <SelectValue placeholder="Selecciona una categoría" />
           </SelectTrigger>
-          <SelectContent className="border-2 border-black bg-background dark:border-white">
+          <SelectContent className="border border-outline-variant bg-background">
             {categorias.map((c) => (
               <SelectItem key={c.id} value={c.id}>
                 {c.nombre}
@@ -110,7 +110,7 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           placeholder="Breve descripción que aparece en listados (entre 50 y 500 caracteres)."
           required
           rows={3}
-          className="border-2 border-black dark:border-white text-base"
+          className="border border-outline-variant text-base"
         />
         {state.fieldErrors?.resumen && (
           <p className="text-red-600 text-sm font-semibold">
@@ -130,7 +130,7 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           placeholder="Escribe el contenido completo de la noticia (mínimo 100 caracteres)."
           required
           rows={12}
-          className="border-2 border-black dark:border-white text-base"
+          className="border border-outline-variant text-base"
         />
         {state.fieldErrors?.contenido && (
           <p className="text-red-600 text-sm font-semibold">
@@ -150,10 +150,10 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           type="file"
           accept="image/*"
           onChange={handleImageChange}
-          className="border-2 border-black dark:border-white text-base py-3 bg-background file:mr-4 file:py-1 file:px-4 file:border-2 file:border-black file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+          className="border border-outline-variant text-base py-3 bg-background file:mr-4 file:py-1 file:px-4 file:border file:border-outline-variant file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
         />
         {previewUrl && (
-          <div className="relative aspect-video w-full border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+          <div className="relative aspect-video w-full border border-outline-variant overflow-hidden dark:">
             <Image
               src={previewUrl}
               alt="Previsualización"
@@ -172,7 +172,7 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full text-xl font-bold py-6 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all disabled:opacity-50"
+        className="w-full text-xl font-bold py-6 border border-outline-variant dark: hover: dark:hover: transition-all disabled:opacity-50"
       >
         {isPending ? (
           <>

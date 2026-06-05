@@ -3,33 +3,35 @@ import Link from "next/link";
 
 export function Footer() {
   return (
-    <footer className="border-t-4 border-black dark:border-white bg-card mt-auto">
-      <div className="container mx-auto px-4 py-12">
+    <footer className="border-t border-outline-variant bg-surface-container-lowest mt-auto">
+      <div className="container mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <div className="bg-primary p-2 border-2 border-black dark:border-white">
-                <Bug className="h-6 w-6 text-primary-foreground" />
+            <Link href="/" className="flex items-center gap-3">
+              <div className="text-primary flex items-center justify-center">
+                <Bug className="h-6 w-6" />
               </div>
-              <span className="font-bold text-xl">InsectosVivos</span>
+              <span className="font-black text-xl tracking-tighter text-on-background">
+                InsectosVivos
+              </span>
             </Link>
-            <p className="text-muted-foreground">
+            <p className="text-on-surface-variant text-sm font-body">
               Fundación dedicada a la protección y conservación de insectos y
-              arácnidos en todo el mundo.
+              arácnidos en todo el mundo. Precisión en la oscuridad.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-bold text-lg mb-4 border-b-2 border-black dark:border-white pb-2">
+            <h3 className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-4 pb-2 border-b border-outline-variant">
               Enlaces Rápidos
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-3 text-sm font-body">
               <li>
                 <Link
                   href="/peticiones"
-                  className="hover:text-primary hover:underline transition-colors"
+                  className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   Peticiones Activas
                 </Link>
@@ -37,7 +39,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/noticias"
-                  className="hover:text-primary hover:underline transition-colors"
+                  className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   Blog y Noticias
                 </Link>
@@ -45,7 +47,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/nosotros"
-                  className="hover:text-primary hover:underline transition-colors"
+                  className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   Sobre Nosotros
                 </Link>
@@ -53,7 +55,7 @@ export function Footer() {
               <li>
                 <Link
                   href="/peticiones/crear"
-                  className="hover:text-primary hover:underline transition-colors"
+                  className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   Crear Petición
                 </Link>
@@ -63,21 +65,18 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h3 className="font-bold text-lg mb-4 border-b-2 border-black dark:border-white pb-2">
+            <h3 className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-4 pb-2 border-b border-outline-variant">
               Contacto
             </h3>
-            <ul className="space-y-2">
-              <li className="flex items-center gap-2">
+            <ul className="space-y-3 text-sm font-body">
+              <li className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" />
-                <a
-                  href="mailto:info@insectosvivos.org"
-                  className="hover:text-primary hover:underline"
-                >
+                <a href="mailto:info@insectosvivos.org">
                   info@insectosvivos.org
                 </a>
               </li>
               <li className="mt-4">
-                <p className="text-muted-foreground text-sm">
+                <p className="text-on-surface-variant text-sm leading-relaxed">
                   Av. de la Naturaleza 123
                   <br />
                   Ciudad Verde, CP 12345
@@ -88,44 +87,45 @@ export function Footer() {
 
           {/* Social */}
           <div>
-            <h3 className="font-bold text-lg mb-4 border-b-2 border-black dark:border-white pb-2">
+            <h3 className="font-label text-xs uppercase tracking-widest text-on-surface-variant mb-4 pb-2 border-b border-outline-variant">
               Canales
             </h3>
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <a
                 href="/noticias"
-                className="p-2 border-2 border-black dark:border-white bg-card hover:bg-primary hover:text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-all active:scale-95"
                 aria-label="Noticias"
               >
-                <Rss className="h-5 w-5" />
+                <Rss className="h-4 w-4" />
               </a>
               <a
                 href="/peticiones"
-                className="p-2 border-2 border-black dark:border-white bg-card hover:bg-primary hover:text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-all active:scale-95"
                 aria-label="Peticiones"
               >
-                <Globe className="h-5 w-5" />
+                <Globe className="h-4 w-4" />
               </a>
               <a
                 href="/nosotros"
-                className="p-2 border-2 border-black dark:border-white bg-card hover:bg-primary hover:text-primary-foreground shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+                className="w-10 h-10 flex items-center justify-center rounded-lg bg-surface-container border border-outline-variant text-on-surface-variant hover:text-primary hover:border-primary transition-all active:scale-95"
                 aria-label="Nosotros"
               >
-                <MessageCircle className="h-5 w-5" />
+                <MessageCircle className="h-4 w-4" />
               </a>
             </div>
           </div>
         </div>
 
         {/* Bottom */}
-        <div className="mt-8 pt-8 border-t-2 border-black dark:border-white flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-12 pt-6 border-t border-outline-variant flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p className="text-xs text-on-surface-variant font-body">
             © {new Date().getFullYear()} InsectosVivos. Todos los derechos
             reservados.
           </p>
-          <p className="text-sm flex items-center gap-1">
-            Hecho con <Heart className="h-4 w-4 text-primary fill-primary" />{" "}
-            para los insectos
+          <p className="text-xs text-on-surface-variant flex items-center gap-1 font-body">
+            Hecho con{" "}
+            <Heart className="h-3 w-3 text-tertiary fill-tertiary mx-1" /> para
+            los insectos
           </p>
         </div>
       </div>

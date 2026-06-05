@@ -14,7 +14,7 @@ export default async function PeticionesPage() {
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="space-y-4 mb-12">
-        <div className="inline-block bg-primary text-primary-foreground px-4 py-2 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] font-bold">
+        <div className="inline-block bg-primary text-on-primary px-4 py-2 border border-outline-variant dark: font-bold">
           ✍️ Peticiones Activas
         </div>
         <h1 className="text-4xl md:text-5xl font-bold">
@@ -28,7 +28,7 @@ export default async function PeticionesPage() {
       </div>
 
       {peticiones.length === 0 ? (
-        <div className="p-12 text-center border-4 border-black dark:border-white bg-muted">
+        <div className="p-12 text-center border border-outline-variant bg-muted">
           <p className="text-xl font-semibold">
             No hay peticiones activas en este momento.
           </p>

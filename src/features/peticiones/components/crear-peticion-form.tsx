@@ -127,14 +127,14 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
     <form
       action={formAction}
       onSubmit={handleSubmit}
-      className="space-y-6 max-w-2xl mx-auto p-8 border-4 border-black dark:border-white bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]"
+      className="space-y-6 max-w-2xl mx-auto p-8 border border-outline-variant bg-card dark:"
     >
-      <h2 className="text-3xl font-bold border-b-4 border-black dark:border-white pb-3 mb-6">
+      <h2 className="text-3xl font-bold border-b border-outline-variant pb-3 mb-6">
         Nueva Petición
       </h2>
 
       {state.error && (
-        <div className="p-4 border-2 border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
+        <div className="p-4 border border-red-600 bg-red-100 text-red-800 font-semibold text-sm">
           {state.error}
         </div>
       )}
@@ -152,7 +152,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           onChange={(e) => validateField("titulo", e.target.value)}
           onBlur={(e) => validateField("titulo", e.target.value)}
           required
-          className="border-2 border-black dark:border-white text-base py-6"
+          className="border border-outline-variant text-base py-6"
         />
         {getFieldError("titulo") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -172,10 +172,10 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           onValueChange={(val) => validateField("categoriaId", val)}
           required
         >
-          <SelectTrigger className="border-2 border-black dark:border-white py-6 text-base bg-background">
+          <SelectTrigger className="border border-outline-variant py-6 text-base bg-background">
             <SelectValue placeholder="Selecciona una categoría" />
           </SelectTrigger>
-          <SelectContent className="border-2 border-black bg-background dark:border-white">
+          <SelectContent className="border border-outline-variant bg-background">
             {categorias.map((c) => (
               <SelectItem key={c.id} value={c.id}>
                 {c.nombre}
@@ -204,7 +204,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           onBlur={(e) => validateField("resumen", e.target.value)}
           required
           rows={3}
-          className="border-2 border-black dark:border-white text-base"
+          className="border border-outline-variant text-base"
         />
         {getFieldError("resumen") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -227,7 +227,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           onBlur={(e) => validateField("contenido", e.target.value)}
           required
           rows={8}
-          className="border-2 border-black dark:border-white text-base"
+          className="border border-outline-variant text-base"
         />
         {getFieldError("contenido") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -248,10 +248,10 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           accept="image/*"
           required
           onChange={handleImageChange}
-          className="border-2 border-black dark:border-white text-base bg-background file:mr-4 file:py-1 file:px-4 file:border-2 file:border-black file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+          className="border border-outline-variant text-base bg-background file:mr-4 file:py-1 file:px-4 file:border file:border-outline-variant file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
         />
         {previewUrl && (
-          <div className="relative aspect-video w-full mt-4 border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+          <div className="relative aspect-video w-full mt-4 border border-outline-variant overflow-hidden dark:">
             <Image
               src={previewUrl}
               alt="Previsualización de la imagen"
@@ -281,7 +281,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
           onBlur={(e) => validateField("meta_firmas", e.target.value)}
           required
           min={10}
-          className="border-2 border-black dark:border-white text-base py-6"
+          className="border border-outline-variant text-base py-6"
         />
         {getFieldError("meta_firmas") && (
           <p className="text-red-600 text-sm font-semibold">
@@ -293,7 +293,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full text-xl font-bold py-6 border-4 border-black dark:border-white shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] dark:shadow-[6px_6px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all disabled:opacity-50"
+        className="w-full text-xl font-bold py-6 border border-outline-variant dark: hover: dark:hover: transition-all disabled:opacity-50"
       >
         {isPending ? (
           <>

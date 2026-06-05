@@ -1,7 +1,6 @@
-import { ArrowRight, Bug, Leaf, Shield, Users } from "lucide-react";
+import { ArrowRight, Bug, Edit, Leaf, Shield, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
 import { PeticionCard } from "@/features/peticiones/components/peticion-card";
 import {
@@ -16,133 +15,139 @@ export default function HomePage() {
   const otherPeticiones = peticiones.slice(1);
 
   return (
-    <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden border-b-4 border-black dark:border-white">
-        <div className="absolute inset-0 bg-gradient-to-br from-secondary via-background to-secondary opacity-50" />
-        <div className="container mx-auto px-4 py-16 md:py-24 relative">
-          <div className="grid lg:grid-cols-2 gap-8 items-center">
-            <div className="space-y-6">
-              <div className="inline-block bg-primary text-primary-foreground px-4 py-2 border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] font-bold">
-                🐝 Fundación InsectosVivos
+    <div className="min-h-screen bg-background text-on-background">
+      {/* Main Content Container */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
+        <section className="mb-16 relative rounded-xl overflow-hidden border border-outline-variant bg-surface-container group">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1920&h=1080&fit=crop"
+              alt="Arachnid Hero Image"
+              fill
+              className="object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700 mix-blend-luminosity"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+          </div>
+          <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between min-h-[614px]">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-xs font-label uppercase tracking-widest mb-6">
+                <span className="material-symbols-outlined text-sm">
+                  priority_high
+                </span>
+                Urgent Legislation
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-balance">
-                Protegiendo a los{" "}
-                <span className="text-primary">pequeños héroes</span> de nuestro
-                planeta
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter mb-4 text-on-background leading-tight">
+                Protegiendo a los <br />
+                <span className="text-secondary">
+                  pequeños héroes del planeta.
+                </span>
               </h1>
-              <p className="text-lg md:text-xl text-muted-foreground max-w-xl">
+              <p className="text-on-surface-variant text-lg md:text-xl font-body mb-8 max-w-xl">
                 Los insectos y arácnidos son esenciales para la vida en la
                 Tierra. Únete a nuestra misión de protegerlos firmando
                 peticiones y difundiendo conciencia.
               </p>
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/peticiones">
-                  <Button
-                    size="lg"
-                    className="font-bold text-lg border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all"
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
                   >
-                    Ver peticiones
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                    Ver Peticiones
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
                 </Link>
                 <Link href="/nosotros">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="font-bold text-lg border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all"
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto bg-transparent border border-outline-variant text-on-background px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
                   >
-                    Conocer más
-                  </Button>
+                    Conocer Más
+                  </button>
                 </Link>
               </div>
             </div>
-            <div className="relative">
-              <div className="relative aspect-square max-w-md mx-auto">
-                <div className="absolute inset-0 bg-secondary border-4 border-black dark:border-white transform rotate-3" />
-                <div className="absolute inset-0 bg-primary border-4 border-black dark:border-white transform -rotate-3" />
-                <div className="relative border-4 border-black dark:border-white overflow-hidden">
-                  <Image
-                    src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=600&h=600&fit=crop"
-                    alt="Abeja polinizando una flor"
-                    width={600}
-                    height={600}
-                    className="object-cover"
-                    priority
-                  />
+
+            {/* Featured Petition Mini Stats */}
+            {featuredPeticion && (
+              <div className="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant rounded-lg p-6 w-full md:w-80 shadow-2xl">
+                <div className="text-sm font-label text-on-surface-variant uppercase tracking-widest mb-2 line-clamp-1">
+                  Destacado: {featuredPeticion.titulo}
+                </div>
+                <div className="text-3xl font-headline font-black tracking-tighter text-on-background mb-4">
+                  {featuredPeticion.cantidad_firmas.toLocaleString()}
+                  <span className="text-sm font-body text-secondary font-normal tracking-normal">
+                    {""}/ {featuredPeticion.meta_firmas.toLocaleString()}
+                  </span>
+                </div>
+                <div className="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden mb-4 border border-outline-variant">
+                  <div
+                    className="h-full bg-tertiary rounded-full relative transition-all duration-1000 ease-out"
+                    style={{
+                      width: `${Math.min((featuredPeticion.cantidad_firmas / featuredPeticion.meta_firmas) * 100, 100)}%`,
+                    }}
+                  >
+                    <div className="absolute inset-0 bg-white/20 w-full animate-pulse"></div>
+                  </div>
+                </div>
+                <div className="text-xs text-on-surface-variant font-body flex justify-between items-center">
+                  <span>Progreso actual</span>
+                  <Link
+                    href={`/peticiones/${featuredPeticion.slug}`}
+                    className="text-primary hover:underline font-bold transition-colors"
+                  >
+                    Firmar →
+                  </Link>
                 </div>
               </div>
-            </div>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Stats Section */}
-      <section className="border-b-4 border-black dark:border-white bg-secondary">
-        <div className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { icon: Users, value: "50,000+", label: "Firmas recogidas" },
-              { icon: Shield, value: "25+", label: "Peticiones activas" },
-              { icon: Bug, value: "12", label: "Victorias logradas" },
-              { icon: Leaf, value: "100+", label: "Especies protegidas" },
-            ].map((stat) => (
-              <div
-                key={stat.label}
-                className="p-6 bg-card border-4 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] text-center"
-              >
-                <stat.icon className="h-8 w-8 mx-auto mb-2 text-primary" />
-                <div className="text-2xl md:text-3xl font-bold">
-                  {stat.value}
-                </div>
-                <div className="text-sm text-muted-foreground">
-                  {stat.label}
-                </div>
+        {/* Stats Section */}
+        <section className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { icon: Users, value: "50k+", label: "Firmas recogidas" },
+            { icon: Shield, value: "25+", label: "Peticiones activas" },
+            { icon: Bug, value: "12", label: "Victorias logradas" },
+            { icon: Leaf, value: "100+", label: "Especies protegidas" },
+          ].map((stat) => (
+            <div
+              key={stat.label}
+              className="p-6 bg-surface-container border border-outline-variant rounded-lg text-center flex flex-col items-center justify-center hover:bg-surface-container-high transition-colors"
+            >
+              <stat.icon className="h-6 w-6 mb-4 text-primary" />
+              <div className="text-2xl md:text-3xl font-headline font-black tracking-tighter text-on-background mb-1">
+                {stat.value}
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Petition */}
-      <section className="border-b-4 border-black dark:border-white">
-        <div className="container mx-auto px-4 py-16">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold">
-                Petición destacada
-              </h2>
-              <p className="text-muted-foreground mt-2">
-                Esta petición necesita tu apoyo urgente
-              </p>
+              <div className="text-xs font-label uppercase tracking-widest text-on-surface-variant">
+                {stat.label}
+              </div>
             </div>
-          </div>
-          {featuredPeticion && (
-            <PeticionCard peticion={featuredPeticion} featured />
-          )}
-        </div>
-      </section>
+          ))}
+        </section>
 
-      {/* More Petitions */}
-      <section className="border-b-4 border-black dark:border-white bg-muted">
-        <div className="container mx-auto px-4 py-16">
+        {/* Active Petitions */}
+        <section className="mb-16">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold">
+              <h2 className="text-2xl md:text-3xl font-headline font-black tracking-tighter text-on-background">
                 Peticiones activas
               </h2>
-              <p className="text-muted-foreground mt-2">
-                Firma y haz la diferencia
+              <p className="text-on-surface-variant font-body mt-2">
+                Firma y haz la diferencia. Cada apoyo cuenta.
               </p>
             </div>
             <Link href="/peticiones">
-              <Button
-                variant="outline"
-                className="font-bold border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+              <button
+                type="button"
+                className="bg-transparent border border-outline-variant text-on-background px-4 py-2 rounded-lg font-label text-sm uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
               >
                 Ver todas
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -150,29 +155,27 @@ export default function HomePage() {
               <PeticionCard key={peticion.id} peticion={peticion} />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* News Section */}
-      <section className="border-b-4 border-black dark:border-white">
-        <div className="container mx-auto px-4 py-16">
+        {/* News Section */}
+        <section className="mb-16">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold">
+              <h2 className="text-2xl md:text-3xl font-headline font-black tracking-tighter text-on-background">
                 Últimas noticias
               </h2>
-              <p className="text-muted-foreground mt-2">
-                Mantente informado sobre conservación
+              <p className="text-on-surface-variant font-body mt-2">
+                Mantente informado sobre conservación e impacto.
               </p>
             </div>
             <Link href="/noticias">
-              <Button
-                variant="outline"
-                className="font-bold border-2 border-black dark:border-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] transition-all"
+              <button
+                type="button"
+                className="bg-transparent border border-outline-variant text-on-background px-4 py-2 rounded-lg font-label text-sm uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
               >
                 Ver todas
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+                <ArrowRight className="h-4 w-4" />
+              </button>
             </Link>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -195,72 +198,32 @@ export default function HomePage() {
               />
             ))}
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* CTA Section */}
-      <section className="bg-primary border-b-4 border-black dark:border-white">
-        <div className="container mx-auto px-4 py-16 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-4">
-            ¿Tienes una causa que defender?
-          </h2>
-          <p className="text-lg text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-            Crea tu propia petición y moviliza a miles de personas para proteger
-            a los insectos y arácnidos que más lo necesitan.
-          </p>
-          <Link href="/peticiones/crear">
-            <Button
-              size="lg"
-              variant="secondary"
-              className="font-bold text-lg border-4 border-black dark:border-white shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] hover:translate-x-[4px] hover:translate-y-[4px] hover:shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] transition-all"
-            >
-              Crear mi petición
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Image Gallery */}
-      <section className="border-b-4 border-black dark:border-white bg-muted">
-        <div className="container mx-auto px-4 py-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
-            Conoce a nuestros amigos
-          </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              {
-                src: "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=300&h=300&fit=crop",
-                alt: "Abeja en flor",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=300&h=300&fit=crop",
-                alt: "Mariposa monarca",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1568667256549-094345857637?w=300&h=300&fit=crop",
-                alt: "Tarántula",
-              },
-              {
-                src: "https://images.unsplash.com/photo-1534067783941-51c9c23ecefd?w=300&h=300&fit=crop",
-                alt: "Mariquita",
-              },
-            ].map((img) => (
-              <div
-                key={img.alt}
-                className="aspect-square relative border-4 border-black dark:border-white overflow-hidden shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] hover:shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:hover:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] transition-all"
+        {/* CTA Section */}
+        <section className="relative overflow-hidden border border-outline-variant rounded-xl bg-surface-container group">
+          <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors duration-500"></div>
+          <div className="relative z-10 p-8 md:p-16 text-center max-w-3xl mx-auto flex flex-col items-center">
+            <Edit className="w-12 h-12 text-primary mb-6" />
+            <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4">
+              ¿Tienes una causa que defender?
+            </h2>
+            <p className="text-lg text-on-surface-variant font-body mb-8">
+              Crea tu propia petición y moviliza a miles de personas para
+              proteger a los insectos y arácnidos que más lo necesitan.
+            </p>
+            <Link href="/peticiones/crear">
+              <button
+                type="button"
+                className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
               >
-                <Image
-                  src={img.src}
-                  alt={img.alt}
-                  fill
-                  className="object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-            ))}
+                Crear mi petición
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </button>
+            </Link>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
     </div>
   );
 }

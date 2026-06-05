@@ -61,7 +61,7 @@ export default async function PeticionDetailPage({
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-3">
               <Badge
-                className="border-2 border-black dark:border-white font-bold"
+                className="border border-outline-variant font-bold"
                 style={{
                   backgroundColor: peticion.categoria.color ?? undefined,
                 }}
@@ -69,7 +69,7 @@ export default async function PeticionDetailPage({
                 {peticion.categoria.nombre}
               </Badge>
               <span className="text-sm text-muted-foreground">
-                Creado por{" "}
+                Creado por{""}
                 <span className="font-bold text-foreground">
                   {peticion.usuario.nombre}
                 </span>
@@ -84,7 +84,7 @@ export default async function PeticionDetailPage({
           </div>
 
           {peticion.imagen && (
-            <div className="relative aspect-video border-4 border-black dark:border-white overflow-hidden shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+            <div className="relative aspect-video border border-outline-variant overflow-hidden dark:">
               <Image
                 src={peticion.imagen}
                 alt={peticion.titulo}
@@ -95,14 +95,14 @@ export default async function PeticionDetailPage({
             </div>
           )}
 
-          <article className="prose dark:prose-invert max-w-none border-t-4 border-black dark:border-white pt-8 whitespace-pre-line">
+          <article className="prose dark:prose-invert max-w-none border-t border-outline-variant pt-8 whitespace-pre-line">
             {peticion.contenido}
           </article>
         </div>
 
         {/* Sidebar Info & Signature Form */}
         <div className="space-y-6 lg:sticky lg:top-24">
-          <div className="p-6 border-4 border-black dark:border-white bg-secondary space-y-4 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+          <div className="p-6 border border-outline-variant bg-secondary space-y-4 dark:">
             <h2 className="text-2xl font-bold">Estado de firmas</h2>
 
             <div className="flex items-center justify-between text-lg font-semibold">
@@ -119,17 +119,18 @@ export default async function PeticionDetailPage({
 
             <Progress
               value={progress}
-              className="h-4 border-2 border-black dark:border-white"
+              className="h-4 border border-outline-variant"
             />
 
             <div className="flex justify-between items-center text-sm font-bold text-primary">
               <span>{Math.round(progress)}% completado</span>
               <span>
-                Faltan{" "}
+                Faltan{""}
                 {(metaFirmas - peticion.cantidad_firmas > 0
                   ? metaFirmas - peticion.cantidad_firmas
                   : 0
-                ).toLocaleString()}{" "}
+                ).toLocaleString()}
+                {""}
                 firmas
               </span>
             </div>

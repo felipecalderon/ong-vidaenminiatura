@@ -115,7 +115,7 @@ export function AdministracionDashboard({
 
         toast({
           title: "Categoría creada",
-          description: `La categoría "${result.nombre}" ha sido creada exitosamente.`,
+          description: `La categoría"${result.nombre}"ha sido creada exitosamente.`,
         });
 
         // Limpiar
@@ -153,7 +153,7 @@ export function AdministracionDashboard({
 
         toast({
           title: "Categoría actualizada",
-          description: `La categoría "${result.nombre}" ha sido actualizada.`,
+          description: `La categoría"${result.nombre}"ha sido actualizada.`,
         });
 
         setEditingCategory(null);
@@ -241,7 +241,7 @@ export function AdministracionDashboard({
   return (
     <div className="w-full">
       <Tabs defaultValue="categorias" className="w-full">
-        <TabsList className="mb-6 grid w-full max-w-md grid-cols-2 border-2 border-black bg-background p-1 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]">
+        <TabsList className="mb-6 grid w-full max-w-md grid-cols-2 border border-outline-variant bg-background p-1 dark:">
           <TabsTrigger
             value="categorias"
             className="flex items-center gap-2 text-sm font-bold uppercase transition-all data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
@@ -266,16 +266,16 @@ export function AdministracionDashboard({
             </h2>
             <Button
               onClick={() => setIsNewCategoryOpen(true)}
-              className="flex items-center gap-2 border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)] dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+              className="flex items-center gap-2 border border-outline-variant font-bold hover: dark: dark:hover:"
             >
               <Plus className="size-4" />
               Nueva Categoría
             </Button>
           </div>
 
-          <div className="border-4 border-black bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+          <div className="border border-outline-variant bg-card dark:">
             <Table>
-              <TableHeader className="bg-muted border-b-2 border-black dark:border-white">
+              <TableHeader className="bg-muted border-b border-outline-variant">
                 <TableRow>
                   <TableHead className="font-extrabold text-black dark:text-white uppercase">
                     Color
@@ -311,11 +311,11 @@ export function AdministracionDashboard({
                   categorias.map((categoria) => (
                     <TableRow
                       key={categoria.id}
-                      className="border-b border-black/10 dark:border-white/10"
+                      className="border-b border-outline-variant/10"
                     >
                       <TableCell>
                         <div
-                          className="size-6 border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                          className="size-6 border border-outline-variant dark:"
                           style={{ backgroundColor: categoria.color ?? "#ccc" }}
                         />
                       </TableCell>
@@ -334,7 +334,7 @@ export function AdministracionDashboard({
                       </TableCell>
                       <TableCell>
                         <Badge
-                          className={`border-2 border-black font-extrabold dark:border-white ${
+                          className={`border border-outline-variant font-extrabold ${
                             categoria.activo
                               ? "bg-green-300 text-black hover:bg-green-300"
                               : "bg-red-300 text-black hover:bg-red-300"
@@ -348,7 +348,7 @@ export function AdministracionDashboard({
                           onClick={() => handleOpenEdit(categoria)}
                           variant="ghost"
                           size="icon"
-                          className="border border-black bg-card shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:bg-muted dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                          className="border border-outline-variant bg-card hover:bg-muted dark:"
                         >
                           <Edit2 className="size-3.5" />
                         </Button>
@@ -369,9 +369,9 @@ export function AdministracionDashboard({
             </h2>
           </div>
 
-          <div className="border-4 border-black bg-card shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)]">
+          <div className="border border-outline-variant bg-card dark:">
             <Table>
-              <TableHeader className="bg-muted border-b-2 border-black dark:border-white">
+              <TableHeader className="bg-muted border-b border-outline-variant">
                 <TableRow>
                   <TableHead className="font-extrabold text-black dark:text-white uppercase">
                     Usuario
@@ -396,10 +396,10 @@ export function AdministracionDashboard({
                   return (
                     <TableRow
                       key={user.id}
-                      className="border-b border-black/10 dark:border-white/10"
+                      className="border-b border-outline-variant/10"
                     >
                       <TableCell className="flex items-center gap-3">
-                        <Avatar className="size-8 border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
+                        <Avatar className="size-8 border border-outline-variant dark:">
                           <AvatarImage src={user.picture ?? undefined} />
                           <AvatarFallback className="font-extrabold">
                             {user.nombre.substring(0, 2).toUpperCase()}
@@ -407,7 +407,8 @@ export function AdministracionDashboard({
                         </Avatar>
                         <div>
                           <p className="font-bold text-foreground">
-                            {user.nombre}{" "}
+                            {user.nombre}
+                            {""}
                             {esPropio && (
                               <span className="text-xs text-primary font-extrabold">
                                 (Tú)
@@ -432,10 +433,10 @@ export function AdministracionDashboard({
                             handleRoleChange(user.id, val as Rol)
                           }
                         >
-                          <SelectTrigger className="w-[160px] border-2 border-black font-semibold bg-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
+                          <SelectTrigger className="w-[160px] border border-outline-variant font-semibold bg-background dark:">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent className="border-2 border-black dark:border-white bg-popover font-semibold">
+                          <SelectContent className="border border-outline-variant bg-popover font-semibold">
                             <SelectItem value={Rol.USUARIO}>USUARIO</SelectItem>
                             <SelectItem value={Rol.AUTOR}>AUTOR</SelectItem>
                             <SelectItem value={Rol.ADMINISTRADOR}>
@@ -446,7 +447,7 @@ export function AdministracionDashboard({
                       </TableCell>
                       <TableCell>
                         <Badge
-                          className={`border-2 border-black font-extrabold dark:border-white ${
+                          className={`border border-outline-variant font-extrabold ${
                             user.estado === EstadoUsuario.ACTIVO
                               ? "bg-green-300 text-black hover:bg-green-300"
                               : "bg-red-300 text-black hover:bg-red-300"
@@ -463,10 +464,10 @@ export function AdministracionDashboard({
                             handleStatusChange(user.id, val as EstadoUsuario)
                           }
                         >
-                          <SelectTrigger className="w-[140px] ml-auto border-2 border-black font-semibold bg-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]">
+                          <SelectTrigger className="w-[140px] ml-auto border border-outline-variant font-semibold bg-background dark:">
                             <SelectValue />
                           </SelectTrigger>
-                          <SelectContent className="border-2 border-black dark:border-white bg-popover font-semibold">
+                          <SelectContent className="border border-outline-variant bg-popover font-semibold">
                             <SelectItem value={EstadoUsuario.ACTIVO}>
                               ACTIVO
                             </SelectItem>
@@ -487,7 +488,7 @@ export function AdministracionDashboard({
 
       {/* MODAL CREAR CATEGORÍA */}
       <Dialog open={isNewCategoryOpen} onOpenChange={setIsNewCategoryOpen}>
-        <DialogContent className="border-4 border-black bg-background p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] max-w-md">
+        <DialogContent className="border border-outline-variant bg-background p-6 dark: max-w-md">
           <DialogHeader>
             <DialogTitle className="text-xl font-extrabold uppercase text-foreground">
               Nueva Categoría
@@ -506,7 +507,7 @@ export function AdministracionDashboard({
                 value={newCatName}
                 onChange={(e) => setNewCatName(e.target.value)}
                 placeholder="Nombre de la categoría"
-                className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] font-semibold dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                className="border border-outline-variant font-semibold dark:"
                 required
               />
             </div>
@@ -522,7 +523,7 @@ export function AdministracionDashboard({
                 value={newCatDesc}
                 onChange={(e) => setNewCatDesc(e.target.value)}
                 placeholder="Breve descripción de la categoría"
-                className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] font-semibold dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                className="border border-outline-variant font-semibold dark:"
               />
             </div>
             <div className="space-y-2">
@@ -538,12 +539,12 @@ export function AdministracionDashboard({
                   type="color"
                   value={newCatColor}
                   onChange={(e) => setNewCatColor(e.target.value)}
-                  className="size-10 border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] cursor-pointer"
+                  className="size-10 border border-outline-variant dark: cursor-pointer"
                 />
                 <Input
                   value={newCatColor}
                   onChange={(e) => setNewCatColor(e.target.value)}
-                  className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] font-mono dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] max-w-[120px]"
+                  className="border border-outline-variant font-mono dark: max-w-[120px]"
                 />
               </div>
             </div>
@@ -552,14 +553,14 @@ export function AdministracionDashboard({
                 type="button"
                 variant="outline"
                 onClick={() => setIsNewCategoryOpen(false)}
-                className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                className="border border-outline-variant font-bold dark:"
               >
                 Cancelar
               </Button>
               <Button
                 type="submit"
                 disabled={isPending}
-                className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                className="border border-outline-variant font-bold dark:"
               >
                 {isPending ? "Creando..." : "Crear Categoría"}
               </Button>
@@ -573,7 +574,7 @@ export function AdministracionDashboard({
         open={!!editingCategory}
         onOpenChange={(open) => !open && setEditingCategory(null)}
       >
-        <DialogContent className="border-4 border-black bg-background p-6 shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[8px_8px_0px_0px_rgba(255,255,255,1)] max-w-md">
+        <DialogContent className="border border-outline-variant bg-background p-6 dark: max-w-md">
           <DialogHeader>
             <DialogTitle className="text-xl font-extrabold uppercase text-foreground">
               Editar Categoría
@@ -590,7 +591,7 @@ export function AdministracionDashboard({
                   value={editCatName}
                   onChange={(e) => setEditCatName(e.target.value)}
                   placeholder="Nombre de la categoría"
-                  className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] font-semibold dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                  className="border border-outline-variant font-semibold dark:"
                   required
                 />
               </div>
@@ -606,7 +607,7 @@ export function AdministracionDashboard({
                   value={editCatDesc}
                   onChange={(e) => setEditCatDesc(e.target.value)}
                   placeholder="Breve descripción de la categoría"
-                  className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] font-semibold dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                  className="border border-outline-variant font-semibold dark:"
                 />
               </div>
               <div className="space-y-2">
@@ -622,12 +623,12 @@ export function AdministracionDashboard({
                     type="color"
                     value={editCatColor}
                     onChange={(e) => setEditCatColor(e.target.value)}
-                    className="size-10 border-2 border-black dark:border-white shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] cursor-pointer"
+                    className="size-10 border border-outline-variant dark: cursor-pointer"
                   />
                   <Input
                     value={editCatColor}
                     onChange={(e) => setEditCatColor(e.target.value)}
-                    className="border-2 border-black shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] font-mono dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)] max-w-[120px]"
+                    className="border border-outline-variant font-mono dark: max-w-[120px]"
                   />
                 </div>
               </div>
@@ -644,11 +645,11 @@ export function AdministracionDashboard({
                 >
                   <SelectTrigger
                     id="activation-status"
-                    className="w-full border-2 border-black font-semibold bg-background shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,1)]"
+                    className="w-full border border-outline-variant font-semibold bg-background dark:"
                   >
                     <SelectValue />
                   </SelectTrigger>
-                  <SelectContent className="border-2 border-black dark:border-white bg-popover font-semibold">
+                  <SelectContent className="border border-outline-variant bg-popover font-semibold">
                     <SelectItem value="active">ACTIVO</SelectItem>
                     <SelectItem value="inactive">INACTIVO</SelectItem>
                   </SelectContent>
@@ -659,14 +660,14 @@ export function AdministracionDashboard({
                   type="button"
                   variant="outline"
                   onClick={() => setEditingCategory(null)}
-                  className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                  className="border border-outline-variant font-bold dark:"
                 >
                   Cancelar
                 </Button>
                 <Button
                   type="submit"
                   disabled={isPending}
-                  className="border-2 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:border-white dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,1)]"
+                  className="border border-outline-variant font-bold dark:"
                 >
                   {isPending ? "Guardando..." : "Guardar Cambios"}
                 </Button>
