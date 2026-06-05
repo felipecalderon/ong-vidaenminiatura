@@ -20,6 +20,7 @@ export type ActionState = {
     contenido?: string;
     meta_firmas?: number;
     categoriaId?: string;
+    destacado?: boolean;
   };
 };
 
@@ -29,8 +30,11 @@ export async function crearPeticionAction(
 ): Promise<ActionState> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeAcceder) {
-    return { success: false, error: "No autorizado. Inicia sesión primero." };
+  if (!usuario || !usuario.acceso.puedeCrearContenido) {
+    return {
+      success: false,
+      error: "No autorizado. Se requiere rol de Autor o Administrador.",
+    };
   }
 
   const fields = {
@@ -39,6 +43,9 @@ export async function crearPeticionAction(
     contenido: formData.get("contenido") as string,
     meta_firmas: Number(formData.get("meta_firmas")),
     categoriaId: formData.get("categoriaId") as string,
+    destacado:
+      formData.get("destacado") === "on" ||
+      formData.get("destacado") === "true",
   };
 
   // Validar campos primero (sin imagen) para evitar subir la imagen a Cloudinary si hay errores de validación
@@ -82,6 +89,8 @@ export async function crearPeticionAction(
     };
   }
 
+  let redirectPath: string | undefined;
+
   try {
     const peticion = await crearNuevaPeticion(usuario.id, {
       ...parseResult.data,
@@ -90,8 +99,8 @@ export async function crearPeticionAction(
     revalidatePath("/");
     revalidatePath("/peticiones");
 
-    // Hacemos redirect al detalle de la petición
-    redirect(`/peticiones/${peticion.slug}`);
+    // Asignamos la ruta para redirigir fuera del bloque try-catch
+    redirectPath = `/peticiones/${peticion.slug}`;
   } catch (error) {
     const errorMsg =
       error instanceof Error
@@ -103,6 +112,11 @@ export async function crearPeticionAction(
       fields,
     };
   }
+
+  if (redirectPath) {
+    redirect(redirectPath);
+  }
+  return { success: true };
 }
 
 export async function editarPeticionAction(
@@ -111,7 +125,7 @@ export async function editarPeticionAction(
 ): Promise<ActionState> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeAcceder) {
+  if (!usuario || !usuario.acceso.puedeCrearContenido) {
     return { success: false, error: "No autorizado." };
   }
 
@@ -138,6 +152,9 @@ export async function editarPeticionAction(
     imagen: imagenUrl,
     meta_firmas: Number(formData.get("meta_firmas")),
     categoriaId: formData.get("categoriaId") as string,
+    destacado:
+      formData.get("destacado") === "on" ||
+      formData.get("destacado") === "true",
   };
 
   const parseResult = editarPeticionSchema.safeParse(rawData);
@@ -150,6 +167,8 @@ export async function editarPeticionAction(
     };
   }
 
+  let redirectPath: string | undefined;
+
   try {
     const peticion = await editarPeticionExistente(
       usuario.id,
@@ -160,7 +179,7 @@ export async function editarPeticionAction(
     revalidatePath("/peticiones");
     revalidatePath(`/peticiones/${peticion.slug}`);
 
-    redirect(`/peticiones/${peticion.slug}`);
+    redirectPath = `/peticiones/${peticion.slug}`;
   } catch (error) {
     const errorMsg =
       error instanceof Error
@@ -171,6 +190,11 @@ export async function editarPeticionAction(
       error: errorMsg,
     };
   }
+
+  if (redirectPath) {
+    redirect(redirectPath);
+  }
+  return { success: true };
 }
 
 export async function publicarPeticionAction(
@@ -178,7 +202,7 @@ export async function publicarPeticionAction(
 ): Promise<{ success: boolean; error?: string }> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeAcceder) {
+  if (!usuario || !usuario.acceso.puedeCrearContenido) {
     return { success: false, error: "No autorizado." };
   }
 
@@ -218,7 +242,7 @@ export async function eliminarPeticionAction(
 ): Promise<{ success: boolean; error?: string }> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeAcceder) {
+  if (!usuario || !usuario.acceso.puedeCrearContenido) {
     return { success: false, error: "No autorizado." };
   }
 

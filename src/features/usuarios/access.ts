@@ -6,7 +6,8 @@ export function resolverAccesoUsuario(
 ): AccesoUsuario {
   const esSuspendido = usuario.estado === EstadoUsuario.SUSPENDIDO;
   const esAdministrador = usuario.rol === Rol.ADMINISTRADOR;
-  const esAutor = usuario.rol === Rol.AUTOR || esAdministrador;
+  const esAutor =
+    usuario.rol === Rol.AUTOR || usuario.rol === Rol.USUARIO || esAdministrador;
 
   return {
     autenticado: true,

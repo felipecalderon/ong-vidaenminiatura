@@ -83,6 +83,7 @@ model peticion {
   categoria_id        String         @db.Uuid
   usuario_id          String         @db.Uuid
   fecha_publicacion   DateTime?
+  destacado           Boolean        @default(false)
   fecha_creacion      DateTime       @default(now())
   fecha_actualizacion DateTime       @updatedAt
 
@@ -122,6 +123,7 @@ model noticia {
   categoria_id        String         @db.Uuid
   autor_id            String         @db.Uuid
   fecha_publicacion   DateTime?
+  destacado           Boolean        @default(false)
   fecha_creacion      DateTime       @default(now())
   fecha_actualizacion DateTime       @updatedAt
 

@@ -4,6 +4,7 @@ import { Loader2 } from "lucide-react";
 import Image from "next/image";
 import { type ChangeEvent, useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -26,6 +27,7 @@ interface EditarPeticionFormProps {
     meta_firmas: number;
     categoriaId: string;
     imagen: string | null;
+    destacado: boolean;
   };
   categorias: {
     id: string;
@@ -98,6 +100,7 @@ export function EditarPeticionForm({
       contenido: formData.get("contenido") as string,
       meta_firmas: Number(formData.get("meta_firmas")),
       categoriaId: formData.get("categoriaId") as string,
+      destacado: formData.get("destacado") === "on",
       imagen: previewUrl, // Usado solo para pasar validación de Zod
     };
 
@@ -287,6 +290,24 @@ export function EditarPeticionForm({
             />
           </div>
         )}
+      </div>
+
+      {/* Destacado */}
+      <div className="flex flex-row items-start space-x-3 space-y-0 p-4 border border-outline-variant rounded-md">
+        <Checkbox
+          id="destacado"
+          name="destacado"
+          defaultChecked={state.fields?.destacado ?? peticion.destacado}
+        />
+        <div className="space-y-1 leading-none">
+          <Label htmlFor="destacado" className="font-bold cursor-pointer">
+            Marcar como destacado
+          </Label>
+          <p className="text-sm text-muted-foreground">
+            Si marcas esta opción, la petición aparecerá en la sección de
+            destacados.
+          </p>
+        </div>
       </div>
 
       <Button

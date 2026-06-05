@@ -31,6 +31,7 @@ export const crearPeticionSchema = z.object({
     .min(10, "La meta debe ser de al menos 10 firmas")
     .default(1000),
   categoriaId: z.string().uuid("La categoría seleccionada no es válida"),
+  destacado: z.boolean().default(false).optional(),
 });
 
 export type CrearPeticionInput = z.infer<typeof crearPeticionSchema>;

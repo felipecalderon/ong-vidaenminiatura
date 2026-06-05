@@ -58,15 +58,21 @@ export async function crearNoticiaAction(
     };
   }
 
+  let redirectPath: string | undefined;
+
   try {
     const noticia = await crearNuevaNoticia(usuario.id, parseResult.data);
     revalidatePath("/");
     revalidatePath("/noticias");
-    redirect(`/noticias/${noticia.slug}`);
+    redirectPath = `/noticias/${noticia.slug}`;
   } catch (error) {
     const errorMsg =
       error instanceof Error ? error.message : "Error al crear la noticia.";
     return { success: false, error: errorMsg };
+  }
+
+  if (redirectPath) {
+    redirect(redirectPath);
   }
 }
 
@@ -114,6 +120,8 @@ export async function editarNoticiaAction(
     };
   }
 
+  let redirectPath: string | undefined;
+
   try {
     const noticia = await editarNoticiaExistente(
       usuario.id,
@@ -123,11 +131,15 @@ export async function editarNoticiaAction(
     revalidatePath("/");
     revalidatePath("/noticias");
     revalidatePath(`/noticias/${noticia.slug}`);
-    redirect(`/noticias/${noticia.slug}`);
+    redirectPath = `/noticias/${noticia.slug}`;
   } catch (error) {
     const errorMsg =
       error instanceof Error ? error.message : "Error al editar la noticia.";
     return { success: false, error: errorMsg };
+  }
+
+  if (redirectPath) {
+    redirect(redirectPath);
   }
 }
 

@@ -99,6 +99,7 @@ export async function crearPeticion(
       categoria_id: input.categoriaId,
       usuario_id: usuarioId,
       estado: EstadoPeticion.BORRADOR,
+      destacado: input.destacado ?? false,
     },
   });
 }
@@ -118,6 +119,7 @@ export async function actualizarPeticion(
       imagen: input.imagen ?? null,
       meta_firmas: input.meta_firmas,
       categoria_id: input.categoriaId,
+      destacado: input.destacado ?? false,
     },
   });
 }
