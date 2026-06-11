@@ -64,6 +64,7 @@ export async function crearNoticiaAction(
     const noticia = await crearNuevaNoticia(usuario.id, parseResult.data);
     revalidatePath("/");
     revalidatePath("/noticias");
+    revalidatePath("/noticias/mis-noticias");
     redirectPath = `/noticias/${noticia.slug}`;
   } catch (error) {
     const errorMsg =
@@ -74,6 +75,8 @@ export async function crearNoticiaAction(
   if (redirectPath) {
     redirect(redirectPath);
   }
+
+  return { success: true };
 }
 
 export async function editarNoticiaAction(
@@ -130,7 +133,9 @@ export async function editarNoticiaAction(
     );
     revalidatePath("/");
     revalidatePath("/noticias");
+    revalidatePath("/noticias/mis-noticias");
     revalidatePath(`/noticias/${noticia.slug}`);
+    revalidatePath(`/noticias/${noticia.slug}/editar`);
     redirectPath = `/noticias/${noticia.slug}`;
   } catch (error) {
     const errorMsg =
@@ -141,6 +146,8 @@ export async function editarNoticiaAction(
   if (redirectPath) {
     redirect(redirectPath);
   }
+
+  return { success: true };
 }
 
 export async function publicarNoticiaAction(
@@ -169,6 +176,7 @@ export async function publicarNoticiaAction(
     await actualizarEstadoNoticia(id, EstadoNoticia.PUBLICADA, new Date());
     revalidatePath("/");
     revalidatePath("/noticias");
+    revalidatePath("/noticias/mis-noticias");
     revalidatePath(`/noticias/${noticia.slug}`);
 
     return { success: true };

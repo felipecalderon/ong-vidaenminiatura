@@ -5,6 +5,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { NoticiaMarkdownContent } from "@/features/noticias/components/noticia-markdown-content";
 import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries";
 
 interface NoticiaDetailPageProps {
@@ -111,10 +112,7 @@ export default async function NoticiaDetailPage({
         </div>
       )}
 
-      {/* Article content */}
-      <article className="prose dark:prose-invert max-w-none whitespace-pre-line text-base leading-relaxed">
-        {noticia.contenido}
-      </article>
+      <NoticiaMarkdownContent content={noticia.contenido} />
     </div>
   );
 }

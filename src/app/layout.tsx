@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { Figtree, Geist, Geist_Mono } from "next/font/google";
+import "@mdxeditor/editor/style.css";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
@@ -33,6 +35,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const usuarioAutenticado = await obtenerUsuarioAutenticado();
+  const theme = await getTheme();
 
   return (
     <html
@@ -44,7 +47,7 @@ export default async function RootLayout({
         geistMono.variable,
         "font-sans",
         figtree.variable,
-        "dark",
+        theme === "dark" && "dark",
       )}
     >
       <body className="min-h-full bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">

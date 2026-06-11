@@ -58,6 +58,38 @@ export async function listarNoticiasPublicadas() {
   });
 }
 
+export async function listarTodasLasNoticias() {
+  return prisma.noticia.findMany({
+    orderBy: {
+      fecha_creacion: "desc",
+    },
+    include: {
+      categoria: true,
+      autor: {
+        select: {
+          id: true,
+          nombre: true,
+          picture: true,
+        },
+      },
+    },
+  });
+}
+
+export async function listarNoticiasPorUsuario(usuarioId: string) {
+  return prisma.noticia.findMany({
+    where: {
+      autor_id: usuarioId,
+    },
+    orderBy: {
+      fecha_creacion: "desc",
+    },
+    include: {
+      categoria: true,
+    },
+  });
+}
+
 export async function crearNoticia(
   autorId: string,
   slug: string,

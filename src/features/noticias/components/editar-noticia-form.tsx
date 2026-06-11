@@ -14,32 +14,76 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { crearNoticiaAction, type NoticiaActionState } from "../actions";
+import { editarNoticiaAction, type NoticiaActionState } from "../actions";
+import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
-interface CrearNoticiaFormProps {
+interface EditarNoticiaFormProps {
+  noticia: {
+    id: string;
+    titulo: string;
+    resumen: string;
+    contenido: string;
+    categoriaId: string;
+    imagen: string | null;
+  };
   categorias: {
     id: string;
     nombre: string;
   }[];
 }
 
-const initialState: NoticiaActionState = { success: false };
+const initialState: NoticiaActionState = {
+  success: false,
+};
 
-export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
+export function EditarNoticiaForm({
+  noticia,
+  categorias,
+}: EditarNoticiaFormProps) {
   const [state, formAction, isPending] = useActionState(
-    crearNoticiaAction,
+    editarNoticiaAction,
     initialState,
   );
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(noticia.imagen);
+  const [clientErrors, setClientErrors] = useState<Record<string, string[]>>(
+    {},
+  );
+
+  const validateField = (
+    name: keyof typeof editarNoticiaSchema.shape,
+    value: string,
+  ) => {
+    const fieldSchema = editarNoticiaSchema.shape[name];
+    if (!fieldSchema) return;
+
+    const result = fieldSchema.safeParse(value);
+    if (!result.success) {
+      setClientErrors((prev) => ({
+        ...prev,
+        [name]: result.error.flatten().formErrors,
+      }));
+      return;
+    }
+
+    setClientErrors((prev) => {
+      const next = { ...prev };
+      delete next[name];
+      return next;
+    });
+  };
 
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setPreviewUrl(URL.createObjectURL(file));
     } else {
-      setPreviewUrl(null);
+      setPreviewUrl(noticia.imagen);
     }
+  };
+
+  const getFieldError = (name: string) => {
+    return clientErrors[name]?.[0] || state.fieldErrors?.[name]?.[0];
   };
 
   return (
@@ -48,7 +92,7 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
       className="space-y-6 max-w-2xl mx-auto p-8 border border-outline-variant bg-card dark:"
     >
       <h2 className="text-3xl font-bold border-b border-outline-variant pb-3 mb-6">
-        Nueva Noticia
+        Editar Noticia
       </h2>
 
       {state.error && (
@@ -57,7 +101,13 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
         </div>
       )}
 
-      {/* Titulo */}
+      <input type="hidden" name="id" value={noticia.id} />
+      <input
+        type="hidden"
+        name="imagenExistente"
+        value={noticia.imagen || ""}
+      />
+
       <div className="space-y-2">
         <Label htmlFor="titulo" className="text-lg font-bold">
           Título *
@@ -65,23 +115,29 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
         <Input
           id="titulo"
           name="titulo"
-          placeholder="Ej. Descubren nueva especie de abeja en el Amazonas"
+          defaultValue={noticia.titulo}
+          onChange={(e) => validateField("titulo", e.target.value)}
+          onBlur={(e) => validateField("titulo", e.target.value)}
           required
           className="border border-outline-variant text-base py-6"
         />
-        {state.fieldErrors?.titulo && (
+        {getFieldError("titulo") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.titulo[0]}
+            {getFieldError("titulo")}
           </p>
         )}
       </div>
 
-      {/* Categoria */}
       <div className="space-y-2">
         <Label htmlFor="categoriaId" className="text-lg font-bold">
           Categoría *
         </Label>
-        <Select name="categoriaId" required>
+        <Select
+          name="categoriaId"
+          defaultValue={noticia.categoriaId}
+          onValueChange={(value) => validateField("categoriaId", value)}
+          required
+        >
           <SelectTrigger className="border border-outline-variant py-6 text-base bg-background">
             <SelectValue placeholder="Selecciona una categoría" />
           </SelectTrigger>
@@ -93,14 +149,13 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
             ))}
           </SelectContent>
         </Select>
-        {state.fieldErrors?.categoriaId && (
+        {getFieldError("categoriaId") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.categoriaId[0]}
+            {getFieldError("categoriaId")}
           </p>
         )}
       </div>
 
-      {/* Resumen */}
       <div className="space-y-2">
         <Label htmlFor="resumen" className="text-lg font-bold">
           Resumen o extracto *
@@ -108,31 +163,31 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
         <Textarea
           id="resumen"
           name="resumen"
-          placeholder="Breve descripción que aparece en listados (entre 50 y 500 caracteres)."
+          defaultValue={noticia.resumen}
+          onChange={(e) => validateField("resumen", e.target.value)}
+          onBlur={(e) => validateField("resumen", e.target.value)}
           required
           rows={3}
           className="border border-outline-variant text-base"
         />
-        {state.fieldErrors?.resumen && (
+        {getFieldError("resumen") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.resumen[0]}
+            {getFieldError("resumen")}
           </p>
         )}
       </div>
 
-      {/* Contenido */}
       <div className="space-y-2">
         <Label htmlFor="contenido" className="text-lg font-bold">
           Contenido del artículo *
         </Label>
         <NoticiaContentEditor
           name="contenido"
-          initialMarkdown=""
-          error={state.fieldErrors?.contenido?.[0]}
+          initialMarkdown={noticia.contenido}
+          error={getFieldError("contenido")}
         />
       </div>
 
-      {/* Imagen */}
       <div className="space-y-3">
         <Label htmlFor="imagen" className="text-lg font-bold">
           Imagen de portada
@@ -155,9 +210,9 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
             />
           </div>
         )}
-        {state.fieldErrors?.imagen && (
+        {getFieldError("imagen") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.imagen[0]}
+            {getFieldError("imagen")}
           </p>
         )}
       </div>
@@ -170,10 +225,10 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
         {isPending ? (
           <>
             <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-            Guardando noticia...
+            Guardando cambios...
           </>
         ) : (
-          "Crear Noticia en Borrador"
+          "Guardar cambios"
         )}
       </Button>
     </form>

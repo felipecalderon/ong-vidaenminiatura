@@ -25,7 +25,7 @@ interface EditarPeticionFormProps {
     resumen: string;
     contenido: string;
     meta_firmas: number;
-    categoriaId: string;
+    categoriaId?: string;
     imagen: string | null;
     destacado: boolean;
   };
@@ -178,7 +178,7 @@ export function EditarPeticionForm({
         </Label>
         <Select
           name="categoriaId"
-          defaultValue={state.fields?.categoriaId ?? peticion.categoriaId}
+          defaultValue={state.fields?.categoriaId ?? peticion.categoriaId ?? ""}
           onValueChange={(val) => validateField("categoriaId", val)}
           required
         >

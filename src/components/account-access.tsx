@@ -3,6 +3,7 @@
 import {
   ChevronDown,
   ClipboardList,
+  Edit,
   LogIn,
   LogOut,
   ShieldAlert,
@@ -151,6 +152,17 @@ function DesktopAccountAccess({
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link
+            href="/noticias/mis-noticias"
+            className="flex w-full items-center gap-2"
+          >
+            <Edit className="size-4" />
+            {usuario.rol === "ADMINISTRADOR"
+              ? "Gestión de Noticias"
+              : "Mis Noticias"}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link
             href="/auth/logout?returnTo=/"
             className="flex w-full items-center gap-2"
           >
@@ -214,6 +226,17 @@ function MobileAccountAccess({
           {usuario.rol === "ADMINISTRADOR"
             ? "Gestión de Peticiones"
             : "Mis Peticiones"}
+        </Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link
+          href="/noticias/mis-noticias"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
+        >
+          <Edit className="size-4" />
+          {usuario.rol === "ADMINISTRADOR"
+            ? "Gestión de Noticias"
+            : "Mis Noticias"}
         </Link>
       </SheetClose>
       <SheetClose asChild>

@@ -35,12 +35,13 @@ type PeticionConRelaciones = {
   resumen: string;
   contenido: string;
   imagen: string | null;
-  categoriaId: string;
+  categoriaId?: string;
   meta_firmas: number;
   cantidad_firmas: number;
+  destacado: boolean;
   categoria: {
     nombre: string;
-    color: string;
+    color: string | null;
   } | null;
   usuario?: {
     id: string;
@@ -172,7 +173,9 @@ export function MisPeticionesTable({
                 <TableCell>
                   {peticion.categoria ? (
                     <Badge
-                      style={{ backgroundColor: peticion.categoria.color }}
+                      style={{
+                        backgroundColor: peticion.categoria.color ?? undefined,
+                      }}
                       className="border border-outline-variant font-bold"
                     >
                       {peticion.categoria.nombre}
