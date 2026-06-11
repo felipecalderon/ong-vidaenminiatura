@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { PeticionCard } from "@/features/peticiones/components/peticion-card";
-import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries";
+import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries/obtener-lista-peticiones-activas";
 
 export const metadata: Metadata = {
   title: "Peticiones",

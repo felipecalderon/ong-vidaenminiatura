@@ -21,10 +21,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import {
-  eliminarPeticionAction,
-  publicarPeticionAction,
-} from "@/features/peticiones/actions";
+import { eliminarPeticionAction } from "@/features/peticiones/actions/eliminar-peticion";
+import { publicarPeticionAction } from "@/features/peticiones/actions/publicar-peticion";
 import { EditarPeticionForm } from "./editar-peticion-form";
 
 type PeticionConRelaciones = {

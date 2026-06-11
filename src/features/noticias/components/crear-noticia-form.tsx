@@ -14,7 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { crearNoticiaAction, type NoticiaActionState } from "../actions";
+import { crearNoticiaAction } from "../actions/crear-noticia";
+import type { NoticiaActionState } from "../actions/noticia-action-state";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
 interface CrearNoticiaFormProps {

@@ -4,10 +4,10 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { usuarioYaFirmopeticion } from "@/features/firmas/repositories";
+import { usuarioYaFirmopeticion } from "@/features/firmas/queries/repositories/usuario-ya-firmo-peticion";
 import { SignPetitionForm } from "@/features/peticiones/components/sign-petition-form";
-import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries";
-import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries/obtener-peticion-detalle-por-slug";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 interface PeticionDetailPageProps {
   params: Promise<{

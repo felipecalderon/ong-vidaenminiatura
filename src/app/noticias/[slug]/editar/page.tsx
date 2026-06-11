@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound, redirect } from "next/navigation";
-import { obtenerCategoriasActivas } from "@/features/categorias/queries";
+import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { EditarNoticiaForm } from "@/features/noticias/components/editar-noticia-form";
-import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries";
-import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries/obtener-noticia-detalle-por-slug";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 interface EditarNoticiaPageProps {
   params: Promise<{

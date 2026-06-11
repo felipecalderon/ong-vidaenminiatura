@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NoticiaMarkdownContent } from "@/features/noticias/components/noticia-markdown-content";
-import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries";
+import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries/obtener-noticia-detalle-por-slug";
 
 interface NoticiaDetailPageProps {
   params: Promise<{

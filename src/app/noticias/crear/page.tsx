@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import { obtenerCategoriasActivas } from "@/features/categorias/queries";
+import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { CrearNoticiaForm } from "@/features/noticias/components/crear-noticia-form";
-import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata: Metadata = {
   title: "Crear Noticia",

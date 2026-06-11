@@ -15,7 +15,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { type ActionState, crearPeticionAction } from "../actions";
+import type { ActionState } from "../actions/action-state";
+import { crearPeticionAction } from "../actions/crear-peticion";
 import { crearPeticionSchema } from "../schemas/crear-peticion.schema";
 
 interface CrearPeticionFormProps {

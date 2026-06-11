@@ -4,7 +4,7 @@ import "@mdxeditor/editor/style.css";
 import "./globals.css";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 

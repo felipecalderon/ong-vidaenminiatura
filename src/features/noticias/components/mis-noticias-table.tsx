@@ -14,7 +14,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { publicarNoticiaAction } from "@/features/noticias/actions";
+import { publicarNoticiaAction } from "@/features/noticias/actions/publicar-noticia";
 
 type NoticiaConRelaciones = {
   id: string;

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
-import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries";
+import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
 
 export const metadata: Metadata = {
   title: "Noticias",

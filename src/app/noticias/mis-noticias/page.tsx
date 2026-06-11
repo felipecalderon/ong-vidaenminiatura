@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 import { MisNoticiasTable } from "@/features/noticias/components/mis-noticias-table";
-import { obtenerNoticiasParaGestion } from "@/features/noticias/queries";
-import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-noticias-para-gestion";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
   title: "Mis Noticias | InsectosVivos",

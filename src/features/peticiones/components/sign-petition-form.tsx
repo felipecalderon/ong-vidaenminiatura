@@ -4,7 +4,7 @@ import { Check, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
-import { firmarPeticionAction } from "@/features/firmas/actions";
+import { firmarPeticionAction } from "@/features/firmas/actions/firmar-peticion";
 
 interface SignPetitionFormProps {
   peticionId: string;

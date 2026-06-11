@@ -1,10 +1,8 @@
 import { redirect } from "next/navigation";
 import { AdministracionDashboard } from "@/features/categorias/components/administracion-dashboard";
-import { obtenerTodasLasCategorias } from "@/features/categorias/queries";
-import {
-  obtenerTodosLosUsuarios,
-  obtenerUsuarioAutenticado,
-} from "@/features/usuarios/queries";
+import { obtenerTodasLasCategorias } from "@/features/categorias/queries/obtener-todas-las-categorias";
+import { obtenerTodosLosUsuarios } from "@/features/usuarios/queries/obtener-todos-los-usuarios";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
   title: "Administración | InsectosVivos",

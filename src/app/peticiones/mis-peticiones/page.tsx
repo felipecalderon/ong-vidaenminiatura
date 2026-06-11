@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { obtenerCategoriasActivas } from "@/features/categorias/queries";
+import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { MisPeticionesTable } from "@/features/peticiones/components/mis-peticiones-table";
-import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries";
-import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries";
+import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obtener-peticiones-para-gestion";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
   title: "Mis Peticiones | InsectosVivos",

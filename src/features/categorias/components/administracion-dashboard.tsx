@@ -32,16 +32,12 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import {
-  crearCategoriaAction,
-  editarCategoriaAction,
-} from "@/features/categorias/actions";
+import { crearCategoriaAction } from "@/features/categorias/actions/crear-categoria";
+import { editarCategoriaAction } from "@/features/categorias/actions/editar-categoria";
 import type { Categoria } from "@/features/categorias/types";
 // Acciones del servidor
-import {
-  actualizarRolAction,
-  cambiarEstadoUsuarioAction,
-} from "@/features/usuarios/actions";
+import { actualizarRolAction } from "@/features/usuarios/actions/actualizar-rol";
+import { cambiarEstadoUsuarioAction } from "@/features/usuarios/actions/cambiar-estado-usuario";
 import type {
   Usuario,
   UsuarioAutenticadoResumen,
@@ -101,7 +97,7 @@ export function AdministracionDashboard({
   };
 
   // Crear categoría
-  const handleCreateCategory = (e: React.FormEvent) => {
+  const handleCreateCategory = (e: React.ChangeEvent) => {
     e.preventDefault();
     if (!newCatName.trim()) return;
 
@@ -138,7 +134,7 @@ export function AdministracionDashboard({
   };
 
   // Editar categoría
-  const handleEditCategory = (e: React.FormEvent) => {
+  const handleEditCategory = (e: React.ChangeEvent) => {
     e.preventDefault();
     if (!editingCategory || !editCatName.trim()) return;
 

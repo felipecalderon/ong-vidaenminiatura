@@ -14,7 +14,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { editarNoticiaAction, type NoticiaActionState } from "../actions";
+import { editarNoticiaAction } from "../actions/editar-noticia";
+import type { NoticiaActionState } from "../actions/noticia-action-state";
 import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
