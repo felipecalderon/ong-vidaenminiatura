@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { actualizarUsuarioPorAuth0Id } from "../repositories/actualizar-usuario-por-auth0-id";
 import { crearUsuarioAuth0 } from "../repositories/crear-usuario-auth0";
@@ -70,7 +70,7 @@ function construirActualizacion(
     actualizacion.correo = perfil.correo;
   }
 
-  if (perfil.nombre && usuario.nombre !== perfil.nombre) {
+  if (perfil.nombre && !usuario.nombre) {
     actualizacion.nombre = perfil.nombre;
   }
 
@@ -89,7 +89,7 @@ function construirActualizacion(
     actualizacion.family_name = perfil.family_name;
   }
 
-  if (perfil.picture !== null && usuario.picture !== perfil.picture) {
+  if (perfil.picture !== null && !usuario.picture) {
     actualizacion.picture = perfil.picture;
   }
 

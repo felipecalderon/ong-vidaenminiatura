@@ -1,0 +1,125 @@
+"use client";
+
+import { type ChangeEvent, useActionState, useState } from "react";
+import type { ActionState } from "../actions/action-state";
+import { editarPeticionAction } from "../actions/editar-peticion";
+import { editarPeticionSchema } from "../schemas/editar-peticion.schema";
+
+const initialState: ActionState = {
+  success: false,
+};
+
+interface PeticionData {
+  id: string;
+  titulo: string;
+  resumen: string;
+  contenido: string;
+  meta_firmas: number;
+  categoriaId?: string;
+  imagen: string | null;
+  destacado: boolean;
+}
+
+export function useEditarPeticionForm(peticion: PeticionData) {
+  const [state, formAction, isPending] = useActionState(
+    editarPeticionAction,
+    initialState,
+  );
+  const [previewUrl, setPreviewUrl] = useState<string | null>(peticion.imagen);
+  const [clientErrors, setClientErrors] = useState<Record<string, string[]>>(
+    {},
+  );
+
+  const validateField = (
+    name: keyof typeof editarPeticionSchema.shape,
+    value: string | number,
+  ) => {
+    let parsedValue: string | number = value;
+    if (name === "meta_firmas") {
+      parsedValue = Number(value);
+    }
+
+    const fieldSchema = editarPeticionSchema.shape[name];
+    if (!fieldSchema) return;
+
+    const result = fieldSchema.safeParse(parsedValue);
+    if (!result.success) {
+      setClientErrors((prev) => ({
+        ...prev,
+        [name]: result.error.flatten().formErrors,
+      }));
+    } else {
+      setClientErrors((prev) => {
+        const next = { ...prev };
+        delete next[name];
+        return next;
+      });
+    }
+  };
+
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const url = URL.createObjectURL(file);
+      setPreviewUrl(url);
+      setClientErrors((prev) => {
+        const next = { ...prev };
+        delete next.imagen;
+        return next;
+      });
+    } else {
+      setPreviewUrl(peticion.imagen);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      id: formData.get("id") as string,
+      titulo: formData.get("titulo") as string,
+      resumen: formData.get("resumen") as string,
+      contenido: formData.get("contenido") as string,
+      meta_firmas: Number(formData.get("meta_firmas")),
+      categoriaId: formData.get("categoriaId") as string,
+      destacado: formData.get("destacado") === "on",
+      imagen: previewUrl, // Para pasar validación Zod
+    };
+
+    const result = editarPeticionSchema.safeParse(data);
+    const errors: Record<string, string[]> = {};
+
+    if (!result.success) {
+      const fieldErrors = result.error.flatten().fieldErrors as Record<
+        string,
+        string[] | undefined
+      >;
+      for (const key in fieldErrors) {
+        const fieldError = fieldErrors[key];
+        if (fieldError) {
+          errors[key] = fieldError;
+        }
+      }
+    }
+
+    if (Object.keys(errors).length > 0) {
+      e.preventDefault();
+      setClientErrors(errors);
+      return;
+    }
+  };
+
+  const getFieldError = (name: string) => {
+    return clientErrors[name]?.[0] || state.fieldErrors?.[name]?.[0];
+  };
+
+  return {
+    state,
+    formAction,
+    isPending,
+    previewUrl,
+    validateField,
+    handleImageChange,
+    handleSubmit,
+    getFieldError,
+  };
+}

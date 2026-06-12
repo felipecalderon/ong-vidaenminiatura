@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
+import { BarraFiltros } from "@/components/compartido/barra-filtros";
+import { Paginacion } from "@/components/compartido/paginacion";
+import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
 import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
+import type { QueryParams } from "@/types/paginacion";
 
 export const metadata: Metadata = {
   title: "Noticias",
@@ -8,13 +12,23 @@ export const metadata: Metadata = {
     "Mantente informado sobre conservación de insectos y arácnidos. Artículos y novedades de la Fundación InsectosVivos.",
 };
 
-export default async function NoticiasPage() {
-  const noticias = await obtenerListaNoticiasPublicadas();
+interface PageProps {
+  searchParams: Promise<QueryParams>;
+}
+
+export default async function NoticiasPage({ searchParams }: PageProps) {
+  const resolvedParams = await searchParams;
+  const [paginatedResult, categorias] = await Promise.all([
+    obtenerListaNoticiasPublicadas(resolvedParams),
+    obtenerCategoriasActivas(),
+  ]);
+
+  const { data: noticias, meta } = paginatedResult;
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="space-y-4 mb-12">
-        <div className="inline-block bg-primary text-on-primary px-4 py-2 border border-outline-variant dark: font-bold">
+        <div className="inline-block bg-primary text-on-primary px-4 py-2 border border-outline-variant dark:font-bold">
           📰 Últimas Noticias
         </div>
         <h1 className="text-4xl md:text-5xl font-bold">
@@ -26,28 +40,38 @@ export default async function NoticiasPage() {
         </p>
       </div>
 
+      <BarraFiltros categorias={categorias} placeholder="Buscar noticias..." />
+
       {noticias.length === 0 ? (
-        <div className="p-12 text-center border border-outline-variant bg-muted">
+        <div className="p-12 text-center border border-outline-variant bg-card">
           <p className="text-xl font-semibold">
-            No hay noticias publicadas todavía.
+            No se encontraron noticias con los filtros aplicados.
           </p>
           <p className="text-muted-foreground mt-2">
-            ¡Vuelve pronto para estar informado!
+            Intenta cambiar los términos de búsqueda o selecciona otra
+            categoría.
           </p>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {noticias.map((noticia) => (
-            <NoticiaCard
-              key={noticia.id}
-              noticia={{
-                ...noticia,
-                categoria: noticia.categoria ?? null,
-                autor: noticia.autor ?? null,
-              }}
-            />
-          ))}
-        </div>
+        <>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {noticias.map((noticia: any) => (
+              <NoticiaCard
+                key={noticia.id}
+                noticia={{
+                  ...noticia,
+                  categoria: noticia.categoria ?? null,
+                  autor: noticia.autor ?? null,
+                }}
+              />
+            ))}
+          </div>
+
+          <Paginacion
+            currentPage={meta.currentPage}
+            totalPages={meta.totalPages}
+          />
+        </>
       )}
     </div>
   );

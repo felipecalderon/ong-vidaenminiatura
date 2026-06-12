@@ -141,6 +141,15 @@ function DesktopAccountAccess({
         <DropdownMenuSeparator />
         <DropdownMenuItem asChild>
           <Link
+            href="/usuario/mis-datos"
+            className="flex w-full items-center gap-2"
+          >
+            <User2 className="size-4" />
+            Mis datos
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link
             href="/peticiones/mis-peticiones"
             className="flex w-full items-center gap-2"
           >
@@ -219,8 +228,17 @@ function MobileAccountAccess({
       </div>
       <SheetClose asChild>
         <Link
-          href="/peticiones/mis-peticiones"
+          href="/usuario/mis-datos"
           className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
+        >
+          <User2 className="size-4" />
+          Mis datos
+        </Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link
+          href="/peticiones/mis-peticiones"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
         >
           <ClipboardList className="size-4" />
           {usuario.rol === "ADMINISTRADOR"

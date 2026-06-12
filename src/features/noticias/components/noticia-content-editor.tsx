@@ -25,6 +25,7 @@ interface NoticiaContentEditorProps {
   placeholder?: string;
   error?: string;
   className?: string;
+  onChange?: (value: string) => void;
 }
 
 export function NoticiaContentEditor({
@@ -33,6 +34,7 @@ export function NoticiaContentEditor({
   placeholder = "Escribe el contenido de la noticia...",
   error,
   className,
+  onChange,
 }: NoticiaContentEditorProps) {
   const [markdown, setMarkdown] = useState(initialMarkdown);
 
@@ -43,7 +45,10 @@ export function NoticiaContentEditor({
       <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
         <MDXEditor
           markdown={markdown}
-          onChange={(value) => setMarkdown(value)}
+          onChange={(value) => {
+            setMarkdown(value);
+            onChange?.(value);
+          }}
           placeholder={placeholder}
           contentEditableClassName="min-h-[320px] px-4 py-4 text-base leading-7"
           plugins={[

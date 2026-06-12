@@ -35,7 +35,7 @@ export function SignPetitionForm({
 
   if (!usuarioAutenticado) {
     return (
-      <div className="p-6 border border-outline-variant bg-muted text-center space-y-4 dark:">
+      <div className="p-6 border border-outline-variant bg-card text-center space-y-4 dark:">
         <h3 className="text-xl font-bold">Únete y firma esta causa</h3>
         <p className="text-sm text-muted-foreground">
           Necesitas iniciar sesión con tu cuenta para poder firmar esta petición
@@ -54,9 +54,9 @@ export function SignPetitionForm({
 
   if (signed) {
     return (
-      <div className="p-6 border border-outline-variant bg-secondary text-center dark:">
-        <div className="w-16 h-16 mx-auto mb-4 bg-primary border border-outline-variant flex items-center justify-center">
-          <Check className="h-8 w-8 text-primary-foreground" />
+      <div className="p-6 border border-outline-variant bg-card text-center dark:">
+        <div className="w-16 h-16 rounded-full mx-auto mb-4 bg-primary border border-outline-variant flex items-center justify-center">
+          <Check className="h-8 w-8 text-white" />
         </div>
         <h3 className="text-2xl font-bold mb-2">¡Gracias por firmar!</h3>
         <p className="text-muted-foreground">

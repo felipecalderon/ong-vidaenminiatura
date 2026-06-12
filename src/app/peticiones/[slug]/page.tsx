@@ -2,6 +2,7 @@ import { Users } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-facebook";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { usuarioYaFirmopeticion } from "@/features/firmas/queries/repositories/usuario-ya-firmo-peticion";
@@ -27,9 +28,26 @@ export async function generateMetadata({
     };
   }
 
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://vidaenminiatura.org";
+
   return {
     title: peticion.titulo,
     description: peticion.resumen,
+    openGraph: {
+      title: peticion.titulo,
+      description: peticion.resumen ?? undefined,
+      url: `${appUrl}/peticiones/${slug}`,
+      type: "website",
+      ...(peticion.imagen && {
+        images: [
+          {
+            url: peticion.imagen,
+            alt: peticion.titulo,
+          },
+        ],
+      }),
+    },
   };
 }
 
@@ -102,7 +120,7 @@ export default async function PeticionDetailPage({
 
         {/* Sidebar Info & Signature Form */}
         <div className="space-y-6 lg:sticky lg:top-24">
-          <div className="p-6 border border-outline-variant bg-secondary space-y-4 dark:">
+          <div className="p-6 border border-outline-variant bg-card space-y-4 dark:">
             <h2 className="text-2xl font-bold">Estado de firmas</h2>
 
             <div className="flex items-center justify-between text-lg font-semibold">
@@ -125,12 +143,11 @@ export default async function PeticionDetailPage({
             <div className="flex justify-between items-center text-sm font-bold text-primary">
               <span>{Math.round(progress)}% completado</span>
               <span>
-                Faltan{""}
+                Faltan{" "}
                 {(metaFirmas - peticion.cantidad_firmas > 0
                   ? metaFirmas - peticion.cantidad_firmas
                   : 0
-                ).toLocaleString()}
-                {""}
+                ).toLocaleString()}{" "}
                 firmas
               </span>
             </div>
@@ -140,6 +157,12 @@ export default async function PeticionDetailPage({
             peticionId={peticion.id}
             usuarioAutenticado={!!usuario}
             yaFirmoOriginal={yaFirmo}
+          />
+
+          <BotonCompartirFacebook
+            slug={slug}
+            tipo="peticion"
+            className="w-full"
           />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { incrementarContadorFirmas } from "@/features/peticiones/repositories/incrementar-contador-firmas";
 import { obtenerPeticionPorId } from "@/features/peticiones/repositories/obtener-peticion-por-id";

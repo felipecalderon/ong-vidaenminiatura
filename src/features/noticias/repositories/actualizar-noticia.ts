@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { prisma } from "@/lib/prisma";
 import type { EditarNoticiaInput } from "../schemas/editar-noticia.schema";

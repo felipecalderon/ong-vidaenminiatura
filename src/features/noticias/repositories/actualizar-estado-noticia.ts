@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import type { EstadoNoticia } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";

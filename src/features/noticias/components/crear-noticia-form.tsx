@@ -2,7 +2,6 @@
 
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { type ChangeEvent, useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,8 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { crearNoticiaAction } from "../actions/crear-noticia";
-import type { NoticiaActionState } from "../actions/noticia-action-state";
+import { useCrearNoticiaForm } from "../hooks/use-crear-noticia-form";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
 interface CrearNoticiaFormProps {
@@ -25,27 +23,22 @@ interface CrearNoticiaFormProps {
   }[];
 }
 
-const initialState: NoticiaActionState = { success: false };
-
 export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
-  const [state, formAction, isPending] = useActionState(
-    crearNoticiaAction,
-    initialState,
-  );
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
-    } else {
-      setPreviewUrl(null);
-    }
-  };
+  const {
+    state,
+    formAction,
+    isPending,
+    previewUrl,
+    validateField,
+    handleImageChange,
+    handleSubmit,
+    getFieldError,
+  } = useCrearNoticiaForm();
 
   return (
     <form
       action={formAction}
+      onSubmit={handleSubmit}
       className="space-y-6 max-w-2xl mx-auto p-8 border border-outline-variant bg-card dark:"
     >
       <h2 className="text-3xl font-bold border-b border-outline-variant pb-3 mb-6">
@@ -67,12 +60,15 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           id="titulo"
           name="titulo"
           placeholder="Ej. Descubren nueva especie de abeja en el Amazonas"
+          defaultValue={state.fields?.titulo}
+          onChange={(e) => validateField("titulo", e.target.value)}
+          onBlur={(e) => validateField("titulo", e.target.value)}
           required
           className="border border-outline-variant text-base py-6"
         />
-        {state.fieldErrors?.titulo && (
+        {getFieldError("titulo") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.titulo[0]}
+            {getFieldError("titulo")}
           </p>
         )}
       </div>
@@ -82,7 +78,12 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
         <Label htmlFor="categoriaId" className="text-lg font-bold">
           Categoría *
         </Label>
-        <Select name="categoriaId" required>
+        <Select
+          name="categoriaId"
+          defaultValue={state.fields?.categoriaId}
+          onValueChange={(val) => validateField("categoriaId", val)}
+          required
+        >
           <SelectTrigger className="border border-outline-variant py-6 text-base bg-background">
             <SelectValue placeholder="Selecciona una categoría" />
           </SelectTrigger>
@@ -94,9 +95,9 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
             ))}
           </SelectContent>
         </Select>
-        {state.fieldErrors?.categoriaId && (
+        {getFieldError("categoriaId") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.categoriaId[0]}
+            {getFieldError("categoriaId")}
           </p>
         )}
       </div>
@@ -110,13 +111,16 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
           id="resumen"
           name="resumen"
           placeholder="Breve descripción que aparece en listados (entre 50 y 500 caracteres)."
+          defaultValue={state.fields?.resumen}
+          onChange={(e) => validateField("resumen", e.target.value)}
+          onBlur={(e) => validateField("resumen", e.target.value)}
           required
           rows={3}
           className="border border-outline-variant text-base"
         />
-        {state.fieldErrors?.resumen && (
+        {getFieldError("resumen") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.resumen[0]}
+            {getFieldError("resumen")}
           </p>
         )}
       </div>
@@ -128,8 +132,9 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
         </Label>
         <NoticiaContentEditor
           name="contenido"
-          initialMarkdown=""
-          error={state.fieldErrors?.contenido?.[0]}
+          initialMarkdown={state.fields?.contenido || ""}
+          onChange={(val) => validateField("contenido", val)}
+          error={getFieldError("contenido")}
         />
       </div>
 
@@ -156,9 +161,9 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
             />
           </div>
         )}
-        {state.fieldErrors?.imagen && (
+        {getFieldError("imagen") && (
           <p className="text-red-600 text-sm font-semibold">
-            {state.fieldErrors.imagen[0]}
+            {getFieldError("imagen")}
           </p>
         )}
       </div>

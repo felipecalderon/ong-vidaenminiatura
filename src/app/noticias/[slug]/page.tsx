@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-facebook";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NoticiaMarkdownContent } from "@/features/noticias/components/noticia-markdown-content";
@@ -24,9 +25,26 @@ export async function generateMetadata({
     return { title: "Noticia no encontrada" };
   }
 
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "https://vidaenminiatura.org";
+
   return {
     title: noticia.titulo,
     description: noticia.resumen,
+    openGraph: {
+      title: noticia.titulo,
+      description: noticia.resumen ?? undefined,
+      url: `${appUrl}/noticias/${slug}`,
+      type: "article",
+      ...(noticia.imagen && {
+        images: [
+          {
+            url: noticia.imagen,
+            alt: noticia.titulo,
+          },
+        ],
+      }),
+    },
   };
 }
 
@@ -98,6 +116,8 @@ export default async function NoticiaDetailPage({
           )}
         </div>
       </div>
+
+      <BotonCompartirFacebook slug={slug} tipo="noticia" />
 
       {/* Image */}
       {noticia.imagen && (

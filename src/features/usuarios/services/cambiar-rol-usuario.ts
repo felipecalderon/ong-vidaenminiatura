@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { EstadoUsuario, Rol } from "@/generated/prisma/enums";
 import { actualizarRolUsuario } from "../repositories/actualizar-rol-usuario";

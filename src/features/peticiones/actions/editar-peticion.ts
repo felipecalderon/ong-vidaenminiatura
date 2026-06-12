@@ -38,7 +38,6 @@ export async function editarPeticionAction(
     titulo: formData.get("titulo") as string,
     resumen: formData.get("resumen") as string,
     contenido: formData.get("contenido") as string,
-    imagen: imagenUrl,
     meta_firmas: Number(formData.get("meta_firmas")),
     categoriaId: formData.get("categoriaId") as string,
     destacado:
@@ -46,13 +45,29 @@ export async function editarPeticionAction(
       formData.get("destacado") === "true",
   };
 
-  const parseResult = editarPeticionSchema.safeParse(rawData);
+  if (imagenFile && imagenFile.size > 0) {
+    try {
+      imagenUrl = await subirImagenACloudinary(imagenFile);
+    } catch (_e) {
+      return {
+        success: false,
+        error: "Error al subir la nueva imagen a la nube.",
+        fields: rawData,
+      };
+    }
+  }
+
+  const parseResult = editarPeticionSchema.safeParse({
+    ...rawData,
+    imagen: imagenUrl,
+  });
 
   if (!parseResult.success) {
     return {
       success: false,
       error: "Datos de formulario inválidos.",
       fieldErrors: parseResult.error.flatten().fieldErrors,
+      fields: rawData,
     };
   }
 
@@ -76,6 +91,7 @@ export async function editarPeticionAction(
     return {
       success: false,
       error: errorMsg,
+      fields: rawData,
     };
   }
 

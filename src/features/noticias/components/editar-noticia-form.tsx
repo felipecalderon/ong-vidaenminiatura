@@ -2,7 +2,6 @@
 
 import { Loader2 } from "lucide-react";
 import Image from "next/image";
-import { type ChangeEvent, useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,9 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { editarNoticiaAction } from "../actions/editar-noticia";
-import type { NoticiaActionState } from "../actions/noticia-action-state";
-import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
+import { useEditarNoticiaForm } from "../hooks/use-editar-noticia-form";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
 interface EditarNoticiaFormProps {
@@ -34,62 +31,25 @@ interface EditarNoticiaFormProps {
   }[];
 }
 
-const initialState: NoticiaActionState = {
-  success: false,
-};
-
 export function EditarNoticiaForm({
   noticia,
   categorias,
 }: EditarNoticiaFormProps) {
-  const [state, formAction, isPending] = useActionState(
-    editarNoticiaAction,
-    initialState,
-  );
-  const [previewUrl, setPreviewUrl] = useState<string | null>(noticia.imagen);
-  const [clientErrors, setClientErrors] = useState<Record<string, string[]>>(
-    {},
-  );
-
-  const validateField = (
-    name: keyof typeof editarNoticiaSchema.shape,
-    value: string,
-  ) => {
-    const fieldSchema = editarNoticiaSchema.shape[name];
-    if (!fieldSchema) return;
-
-    const result = fieldSchema.safeParse(value);
-    if (!result.success) {
-      setClientErrors((prev) => ({
-        ...prev,
-        [name]: result.error.flatten().formErrors,
-      }));
-      return;
-    }
-
-    setClientErrors((prev) => {
-      const next = { ...prev };
-      delete next[name];
-      return next;
-    });
-  };
-
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setPreviewUrl(URL.createObjectURL(file));
-    } else {
-      setPreviewUrl(noticia.imagen);
-    }
-  };
-
-  const getFieldError = (name: string) => {
-    return clientErrors[name]?.[0] || state.fieldErrors?.[name]?.[0];
-  };
+  const {
+    state,
+    formAction,
+    isPending,
+    previewUrl,
+    validateField,
+    handleImageChange,
+    handleSubmit,
+    getFieldError,
+  } = useEditarNoticiaForm(noticia);
 
   return (
     <form
       action={formAction}
+      onSubmit={handleSubmit}
       className="space-y-6 max-w-2xl mx-auto p-8 border border-outline-variant bg-card dark:"
     >
       <h2 className="text-3xl font-bold border-b border-outline-variant pb-3 mb-6">
@@ -109,6 +69,7 @@ export function EditarNoticiaForm({
         value={noticia.imagen || ""}
       />
 
+      {/* Titulo */}
       <div className="space-y-2">
         <Label htmlFor="titulo" className="text-lg font-bold">
           Título *
@@ -116,7 +77,7 @@ export function EditarNoticiaForm({
         <Input
           id="titulo"
           name="titulo"
-          defaultValue={noticia.titulo}
+          defaultValue={state.fields?.titulo ?? noticia.titulo}
           onChange={(e) => validateField("titulo", e.target.value)}
           onBlur={(e) => validateField("titulo", e.target.value)}
           required
@@ -129,13 +90,14 @@ export function EditarNoticiaForm({
         )}
       </div>
 
+      {/* Categoria */}
       <div className="space-y-2">
         <Label htmlFor="categoriaId" className="text-lg font-bold">
           Categoría *
         </Label>
         <Select
           name="categoriaId"
-          defaultValue={noticia.categoriaId}
+          defaultValue={state.fields?.categoriaId ?? noticia.categoriaId}
           onValueChange={(value) => validateField("categoriaId", value)}
           required
         >
@@ -157,6 +119,7 @@ export function EditarNoticiaForm({
         )}
       </div>
 
+      {/* Resumen */}
       <div className="space-y-2">
         <Label htmlFor="resumen" className="text-lg font-bold">
           Resumen o extracto *
@@ -164,7 +127,7 @@ export function EditarNoticiaForm({
         <Textarea
           id="resumen"
           name="resumen"
-          defaultValue={noticia.resumen}
+          defaultValue={state.fields?.resumen ?? noticia.resumen}
           onChange={(e) => validateField("resumen", e.target.value)}
           onBlur={(e) => validateField("resumen", e.target.value)}
           required
@@ -178,17 +141,20 @@ export function EditarNoticiaForm({
         )}
       </div>
 
+      {/* Contenido */}
       <div className="space-y-2">
         <Label htmlFor="contenido" className="text-lg font-bold">
           Contenido del artículo *
         </Label>
         <NoticiaContentEditor
           name="contenido"
-          initialMarkdown={noticia.contenido}
+          initialMarkdown={state.fields?.contenido ?? noticia.contenido}
+          onChange={(value) => validateField("contenido", value)}
           error={getFieldError("contenido")}
         />
       </div>
 
+      {/* Imagen */}
       <div className="space-y-3">
         <Label htmlFor="imagen" className="text-lg font-bold">
           Imagen de portada

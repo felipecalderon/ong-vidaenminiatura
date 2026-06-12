@@ -16,96 +16,94 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-background text-on-background">
-      {/* Main Content Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        {/* Hero Section */}
-        <section className="mb-16 relative rounded-xl overflow-hidden border border-outline-variant bg-surface-container group">
-          <div className="absolute inset-0 z-0">
-            <Image
-              src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1920&h=1080&fit=crop"
-              alt="Arachnid Hero Image"
-              fill
-              className="object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700 mix-blend-luminosity"
-              priority
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+      {/* Hero Section */}
+      <section className="mb-16 relative rounded-b-4xl overflow-hidden border border-outline-variant bg-surface-container group">
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1920&h=1080&fit=crop"
+            alt="Arachnid Hero Image"
+            fill
+            className="object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700 mix-blend-luminosity"
+            priority
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-background via-background/80 to-transparent"></div>
+        </div>
+        <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between min-h-150">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-xs font-label uppercase tracking-widest mb-6">
+              <span className="material-symbols-outlined text-sm">
+                priority_high
+              </span>
+              Urgent Legislation
+            </div>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter mb-4 text-on-background leading-tight">
+              Protegiendo a los <br />
+              pequeños héroes del planeta.
+            </h1>
+            <p className="text-on-surface-variant text-lg md:text-xl font-body mb-8 max-w-xl">
+              Los insectos y arácnidos son esenciales para la vida en la Tierra.
+              Únete a nuestra misión de protegerlos firmando peticiones y
+              difundiendo conciencia.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/peticiones">
+                <button
+                  type="button"
+                  className="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
+                >
+                  Ver Peticiones
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </Link>
+              <Link href="/nosotros">
+                <button
+                  type="button"
+                  className="w-full sm:w-auto bg-transparent border border-outline-variant text-on-background px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
+                >
+                  Conocer Más
+                </button>
+              </Link>
+            </div>
           </div>
-          <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between min-h-[614px]">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-xs font-label uppercase tracking-widest mb-6">
-                <span className="material-symbols-outlined text-sm">
-                  priority_high
-                </span>
-                Urgent Legislation
+
+          {/* Featured Petition Mini Stats */}
+          {featuredPeticion && (
+            <div className="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant rounded-lg p-6 w-full md:w-80 shadow-2xl">
+              <div className="text-sm font-label text-on-surface-variant uppercase tracking-widest mb-2 line-clamp-1">
+                Destacado: {featuredPeticion.titulo}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter mb-4 text-on-background leading-tight">
-                Protegiendo a los <br />
-                <span className="text-secondary">
-                  pequeños héroes del planeta.
+              <div className="text-3xl font-headline font-black tracking-tighter text-on-background mb-4">
+                {featuredPeticion.cantidad_firmas.toLocaleString()}
+                <span className="text-sm font-body text-secondary font-normal tracking-normal">
+                  {""}/ {featuredPeticion.meta_firmas.toLocaleString()}
                 </span>
-              </h1>
-              <p className="text-on-surface-variant text-lg md:text-xl font-body mb-8 max-w-xl">
-                Los insectos y arácnidos son esenciales para la vida en la
-                Tierra. Únete a nuestra misión de protegerlos firmando
-                peticiones y difundiendo conciencia.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link href="/peticiones">
-                  <button
-                    type="button"
-                    className="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-                  >
-                    Ver Peticiones
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                </Link>
-                <Link href="/nosotros">
-                  <button
-                    type="button"
-                    className="w-full sm:w-auto bg-transparent border border-outline-variant text-on-background px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-                  >
-                    Conocer Más
-                  </button>
+              </div>
+              <div className="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden mb-4 border border-outline-variant">
+                <div
+                  className="h-full bg-tertiary rounded-full relative transition-all duration-1000 ease-out"
+                  style={{
+                    width: `${Math.min((featuredPeticion.cantidad_firmas / featuredPeticion.meta_firmas) * 100, 100)}%`,
+                  }}
+                >
+                  <div className="absolute inset-0 bg-white/20 w-full animate-pulse"></div>
+                </div>
+              </div>
+              <div className="text-xs text-on-surface-variant font-body flex justify-between items-center">
+                <span>Progreso actual</span>
+                <Link
+                  href={`/peticiones/${featuredPeticion.slug}`}
+                  className="text-primary hover:underline font-bold transition-colors"
+                >
+                  Firmar →
                 </Link>
               </div>
             </div>
+          )}
+        </div>
+      </section>
 
-            {/* Featured Petition Mini Stats */}
-            {featuredPeticion && (
-              <div className="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant rounded-lg p-6 w-full md:w-80 shadow-2xl">
-                <div className="text-sm font-label text-on-surface-variant uppercase tracking-widest mb-2 line-clamp-1">
-                  Destacado: {featuredPeticion.titulo}
-                </div>
-                <div className="text-3xl font-headline font-black tracking-tighter text-on-background mb-4">
-                  {featuredPeticion.cantidad_firmas.toLocaleString()}
-                  <span className="text-sm font-body text-secondary font-normal tracking-normal">
-                    {""}/ {featuredPeticion.meta_firmas.toLocaleString()}
-                  </span>
-                </div>
-                <div className="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden mb-4 border border-outline-variant">
-                  <div
-                    className="h-full bg-tertiary rounded-full relative transition-all duration-1000 ease-out"
-                    style={{
-                      width: `${Math.min((featuredPeticion.cantidad_firmas / featuredPeticion.meta_firmas) * 100, 100)}%`,
-                    }}
-                  >
-                    <div className="absolute inset-0 bg-white/20 w-full animate-pulse"></div>
-                  </div>
-                </div>
-                <div className="text-xs text-on-surface-variant font-body flex justify-between items-center">
-                  <span>Progreso actual</span>
-                  <Link
-                    href={`/peticiones/${featuredPeticion.slug}`}
-                    className="text-primary hover:underline font-bold transition-colors"
-                  >
-                    Firmar →
-                  </Link>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-
+      {/* Main Content Container */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Stats Section */}
         <section className="mb-16 grid grid-cols-2 md:grid-cols-4 gap-4">
           {[

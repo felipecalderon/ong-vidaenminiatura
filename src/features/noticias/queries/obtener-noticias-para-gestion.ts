@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import { cache } from "react";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";

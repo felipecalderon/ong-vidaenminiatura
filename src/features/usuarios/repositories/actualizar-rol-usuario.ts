@@ -1,4 +1,4 @@
-import "server-only";
+"use server";
 
 import type { Rol } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
