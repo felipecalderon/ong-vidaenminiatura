@@ -84,10 +84,10 @@ function LoginButton() {
       size="icon"
       className="border border-outline-variant"
     >
-      <Link href="/auth/login">
+      <a href="/auth/login">
         <LogIn className="size-4" />
         <span className="sr-only">Iniciar sesión</span>
-      </Link>
+      </a>
     </Button>
   );
 }
@@ -191,10 +191,7 @@ function DesktopAccountAccess({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link
-            href="/auth/logout?returnTo=/"
-            className="flex w-full items-center gap-2"
-          >
+          <Link href="/auth/logout" className="flex w-full items-center gap-2">
             <LogOut className="size-4" />
             Cerrar sesión
           </Link>
@@ -297,7 +294,7 @@ function MobileAccountAccess({
       </SheetClose>
       <SheetClose asChild>
         <Link
-          href="/auth/logout?returnTo=/"
+          href="/auth/logout"
           className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
         >
           <LogOut className="size-4" />
