@@ -1,6 +1,5 @@
 "use client";
 
-import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -20,10 +19,7 @@ import {
 } from "@/components/ui/table";
 import { EstadoUsuario, Rol } from "@/generated/prisma/enums";
 import { useGestionUsuarios } from "../hooks/use-gestion-usuarios";
-import type {
-  Usuario,
-  UsuarioAutenticadoResumen,
-} from "../types";
+import type { Usuario, UsuarioAutenticadoResumen } from "../types";
 
 interface GestionUsuariosProps {
   initialUsuarios: Usuario[];
@@ -83,8 +79,7 @@ export function GestionUsuarios({
                     </Avatar>
                     <div>
                       <p className="font-bold text-foreground">
-                        {user.nombre}
-                        {" "}
+                        {user.nombre}{" "}
                         {esPropio && (
                           <span className="text-xs text-primary font-extrabold">
                             (Tú)

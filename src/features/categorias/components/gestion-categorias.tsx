@@ -1,7 +1,6 @@
 "use client";
 
 import { Edit2, Plus } from "lucide-react";
-import * as React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -35,7 +34,9 @@ interface GestionCategoriasProps {
   initialCategorias: Categoria[];
 }
 
-export function GestionCategorias({ initialCategorias }: GestionCategoriasProps) {
+export function GestionCategorias({
+  initialCategorias,
+}: GestionCategoriasProps) {
   const {
     categorias,
     isPending,
@@ -169,7 +170,10 @@ export function GestionCategorias({ initialCategorias }: GestionCategoriasProps)
           </DialogHeader>
           <form onSubmit={handleCreateCategory} className="space-y-4 mt-2">
             <div className="space-y-2">
-              <label htmlFor="create-name" className="text-sm font-bold uppercase">
+              <label
+                htmlFor="create-name"
+                className="text-sm font-bold uppercase"
+              >
                 Nombre
               </label>
               <Input
@@ -182,7 +186,10 @@ export function GestionCategorias({ initialCategorias }: GestionCategoriasProps)
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="create-description" className="text-sm font-bold uppercase">
+              <label
+                htmlFor="create-description"
+                className="text-sm font-bold uppercase"
+              >
                 Descripción
               </label>
               <Textarea
@@ -194,7 +201,10 @@ export function GestionCategorias({ initialCategorias }: GestionCategoriasProps)
               />
             </div>
             <div className="space-y-2">
-              <label htmlFor="create-color" className="text-sm font-bold uppercase block">
+              <label
+                htmlFor="create-color"
+                className="text-sm font-bold uppercase block"
+              >
                 Color Identificador
               </label>
               <div className="flex items-center gap-3">
@@ -260,7 +270,10 @@ export function GestionCategorias({ initialCategorias }: GestionCategoriasProps)
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="description" className="text-sm font-bold uppercase">
+                <label
+                  htmlFor="description"
+                  className="text-sm font-bold uppercase"
+                >
                   Descripción
                 </label>
                 <Textarea
@@ -272,7 +285,10 @@ export function GestionCategorias({ initialCategorias }: GestionCategoriasProps)
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="color-id" className="text-sm font-bold uppercase block">
+                <label
+                  htmlFor="color-id"
+                  className="text-sm font-bold uppercase block"
+                >
                   Color Identificador
                 </label>
                 <div className="flex items-center gap-3">
@@ -291,7 +307,10 @@ export function GestionCategorias({ initialCategorias }: GestionCategoriasProps)
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="activation-status" className="text-sm font-bold uppercase block">
+                <label
+                  htmlFor="activation-status"
+                  className="text-sm font-bold uppercase block"
+                >
                   Estado de Activación
                 </label>
                 <Select

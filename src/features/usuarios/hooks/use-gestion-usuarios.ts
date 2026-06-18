@@ -1,7 +1,6 @@
 "use client";
 
-import * as React from "react";
-import { useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useToast } from "@/components/ui/use-toast";
 import { actualizarRolAction } from "@/features/usuarios/actions/actualizar-rol";
 import { cambiarEstadoUsuarioAction } from "@/features/usuarios/actions/cambiar-estado-usuario";
@@ -18,9 +17,9 @@ export function useGestionUsuarios(
   const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
-  const [usuarios, setUsuarios] = React.useState<Usuario[]>(initialUsuarios);
+  const [usuarios, setUsuarios] = useState<Usuario[]>(initialUsuarios);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setUsuarios(initialUsuarios);
   }, [initialUsuarios]);
 

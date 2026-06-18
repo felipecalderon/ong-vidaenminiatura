@@ -3,8 +3,6 @@
 import { Edit, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { DescargarFirmasExcelButton } from "./descargar-firmas-excel-button";
-import * as React from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -176,7 +174,10 @@ export function GestionPeticiones({
                         className="border border-outline-variant bg-card hover:bg-muted dark:"
                         title="Ver petición"
                       >
-                        <Link href={`/peticiones/${peticion.slug}`} target="_blank">
+                        <Link
+                          href={`/peticiones/${peticion.slug}`}
+                          target="_blank"
+                        >
                           <Eye className="size-3.5" />
                         </Link>
                       </Button>
