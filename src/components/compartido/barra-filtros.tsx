@@ -93,7 +93,7 @@ export function BarraFiltros({
       </div>
 
       {showCategoryFilter && (
-        <div className="w-full sm:w-auto min-w-[200px]">
+        <div className="w-full sm:w-auto min-w-50">
           <select
             value={searchParams.get("categoriaId") || ""}
             onChange={handleCategoryChange}

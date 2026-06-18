@@ -104,7 +104,7 @@ function DesktopAccountAccess({
       <DropdownMenuTrigger asChild>
         <Button
           variant="outline"
-          className="max-w-[14rem] border border-outline-variant px-3 font-semibold"
+          className="max-w-56 border border-outline-variant px-3 font-semibold"
         >
           <AvatarCuenta usuario={usuario} />
           <span className="hidden max-w-28 truncate sm:inline">

@@ -34,7 +34,7 @@ export function NoticiaCard({ noticia, featured = false }: NoticiaCardProps) {
         className={`h-full border border-outline-variant bg-surface-container rounded-lg overflow-hidden transition-all duration-200 hover:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background ${featured ? "md:flex md:flex-row" : "flex flex-col"}`}
       >
         <div
-          className={`relative overflow-hidden ${featured ? "md:w-1/2 aspect-[4/3] md:aspect-auto" : "aspect-video w-full"}`}
+          className={`relative overflow-hidden ${featured ? "md:w-1/2 aspect-4/3 md:aspect-auto" : "aspect-video w-full"}`}
         >
           <Image
             src={

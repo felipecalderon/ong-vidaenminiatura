@@ -6,7 +6,7 @@ import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { usuarioYaFirmopeticion } from "@/features/firmas/queries/repositories/usuario-ya-firmo-peticion";
-import { SignPetitionForm } from "@/features/peticiones/components/sign-petition-form";
+import { SignPetitionForm } from "@/features/firmas/components/sign-petition-form";
 import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries/obtener-peticion-detalle-por-slug";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 

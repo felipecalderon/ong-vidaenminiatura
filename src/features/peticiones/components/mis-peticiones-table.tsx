@@ -158,7 +158,7 @@ export function MisPeticionesTable({
                 className="border-b border-outline-variant/20"
               >
                 <TableCell
-                  className="font-medium max-w-[200px] truncate"
+                  className="font-medium max-w-50 truncate"
                   title={peticion.titulo}
                 >
                   {peticion.titulo}
@@ -231,7 +231,7 @@ export function MisPeticionesTable({
       </div>
 
       <Dialog open={modalAbierto} onOpenChange={setModalAbierto}>
-        <DialogContent className="border border-outline-variant dark: w-full max-w-[95vw] sm:max-w-[700px] max-h-[85vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6 md:p-8">
+        <DialogContent className="border border-outline-variant dark: w-full max-w-[95vw] sm:max-w-175 max-h-[85vh] overflow-y-auto overflow-x-hidden p-4 sm:p-6 md:p-8">
           <DialogHeader className="mb-4">
             <DialogTitle className="text-2xl font-bold">
               Editar Petición
@@ -255,7 +255,7 @@ export function MisPeticionesTable({
                     </p>
                   </div>
                   <Button
-                    className="w-full sm:w-auto font-bold border border-outline-variant py-5 hover: transition-all flex-shrink-0"
+                    className="w-full sm:w-auto font-bold border border-outline-variant py-5 hover: transition-all shrink-0"
                     onClick={() => handlePublicar(peticionSeleccionada.id)}
                     disabled={publicandoId === peticionSeleccionada.id}
                   >

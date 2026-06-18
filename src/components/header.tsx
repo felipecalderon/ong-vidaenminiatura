@@ -42,7 +42,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
             <Link
               key={link.href}
               href={link.href}
-              className="text-on-surface-variant hover:text-on-surface transition-colors font-headline tracking-tight hover:bg-surface-container-high transition-all duration-200 active:scale-95 px-3 py-1 rounded-md"
+              className="text-on-surface-variant hover:text-on-surface transition-colors font-headline tracking-tight hover:bg-surface-container-high duration-200 active:scale-95 px-3 py-1 rounded-md"
             >
               {link.label}
             </Link>
@@ -62,8 +62,6 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
               <span className="sr-only">Administración</span>
             </Link>
           )}
-
-
 
           <Sheet>
             <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all active:scale-95 md:hidden">
@@ -99,7 +97,6 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
                     </Link>
                   </SheetClose>
                 )}
-
               </div>
             </SheetContent>
           </Sheet>

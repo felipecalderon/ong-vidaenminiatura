@@ -135,7 +135,7 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
               className="border-b border-outline-variant/20"
             >
               <TableCell
-                className="font-medium max-w-[220px] truncate"
+                className="font-medium max-w-55 truncate"
                 title={noticia.titulo}
               >
                 {noticia.titulo}

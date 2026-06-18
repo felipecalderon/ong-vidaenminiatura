@@ -429,7 +429,7 @@ export function AdministracionDashboard({
                             handleRoleChange(user.id, val as Rol)
                           }
                         >
-                          <SelectTrigger className="w-[160px] border border-outline-variant font-semibold bg-background dark:">
+                          <SelectTrigger className="w-40 border border-outline-variant font-semibold bg-background dark:">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent className="border border-outline-variant bg-popover font-semibold">
@@ -460,7 +460,7 @@ export function AdministracionDashboard({
                             handleStatusChange(user.id, val as EstadoUsuario)
                           }
                         >
-                          <SelectTrigger className="w-[140px] ml-auto border border-outline-variant font-semibold bg-background dark:">
+                          <SelectTrigger className="w-35 ml-auto border border-outline-variant font-semibold bg-background dark:">
                             <SelectValue />
                           </SelectTrigger>
                           <SelectContent className="border border-outline-variant bg-popover font-semibold">
@@ -540,7 +540,7 @@ export function AdministracionDashboard({
                 <Input
                   value={newCatColor}
                   onChange={(e) => setNewCatColor(e.target.value)}
-                  className="border border-outline-variant font-mono dark: max-w-[120px]"
+                  className="border border-outline-variant font-mono dark: max-w-30"
                 />
               </div>
             </div>
@@ -624,7 +624,7 @@ export function AdministracionDashboard({
                   <Input
                     value={editCatColor}
                     onChange={(e) => setEditCatColor(e.target.value)}
-                    className="border border-outline-variant font-mono dark: max-w-[120px]"
+                    className="border border-outline-variant font-mono dark: max-w-30"
                   />
                 </div>
               </div>
