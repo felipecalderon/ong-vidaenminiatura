@@ -63,14 +63,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
             </Link>
           )}
 
-          <Link href="/peticiones/crear" className="hidden sm:block">
-            <button
-              type="button"
-              className="bg-primary text-on-primary px-4 py-2 rounded-lg font-label text-sm tracking-widest uppercase hover:bg-primary-fixed-dim transition-colors active:scale-95 duration-100 font-bold"
-            >
-              Crear Petición
-            </button>
-          </Link>
+
 
           <Sheet>
             <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all active:scale-95 md:hidden">
@@ -106,16 +99,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
                     </Link>
                   </SheetClose>
                 )}
-                <SheetClose asChild>
-                  <Link href="/peticiones/crear">
-                    <button
-                      type="button"
-                      className="w-full bg-primary text-on-primary py-4 rounded-lg font-label text-sm tracking-widest uppercase hover:bg-primary-fixed-dim transition-colors active:scale-95 duration-100 font-bold"
-                    >
-                      Crear Petición
-                    </button>
-                  </Link>
-                </SheetClose>
+
               </div>
             </SheetContent>
           </Sheet>

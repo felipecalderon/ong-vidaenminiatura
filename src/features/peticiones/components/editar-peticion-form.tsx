@@ -201,6 +201,7 @@ export function EditarPeticionForm({
               src={previewUrl}
               alt="Previsualización de la imagen"
               fill
+              sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover"
             />
           </div>

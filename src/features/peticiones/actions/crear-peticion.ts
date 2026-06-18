@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { generarExtractoAction } from "@/actions/generar-extracto";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { subirImagenACloudinary } from "@/lib/cloudinary";
 import { crearPeticionSchema } from "../schemas/crear-peticion.schema";
@@ -23,7 +24,6 @@ export async function crearPeticionAction(
 
   const fields = {
     titulo: formData.get("titulo") as string,
-    resumen: formData.get("resumen") as string,
     contenido: formData.get("contenido") as string,
     meta_firmas: Number(formData.get("meta_firmas")),
     categoriaId: formData.get("categoriaId") as string,
@@ -32,6 +32,7 @@ export async function crearPeticionAction(
       formData.get("destacado") === "true",
   };
 
+  // Validar campos básicos antes de llamar a la IA
   const parseResult = crearPeticionSchema.safeParse({
     ...fields,
     imagen: null,
@@ -70,11 +71,26 @@ export async function crearPeticionAction(
     };
   }
 
+  // Generar el extracto SEO con IA
+  const extractoResult = await generarExtractoAction({
+    titulo: fields.titulo,
+    contenido: fields.contenido,
+  });
+
+  if (!extractoResult.success) {
+    return {
+      success: false,
+      error: `No se pudo generar el extracto automático: ${extractoResult.error}`,
+      fields,
+    };
+  }
+
   let redirectPath: string | undefined;
 
   try {
     const peticion = await crearNuevaPeticion(usuario.id, {
       ...parseResult.data,
+      resumen: extractoResult.extracto,
       imagen: imagenUrl,
     });
     revalidatePath("/");

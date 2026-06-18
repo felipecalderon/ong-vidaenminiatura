@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { generarExtractoAction } from "@/actions/generar-extracto";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { subirImagenACloudinary } from "@/lib/cloudinary";
 import { crearNoticiaSchema } from "../schemas/crear-noticia.schema";
@@ -21,15 +22,14 @@ export async function crearNoticiaAction(
     };
   }
 
-  const imagenFile = formData.get("imagen") as File | null;
-  let imagenUrl: string | undefined;
-
   const rawData = {
     titulo: formData.get("titulo") as string,
-    resumen: formData.get("resumen") as string,
     contenido: formData.get("contenido") as string,
     categoriaId: formData.get("categoriaId") as string,
   };
+
+  const imagenFile = formData.get("imagen") as File | null;
+  let imagenUrl: string | undefined;
 
   if (imagenFile && imagenFile.size > 0) {
     try {
@@ -43,6 +43,7 @@ export async function crearNoticiaAction(
     }
   }
 
+  // Pre-validar campos básicos antes de llamar a la IA
   const parseResult = crearNoticiaSchema.safeParse({
     ...rawData,
     imagen: imagenUrl,
@@ -57,10 +58,27 @@ export async function crearNoticiaAction(
     };
   }
 
+  // Generar el extracto SEO con IA
+  const extractoResult = await generarExtractoAction({
+    titulo: rawData.titulo,
+    contenido: rawData.contenido,
+  });
+
+  if (!extractoResult.success) {
+    return {
+      success: false,
+      error: `No se pudo generar el extracto automático: ${extractoResult.error}`,
+      fields: rawData,
+    };
+  }
+
   let redirectPath: string | undefined;
 
   try {
-    const noticia = await crearNuevaNoticia(usuario.id, parseResult.data);
+    const noticia = await crearNuevaNoticia(usuario.id, {
+      ...parseResult.data,
+      resumen: extractoResult.extracto,
+    });
     revalidatePath("/");
     revalidatePath("/noticias");
     revalidatePath("/noticias/mis-noticias");

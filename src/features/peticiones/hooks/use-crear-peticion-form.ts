@@ -65,13 +65,13 @@ export function useCrearPeticionForm() {
     const formData = new FormData(e.currentTarget);
     const data = {
       titulo: formData.get("titulo") as string,
-      resumen: formData.get("resumen") as string,
       contenido: formData.get("contenido") as string,
       meta_firmas: Number(formData.get("meta_firmas")),
       categoriaId: formData.get("categoriaId") as string,
       destacado: formData.get("destacado") === "on",
       imagen: null,
     };
+
 
     const result = crearPeticionSchema.safeParse(data);
     const errors: Record<string, string[]> = {};

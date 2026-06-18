@@ -7,8 +7,10 @@ export const crearNoticiaSchema = z.object({
     .max(200, "El título no puede exceder los 200 caracteres"),
   resumen: z
     .string()
-    .min(50, "El resumen debe tener al menos 50 caracteres")
-    .max(500, "El resumen no puede exceder los 500 caracteres"),
+    .min(30, "El resumen debe tener al menos 30 caracteres")
+    .max(500, "El resumen no puede exceder los 500 caracteres")
+    .optional()
+    .default(""),
   contenido: z
     .string()
     .min(100, "El contenido debe tener al menos 100 caracteres"),

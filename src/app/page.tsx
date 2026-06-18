@@ -23,6 +23,7 @@ export default function HomePage() {
             src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1920&h=1080&fit=crop"
             alt="Arachnid Hero Image"
             fill
+            sizes="100vw"
             className="object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700 mix-blend-luminosity"
             priority
           />

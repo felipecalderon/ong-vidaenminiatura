@@ -29,6 +29,8 @@ export const metadata: Metadata = {
     "Fundación para la protección y conservación de insectos y arácnidos.",
 };
 
+import { Toaster } from "sonner";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -56,7 +58,9 @@ export default async function RootLayout({
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
+        <Toaster richColors closeButton position="top-right" />
       </body>
     </html>
   );
 }
+

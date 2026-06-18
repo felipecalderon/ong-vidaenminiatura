@@ -102,28 +102,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         )}
       </div>
 
-      {/* Resumen */}
-      <div className="space-y-2">
-        <Label htmlFor="resumen" className="text-lg font-bold">
-          Resumen o descripción corta *
-        </Label>
-        <Textarea
-          id="resumen"
-          name="resumen"
-          placeholder="Describe brevemente la causa (entre 50 y 500 caracteres)."
-          defaultValue={state.fields?.resumen}
-          onChange={(e) => validateField("resumen", e.target.value)}
-          onBlur={(e) => validateField("resumen", e.target.value)}
-          required
-          rows={3}
-          className="border border-outline-variant text-base"
-        />
-        {getFieldError("resumen") && (
-          <p className="text-red-600 text-sm font-semibold">
-            {getFieldError("resumen")}
-          </p>
-        )}
-      </div>
+
 
       {/* Contenido */}
       <div className="space-y-2">
@@ -168,6 +147,7 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
               src={previewUrl}
               alt="Previsualización de la imagen"
               fill
+              sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover"
             />
           </div>

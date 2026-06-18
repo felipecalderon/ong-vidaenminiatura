@@ -4,8 +4,10 @@ import {
   ChevronDown,
   ClipboardList,
   Edit,
+  FilePlus2,
   LogIn,
   LogOut,
+  Newspaper,
   ShieldAlert,
   User2,
 } from "lucide-react";
@@ -150,6 +152,15 @@ function DesktopAccountAccess({
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
           <Link
+            href="/peticiones/crear"
+            className="flex w-full items-center gap-2"
+          >
+            <FilePlus2 className="size-4" />
+            Crear Petición
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link
             href="/peticiones/mis-peticiones"
             className="flex w-full items-center gap-2"
           >
@@ -157,6 +168,15 @@ function DesktopAccountAccess({
             {usuario.rol === "ADMINISTRADOR"
               ? "Gestión de Peticiones"
               : "Mis Peticiones"}
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link
+            href="/noticias/crear"
+            className="flex w-full items-center gap-2"
+          >
+            <Newspaper className="size-4" />
+            Crear Noticia
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
@@ -237,6 +257,15 @@ function MobileAccountAccess({
       </SheetClose>
       <SheetClose asChild>
         <Link
+          href="/peticiones/crear"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
+        >
+          <FilePlus2 className="size-4" />
+          Crear Petición
+        </Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link
           href="/peticiones/mis-peticiones"
           className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
         >
@@ -244,6 +273,15 @@ function MobileAccountAccess({
           {usuario.rol === "ADMINISTRADOR"
             ? "Gestión de Peticiones"
             : "Mis Peticiones"}
+        </Link>
+      </SheetClose>
+      <SheetClose asChild>
+        <Link
+          href="/noticias/crear"
+          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
+        >
+          <Newspaper className="size-4" />
+          Crear Noticia
         </Link>
       </SheetClose>
       <SheetClose asChild>

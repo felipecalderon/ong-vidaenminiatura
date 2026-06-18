@@ -173,6 +173,7 @@ export function EditarNoticiaForm({
               src={previewUrl}
               alt="Previsualización"
               fill
+              sizes="(max-width: 768px) 100vw, 600px"
               className="object-cover"
             />
           </div>
