@@ -86,7 +86,7 @@ export default async function NoticiaDetailPage({
           <Badge
             className="border border-outline-variant font-bold"
             style={{
-              backgroundColor: noticia.categoria.color ?? undefined,
+              borderColor: noticia.categoria.color ?? undefined,
             }}
           >
             {noticia.categoria.nombre}

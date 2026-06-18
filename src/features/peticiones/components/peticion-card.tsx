@@ -35,11 +35,11 @@ export function PeticionCard({
           />
           {peticion.categoria && (
             <Badge
-              className="absolute top-4 left-4 bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant font-label text-xs uppercase tracking-widest text-on-surface"
+              className="absolute top-4 left-4 bg-surface-container-highest/80 backdrop-blur-md font-label text-xs uppercase tracking-widest text-on-surface"
               style={{
-                backgroundColor: peticion.categoria.color
-                  ? `${peticion.categoria.color}80`
-                  : undefined,
+                borderColor: peticion.categoria.color ?? undefined,
+                borderWidth: "1.5px",
+                borderStyle: "solid",
               }}
             >
               {peticion.categoria.nombre}

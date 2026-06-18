@@ -147,7 +147,7 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
                 {noticia.categoria ? (
                   <Badge
                     style={{
-                      backgroundColor: noticia.categoria.color ?? undefined,
+                      borderColor: noticia.categoria.color ?? undefined,
                     }}
                     className="border border-outline-variant font-bold"
                   >

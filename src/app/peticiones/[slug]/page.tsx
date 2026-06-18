@@ -5,7 +5,7 @@ import { notFound } from "next/navigation";
 import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-facebook";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
-import { usuarioYaFirmopeticion } from "@/features/firmas/queries/repositories/usuario-ya-firmo-peticion";
+import { usuarioYaFirmopeticion } from "@/features/firmas/repositories/usuario-ya-firmo-peticion";
 import { SignPetitionForm } from "@/features/firmas/components/sign-petition-form";
 import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries/obtener-peticion-detalle-por-slug";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
@@ -81,7 +81,7 @@ export default async function PeticionDetailPage({
               <Badge
                 className="border border-outline-variant font-bold"
                 style={{
-                  backgroundColor: peticion.categoria.color ?? undefined,
+                  borderColor: peticion.categoria.color ?? undefined,
                 }}
               >
                 {peticion.categoria.nombre}

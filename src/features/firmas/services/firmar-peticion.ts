@@ -4,8 +4,8 @@ import { incrementarContadorFirmas } from "@/features/peticiones/repositories/in
 import { obtenerPeticionPorId } from "@/features/peticiones/repositories/obtener-peticion-por-id";
 import { EstadoPeticion } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
-import { registrarFirma } from "../queries/repositories/registrar-firma";
-import { usuarioYaFirmopeticion } from "../queries/repositories/usuario-ya-firmo-peticion";
+import { registrarFirma } from "../repositories/registrar-firma";
+import { usuarioYaFirmopeticion } from "../repositories/usuario-ya-firmo-peticion";
 
 export async function firmarPeticion(usuarioId: string, peticionId: string) {
   const yaFirmo = await usuarioYaFirmopeticion(usuarioId, peticionId);

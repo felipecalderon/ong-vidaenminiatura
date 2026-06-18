@@ -172,7 +172,7 @@ export function MisPeticionesTable({
                   {peticion.categoria ? (
                     <Badge
                       style={{
-                        backgroundColor: peticion.categoria.color ?? undefined,
+                        borderColor: peticion.categoria.color ?? undefined,
                       }}
                       className="border border-outline-variant font-bold"
                     >
