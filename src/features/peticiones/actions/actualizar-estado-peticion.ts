@@ -30,7 +30,8 @@ export async function actualizarEstadoPeticionAction(
       };
     }
 
-    const fechaPublicacion = estado === EstadoPeticion.PUBLICADA ? new Date() : null;
+    const fechaPublicacion =
+      estado === EstadoPeticion.PUBLICADA ? new Date() : null;
 
     await actualizarEstadoPeticion(id, estado, fechaPublicacion);
 

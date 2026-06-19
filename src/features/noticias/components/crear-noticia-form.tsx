@@ -1,8 +1,8 @@
 "use client";
 
-import { Loader2, Upload, X, Image as ImageIcon } from "lucide-react";
+import { Loader2, Upload, X } from "lucide-react";
 import Image from "next/image";
-import { useState, useRef } from "react";
+import { useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -109,10 +109,15 @@ function ImageUploader({ previewUrl, onFileSelect }: ImageUploaderProps) {
         </div>
       ) : (
         <div
+          role="button"
+          tabIndex={0}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
           onClick={handleAreaClick}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") handleAreaClick();
+          }}
           className={`relative aspect-video w-full rounded-lg border-2 border-dashed flex flex-col items-center justify-center p-6 text-center cursor-pointer transition-all duration-200 ${
             isDragging
               ? "border-primary bg-primary/5 scale-[0.99]"
@@ -151,7 +156,6 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
     isPending,
     previewUrl,
     validateField,
-    handleImageChange,
     processImageFile,
     handleSubmit,
     getFieldError,

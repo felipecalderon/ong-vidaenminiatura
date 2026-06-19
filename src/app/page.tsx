@@ -2,15 +2,17 @@ import { ArrowRight, Bug, Edit, Leaf, Shield, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
+import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
 import { PeticionCard } from "@/features/peticiones/components/peticion-card";
-import {
-  getNoticiasPublicadas,
-  getPeticionesPublicadas,
-} from "@/lib/mock-data";
+import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries/obtener-lista-peticiones-activas";
 
-export default function HomePage() {
-  const peticiones = getPeticionesPublicadas().slice(0, 4);
-  const noticias = getNoticiasPublicadas().slice(0, 3);
+export default async function HomePage() {
+  const { data: peticiones } = await obtenerListaPeticionesActivas({
+    limit: "4",
+  });
+  const { data: noticias } = await obtenerListaNoticiasPublicadas({
+    limit: "3",
+  });
   const featuredPeticion = peticiones[0];
   const otherPeticiones = peticiones.slice(1);
 
@@ -179,22 +181,7 @@ export default function HomePage() {
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {noticias.map((noticia) => (
-              <NoticiaCard
-                key={noticia.id}
-                noticia={{
-                  ...noticia,
-                  fecha_publicacion: noticia.fecha_publicacion ?? null,
-                  categoria: noticia.categoria
-                    ? {
-                        nombre: noticia.categoria.nombre,
-                        color: noticia.categoria.color ?? null,
-                      }
-                    : null,
-                  autor: noticia.autor
-                    ? { nombre: noticia.autor.nombre }
-                    : null,
-                }}
-              />
+              <NoticiaCard key={noticia.id} noticia={noticia} />
             ))}
           </div>
         </section>

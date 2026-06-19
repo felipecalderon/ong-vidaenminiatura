@@ -1,6 +1,6 @@
 "use client";
 
-import { type ChangeEvent, useActionState, useState, useEffect } from "react";
+import { type ChangeEvent, useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { crearNoticiaAction } from "../actions/crear-noticia";
 import type { NoticiaActionState } from "../actions/noticia-action-state";
@@ -54,9 +54,17 @@ export function useCrearNoticiaForm() {
     }
 
     // Validar tipo de formato de imagen
-    const validTypes = ["image/jpeg", "image/png", "image/webp", "image/gif", "image/svg+xml"];
+    const validTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "image/svg+xml",
+    ];
     if (!validTypes.includes(file.type)) {
-      toast.error("Formato de imagen no permitido. Usa JPG, PNG, WEBP, GIF o SVG.");
+      toast.error(
+        "Formato de imagen no permitido. Usa JPG, PNG, WEBP, GIF o SVG.",
+      );
       return;
     }
 

@@ -2,16 +2,16 @@
 
 import * as React from "react";
 import { useTransition } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { crearCategoriaAction } from "@/features/categorias/actions/crear-categoria";
 import { editarCategoriaAction } from "@/features/categorias/actions/editar-categoria";
 import type { Categoria } from "@/features/categorias/types";
 
 export function useGestionCategorias(initialCategorias: Categoria[]) {
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
 
-  const [categorias, setCategorias] = React.useState<Categoria[]>(initialCategorias);
+  const [categorias, setCategorias] =
+    React.useState<Categoria[]>(initialCategorias);
 
   React.useEffect(() => {
     setCategorias(initialCategorias);
@@ -19,7 +19,8 @@ export function useGestionCategorias(initialCategorias: Categoria[]) {
 
   // Estados de modales
   const [isNewCategoryOpen, setIsNewCategoryOpen] = React.useState(false);
-  const [editingCategory, setEditingCategory] = React.useState<Categoria | null>(null);
+  const [editingCategory, setEditingCategory] =
+    React.useState<Categoria | null>(null);
 
   // Form de nueva categoría
   const [newCatName, setNewCatName] = React.useState("");
@@ -54,8 +55,7 @@ export function useGestionCategorias(initialCategorias: Categoria[]) {
           color: newCatColor,
         });
 
-        toast({
-          title: "Categoría creada",
+        toast.success("Categoría creada", {
           description: `La categoría "${result.nombre}" ha sido creada exitosamente.`,
         });
 
@@ -69,9 +69,7 @@ export function useGestionCategorias(initialCategorias: Categoria[]) {
           err instanceof Error
             ? err.message
             : "Ha ocurrido un error inesperado";
-        toast({
-          variant: "destructive",
-          title: "Error al crear la categoría",
+        toast.error("Error al crear la categoría", {
           description: message || "Ocurrió un error inesperado.",
         });
       }
@@ -92,8 +90,7 @@ export function useGestionCategorias(initialCategorias: Categoria[]) {
           activo: editCatActive,
         });
 
-        toast({
-          title: "Categoría actualizada",
+        toast.success("Categoría actualizada", {
           description: `La categoría "${result.nombre}" ha sido actualizada.`,
         });
 
@@ -103,9 +100,7 @@ export function useGestionCategorias(initialCategorias: Categoria[]) {
           err instanceof Error
             ? err.message
             : "Ha ocurrido un error inesperado";
-        toast({
-          variant: "destructive",
-          title: "Error al actualizar la categoría",
+        toast.error("Error al actualizar la categoría", {
           description: message || "Ocurrió un error inesperado.",
         });
       }

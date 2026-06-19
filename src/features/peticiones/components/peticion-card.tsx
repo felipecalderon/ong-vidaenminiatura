@@ -2,10 +2,23 @@ import { ArrowRight, Users } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
-import type { Peticion } from "@/lib/mock-data";
+
+interface PeticionCardPeticion {
+  id: string;
+  slug: string;
+  titulo: string;
+  resumen: string;
+  imagen: string | null;
+  cantidad_firmas: number;
+  meta_firmas: number;
+  categoria?: {
+    nombre: string;
+    color: string | null;
+  } | null;
+}
 
 interface PeticionCardProps {
-  peticion: Peticion;
+  peticion: PeticionCardPeticion;
   featured?: boolean;
 }
 
@@ -27,7 +40,10 @@ export function PeticionCard({
           className={`relative overflow-hidden ${featured ? "md:w-1/2" : "aspect-video w-full"}`}
         >
           <Image
-            src={peticion.imagen}
+            src={
+              peticion.imagen ??
+              "https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=800&h=400&fit=crop"
+            }
             alt={peticion.titulo}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { incrementarContadorFirmas } from "@/features/peticiones/repositories/incrementar-contador-firmas";
 import { obtenerPeticionPorId } from "@/features/peticiones/repositories/obtener-peticion-por-id";
 import { EstadoPeticion } from "@/generated/prisma/enums";

@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { prisma } from "@/lib/prisma";
 import type { EditarPeticionInput } from "../schemas/editar-peticion.schema";
 

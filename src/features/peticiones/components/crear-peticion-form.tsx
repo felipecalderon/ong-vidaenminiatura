@@ -102,8 +102,6 @@ export function CrearPeticionForm({ categorias }: CrearPeticionFormProps) {
         )}
       </div>
 
-
-
       {/* Contenido */}
       <div className="space-y-2">
         <Label htmlFor="contenido" className="text-lg font-bold">

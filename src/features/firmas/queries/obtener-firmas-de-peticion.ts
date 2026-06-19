@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { listarFirmasPorPeticion } from "../repositories/listar-firmas-por-peticion";
 

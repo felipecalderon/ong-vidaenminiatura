@@ -42,7 +42,8 @@ export async function generarExtractoAction(
   if (!titulo?.trim() || !contenido?.trim()) {
     return {
       success: false,
-      error: "El título y el contenido son requeridos para generar el extracto.",
+      error:
+        "El título y el contenido son requeridos para generar el extracto.",
     };
   }
 

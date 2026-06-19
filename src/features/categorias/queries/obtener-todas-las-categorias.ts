@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { cache } from "react";
 import { listarTodasLasCategorias } from "../repositories/listar-todas-las-categorias";
 

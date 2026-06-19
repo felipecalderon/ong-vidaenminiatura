@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { cache } from "react";
 import { obtenerNoticiaPorSlug } from "../repositories/obtener-noticia-por-slug";
 

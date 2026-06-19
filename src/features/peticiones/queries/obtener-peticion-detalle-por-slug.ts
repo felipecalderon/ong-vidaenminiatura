@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { cache } from "react";
 import { obtenerPeticionPorSlug } from "../repositories/obtener-peticion-por-slug";
 

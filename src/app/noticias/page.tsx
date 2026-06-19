@@ -55,13 +55,25 @@ export default async function NoticiasPage({ searchParams }: PageProps) {
       ) : (
         <>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {noticias.map((noticia: any) => (
+            {noticias.map((noticia) => (
               <NoticiaCard
                 key={noticia.id}
                 noticia={{
-                  ...noticia,
-                  categoria: noticia.categoria ?? null,
-                  autor: noticia.autor ?? null,
+                  id: noticia.id,
+                  slug: noticia.slug,
+                  titulo: noticia.titulo,
+                  resumen: noticia.resumen,
+                  imagen: noticia.imagen,
+                  fecha_publicacion: noticia.fecha_publicacion,
+                  categoria: noticia.categoria
+                    ? {
+                        nombre: noticia.categoria.nombre,
+                        color: noticia.categoria.color ?? null,
+                      }
+                    : null,
+                  autor: noticia.autor
+                    ? { nombre: noticia.autor.nombre }
+                    : null,
                 }}
               />
             ))}

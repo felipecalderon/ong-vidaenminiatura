@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { cache } from "react";
 import { auth0 } from "@/lib/auth0";
 import { resolverAccesoUsuario } from "../access";

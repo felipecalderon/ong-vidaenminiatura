@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { ClipboardList, FileText, Settings, User } from "lucide-react";
+import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GestionCategorias } from "@/features/categorias/components/gestion-categorias";
 import { obtenerTodasLasCategorias } from "@/features/categorias/queries/obtener-todas-las-categorias";
@@ -13,7 +13,8 @@ import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-u
 
 export const metadata = {
   title: "Administración | InsectosVivos",
-  description: "Panel de administración para configurar categorías, usuarios, peticiones y noticias.",
+  description:
+    "Panel de administración para configurar categorías, usuarios, peticiones y noticias.",
 };
 
 export default async function AdministracionPage() {
@@ -23,12 +24,13 @@ export default async function AdministracionPage() {
     redirect("/");
   }
 
-  const [usuarios, categorias, peticionesData, noticiasData] = await Promise.all([
-    obtenerTodosLosUsuarios(),
-    obtenerTodasLasCategorias(),
-    obtenerPeticionesParaGestion(),
-    obtenerNoticiasParaGestion(),
-  ]);
+  const [usuarios, categorias, peticionesData, noticiasData] =
+    await Promise.all([
+      obtenerTodosLosUsuarios(),
+      obtenerTodasLasCategorias(),
+      obtenerPeticionesParaGestion(),
+      obtenerNoticiasParaGestion(),
+    ]);
 
   const peticiones = peticionesData || [];
   const noticias = noticiasData || [];
@@ -40,7 +42,8 @@ export default async function AdministracionPage() {
           Panel de Administración
         </h1>
         <p className="mt-2 text-lg font-semibold text-muted-foreground">
-          Configura y gestiona las categorías, usuarios registrados, peticiones y noticias del sistema.
+          Configura y gestiona las categorías, usuarios registrados, peticiones
+          y noticias del sistema.
         </p>
       </div>
 
@@ -91,7 +94,10 @@ export default async function AdministracionPage() {
           <TabsContent value="peticiones" className="space-y-4">
             <GestionPeticiones
               initialPeticiones={peticiones}
-              categorias={categorias.map((c) => ({ id: c.id, nombre: c.nombre }))}
+              categorias={categorias.map((c) => ({
+                id: c.id,
+                nombre: c.nombre,
+              }))}
             />
           </TabsContent>
 
@@ -103,5 +109,3 @@ export default async function AdministracionPage() {
     </div>
   );
 }
-
-

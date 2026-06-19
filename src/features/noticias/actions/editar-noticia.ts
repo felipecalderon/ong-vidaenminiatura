@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { subirImagenACloudinary } from "@/lib/cloudinary";
+import { subirImagenSiExiste } from "@/lib/cloudinary";
 import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
 import { editarNoticiaExistente } from "../services/editar-noticia-existente";
 import type { NoticiaActionState } from "./noticia-action-state";
@@ -18,21 +18,6 @@ export async function editarNoticiaAction(
     return { success: false, error: "No autorizado." };
   }
 
-  const imagenFile = formData.get("imagen") as File | null;
-  let imagenUrl: string | undefined =
-    (formData.get("imagenExistente") as string) || undefined;
-
-  if (imagenFile && imagenFile.size > 0) {
-    try {
-      imagenUrl = await subirImagenACloudinary(imagenFile);
-    } catch (_e) {
-      return {
-        success: false,
-        error: "Error al subir la nueva imagen a la nube.",
-      };
-    }
-  }
-
   const rawData = {
     id: formData.get("id") as string,
     titulo: formData.get("titulo") as string,
@@ -41,16 +26,21 @@ export async function editarNoticiaAction(
     categoriaId: formData.get("categoriaId") as string,
   };
 
-  if (imagenFile && imagenFile.size > 0) {
-    try {
-      imagenUrl = await subirImagenACloudinary(imagenFile);
-    } catch (_e) {
-      return {
-        success: false,
-        error: "Error al subir la nueva imagen a la nube.",
-        fields: rawData,
-      };
+  const imagenFile = formData.get("imagen") as File | null;
+  let imagenUrl: string | undefined =
+    (formData.get("imagenExistente") as string) || undefined;
+
+  try {
+    const nuevaImagenUrl = await subirImagenSiExiste(imagenFile);
+    if (nuevaImagenUrl) {
+      imagenUrl = nuevaImagenUrl;
     }
+  } catch (_e) {
+    return {
+      success: false,
+      error: "Error al subir la nueva imagen a la nube.",
+      fields: rawData,
+    };
   }
 
   const parseResult = editarNoticiaSchema.safeParse({

@@ -26,4 +26,11 @@ export async function subirImagenACloudinary(file: File): Promise<string> {
       .end(buffer);
   });
 }
+export async function subirImagenSiExiste(
+  file: File | null | undefined,
+): Promise<string | undefined> {
+  if (!file || file.size === 0) return undefined;
+  return subirImagenACloudinary(file);
+}
+
 export { cloudinary };

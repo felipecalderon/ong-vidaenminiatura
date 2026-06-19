@@ -2,8 +2,6 @@
 
 import { Edit, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
-import * as React from "react";
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -146,7 +144,10 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
                         className="border border-outline-variant bg-card hover:bg-muted dark:"
                         title="Ver noticia"
                       >
-                        <Link href={`/noticias/${noticia.slug}`} target="_blank">
+                        <Link
+                          href={`/noticias/${noticia.slug}`}
+                          target="_blank"
+                        >
                           <Eye className="size-3.5" />
                         </Link>
                       </Button>

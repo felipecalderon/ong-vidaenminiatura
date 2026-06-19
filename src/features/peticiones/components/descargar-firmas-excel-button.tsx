@@ -1,10 +1,10 @@
 "use client";
 
-import * as XLSX from "xlsx";
 import { Download, Loader2 } from "lucide-react";
 import * as React from "react";
+import * as XLSX from "xlsx";
 import { Button } from "@/components/ui/button";
-import { obtenerFirmasDePeticion } from "@/features/firmas/queries/obtener-firmas-de-peticion";
+import { obtenerFirmasParaExportarAction } from "@/features/firmas/actions/obtener-firmas-para-exportar";
 
 interface DescargarFirmasExcelButtonProps {
   peticionId: string;
@@ -22,17 +22,22 @@ export function DescargarFirmasExcelButton({
   const handleDownload = async () => {
     setIsLoading(true);
     try {
-      const firmas = await obtenerFirmasDePeticion(peticionId);
+      const result = await obtenerFirmasParaExportarAction(peticionId);
 
-      if (!firmas || firmas.length === 0) {
+      if (!result.success) {
+        alert(result.error);
+        return;
+      }
+
+      if (result.data.length === 0) {
         alert("Esta petición no tiene firmas registradas.");
         return;
       }
 
-      const filas = firmas.map((firma, index) => ({
+      const filas = result.data.map((firma, index) => ({
         "#": index + 1,
-        Nombre: firma.usuario.nombre,
-        Correo: firma.usuario.correo,
+        Nombre: firma.nombre,
+        Correo: firma.correo,
         "Fecha de firma": new Date(firma.fecha_creacion).toLocaleString(
           "es-ES",
           {
@@ -48,12 +53,7 @@ export function DescargarFirmasExcelButton({
       const hoja = XLSX.utils.json_to_sheet(filas);
 
       // Ajustar anchos de columna
-      hoja["!cols"] = [
-        { wch: 5 },
-        { wch: 35 },
-        { wch: 40 },
-        { wch: 22 },
-      ];
+      hoja["!cols"] = [{ wch: 5 }, { wch: 35 }, { wch: 40 }, { wch: 22 }];
 
       const libro = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(libro, hoja, "Firmas");

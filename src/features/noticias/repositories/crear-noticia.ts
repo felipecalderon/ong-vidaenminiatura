@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { EstadoNoticia } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import type { CrearNoticiaInput } from "../schemas/crear-noticia.schema";

@@ -2,10 +2,10 @@
 
 import * as React from "react";
 import { useTransition } from "react";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 import { actualizarEstadoNoticiaAction } from "@/features/noticias/actions/actualizar-estado-noticia";
 import { eliminarNoticiaAction } from "@/features/noticias/actions/eliminar-noticia";
-import { EstadoNoticia } from "@/generated/prisma/enums";
+import type { EstadoNoticia } from "@/generated/prisma/enums";
 
 type NoticiaConRelaciones = {
   id: string;
@@ -27,9 +27,9 @@ type NoticiaConRelaciones = {
 };
 
 export function useGestionNoticias(initialNoticias: NoticiaConRelaciones[]) {
-  const { toast } = useToast();
   const [isPending, startTransition] = useTransition();
-  const [noticias, setNoticias] = React.useState<NoticiaConRelaciones[]>(initialNoticias);
+  const [noticias, setNoticias] =
+    React.useState<NoticiaConRelaciones[]>(initialNoticias);
 
   React.useEffect(() => {
     setNoticias(initialNoticias);
@@ -39,14 +39,11 @@ export function useGestionNoticias(initialNoticias: NoticiaConRelaciones[]) {
     startTransition(async () => {
       const result = await actualizarEstadoNoticiaAction(id, nuevoEstado);
       if (result.success) {
-        toast({
-          title: "Estado actualizado",
+        toast.success("Estado actualizado", {
           description: `El estado de la noticia ha sido cambiado a ${nuevoEstado}.`,
         });
       } else {
-        toast({
-          variant: "destructive",
-          title: "Error al actualizar estado",
+        toast.error("Error al actualizar estado", {
           description: result.error || "No se pudo cambiar el estado.",
         });
       }
@@ -54,21 +51,22 @@ export function useGestionNoticias(initialNoticias: NoticiaConRelaciones[]) {
   };
 
   const handleDeleteNoticia = (id: string) => {
-    if (!confirm("¿Estás seguro de que deseas eliminar esta noticia de forma permanente?")) {
+    if (
+      !confirm(
+        "¿Estás seguro de que deseas eliminar esta noticia de forma permanente?",
+      )
+    ) {
       return;
     }
 
     startTransition(async () => {
       const result = await eliminarNoticiaAction(id);
       if (result.success) {
-        toast({
-          title: "Noticia eliminada",
+        toast.success("Noticia eliminada", {
           description: "La noticia ha sido eliminada permanentemente.",
         });
       } else {
-        toast({
-          variant: "destructive",
-          title: "Error al eliminar",
+        toast.error("Error al eliminar", {
           description: result.error || "No se pudo eliminar la noticia.",
         });
       }

@@ -72,7 +72,6 @@ export function useCrearPeticionForm() {
       imagen: null,
     };
 
-
     const result = crearPeticionSchema.safeParse(data);
     const errors: Record<string, string[]> = {};
 

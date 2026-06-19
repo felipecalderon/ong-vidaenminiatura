@@ -1,14 +1,28 @@
-"use server";
-
+import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { EstadoNoticia } from "@/generated/prisma/enums";
 import { parsePaginationParams } from "@/lib/paginacion-helper";
 import { prisma } from "@/lib/prisma";
 import type { PaginatedResult, QueryParams } from "@/types/paginacion";
 
+const noticiaInclude = {
+  categoria: true,
+  autor: {
+    select: {
+      id: true,
+      nombre: true,
+      picture: true,
+    },
+  },
+} satisfies Prisma.noticiaInclude;
+
+export type NoticiaConRelaciones = Prisma.noticiaGetPayload<{
+  include: typeof noticiaInclude;
+}>;
+
 export async function listarNoticiasPublicadas(
   params: QueryParams = {},
-): Promise<PaginatedResult<any>> {
+): Promise<PaginatedResult<NoticiaConRelaciones>> {
   const { skip, take, orderBy } = parsePaginationParams(
     params,
     9,
@@ -38,16 +52,7 @@ export async function listarNoticiasPublicadas(
       skip,
       take,
       orderBy,
-      include: {
-        categoria: true,
-        autor: {
-          select: {
-            id: true,
-            nombre: true,
-            picture: true,
-          },
-        },
-      },
+      include: noticiaInclude,
     }),
   ]);
 

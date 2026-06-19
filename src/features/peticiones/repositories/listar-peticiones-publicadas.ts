@@ -1,14 +1,21 @@
-"use server";
-
+import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { EstadoPeticion } from "@/generated/prisma/enums";
 import { parsePaginationParams } from "@/lib/paginacion-helper";
 import { prisma } from "@/lib/prisma";
 import type { PaginatedResult, QueryParams } from "@/types/paginacion";
 
+const peticionInclude = {
+  categoria: true,
+} satisfies Prisma.peticionInclude;
+
+export type PeticionConRelaciones = Prisma.peticionGetPayload<{
+  include: typeof peticionInclude;
+}>;
+
 export async function listarPeticionesPublicadas(
   params: QueryParams = {},
-): Promise<PaginatedResult<any>> {
+): Promise<PaginatedResult<PeticionConRelaciones>> {
   const { skip, take, orderBy } = parsePaginationParams(
     params,
     9,
@@ -38,9 +45,7 @@ export async function listarPeticionesPublicadas(
       skip,
       take,
       orderBy,
-      include: {
-        categoria: true,
-      },
+      include: peticionInclude,
     }),
   ]);
 

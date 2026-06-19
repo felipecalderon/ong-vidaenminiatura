@@ -59,20 +59,17 @@ export default async function PeticionesPage({ searchParams }: PageProps) {
       ) : (
         <>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {peticiones.map((peticion: any) => (
+            {peticiones.map((peticion) => (
               <PeticionCard
                 key={peticion.id}
                 peticion={{
                   ...peticion,
                   imagen: peticion.imagen ?? "",
                   meta_firmas: peticion.meta_firmas ?? 1000,
-                  fecha_publicacion: peticion.fecha_publicacion ?? undefined,
                   categoria: peticion.categoria
                     ? {
-                        ...peticion.categoria,
-                        descripcion:
-                          peticion.categoria.descripcion ?? undefined,
-                        color: peticion.categoria.color ?? undefined,
+                        nombre: peticion.categoria.nombre,
+                        color: peticion.categoria.color ?? null,
                       }
                     : undefined,
                 }}

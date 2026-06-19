@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { cache } from "react";
 import type { QueryParams } from "@/types/paginacion";
 import { listarPeticionesPublicadas } from "../repositories/listar-peticiones-publicadas";

@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import { actualizarUsuarioPorAuth0Id } from "../repositories/actualizar-usuario-por-auth0-id";
 import { obtenerUsuarioPorAuth0Id } from "../repositories/obtener-usuario-por-auth0-id";
 import type { Usuario } from "../types";

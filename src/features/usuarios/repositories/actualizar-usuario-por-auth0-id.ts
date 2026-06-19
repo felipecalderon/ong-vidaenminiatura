@@ -1,5 +1,4 @@
-"use server";
-
+import "server-only";
 import type { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import type { Usuario } from "../types";
