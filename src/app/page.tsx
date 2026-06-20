@@ -19,58 +19,51 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-background text-on-background">
       {/* Hero Section */}
-      <section className="mb-16 relative rounded-b-4xl overflow-hidden border border-outline-variant bg-surface-container group">
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="https://images.unsplash.com/photo-1558642452-9d2a7deb7f62?w=1920&h=1080&fit=crop"
-            alt="Arachnid Hero Image"
-            fill
-            sizes="100vw"
-            className="object-cover opacity-20 group-hover:opacity-30 transition-opacity duration-700 mix-blend-luminosity"
-            priority
-          />
-          <div className="absolute inset-0 bg-linear-to-t from-background via-background/80 to-transparent"></div>
-        </div>
-        <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between min-h-150">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/10 border border-tertiary/20 text-tertiary text-xs font-label uppercase tracking-widest mb-6">
-              <span className="material-symbols-outlined text-sm">
-                priority_high
-              </span>
-              Urgent Legislation
-            </div>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter mb-4 text-on-background leading-tight">
-              Protegiendo a los <br />
-              pequeños héroes del planeta.
-            </h1>
-            <p className="text-on-surface-variant text-lg md:text-xl font-body mb-8 max-w-xl">
-              Los insectos y arácnidos son esenciales para la vida en la Tierra.
-              Únete a nuestra misión de protegerlos firmando peticiones y
-              difundiendo conciencia.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/peticiones">
-                <button
-                  type="button"
-                  className="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-                >
-                  Ver Peticiones
-                  <ArrowRight className="w-5 h-5" />
-                </button>
-              </Link>
-              <Link href="/nosotros">
-                <button
-                  type="button"
-                  className="w-full sm:w-auto bg-transparent border border-outline-variant text-on-background px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-                >
-                  Conocer Más
-                </button>
-              </Link>
-            </div>
+      {featuredPeticion && (
+        <section className="mb-16 relative overflow-hidden bg-surface-container group">
+          <div className="absolute inset-0 z-0">
+            <Image
+              src={featuredPeticion.imagen || "none.jpg"}
+              alt={featuredPeticion.titulo}
+              fill
+              sizes="100vw"
+              className="object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-700"
+              priority
+            />
+            <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent"></div>
           </div>
+          <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between min-h-150">
+            <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/60 border border-tertiary/20 text-white text-xs font-label uppercase tracking-widest mb-6">
+                {featuredPeticion.categoria.nombre}
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter mb-4 text-on-background leading-tight">
+                {featuredPeticion.titulo}
+              </h1>
+              <p className="text-on-surface-variant text-lg md:text-xl font-body mb-8 max-w-xl">
+                {featuredPeticion.resumen}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href={`/peticiones/${featuredPeticion.slug}`}>
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
+                  >
+                    Ver Petición
+                    <ArrowRight className="w-5 h-5" />
+                  </button>
+                </Link>
+                <Link href="/nosotros">
+                  <button
+                    type="button"
+                    className="w-full sm:w-auto bg-transparent border border-outline-variant text-on-background px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
+                  >
+                    Quienes somos
+                  </button>
+                </Link>
+              </div>
+            </div>
 
-          {/* Featured Petition Mini Stats */}
-          {featuredPeticion && (
             <div className="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant rounded-lg p-6 w-full md:w-80 shadow-2xl">
               <div className="text-sm font-label text-on-surface-variant uppercase tracking-widest mb-2 line-clamp-1">
                 Destacado: {featuredPeticion.titulo}
@@ -101,9 +94,9 @@ export default async function HomePage() {
                 </Link>
               </div>
             </div>
-          )}
-        </div>
-      </section>
+          </div>
+        </section>
+      )}
 
       {/* Main Content Container */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
