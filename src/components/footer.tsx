@@ -53,12 +53,12 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link
+                <a
                   href="/peticiones/crear"
                   className="text-on-surface-variant hover:text-primary transition-colors"
                 >
                   Crear Petición
-                </Link>
+                </a>
               </li>
             </ul>
           </div>
