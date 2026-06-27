@@ -1,6 +1,7 @@
 import { Bug, Menu, Settings } from "lucide-react";
 import Link from "next/link";
 import { AccountAccess } from "@/components/account-access";
+import { Navigation } from "@/components/navigation";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -13,13 +14,6 @@ import type { UsuarioAutenticadoResumen } from "@/features/usuarios/types";
 interface HeaderProps {
   usuarioAutenticado: UsuarioAutenticadoResumen | null;
 }
-
-const navLinks = [
-  { href: "/", label: "Inicio" },
-  { href: "/peticiones", label: "Peticiones" },
-  { href: "/noticias", label: "Noticias" },
-  { href: "/nosotros", label: "Nosotros" },
-];
 
 export function Header({ usuarioAutenticado }: HeaderProps) {
   return (
@@ -37,17 +31,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-6 md:flex">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-on-surface-variant hover:text-on-surface transition-colors font-headline tracking-tight hover:bg-surface-container-high duration-200 active:scale-95 px-3 py-1 rounded-md"
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
+        <Navigation className="hidden md:flex" variant="desktop" />
 
         <div className="flex items-center gap-4">
           <AccountAccess usuario={usuarioAutenticado} variant="desktop" />
@@ -74,16 +58,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
             >
               <div className="mt-8 flex flex-col gap-4">
                 <AccountAccess usuario={usuarioAutenticado} variant="mobile" />
-                {navLinks.map((link) => (
-                  <SheetClose asChild key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="px-4 py-3 text-lg font-bold text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-colors rounded-lg"
-                    >
-                      {link.label}
-                    </Link>
-                  </SheetClose>
-                ))}
+                <Navigation variant="mobile" />
                 {usuarioAutenticado?.acceso.esAdministrador && (
                   <SheetClose asChild>
                     <Link href="/administracion">

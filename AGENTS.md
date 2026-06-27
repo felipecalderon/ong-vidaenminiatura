@@ -8,4 +8,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 **Toda la lógica de negocio ocurre en Services. Las consultas se realizan desde Server Components mediante Repositories o Queries. Las mutaciones se realizan mediante Server Actions. Los componentes React sólo presentan datos y capturan interacción del usuario. page.tsx coordina la carga inicial de datos y compone la página entregando props a los componentes hijos**
 
+**Jamas hacer build ni lint, se hará siempre manualmente al final de cada hito**
+
 <!-- END:nextjs-agent-rules -->
