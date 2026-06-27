@@ -59,6 +59,35 @@
   --color-border: var(--outline-variant);
   --color-input: var(--surface-container);
   --color-ring: var(--primary);
+
+  --animate-leg-r: leg-r 1.6s ease-in-out infinite;
+  --animate-leg-l: leg-l 1.6s ease-in-out infinite;
+  --animate-antenna: antenna 2.4s ease-in-out infinite;
+  --animate-sway: sway 3.2s ease-in-out infinite;
+
+  @keyframes leg-r {
+    50% {
+      transform: rotate(10deg);
+    }
+  }
+  @keyframes leg-l {
+    50% {
+      transform: rotate(-10deg);
+    }
+  }
+  @keyframes antenna {
+    30% {
+      transform: rotate(6deg);
+    }
+    60% {
+      transform: rotate(-5deg);
+    }
+  }
+  @keyframes sway {
+    50% {
+      transform: translateY(-0.4px) rotate(0.6deg);
+    }
+  }
 }
 
 :root {

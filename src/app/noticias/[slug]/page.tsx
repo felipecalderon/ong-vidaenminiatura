@@ -121,7 +121,7 @@ export default async function NoticiaDetailPage({
 
       {/* Image */}
       {noticia.imagen && (
-        <div className="relative aspect-video w-full mb-10 border border-outline-variant overflow-hidden dark:">
+        <div className="relative aspect-video w-full mb-10 border border-outline-variant overflow-hidden">
           <Image
             src={noticia.imagen}
             alt={noticia.titulo}

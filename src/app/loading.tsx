@@ -8,7 +8,7 @@ export default function Loading() {
         {/* Animated Background skeleton */}
         <div className="absolute inset-0 z-0">
           <Skeleton className="w-full h-full opacity-35 rounded-none" />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent"></div>
         </div>
 
         <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between w-full">

@@ -1,4 +1,4 @@
-import { Bug, Menu, Settings } from "lucide-react";
+import { Menu, Settings } from "lucide-react";
 import Link from "next/link";
 import { AccountAccess } from "@/components/account-access";
 import { Navigation } from "@/components/navigation";
@@ -10,6 +10,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { UsuarioAutenticadoResumen } from "@/features/usuarios/types";
+import { LogoIcon } from "./compartido/logo";
 
 interface HeaderProps {
   usuarioAutenticado: UsuarioAutenticadoResumen | null;
@@ -24,11 +25,14 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
           className="group flex items-center gap-3 active:scale-95 transition-transform duration-100"
         >
           <div className="text-primary flex items-center justify-center">
-            <Bug className="h-6 w-6" />
+            <LogoIcon size={45} />
           </div>
-          <span className="hidden text-xl font-black text-on-background tracking-tighter sm:block">
-            InsectosVivos
-          </span>
+          <div className="hidden sm:flex items-center gap-1 font-black tracking-tighter">
+            <span className="relative -top-0.5 text-4xl text-emerald-800 leading-none">
+              +
+            </span>
+            <span className="text-xl leading-none">Insectos</span>
+          </div>
         </Link>
 
         <Navigation className="hidden md:flex" variant="desktop" />
@@ -54,24 +58,45 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
             </SheetTrigger>
             <SheetContent
               side="right"
-              className="border-l border-outline-variant bg-surface-container-lowest"
+              className="border-l border-outline-variant bg-surface-container-lowest flex flex-col h-full p-6"
             >
-              <div className="mt-8 flex flex-col gap-4">
-                <AccountAccess usuario={usuarioAutenticado} variant="mobile" />
+              {/* Brand Header */}
+              <div className="flex items-center gap-2.5 pb-5 border-b border-outline-variant/60">
+                <div className="text-primary flex items-center justify-center">
+                  <LogoIcon size={36} />
+                </div>
+                <div className="flex items-center gap-0.5 font-black tracking-tighter">
+                  <span className="relative -top-0.5 text-2xl text-emerald-800 leading-none">
+                    +
+                  </span>
+                  <span className="text-lg leading-none">Insectos</span>
+                </div>
+              </div>
+
+              {/* Scrollable content container */}
+              <div className="flex-1 py-6 flex flex-col justify-between overflow-y-auto min-h-0 gap-6">
                 <Navigation variant="mobile" />
-                {usuarioAutenticado?.acceso.esAdministrador && (
-                  <SheetClose asChild>
-                    <Link href="/administracion">
-                      <Button
-                        variant="outline"
-                        className="w-full gap-2 py-6 text-lg font-bold bg-transparent border-outline-variant text-on-background hover:bg-surface-container-high"
-                      >
-                        <Settings className="h-5 w-5" />
-                        Administración
-                      </Button>
-                    </Link>
-                  </SheetClose>
-                )}
+
+                <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-outline-variant/60">
+                  <AccountAccess
+                    usuario={usuarioAutenticado}
+                    variant="mobile"
+                  />
+
+                  {usuarioAutenticado?.acceso.esAdministrador && (
+                    <SheetClose asChild>
+                      <Link href="/administracion">
+                        <Button
+                          variant="outline"
+                          className="w-full gap-2 py-5 text-base font-bold bg-transparent border-outline-variant text-on-background hover:bg-surface-container-high rounded-xl"
+                        >
+                          <Settings className="h-5 w-5" />
+                          Administración
+                        </Button>
+                      </Link>
+                    </SheetClose>
+                  )}
+                </div>
               </div>
             </SheetContent>
           </Sheet>

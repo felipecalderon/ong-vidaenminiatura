@@ -81,12 +81,11 @@ function LoginButton() {
     <Button
       asChild
       variant="outline"
-      size="icon"
-      className="border border-outline-variant"
+      className="gap-2 border border-outline-variant rounded-full"
     >
-      <a href="/auth/login">
+      <a href="/auth/login" className="flex items-center gap-2">
         <LogIn className="size-4" />
-        <span className="sr-only">Iniciar sesión</span>
+        <span>Iniciar sesión</span>
       </a>
     </Button>
   );
@@ -218,7 +217,7 @@ function MobileAccountAccess({
   const esSuspendida = usuario.estado === "SUSPENDIDO";
 
   return (
-    <div className="rounded-2xl border border-outline-variant bg-card p-4 dark:">
+    <div className="rounded-xl border border-outline-variant bg-card p-4">
       <div className="flex items-center gap-3">
         <AvatarCuenta usuario={usuario} className="size-11" />
         <div className="min-w-0">
@@ -229,7 +228,7 @@ function MobileAccountAccess({
         </div>
       </div>
       <div className="mt-3 flex flex-wrap gap-2 text-xs">
-        <span className="rounded-full bg-secondary px-2 py-1 font-semibold">
+        <span className="rounded-full bg-secondary/10 text-secondary px-2 py-1 font-semibold dark:bg-secondary/20 dark:text-on-surface-variant">
           {formatearRol(usuario.rol)}
         </span>
         <span
@@ -243,64 +242,66 @@ function MobileAccountAccess({
           {formatearEstado(usuario.estado)}
         </span>
       </div>
-      <SheetClose asChild>
-        <Link
-          href="/usuario/mis-datos"
-          className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
-        >
-          <User2 className="size-4" />
-          Mis datos
-        </Link>
-      </SheetClose>
-      <SheetClose asChild>
-        <Link
-          href="/peticiones/crear"
-          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
-        >
-          <FilePlus2 className="size-4" />
-          Crear Petición
-        </Link>
-      </SheetClose>
-      <SheetClose asChild>
-        <Link
-          href="/peticiones/mis-peticiones"
-          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
-        >
-          <ClipboardList className="size-4" />
-          {usuario.rol === "ADMINISTRADOR"
-            ? "Gestión de Peticiones"
-            : "Mis Peticiones"}
-        </Link>
-      </SheetClose>
-      <SheetClose asChild>
-        <Link
-          href="/noticias/crear"
-          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
-        >
-          <Newspaper className="size-4" />
-          Crear Noticia
-        </Link>
-      </SheetClose>
-      <SheetClose asChild>
-        <Link
-          href="/noticias/mis-noticias"
-          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
-        >
-          <Edit className="size-4" />
-          {usuario.rol === "ADMINISTRADOR"
-            ? "Gestión de Noticias"
-            : "Mis Noticias"}
-        </Link>
-      </SheetClose>
-      <SheetClose asChild>
-        <Link
-          href="/auth/logout"
-          className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-md border border-outline-variant bg-background px-4 py-2 font-semibold transition-all hover: dark: dark:hover:"
-        >
-          <LogOut className="size-4" />
-          Cerrar sesión
-        </Link>
-      </SheetClose>
+      <div className="mt-4 flex flex-col gap-2">
+        <SheetClose asChild>
+          <Link
+            href="/usuario/mis-datos"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+          >
+            <User2 className="size-4" />
+            Mis datos
+          </Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link
+            href="/peticiones/crear"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+          >
+            <FilePlus2 className="size-4" />
+            Crear Petición
+          </Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link
+            href="/peticiones/mis-peticiones"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+          >
+            <ClipboardList className="size-4" />
+            {usuario.rol === "ADMINISTRADOR"
+              ? "Gestión de Peticiones"
+              : "Mis Peticiones"}
+          </Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link
+            href="/noticias/crear"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+          >
+            <Newspaper className="size-4" />
+            Crear Noticia
+          </Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link
+            href="/noticias/mis-noticias"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+          >
+            <Edit className="size-4" />
+            {usuario.rol === "ADMINISTRADOR"
+              ? "Gestión de Noticias"
+              : "Mis Noticias"}
+          </Link>
+        </SheetClose>
+        <SheetClose asChild>
+          <Link
+            href="/auth/logout"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high text-destructive active:scale-[0.98]"
+          >
+            <LogOut className="size-4" />
+            Cerrar sesión
+          </Link>
+        </SheetClose>
+      </div>
       {esSuspendida ? (
         <p className="mt-3 flex items-center gap-2 text-sm text-destructive">
           <ShieldAlert className="size-4" />
@@ -316,7 +317,7 @@ function MobileAnonymousAccess() {
     <SheetClose asChild>
       <Link
         href="/auth/login"
-        className="inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-outline-variant bg-primary px-4 py-3 font-bold text-primary-foreground transition-all hover: dark: dark:hover:"
+        className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-transparent bg-primary px-4 py-3.5 font-bold text-on-primary transition-all hover:bg-primary/90 active:scale-[0.98] shadow-sm shadow-primary/20"
       >
         <LogIn className="size-4" />
         Iniciar sesión
