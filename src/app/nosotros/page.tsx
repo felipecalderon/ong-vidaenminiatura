@@ -4,7 +4,6 @@ import {
   Heart,
   Leaf,
   MapPin,
-  Microscope,
   Shield,
   Sparkles,
   Target,
@@ -14,6 +13,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Revelar } from "@/components/compartido/revelar";
+import { fundadores, valores } from "./nosotros-data";
 
 export const metadata: Metadata = {
   title: "Nosotros",
@@ -21,92 +21,11 @@ export const metadata: Metadata = {
     "Conoce a InsectosVivos: una fundación nacida en Temuco, Chile, dedicada a educar y preservar el bienestar animal con foco en el mundo de los insectos.",
 };
 
-const fundadores = [
-  {
-    nombre: "Bárbara Manquilef Aburto",
-    rol: "Cofundadora",
-    descripcion:
-      "Abogada especializada en Derecho Animal, Docente en la Universidad Católica, amante de los gatos y los insectos",
-    emoji: "🦋",
-    iniciales: "BM",
-    tema: "primary",
-    foto: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600&h=600",
-  },
-  {
-    nombre: "Felipe Calderón Espinoza",
-    rol: "Cofundador",
-    descripcion:
-      "Ingeniero de Software apasionado por la tecnología con enfoque ambientalista, apasionado por las teorías de panteísmo y monismo.",
-    emoji: "💻",
-    iniciales: "FC",
-    tema: "tertiary",
-    foto: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=600&h=600",
-  },
-];
-
-const valores = [
-  {
-    icon: Microscope,
-    titulo: "Ciencia con propósito",
-    descripcion:
-      "Cada acción que tomamos está respaldada por evidencia científica rigurosa y pensamiento crítico.",
-  },
-  {
-    icon: Heart,
-    titulo: "Bienestar integral",
-    descripcion:
-      "Creemos que el bienestar animal no tiene jerarquías: toda vida merece respeto, sin importar su tamaño.",
-  },
-  {
-    icon: Users,
-    titulo: "Comunidad y educación",
-    descripcion:
-      "Sembramos conciencia en las nuevas generaciones para construir una sociedad que cuide su entorno.",
-  },
-  {
-    icon: Leaf,
-    titulo: "Regeneración ecosistémica",
-    descripcion:
-      "Proteger los insectos es proteger bosques, ríos, cultivos y la red completa de la vida.",
-  },
-];
-
-const hitos = [
-  {
-    año: "2019",
-    titulo: "El origen",
-    descripcion:
-      "Dos personas con una misma inquietud se encuentran y deciden que es momento de actuar por quienes no tienen voz.",
-    icono: "🌱",
-  },
-  {
-    año: "2021",
-    titulo: "Primera campaña",
-    descripcion:
-      "La primera salida a terreno: bitácoras, pinzas y una infinita curiosidad por documentar la vida pequeña.",
-    icono: "📗",
-  },
-  {
-    año: "2022",
-    titulo: "Constitución oficial",
-    descripcion:
-      "InsectosVivos nace formalmente. Lo que era un sueño compartido se convierte en fundación con personalidad jurídica.",
-    icono: "📜",
-  },
-  {
-    año: "2024",
-    titulo: "Plataforma digital",
-    descripcion:
-      "Lanzamos nuestra web para llegar más lejos: información, peticiones y una comunidad que crece día a día.",
-    icono: "🌐",
-  },
-];
-
 export default function NosotrosPage() {
   return (
     <div className="min-h-screen bg-background text-on-background overflow-hidden">
       {/* ── Hero ────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-surface-container via-surface-container/50 to-background">
+      <section className="relative overflow-hidden bg-linear-to-b from-surface-container via-surface-container/50 to-background">
         {/* Decorative floating elements */}
         <div
           aria-hidden
@@ -119,7 +38,7 @@ export default function NosotrosPage() {
           <svg
             role="img"
             aria-label="Formas decorativas"
-            className="absolute top-20 right-[10%] h-32 w-32 text-primary/[0.04] dark:text-primary/[0.07]"
+            className="absolute top-20 right-[10%] h-32 w-32 text-primary/4 dark:text-primary/[0.07]"
             viewBox="0 0 100 100"
             fill="none"
           >
@@ -129,7 +48,7 @@ export default function NosotrosPage() {
           <svg
             role="img"
             aria-label="Formas decorativas"
-            className="absolute bottom-40 left-[5%] h-40 w-40 text-tertiary/[0.04] dark:text-tertiary/[0.07]"
+            className="absolute bottom-40 left-[5%] h-40 w-40 text-tertiary/4 dark:text-tertiary/[0.07]"
             viewBox="0 0 100 100"
             fill="none"
           >
@@ -139,7 +58,7 @@ export default function NosotrosPage() {
           <svg
             role="img"
             aria-label="Formas decorativas"
-            className="absolute top-40 left-[15%] h-20 w-20 text-primary/[0.03] dark:text-primary/[0.05]"
+            className="absolute top-40 left-[15%] h-20 w-20 text-primary/3 dark:text-primary/5"
             viewBox="0 0 100 100"
             fill="none"
           >
@@ -156,7 +75,7 @@ export default function NosotrosPage() {
 
         <div className="relative z-10 mx-auto max-w-5xl px-6 pb-24 pt-20 md:pb-40 md:pt-32">
           {/* Eyebrow */}
-          <div className="mb-10 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-full border border-primary/15 bg-gradient-to-r from-primary/[0.07] to-primary/[0.03] px-4 py-1.5 text-xs font-label uppercase tracking-[0.15em] text-primary">
+          <div className="mb-10 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-full border border-primary/15 bg-linear-to-r from-primary/7 to-primary/3 px-4 py-1.5 text-xs font-label uppercase tracking-[0.15em] text-primary">
             <MapPin className="h-3 w-3" />
             Temuco, Chile · Fundada 2026
           </div>
@@ -165,7 +84,7 @@ export default function NosotrosPage() {
             <div className="md:col-span-3 animate-[fadeIn_0.8s_ease-out]">
               <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-headline font-black tracking-[-0.03em] text-on-background leading-[0.92] mb-6">
                 Cada insecto{" "}
-                <span className="bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
                   importa.
                 </span>
                 <br />
@@ -209,7 +128,7 @@ export default function NosotrosPage() {
                   className="group flex items-center gap-4 rounded-2xl border border-outline-variant/60 bg-surface/70 backdrop-blur-sm px-5 py-4 hover:bg-surface hover:border-primary/20 transition-all duration-300 hover:translate-x-1"
                   style={{ animationDelay: `${0.3 + i * 0.1}s` }}
                 >
-                  <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/[0.08] to-primary/[0.02] border border-primary/10">
+                  <div className="shrink-0 flex h-10 w-10 items-center justify-center rounded-xl bg-linear-to-br from-primary/8 to-primary/2 border border-primary/10">
                     <s.icon className="h-4 w-4 text-primary" />
                   </div>
                   <div>
@@ -229,7 +148,7 @@ export default function NosotrosPage() {
         {/* Organic bottom transition */}
         <div
           aria-hidden
-          className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-background to-transparent"
+          className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-background to-transparent"
         />
       </section>
 
@@ -240,13 +159,13 @@ export default function NosotrosPage() {
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
               {/* Misión */}
               <div className="group relative">
-                <div className="absolute -inset-1 bg-gradient-to-br from-primary/10 to-primary/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -inset-1 bg-linear-to-br from-primary/10 to-primary/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative rounded-2xl border border-outline-variant/60 bg-surface p-8 md:p-10 backdrop-blur-sm">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="shrink-0 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/15">
+                    <div className="shrink-0 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-primary/10 to-primary/5 border border-primary/15">
                       <Target className="h-6 w-6 text-primary" />
                     </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-primary/20 to-transparent" />
+                    <div className="h-px flex-1 bg-linear-to-r from-primary/20 to-transparent" />
                   </div>
                   <h2 className="text-xs font-label uppercase tracking-[0.15em] text-primary mb-2">
                     Nuestra Misión
@@ -267,13 +186,13 @@ export default function NosotrosPage() {
 
               {/* Visión */}
               <div className="group relative md:pt-16">
-                <div className="absolute -inset-1 bg-gradient-to-br from-tertiary/10 to-tertiary/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute -inset-1 bg-linear-to-br from-tertiary/10 to-tertiary/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 <div className="relative rounded-2xl border border-outline-variant/60 bg-surface p-8 md:p-10 backdrop-blur-sm">
                   <div className="flex items-center gap-4 mb-6">
-                    <div className="shrink-0 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-tertiary/10 to-tertiary/5 border border-tertiary/15">
+                    <div className="shrink-0 flex h-14 w-14 items-center justify-center rounded-2xl bg-linear-to-br from-tertiary/10 to-tertiary/5 border border-tertiary/15">
                       <Sparkles className="h-6 w-6 text-tertiary" />
                     </div>
-                    <div className="h-px flex-1 bg-gradient-to-r from-tertiary/20 to-transparent" />
+                    <div className="h-px flex-1 bg-linear-to-r from-tertiary/20 to-transparent" />
                   </div>
                   <h2 className="text-xs font-label uppercase tracking-[0.15em] text-tertiary mb-2">
                     Nuestra Visión
@@ -306,6 +225,91 @@ export default function NosotrosPage() {
           </section>
         </Revelar>
 
+        {/* ── Fundadores ───────────────────────────────────── */}
+        <Revelar delay={0.1}>
+          <section id="fundadores">
+            <div className="mb-12 text-center">
+              <div className="mx-auto mb-6 flex items-center justify-center gap-3">
+                <div className="h-px w-8 bg-outline-variant" />
+                <span className="text-xs font-label uppercase tracking-[0.15em] text-on-surface-variant">
+                  Las personas detrás de la misión
+                </span>
+                <div className="h-px w-8 bg-outline-variant" />
+              </div>
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background">
+                Quiénes somos
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+              {fundadores.map((f) => (
+                <div
+                  key={f.nombre}
+                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-outline-variant/60 bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
+                >
+                  {/* Image Container */}
+                  <div className="relative aspect-4/3 w-full transition-transform duration-500 group-hover:scale-103">
+                    <Image
+                      src={f.foto}
+                      alt={f.nombre}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="overflow-hidden object-cover transition-transform duration-500 will-change-transform transform-gpu group-hover:scale-103 backface-hidden"
+                      priority
+                    />
+                    {/* Gradient Overlay */}
+                    <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/20 to-transparent duration-500 group-hover:scale-105" />
+
+                    {/* Floating emoji/icon */}
+                    <div
+                      className={`absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-2xl border backdrop-blur-md shadow-md ${
+                        f.tema === "primary"
+                          ? "border-primary/20 bg-primary/10 text-primary"
+                          : "border-tertiary/20 bg-tertiary/10 text-tertiary"
+                      }`}
+                    >
+                      <span className="text-2xl">{f.emoji}</span>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="relative flex-1 p-6 md:p-8 flex flex-col justify-between">
+                    {/* Decorative background blob */}
+                    <div
+                      aria-hidden
+                      className={`absolute -bottom-20 -right-20 h-40 w-40 rounded-full ${
+                        f.tema === "primary" ? "bg-primary/3" : "bg-tertiary/3"
+                      } blur-3xl`}
+                    />
+
+                    <div className="relative z-10">
+                      <div className="mb-2">
+                        <span
+                          className={`text-xs font-label uppercase tracking-[0.15em] font-semibold ${
+                            f.tema === "primary"
+                              ? "text-primary"
+                              : "text-tertiary"
+                          }`}
+                        >
+                          {f.rol}
+                        </span>
+                      </div>
+
+                      <h3 className="text-2xl font-headline font-black tracking-tighter text-on-background mb-4">
+                        {f.nombre}
+                      </h3>
+
+                      <p className="text-on-surface-variant font-body leading-relaxed text-sm md:text-base">
+                        {f.descripcion}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+        </Revelar>
+
         {/* ── Quote 1 ──────────────────────────────────────── */}
         <Revelar delay={0.1}>
           <section className="relative">
@@ -313,20 +317,20 @@ export default function NosotrosPage() {
               aria-hidden
               className="pointer-events-none absolute inset-0 flex items-center justify-center"
             >
-              <div className="h-64 w-64 rounded-full bg-primary/[0.03] blur-[80px]" />
+              <div className="h-64 w-64 rounded-full bg-primary/3 blur-[80px]" />
             </div>
 
-            <div className="relative rounded-3xl border border-primary/10 bg-gradient-to-br from-primary/[0.03] via-transparent to-primary/[0.02] p-8 md:p-14 text-center">
+            <div className="relative rounded-3xl border border-primary/10 bg-linear-to-br from-primary/3 via-transparent to-primary/2 p-8 md:p-14 text-center">
               {/* Decorative large quotes */}
               <div
                 aria-hidden
-                className="absolute top-4 left-6 md:top-6 md:left-10 text-6xl md:text-8xl font-headline font-black leading-none text-primary/[0.06] select-none"
+                className="absolute top-4 left-6 md:top-6 md:left-10 text-6xl md:text-8xl font-headline font-black leading-none text-primary/6 select-none"
               >
                 &ldquo;
               </div>
               <div
                 aria-hidden
-                className="absolute bottom-4 right-6 md:bottom-6 md:right-10 text-6xl md:text-8xl font-headline font-black leading-none text-primary/[0.06] select-none"
+                className="absolute bottom-4 right-6 md:bottom-6 md:right-10 text-6xl md:text-8xl font-headline font-black leading-none text-primary/6 select-none"
               >
                 &rdquo;
               </div>
@@ -336,8 +340,10 @@ export default function NosotrosPage() {
                   <Leaf className="h-5 w-5 text-primary" />
                 </div>
                 <blockquote className="text-2xl md:text-3xl lg:text-4xl font-headline font-black tracking-tighter text-on-background leading-[1.15] max-w-3xl mx-auto mb-6">
-                  &ldquo;Un mundo sin insectos es un mundo sin futuro. Nosotros
-                  elegimos el futuro.&rdquo;
+                  &ldquo;Una abeja no contempla el mismo jardín que nosotros.
+                  Donde vemos colores, ella percibe patrones ultravioleta
+                  invisibles para el ojo humano. El universo no creó una copia
+                  de nuestra mirada; creó otra forma de descubrirse.&rdquo;
                 </blockquote>
                 <div className="inline-flex items-center gap-3">
                   <div className="h-px w-8 bg-primary/30" />
@@ -373,10 +379,10 @@ export default function NosotrosPage() {
                   key={v.titulo}
                   className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-7 md:p-8 hover:shadow-sm transition-all duration-300"
                 >
-                  <div className="absolute top-0 right-0 h-32 w-32 translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-primary/[0.04] to-transparent group-hover:scale-150 transition-transform duration-700" />
+                  <div className="absolute top-0 right-0 h-32 w-32 translate-x-1/2 -translate-y-1/2 rounded-full bg-linear-to-br from-primary/4 to-transparent group-hover:scale-150 transition-transform duration-700" />
                   <div className="relative z-10 flex gap-5">
                     <div className="shrink-0 mt-1">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 border border-primary/10 group-hover:border-primary/20 group-hover:shadow-sm transition-all duration-300">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-primary/10 to-primary/5 border border-primary/10 group-hover:border-primary/20 group-hover:shadow-sm transition-all duration-300">
                         <v.icon className="h-5 w-5 text-primary" />
                       </div>
                     </div>
@@ -400,7 +406,7 @@ export default function NosotrosPage() {
                       aria-label="Formas decorativas"
                       viewBox="0 0 32 32"
                       fill="none"
-                      className="h-full w-full text-primary/[0.06]"
+                      className="h-full w-full text-primary/6"
                     >
                       <path
                         d="M2 30 L30 2"
@@ -422,166 +428,12 @@ export default function NosotrosPage() {
           </section>
         </Revelar>
 
-        {/* ── Historia ─────────────────────────────────────── */}
-        <Revelar delay={0.1}>
-          <section id="historia">
-            <div className="mb-12 text-center">
-              <div className="mx-auto mb-6 flex items-center justify-center gap-3">
-                <div className="h-px w-8 bg-outline-variant" />
-                <span className="text-xs font-label uppercase tracking-[0.15em] text-on-surface-variant">
-                  Cómo empezó todo
-                </span>
-                <div className="h-px w-8 bg-outline-variant" />
-              </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background">
-                Nuestra historia
-              </h2>
-            </div>
-
-            <div className="relative">
-              {/* Decorative background path */}
-              <div
-                aria-hidden
-                className="absolute left-6 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary/20 via-primary/10 to-primary/20"
-              />
-
-              <div className="space-y-10 md:space-y-16">
-                {hitos.map((hito, i) => (
-                  <div
-                    key={hito.año}
-                    className={`relative flex flex-col md:flex-row gap-6 md:gap-10 items-start ${
-                      i % 2 === 0 ? "" : "md:flex-row-reverse"
-                    }`}
-                  >
-                    {/* Content */}
-                    <div className="md:w-[calc(50%-2rem)] w-full pl-16 md:pl-0">
-                      <div className="group relative rounded-2xl border border-outline-variant/60 bg-surface p-6 md:p-8 hover:border-primary/20 transition-all duration-300 hover:shadow-sm">
-                        {/* Year badge */}
-                        <div className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 border border-primary/10 px-3 py-1.5 mb-4">
-                          <span className="text-sm">{hito.icono}</span>
-                          <span className="text-xs font-label uppercase tracking-widest text-primary font-bold">
-                            {hito.año}
-                          </span>
-                        </div>
-
-                        <h3 className="text-lg md:text-xl font-headline font-bold tracking-tight text-on-background mb-2">
-                          {hito.titulo}
-                        </h3>
-                        <p className="text-sm text-on-surface-variant font-body leading-relaxed">
-                          {hito.descripcion}
-                        </p>
-
-                        {/* Hover glow */}
-                        <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/[0.02] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-                      </div>
-                    </div>
-
-                    {/* Timeline dot (mobile: left-aligned, desktop: centered) */}
-                    <div
-                      className={`absolute left-2 md:left-1/2 md:-translate-x-1/2 top-8 flex items-center justify-center z-10`}
-                    >
-                      <div className="h-4 w-4 rounded-full bg-gradient-to-br from-primary to-primary/60 border-[3px] border-background shadow-sm" />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        </Revelar>
-
-        {/* ── Fundadores ───────────────────────────────────── */}
-        <Revelar delay={0.1}>
-          <section id="fundadores">
-            <div className="mb-12 text-center">
-              <div className="mx-auto mb-6 flex items-center justify-center gap-3">
-                <div className="h-px w-8 bg-outline-variant" />
-                <span className="text-xs font-label uppercase tracking-[0.15em] text-on-surface-variant">
-                  Las personas detrás de la misión
-                </span>
-                <div className="h-px w-8 bg-outline-variant" />
-              </div>
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background">
-                Quiénes somos
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-              {fundadores.map((f) => (
-                <div
-                  key={f.nombre}
-                  className="group relative flex flex-col overflow-hidden rounded-3xl border border-outline-variant/60 bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
-                >
-                  {/* Image Container */}
-                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
-                    <Image
-                      src={f.foto}
-                      alt={f.nombre}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      priority
-                    />
-                    {/* Gradient Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/20 to-transparent" />
-
-                    {/* Floating emoji/icon */}
-                    <div
-                      className={`absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-2xl border backdrop-blur-md shadow-md ${
-                        f.tema === "primary"
-                          ? "border-primary/20 bg-primary/10 text-primary"
-                          : "border-tertiary/20 bg-tertiary/10 text-tertiary"
-                      }`}
-                    >
-                      <span className="text-2xl">{f.emoji}</span>
-                    </div>
-                  </div>
-
-                  {/* Content */}
-                  <div className="relative flex-1 p-6 md:p-8 flex flex-col justify-between">
-                    {/* Decorative background blob */}
-                    <div
-                      aria-hidden
-                      className={`absolute -bottom-20 -right-20 h-40 w-40 rounded-full ${
-                        f.tema === "primary"
-                          ? "bg-primary/[0.03]"
-                          : "bg-tertiary/[0.03]"
-                      } blur-3xl`}
-                    />
-
-                    <div className="relative z-10">
-                      <div className="mb-2">
-                        <span
-                          className={`text-xs font-label uppercase tracking-[0.15em] font-semibold ${
-                            f.tema === "primary"
-                              ? "text-primary"
-                              : "text-tertiary"
-                          }`}
-                        >
-                          {f.rol}
-                        </span>
-                      </div>
-
-                      <h3 className="text-2xl font-headline font-black tracking-tighter text-on-background mb-4">
-                        {f.nombre}
-                      </h3>
-
-                      <p className="text-on-surface-variant font-body leading-relaxed text-sm md:text-base">
-                        {f.descripcion}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </Revelar>
-
-        {/* ── Quote 2 (Diego) ──────────────────────────────── */}
+        {/* ── Quote 2 (Felipe) ──────────────────────────────── */}
         <Revelar delay={0.1} desde="izquierda">
-          <section className="relative overflow-hidden rounded-3xl border border-tertiary/10 bg-gradient-to-br from-tertiary/[0.03] via-transparent to-tertiary/[0.02] p-8 md:p-14 text-center">
+          <section className="relative overflow-hidden rounded-3xl border border-tertiary/10 bg-linear-to-br from-tertiary/3 via-transparent to-tertiary/2 p-8 md:p-14 text-center">
             <div
               aria-hidden
-              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-tertiary/[0.04] via-transparent to-transparent"
+              className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--tw-gradient-stops))] from-tertiary/4 via-transparent to-transparent"
             />
 
             <div className="relative z-10">
@@ -591,14 +443,16 @@ export default function NosotrosPage() {
               </div>
 
               <blockquote className="text-2xl md:text-3xl lg:text-4xl font-headline font-black tracking-tighter text-on-background leading-[1.15] max-w-3xl mx-auto mb-6">
-                &ldquo;Nadie protege lo que no conoce. Por eso enseñamos
-                primero, y actuamos después &mdash; siempre juntos.&rdquo;
+                &ldquo;Nuestros sentidos son la manera en que el universo se
+                observa a sí mismo, los sentidos de los animales no son más que
+                otra perspectiva de la misma realidad. Ignorar su bienestar es
+                empobrecer la mirada del propio cosmos.&rdquo;
               </blockquote>
 
               <div className="inline-flex items-center gap-3">
                 <div className="h-px w-8 bg-tertiary/30" />
                 <p className="text-sm font-label uppercase tracking-[0.15em] text-on-surface-variant">
-                  Diego Sepúlveda, cofundador
+                  Felipe Calderón, cofundador
                 </p>
                 <div className="h-px w-8 bg-tertiary/30" />
               </div>
@@ -609,7 +463,7 @@ export default function NosotrosPage() {
               role="img"
               aria-label="Formas decorativas"
               aria-hidden
-              className="absolute -bottom-10 -right-10 h-40 w-40 text-tertiary/[0.04] dark:text-tertiary/[0.06]"
+              className="absolute -bottom-10 -right-10 h-40 w-40 text-tertiary/4 dark:text-tertiary/6"
               viewBox="0 0 100 100"
               fill="none"
             >
@@ -620,7 +474,7 @@ export default function NosotrosPage() {
               role="img"
               aria-label="Formas decorativas"
               aria-hidden
-              className="absolute -top-10 -left-10 h-28 w-28 text-tertiary/[0.03] dark:text-tertiary/[0.05]"
+              className="absolute -top-10 -left-10 h-28 w-28 text-tertiary/3 dark:text-tertiary/5"
               viewBox="0 0 100 100"
               fill="none"
             >
@@ -630,88 +484,17 @@ export default function NosotrosPage() {
           </section>
         </Revelar>
 
-        {/* ── Impacto / Cifras ─────────────────────────────── */}
-        <Revelar delay={0.1}>
-          <section>
-            <div className="mb-10 text-center">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background mb-3">
-                Nuestro impacto
-              </h2>
-              <p className="text-on-surface-variant font-body text-sm md:text-base max-w-lg mx-auto">
-                Números que cuentan una historia de cambio, una vida pequeña a
-                la vez.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6">
-              {[
-                {
-                  icon: Users,
-                  value: "10.000+",
-                  label: "Estudiantes impactados",
-                  sub: "en escuelas de La Araucanía",
-                  gradient: "from-primary/10 to-primary/5",
-                  borderColor: "border-primary/15",
-                },
-                {
-                  icon: Shield,
-                  value: "40+",
-                  label: "Especies documentadas",
-                  sub: "en campañas de campo",
-                  gradient: "from-tertiary/10 to-tertiary/5",
-                  borderColor: "border-tertiary/15",
-                },
-                {
-                  icon: Leaf,
-                  value: "3",
-                  label: "Regiones alcanzadas",
-                  sub: "con programas educativos",
-                  gradient: "from-primary/10 to-primary/5",
-                  borderColor: "border-primary/15",
-                },
-              ].map((stat) => (
-                <div
-                  key={stat.label}
-                  className="relative group rounded-2xl border border-outline-variant/60 bg-surface p-8 md:p-10 text-center hover:shadow-sm transition-all duration-300"
-                >
-                  {/* Top accent */}
-                  <div
-                    aria-hidden
-                    className={`absolute top-0 left-8 right-8 h-[2px] rounded-full bg-gradient-to-r ${stat.gradient}`}
-                  />
-
-                  <div
-                    className={`mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${stat.gradient} border ${stat.borderColor} group-hover:scale-105 transition-transform duration-300`}
-                  >
-                    <stat.icon className="h-6 w-6 text-on-background" />
-                  </div>
-
-                  <div className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-1">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm font-bold text-on-background mb-1">
-                    {stat.label}
-                  </div>
-                  <div className="text-xs text-on-surface-variant font-body">
-                    {stat.sub}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-        </Revelar>
-
         {/* ── CTA final ────────────────────────────────────── */}
         <Revelar delay={0.1}>
           <section className="relative overflow-hidden rounded-3xl">
             {/* Background */}
             <div
               aria-hidden
-              className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] via-primary/[0.01] to-background"
+              className="absolute inset-0 bg-linear-to-br from-primary/4 via-primary/1 to-background"
             />
             <div
               aria-hidden
-              className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,var(--tw-gradient-stops))] from-primary/[0.06] via-transparent to-transparent"
+              className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,var(--tw-gradient-stops))] from-primary/6 via-transparent to-transparent"
             />
 
             {/* Decorative wing shapes */}
@@ -719,7 +502,7 @@ export default function NosotrosPage() {
               role="img"
               aria-label="Formas decorativas"
               aria-hidden
-              className="absolute -top-16 -right-16 h-64 w-64 text-primary/[0.03] dark:text-primary/[0.05]"
+              className="absolute -top-16 -right-16 h-64 w-64 text-primary/3 dark:text-primary/5"
               viewBox="0 0 100 100"
               fill="none"
             >
