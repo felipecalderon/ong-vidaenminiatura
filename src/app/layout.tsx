@@ -1,29 +1,15 @@
-import type { Metadata } from "next";
-import { Figtree, Geist, Geist_Mono } from "next/font/google";
 import "@mdxeditor/editor/style.css";
 import "./globals.css";
+import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
+import { figtree, geistMono, geistSans } from "@/lib/fonts";
+import { metadataSEO } from "@/lib/metadata-seo";
 import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
 
-const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = metadataSEO;
-
-import { Toaster } from "sonner";
-import { metadataSEO } from "@/lib/metadata-seo";
 
 export default async function RootLayout({
   children,
