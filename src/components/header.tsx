@@ -27,7 +27,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
           <div className="text-primary flex items-center justify-center">
             <LogoIcon size={45} />
           </div>
-          <div className="hidden sm:flex items-center gap-1 font-black tracking-tighter">
+          <div className="flex items-center gap-1 font-black tracking-tighter">
             <span className="relative -top-0.5 text-4xl text-emerald-800 leading-none">
               +
             </span>
