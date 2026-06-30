@@ -185,7 +185,7 @@ src/
 ├── app/
 ├── components/
 ├── features/
-├── server/
+├── actions/
 ├── generated/
 ├── types/
 └── middleware.ts
@@ -340,6 +340,8 @@ ADMINISTRADOR
 ### Usuario
 
 ```text
+Crear noticias (en revisión)
+Crear peticiones
 Firmar peticiones
 Gestionar perfil
 ```
@@ -350,6 +352,8 @@ Gestionar perfil
 
 ```text
 Crear noticias
+Crear peticiones
+Firmar peticiones
 Editar noticias propias
 Publicar noticias propias
 ```
@@ -449,6 +453,7 @@ FechaPublicación
 
 ```text
 BORRADOR
+REVISION
 PUBLICADA
 CERRADA
 ARCHIVADA
@@ -460,6 +465,7 @@ ARCHIVADA
 
 ```text
 BORRADOR
+REVISION
 PUBLICADA
 ARCHIVADA
 ```
