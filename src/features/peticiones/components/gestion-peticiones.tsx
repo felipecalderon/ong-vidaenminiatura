@@ -153,6 +153,9 @@ export function GestionPeticiones({
                         <SelectItem value={EstadoPeticion.BORRADOR}>
                           BORRADOR
                         </SelectItem>
+                        <SelectItem value={EstadoPeticion.REVISION}>
+                          REVISIÓN
+                        </SelectItem>
                         <SelectItem value={EstadoPeticion.PUBLICADA}>
                           PUBLICADA
                         </SelectItem>

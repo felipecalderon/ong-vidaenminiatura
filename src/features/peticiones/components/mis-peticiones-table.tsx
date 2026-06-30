@@ -187,8 +187,15 @@ export function MisPeticionesTable({
                     variant={
                       peticion.estado === "PUBLICADA" ? "default" : "secondary"
                     }
+                    className={
+                      peticion.estado === "REVISION"
+                        ? "border border-amber-500 bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+                        : undefined
+                    }
                   >
-                    {peticion.estado}
+                    {peticion.estado === "REVISION"
+                      ? "En Revisión"
+                      : peticion.estado}
                   </Badge>
                 </TableCell>
                 <TableCell className="text-right font-bold">
@@ -262,6 +269,18 @@ export function MisPeticionesTable({
                     <CheckCircle className="mr-2 h-5 w-5" />
                     Publicar Ahora
                   </Button>
+                </div>
+              )}
+
+              {peticionSeleccionada.estado === "REVISION" && (
+                <div className="bg-amber-50 border border-amber-400 p-4 rounded-xl dark:bg-amber-900/20">
+                  <h3 className="font-bold text-lg text-amber-700 dark:text-amber-300">
+                    Pendiente de revisión
+                  </h3>
+                  <p className="text-sm text-amber-600 dark:text-amber-400">
+                    Tu petición está siendo revisada por un administrador. Te
+                    notificaremos cuando sea aprobada o rechazada.
+                  </p>
                 </div>
               )}
 

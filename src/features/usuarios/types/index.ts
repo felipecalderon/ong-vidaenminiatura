@@ -13,6 +13,7 @@ export interface AccesoUsuario {
   esAutor: boolean;
   esAdministrador: boolean;
   esSuspendido: boolean;
+  omitirRevision: boolean;
 }
 
 export interface UsuarioAutenticadoResumen {

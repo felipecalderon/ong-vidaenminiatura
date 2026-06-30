@@ -9,6 +9,9 @@ export function resolverAccesoUsuario(
   const esAutor =
     usuario.rol === Rol.AUTOR || usuario.rol === Rol.USUARIO || esAdministrador;
 
+  // Solo AUTOR y ADMINISTRADOR omiten la cola de moderación
+  const omitirRevision = usuario.rol === Rol.AUTOR || esAdministrador;
+
   return {
     autenticado: true,
     puedeAcceder: !esSuspendido,
@@ -18,6 +21,7 @@ export function resolverAccesoUsuario(
     esAutor,
     esAdministrador,
     esSuspendido,
+    omitirRevision,
   };
 }
 

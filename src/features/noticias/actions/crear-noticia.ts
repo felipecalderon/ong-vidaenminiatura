@@ -75,14 +75,22 @@ export async function crearNoticiaAction(
   let redirectPath: string | undefined;
 
   try {
-    const noticia = await crearNuevaNoticia(usuario.id, {
-      ...parseResult.data,
-      resumen: extractoResult.extracto,
-    });
+    const noticia = await crearNuevaNoticia(
+      usuario.id,
+      {
+        ...parseResult.data,
+        resumen: extractoResult.extracto,
+      },
+      usuario.acceso.omitirRevision,
+    );
     revalidatePath("/");
     revalidatePath("/noticias");
     revalidatePath("/noticias/mis-noticias");
-    redirectPath = `/noticias/${noticia.slug}`;
+    if (usuario.acceso.omitirRevision) {
+      redirectPath = `/noticias/${noticia.slug}`;
+    } else {
+      redirectPath = "/usuario/mis-datos?tab=noticias&status=revision";
+    }
   } catch (error) {
     const errorMsg =
       error instanceof Error ? error.message : "Error al crear la noticia.";

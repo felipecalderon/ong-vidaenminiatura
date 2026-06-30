@@ -29,6 +29,17 @@ export async function publicarNoticiaAction(
       };
     }
 
+    // Solo el ADMINISTRADOR puede publicar contenido en cola de revisión
+    if (
+      noticia.estado === EstadoNoticia.REVISION &&
+      usuario.rol !== "ADMINISTRADOR"
+    ) {
+      return {
+        success: false,
+        error: "Solo un administrador puede publicar contenido en revisión.",
+      };
+    }
+
     await actualizarEstadoNoticia(id, EstadoNoticia.PUBLICADA, new Date());
     revalidatePath("/");
     revalidatePath("/noticias");

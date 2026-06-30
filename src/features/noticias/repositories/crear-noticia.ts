@@ -7,7 +7,11 @@ export async function crearNoticia(
   autorId: string,
   slug: string,
   input: CrearNoticiaInput,
+  omitirRevision: boolean,
 ) {
+  const estado = omitirRevision
+    ? EstadoNoticia.BORRADOR
+    : EstadoNoticia.REVISION;
   return prisma.noticia.create({
     data: {
       titulo: input.titulo,
@@ -17,7 +21,7 @@ export async function crearNoticia(
       imagen: input.imagen ?? null,
       categoria_id: input.categoriaId,
       autor_id: autorId,
-      estado: EstadoNoticia.BORRADOR,
+      estado,
     },
   });
 }

@@ -29,6 +29,17 @@ export async function publicarPeticionAction(
       };
     }
 
+    // Solo el ADMINISTRADOR puede publicar contenido en cola de revisión
+    if (
+      peticion.estado === EstadoPeticion.REVISION &&
+      usuario.rol !== "ADMINISTRADOR"
+    ) {
+      return {
+        success: false,
+        error: "Solo un administrador puede publicar contenido en revisión.",
+      };
+    }
+
     await actualizarEstadoPeticion(id, EstadoPeticion.PUBLICADA, new Date());
     revalidatePath("/");
     revalidatePath("/peticiones");

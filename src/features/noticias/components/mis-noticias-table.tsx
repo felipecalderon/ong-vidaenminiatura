@@ -41,6 +41,8 @@ function formatearEstado(estado: string) {
   switch (estado) {
     case "BORRADOR":
       return "Borrador";
+    case "REVISION":
+      return "En Revisión";
     case "PUBLICADA":
       return "Publicada";
     case "ARCHIVADA":
@@ -161,6 +163,11 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
                 <Badge
                   variant={
                     noticia.estado === "PUBLICADA" ? "default" : "secondary"
+                  }
+                  className={
+                    noticia.estado === "REVISION"
+                      ? "border border-amber-500 bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+                      : undefined
                   }
                 >
                   {formatearEstado(noticia.estado)}

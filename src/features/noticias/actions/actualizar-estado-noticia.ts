@@ -30,6 +30,18 @@ export async function actualizarEstadoNoticiaAction(
       };
     }
 
+    // Solo el ADMINISTRADOR puede aprobar contenido en cola de revisión
+    if (
+      noticia.estado === EstadoNoticia.REVISION &&
+      usuario.rol !== "ADMINISTRADOR"
+    ) {
+      return {
+        success: false,
+        error:
+          "Solo un administrador puede aprobar o rechazar contenido en revisión.",
+      };
+    }
+
     const fechaPublicacion =
       estado === EstadoNoticia.PUBLICADA ? new Date() : null;
 

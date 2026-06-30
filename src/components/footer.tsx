@@ -13,12 +13,12 @@ export function Footer() {
                 <Bug className="h-6 w-6" />
               </div>
               <span className="font-black text-xl tracking-tighter text-on-background">
-                InsectosVivos
+                Más Insectos
               </span>
             </Link>
             <p className="text-on-surface-variant text-sm font-body">
               Fundación dedicada a la protección y conservación de insectos y
-              arácnidos en todo el mundo. Precisión en la oscuridad.
+              arácnidos en todo el mundo (incluye todos los seres vivos).
             </p>
           </div>
 
@@ -71,15 +71,13 @@ export function Footer() {
             <ul className="space-y-3 text-sm font-body">
               <li className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
                 <Mail className="h-4 w-4" />
-                <a href="mailto:info@insectosvivos.org">
-                  info@insectosvivos.org
-                </a>
+                <a href="mailto:info@insectosvivos.org">hola@masinsectos.org</a>
               </li>
               <li className="mt-4">
                 <p className="text-on-surface-variant text-sm leading-relaxed">
-                  Av. de la Naturaleza 123
+                  Organización sin fines de lucro.
                   <br />
-                  Ciudad Verde, CP 12345
+                  De la vida, para la vida.
                 </p>
               </li>
             </ul>
@@ -118,11 +116,31 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-12 pt-6 border-t border-outline-variant flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-xs text-on-surface-variant font-body">
-            © {new Date().getFullYear()} InsectosVivos. Todos los derechos
-            reservados.
-          </p>
-          <p className="text-xs text-on-surface-variant flex items-center gap-1 font-body">
+          <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
+            <p className="text-xs text-on-surface-variant font-body">
+              © {new Date().getFullYear()} InsectosVivos. Todos los derechos
+              reservados.
+            </p>
+            <span className="hidden sm:inline text-outline-variant text-xs">
+              •
+            </span>
+            <Link
+              href="/terminos-de-uso"
+              className="text-xs text-on-surface-variant hover:text-primary transition-colors font-body underline decoration-transparent hover:decoration-primary underline-offset-4"
+            >
+              Términos de Uso
+            </Link>
+            <span className="hidden sm:inline text-outline-variant text-xs">
+              •
+            </span>
+            <Link
+              href="/privacidad"
+              className="text-xs text-on-surface-variant hover:text-primary transition-colors font-body underline decoration-transparent hover:decoration-primary underline-offset-4"
+            >
+              Política de Privacidad
+            </Link>
+          </div>
+          <p className="text-xs text-on-surface-variant flex items-center justify-center gap-1 font-body">
             Hecho con{" "}
             <Heart className="h-3 w-3 text-tertiary fill-tertiary mx-1" /> para
             los insectos

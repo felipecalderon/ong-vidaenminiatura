@@ -126,6 +126,9 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
                         <SelectItem value={EstadoNoticia.BORRADOR}>
                           BORRADOR
                         </SelectItem>
+                        <SelectItem value={EstadoNoticia.REVISION}>
+                          REVISIÓN
+                        </SelectItem>
                         <SelectItem value={EstadoNoticia.PUBLICADA}>
                           PUBLICADA
                         </SelectItem>

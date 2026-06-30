@@ -88,14 +88,22 @@ export async function crearPeticionAction(
   let redirectPath: string | undefined;
 
   try {
-    const peticion = await crearNuevaPeticion(usuario.id, {
-      ...parseResult.data,
-      resumen: extractoResult.extracto,
-      imagen: imagenUrl,
-    });
+    const peticion = await crearNuevaPeticion(
+      usuario.id,
+      {
+        ...parseResult.data,
+        resumen: extractoResult.extracto,
+        imagen: imagenUrl,
+      },
+      usuario.acceso.omitirRevision,
+    );
     revalidatePath("/");
     revalidatePath("/peticiones");
-    redirectPath = `/peticiones/${peticion.slug}`;
+    if (usuario.acceso.omitirRevision) {
+      redirectPath = `/peticiones/${peticion.slug}`;
+    } else {
+      redirectPath = "/usuario/mis-datos?tab=peticiones&status=revision";
+    }
   } catch (error) {
     const errorMsg =
       error instanceof Error
