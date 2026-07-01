@@ -34,7 +34,10 @@ export default async function RootLayout({
     >
       <body className="min-h-full bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
         <div className="flex min-h-screen flex-col">
-          <Header usuarioAutenticado={usuarioAutenticado} />
+          <Header
+            usuarioAutenticado={usuarioAutenticado}
+            currentTheme={theme}
+          />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>

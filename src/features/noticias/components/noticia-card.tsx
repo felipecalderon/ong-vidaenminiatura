@@ -44,7 +44,7 @@ export function NoticiaCard({ noticia, featured = false }: NoticiaCardProps) {
             alt={noticia.titulo}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal opacity-80 group-hover:opacity-100"
+            className="object-cover group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal opacity-80 group-hover:opacity-100 ultraviolet-image"
           />
           {noticia.categoria && (
             <Badge

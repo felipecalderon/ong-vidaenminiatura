@@ -27,7 +27,7 @@ export default async function HomePage() {
               alt={featuredPeticion.titulo}
               fill
               sizes="100vw"
-              className="object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-700"
+              className="object-cover opacity-60 group-hover:opacity-90 transition-opacity duration-700 ultraviolet-image"
               priority
             />
             <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent"></div>
@@ -110,7 +110,7 @@ export default async function HomePage() {
           ].map((stat) => (
             <div
               key={stat.label}
-              className="p-6 bg-surface-container border border-outline-variant rounded-lg text-center flex flex-col items-center justify-center hover:bg-surface-container-high transition-colors"
+              className="p-6 bg-surface-container border border-outline-variant rounded-lg text-center flex flex-col items-center justify-center hover:bg-surface-container-high transition-colors dark:neon-border-cyan dark:hover:neon-border-yellow duration-300"
             >
               <stat.icon className="h-6 w-6 mb-4 text-primary" />
               <div className="text-2xl md:text-3xl font-headline font-black tracking-tighter text-on-background mb-1">

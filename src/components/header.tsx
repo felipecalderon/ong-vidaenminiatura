@@ -2,6 +2,7 @@ import { Menu, Settings } from "lucide-react";
 import Link from "next/link";
 import { AccountAccess } from "@/components/account-access";
 import { Navigation } from "@/components/navigation";
+import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -10,13 +11,15 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { UsuarioAutenticadoResumen } from "@/features/usuarios/types";
+import type { Theme } from "@/lib/theme";
 import { LogoIcon } from "./compartido/logo";
 
 interface HeaderProps {
   usuarioAutenticado: UsuarioAutenticadoResumen | null;
+  currentTheme: Theme;
 }
 
-export function Header({ usuarioAutenticado }: HeaderProps) {
+export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-outline-variant bg-surface/80 backdrop-blur-md">
       <div className="container mx-auto px-6 h-16 flex items-center justify-between">
@@ -38,6 +41,7 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
         <Navigation className="hidden md:flex" variant="desktop" />
 
         <div className="flex items-center gap-4">
+          <ThemeToggle currentTheme={currentTheme} />
           <AccountAccess usuario={usuarioAutenticado} variant="desktop" />
 
           {usuarioAutenticado?.acceso.esAdministrador && (
@@ -77,7 +81,14 @@ export function Header({ usuarioAutenticado }: HeaderProps) {
               <div className="flex-1 py-6 flex flex-col justify-between overflow-y-auto min-h-0 gap-6">
                 <Navigation variant="mobile" />
 
-                <div className="mt-auto flex flex-col gap-3 pt-6 border-t border-outline-variant/60">
+                <div className="mt-auto flex flex-col gap-4 pt-6 border-t border-outline-variant/60">
+                  <div className="flex items-center justify-between px-2">
+                    <span className="text-sm font-bold text-on-surface-variant font-label uppercase tracking-widest">
+                      Tema
+                    </span>
+                    <ThemeToggle currentTheme={currentTheme} />
+                  </div>
+
                   <AccountAccess
                     usuario={usuarioAutenticado}
                     variant="mobile"
