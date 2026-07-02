@@ -20,10 +20,11 @@ export const VisionSection = () => {
           lo pequeño
         </p>
         <p className="text-on-surface-variant font-body leading-relaxed text-sm md:text-base">
-          Imaginamos una sociedad donde los insectos sean valorados como los
-          pilares invisibles de la biodiversidad; donde la infancia crezca con
-          asombro por la naturaleza y donde las políticas públicas reflejen que
-          cuidar lo pequeño es cuidar el todo.
+          Imaginamos una sociedad multiespecie donde todos los seres vivos —sin
+          importar su forma, tamaño o especie— sean protegidos legalmente.
+          Aspiramos a un futuro donde la educación y la empatía generen
+          protección hacia los invertebrados, asegurando la vida de todos y
+          todas de manera antiespecista.
         </p>
       </div>
     </div>

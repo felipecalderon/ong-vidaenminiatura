@@ -17,8 +17,10 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-on-surface-variant text-sm font-body">
-              Fundación dedicada a la protección y conservación de insectos y
-              arácnidos en todo el mundo (incluye todos los seres vivos).
+              Organización sin fines de lucro comprometida en la protección de
+              los animales no humanos, con enfoque prioritario en la defensa,
+              conservación y reconocimiento de los insectos, arácnidos y otros
+              invertebrados.
             </p>
           </div>
 

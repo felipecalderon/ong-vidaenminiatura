@@ -1,4 +1,4 @@
-import { Bug, Leaf } from "lucide-react";
+import { Bug, Fish, Leaf, Rabbit, Worm } from "lucide-react";
 import type { Metadata } from "next";
 import { Revelar } from "@/components/compartido/revelar";
 import { CTASection } from "./components/call-to-action";
@@ -55,8 +55,10 @@ export default function NosotrosPage() {
           <QuoteSection
             quote="Los insectos y demás seres vivos son la prueba de que el universo no buscó contemplarse de una sola manera. La evolución junto al universo crearon millones de ojos, cerebros y formas de percibir el mismo mundo. Y nosotros los humanos solo somos una pequeña parte de ellas."
             author="Bárbara Manquilef, cofundadora"
-            Icon={Leaf}
+            Icon={Bug}
             color="primary"
+            bgIconLeft={Worm}
+            bgIconRight={Rabbit}
           />
         </Revelar>
 
@@ -69,8 +71,10 @@ export default function NosotrosPage() {
           <QuoteSection
             quote='Nuestros sentidos son la manera en que el universo se observa a sí mismo, ya sean de seres humanos como seres no humanos, dichos sentidos no son más que otra perspectiva de la misma realidad. Ignorar su bienestar es empobrecer la mirada del propio cosmos ya que cada especie es un tipo de "filtro" que observa una parte de la verdad.'
             author="Felipe Calderón, cofundador"
-            Icon={Bug}
+            Icon={Leaf}
             color="tertiary"
+            bgIconLeft={Bug}
+            bgIconRight={Fish}
           />
         </Revelar>
 

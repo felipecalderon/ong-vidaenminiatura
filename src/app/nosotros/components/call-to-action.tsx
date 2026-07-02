@@ -1,4 +1,4 @@
-import { ArrowRight, Leaf } from "lucide-react";
+import { ArrowRight, Leaf, Snail } from "lucide-react";
 import Link from "next/link";
 
 export const CTASection = () => {
@@ -14,18 +14,8 @@ export const CTASection = () => {
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_70%_50%,var(--tw-gradient-stops))] from-primary/6 via-transparent to-transparent"
       />
 
-      {/* Decorative wing shapes */}
-      <svg
-        role="img"
-        aria-label="Formas decorativas"
-        aria-hidden
-        className="absolute -top-16 -right-16 h-64 w-64 text-primary/3 dark:text-primary/5"
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <ellipse cx="50" cy="50" rx="48" ry="22" fill="currentColor" />
-        <ellipse cx="50" cy="50" rx="22" ry="48" fill="currentColor" />
-      </svg>
+      {/* Decorative floating animal/bug icons */}
+      <Snail className="absolute -top-16 -right-16 h-64 w-64 text-primary/3 dark:text-primary/5 stroke-[1.2]" />
 
       <div className="relative z-10 border border-primary/15 rounded-3xl p-10 md:p-16 text-center backdrop-blur-sm">
         <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 border border-primary/15">

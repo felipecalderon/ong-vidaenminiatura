@@ -61,17 +61,17 @@ export const LogoIcon = ({ size }: { size: number }) => {
       {/* Cuerpo */}
       <g className="origin-center animate-sway transform-fill">
         {/* Cabeza */}
-        <path d="M9 7.13V6a3 3 0 1 1 6 0v1.13" stroke="url(#beetleBody)" />
+        <path d="M9 7.13V6a3 3 0 1 1 6 0v1.13" stroke="#312E81" />
 
         {/* Torso */}
         <path
           d="M14 7a4 4 0 0 1 4 4v3a6 6 0 0 1-12 0v-3a4 4 0 0 1 4-4z"
-          stroke="url(#beetleBody)"
+          stroke="#312E81"
           strokeWidth={2}
         />
 
         {/* Línea central */}
-        <path d="M12 20v-9" stroke="#9333EA" />
+        <path d="M12 20v-9" stroke="#312E81" />
 
         {/* Antena derecha */}
         <path

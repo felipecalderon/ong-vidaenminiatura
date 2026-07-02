@@ -6,6 +6,8 @@ interface QuoteSectionProps {
   author: string;
   Icon: LucideIcon;
   color: "primary" | "tertiary";
+  bgIconLeft?: LucideIcon;
+  bgIconRight?: LucideIcon;
 }
 
 const colorMaps = {
@@ -19,8 +21,8 @@ const colorMaps = {
     iconBorder: "border-primary/15",
     iconText: "text-primary",
     lineBg: "bg-primary/30",
-    wingBig: "text-primary/4 dark:text-primary/6",
-    wingSmall: "text-primary/3 dark:text-primary/5",
+    wingBig: "text-primary dark:text-primary opacity-7",
+    wingSmall: "text-primary dark:text-primary opacity-7",
     radialFrom: "from-primary/4",
   },
   tertiary: {
@@ -33,8 +35,8 @@ const colorMaps = {
     iconBorder: "border-tertiary/15",
     iconText: "text-tertiary",
     lineBg: "bg-tertiary/30",
-    wingBig: "text-tertiary/4 dark:text-tertiary/6",
-    wingSmall: "text-tertiary/3 dark:text-tertiary/5",
+    wingBig: "text-tertiary dark:text-tertiary opacity-7",
+    wingSmall: "text-tertiary dark:text-tertiary opacity-7 rotate-45",
     radialFrom: "from-tertiary/4",
   },
 };
@@ -44,6 +46,8 @@ export function QuoteSection({
   author,
   Icon,
   color,
+  bgIconLeft: BgIconLeft,
+  bgIconRight: BgIconRight,
 }: QuoteSectionProps) {
   const styles = colorMaps[color];
 
@@ -113,39 +117,30 @@ export function QuoteSection({
         {/* Author */}
         <div className="inline-flex items-center gap-3">
           <div className={cn("h-px w-8", styles.lineBg)} />
-          <p className="text-sm font-label uppercase tracking-[0.15em] text-on-surface-variant">
+          <p className="text-sm italic font-label uppercase tracking-[0.15em] text-on-surface-variant">
             {author}
           </p>
           <div className={cn("h-px w-8", styles.lineBg)} />
         </div>
       </div>
 
-      {/* Wing decorations */}
-      <svg
-        role="img"
-        aria-label="Formas decorativas"
-        aria-hidden
-        className={cn(
-          "absolute -bottom-10 -right-20 h-40 w-40",
-          styles.wingBig,
-        )}
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <ellipse cx="50" cy="50" rx="45" ry="20" fill="currentColor" />
-        <ellipse cx="50" cy="50" rx="20" ry="45" fill="currentColor" />
-      </svg>
-      <svg
-        role="img"
-        aria-label="Formas decorativas"
-        aria-hidden
-        className={cn("absolute -top-10 -left-10 h-28 w-28", styles.wingSmall)}
-        viewBox="0 0 100 100"
-        fill="none"
-      >
-        <ellipse cx="50" cy="50" rx="40" ry="18" fill="currentColor" />
-        <ellipse cx="50" cy="50" rx="18" ry="40" fill="currentColor" />
-      </svg>
+      {/* Wing decorations replaced by dynamic Lucide icons */}
+      {BgIconRight && (
+        <BgIconRight
+          className={cn(
+            "absolute -bottom-4 right-20 h-40 w-40 stroke-1",
+            styles.wingBig,
+          )}
+        />
+      )}
+      {BgIconLeft && (
+        <BgIconLeft
+          className={cn(
+            "absolute top-2 left-20 h-28 w-28 stroke-1",
+            styles.wingSmall,
+          )}
+        />
+      )}
     </section>
   );
 }

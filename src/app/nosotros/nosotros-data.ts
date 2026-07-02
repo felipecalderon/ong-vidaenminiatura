@@ -5,7 +5,7 @@ export const fundadores = [
     nombre: "Bárbara Manquilef Aburto",
     rol: "Cofundadora",
     descripcion:
-      "Abogada especializada en Derecho Animal, Docente en la Universidad Católica de Temuco, amante de la lectura, con un compromiso muy serio hacia la defensa, protección y el cuidado de todos los animales.",
+      "Abogada especializada en Derecho Animal, Docente de la Universidad Católica de Temuco, amante de la lectura y la investigación, con fuerte compromiso hacia la defensa, protección y el cuidado de todas y todos los humanos y no humanos.",
     emoji: "🦋",
     iniciales: "BM",
     tema: "primary",

@@ -19,10 +19,14 @@ export const MisionSection = () => {
           <br />y restaurar
         </p>
         <p className="text-on-surface-variant font-body leading-relaxed text-sm md:text-base">
-          Promovemos la educación ambiental y el bienestar animal con foco en
-          los insectos, trabajando con comunidades, escuelas e instituciones
-          para generar un cambio cultural que reconozca el valor irremplazable
-          de estos seres en todos los ecosistemas.
+          Garantizar la defensa jurídica, la protección y el bienestar de los
+          animales no humanos, con especial enfoque en insectos, arácnidos y
+          otros invertebrados, reconociendo su valor intrínseco y su rol
+          fundamental en el sostenimiento de la vida en la Tierra. Desde el
+          corazón de La Araucanía, promovemos una convivencia multiespecie justa
+          a través de la educación, la investigación y la incidencia,
+          transformando la relación de la humanidad con los habitantes más
+          vulnerables, pero más presentes en el planeta.
         </p>
       </div>
     </div>
