@@ -3,6 +3,7 @@ import { cache } from "react";
 import { auth0 } from "@/lib/auth0";
 import { resolverAccesoUsuario } from "../access";
 import { obtenerUsuarioPorAuth0Id } from "../repositories/obtener-usuario-por-auth0-id";
+import { asegurarUsuarioDesdeAuth0 } from "../services/asegurar-usuario-desde-auth0";
 import type { UsuarioAutenticadoResumen } from "../types";
 
 export const obtenerUsuarioAutenticado = cache(
@@ -13,10 +14,18 @@ export const obtenerUsuarioAutenticado = cache(
       return null;
     }
 
-    const usuario = await obtenerUsuarioPorAuth0Id(session.user.sub);
+    let usuario = await obtenerUsuarioPorAuth0Id(session.user.sub);
 
     if (!usuario) {
-      return null;
+      try {
+        usuario = await asegurarUsuarioDesdeAuth0(session.user);
+      } catch (error) {
+        console.error(
+          "Error al asegurar usuario desde Auth0 en consulta:",
+          error,
+        );
+        return null;
+      }
     }
 
     return {

@@ -35,9 +35,8 @@ export default async function PeticionesPage({ searchParams }: PageProps) {
           Causas que necesitan tu apoyo
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          Explora las peticiones creadas por nuestra comunidad y suma tu firma
-          para ayudarnos a impulsar cambios reales para los insectos y
-          arácnidos.
+          Explora las peticiones creadas por la comunidad y firma para ayudarnos
+          a impulsar cambios reales
         </p>
       </div>
 

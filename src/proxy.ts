@@ -1,6 +1,5 @@
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-import { resolverAccesoUsuario } from "@/features/usuarios/access";
 import { auth0 } from "./lib/auth0";
 
 /**
@@ -29,49 +28,24 @@ export async function proxy(request: NextRequest) {
     return authResponse;
   }
 
+  // Las peticiones RSC del cliente no pueden seguir redirecciones cross-origin
+  // a Auth0 por CORS. Para RSC, dejamos que el page-level redirect() lo maneje.
+  const esRsc =
+    request.headers.get("rsc") === "1" ||
+    request.nextUrl.searchParams.has("_rsc");
+
+  if (esRsc) {
+    return authResponse;
+  }
+
+  // Solo verificamos que el usuario tenga una sesión Auth0 válida (sub presente).
+  // La autorización por rol/estado la manejan las propias páginas mediante
+  // obtenerUsuarioAutenticado() + redirect(), ya que esos campos viven en la BD
+  // local y no en el JWT de Auth0.
   const session = await auth0.getSession(request);
-  const usuarioSesion = session?.user as
-    | {
-        usuario?: {
-          auth0Id?: string;
-          correo?: string;
-          nombre?: string;
-          picture?: string | null;
-          rol?: "USUARIO" | "AUTOR" | "ADMINISTRADOR";
-          estado?: "ACTIVO" | "SUSPENDIDO";
-        };
-        auth0Id?: string;
-        correo?: string;
-        nombre?: string;
-        picture?: string | null;
-        rol?: "USUARIO" | "AUTOR" | "ADMINISTRADOR";
-        estado?: "ACTIVO" | "SUSPENDIDO";
-      }
-    | undefined;
-  const usuarioLocal = usuarioSesion?.usuario ?? usuarioSesion;
 
-  if (!session?.user?.sub || !usuarioLocal?.rol || !usuarioLocal?.estado) {
+  if (!session?.user?.sub) {
     return redirigirALogin(request);
-  }
-
-  const acceso = resolverAccesoUsuario({
-    rol: usuarioLocal.rol,
-    estado: usuarioLocal.estado,
-  });
-
-  if (!acceso.puedeAcceder) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  if (
-    requerimientoAcceso === "backoffice" &&
-    !acceso.puedeGestionarBackoffice
-  ) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
-
-  if (requerimientoAcceso === "contenido" && !acceso.puedeCrearContenido) {
-    return NextResponse.redirect(new URL("/", request.url));
   }
 
   return authResponse;
