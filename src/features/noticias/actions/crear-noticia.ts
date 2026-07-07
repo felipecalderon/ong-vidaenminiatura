@@ -18,7 +18,8 @@ export async function crearNoticiaAction(
   if (!usuario || !usuario.acceso.puedeCrearContenido) {
     return {
       success: false,
-      error: "No autorizado. Se requiere rol de Autor o Administrador.",
+      error:
+        "No autorizado. Tu usuario no tiene permisos para crear contenido o se encuentra suspendido.",
     };
   }
 
@@ -89,7 +90,7 @@ export async function crearNoticiaAction(
     if (usuario.acceso.omitirRevision) {
       redirectPath = `/noticias/${noticia.slug}`;
     } else {
-      redirectPath = "/usuario/mis-datos?tab=noticias&status=revision";
+      redirectPath = "/noticias/mis-noticias";
     }
   } catch (error) {
     const errorMsg =

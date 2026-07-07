@@ -17,8 +17,26 @@ interface EditarPerfilFormProps {
     nombre: string;
     picture: string | null;
     correo: string;
+    rol: string;
   };
 }
+
+const ROL_CONFIG = {
+  ADMINISTRADOR: {
+    label: "Admin",
+    classes:
+      "bg-destructive/15 text-destructive border-destructive/30 dark:bg-destructive/20 dark:text-red-400",
+  },
+  AUTOR: {
+    label: "Autor",
+    classes:
+      "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/30 dark:bg-amber-500/20",
+  },
+  USUARIO: {
+    label: "Usuario",
+    classes: "bg-primary/15 text-primary border-primary/30 dark:bg-primary/20",
+  },
+} as const;
 
 const initialState: PerfilActionState = {
   success: false,
@@ -69,6 +87,9 @@ export function EditarPerfilForm({ usuario }: EditarPerfilFormProps) {
     return state.fieldErrors?.[field]?.[0];
   };
 
+  const rolConfig =
+    ROL_CONFIG[usuario.rol as keyof typeof ROL_CONFIG] || ROL_CONFIG.USUARIO;
+
   return (
     <form action={formAction} className="space-y-8 max-w-xl mx-auto">
       <input
@@ -93,6 +114,11 @@ export function EditarPerfilForm({ usuario }: EditarPerfilFormProps) {
       {/* Profile Picture Upload Section */}
       <div className="flex flex-col items-center gap-4 py-4 sm:flex-row sm:items-center">
         <div className="relative group">
+          <span
+            className={`w-max absolute -top-2.5 left-1/2 -translate-x-1/2 z-10 px-2 py-0.5 text-[9px] font-black uppercase tracking-wider rounded-full shadow-sm border bg-card/90 backdrop-blur-sm select-none ${rolConfig.classes}`}
+          >
+            Rol: {rolConfig.label}
+          </span>
           <Avatar className="size-24 border-2 border-outline-variant/50 shadow-md">
             <AvatarImage alt={nameVal} src={previewUrl ?? undefined} />
             <AvatarFallback className="bg-primary text-on-primary text-3xl font-bold">

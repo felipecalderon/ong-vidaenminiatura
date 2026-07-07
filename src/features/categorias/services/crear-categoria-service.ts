@@ -1,8 +1,8 @@
+import { asegurarEsAdministradorActivo } from "@/lib/asegurar-es-administrador-activo";
+import { slugify } from "@/lib/slugify";
 import { crearCategoriaDb } from "../repositories/crear-categoria-db";
 import { obtenerCategoriaPorSlug } from "../repositories/obtener-categoria-por-slug";
 import type { Categoria } from "../types";
-import { slugify } from "./slugify";
-import { verificarAdmin } from "./verificar-admin";
 
 export async function crearCategoriaService(
   operadorId: string,
@@ -12,7 +12,7 @@ export async function crearCategoriaService(
     color?: string | null;
   },
 ): Promise<Categoria> {
-  await verificarAdmin(operadorId);
+  await asegurarEsAdministradorActivo(operadorId);
 
   const slug = slugify(data.nombre);
   const existente = await obtenerCategoriaPorSlug(slug);

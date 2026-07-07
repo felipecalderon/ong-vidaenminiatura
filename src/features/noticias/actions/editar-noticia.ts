@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { generarExtractoAction } from "@/actions/generar-extracto";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { subirImagenSiExiste } from "@/lib/cloudinary";
 import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
@@ -21,7 +22,6 @@ export async function editarNoticiaAction(
   const rawData = {
     id: formData.get("id") as string,
     titulo: formData.get("titulo") as string,
-    resumen: formData.get("resumen") as string,
     contenido: formData.get("contenido") as string,
     categoriaId: formData.get("categoriaId") as string,
   };
@@ -43,8 +43,23 @@ export async function editarNoticiaAction(
     };
   }
 
+  // Generar el extracto SEO con IA automáticamente
+  const extractoResult = await generarExtractoAction({
+    titulo: rawData.titulo,
+    contenido: rawData.contenido,
+  });
+
+  if (!extractoResult.success) {
+    return {
+      success: false,
+      error: `No se pudo generar el extracto automático: ${extractoResult.error}`,
+      fields: rawData,
+    };
+  }
+
   const parseResult = editarNoticiaSchema.safeParse({
     ...rawData,
+    resumen: extractoResult.extracto,
     imagen: imagenUrl,
   });
 

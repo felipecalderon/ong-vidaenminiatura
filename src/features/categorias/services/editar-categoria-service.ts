@@ -1,9 +1,9 @@
+import { asegurarEsAdministradorActivo } from "@/lib/asegurar-es-administrador-activo";
+import { slugify } from "@/lib/slugify";
 import { actualizarCategoriaDb } from "../repositories/actualizar-categoria-db";
 import { obtenerCategoriaPorId } from "../repositories/obtener-categoria-por-id";
 import { obtenerCategoriaPorSlug } from "../repositories/obtener-categoria-por-slug";
 import type { Categoria } from "../types";
-import { slugify } from "./slugify";
-import { verificarAdmin } from "./verificar-admin";
 
 export async function editarCategoriaService(
   operadorId: string,
@@ -15,7 +15,7 @@ export async function editarCategoriaService(
     activo?: boolean;
   },
 ): Promise<Categoria> {
-  await verificarAdmin(operadorId);
+  await asegurarEsAdministradorActivo(operadorId);
 
   const categoria = await obtenerCategoriaPorId(categoriaId);
   if (!categoria) {

@@ -1,6 +1,7 @@
 import "server-only";
 import { incrementarContadorFirmas } from "@/features/peticiones/repositories/incrementar-contador-firmas";
 import { obtenerPeticionPorId } from "@/features/peticiones/repositories/obtener-peticion-por-id";
+import { Prisma } from "@/generated/prisma/client";
 import { EstadoPeticion } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import { registrarFirma } from "../repositories/registrar-firma";
@@ -21,9 +22,19 @@ export async function firmarPeticion(usuarioId: string, peticionId: string) {
     throw new Error("Solo se pueden firmar peticiones publicadas.");
   }
 
-  return prisma.$transaction(async (tx) => {
-    const firma = await registrarFirma(usuarioId, peticionId, tx);
-    await incrementarContadorFirmas(peticionId, tx);
-    return firma;
-  });
+  try {
+    return await prisma.$transaction(async (tx) => {
+      const firma = await registrarFirma(usuarioId, peticionId, tx);
+      await incrementarContadorFirmas(peticionId, tx);
+      return firma;
+    });
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      throw new Error("Ya has firmado esta petición anteriormente.");
+    }
+    throw error;
+  }
 }

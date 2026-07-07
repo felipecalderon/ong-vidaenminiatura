@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NoticiaMarkdownContent } from "@/features/noticias/components/noticia-markdown-content";
 import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries/obtener-noticia-detalle-por-slug";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
+import { EstadoNoticia } from "@/generated/prisma/enums";
 
 interface NoticiaDetailPageProps {
   params: Promise<{
@@ -23,6 +25,13 @@ export async function generateMetadata({
 
   if (!noticia) {
     return { title: "Noticia no encontrada" };
+  }
+
+  if (noticia.estado !== EstadoNoticia.PUBLICADA) {
+    const usuario = await obtenerUsuarioAutenticado();
+    if (!usuario || usuario.id !== noticia.autor_id) {
+      return { title: "Noticia no encontrada" };
+    }
   }
 
   const appUrl =
@@ -56,6 +65,13 @@ export default async function NoticiaDetailPage({
 
   if (!noticia) {
     notFound();
+  }
+
+  if (noticia.estado !== EstadoNoticia.PUBLICADA) {
+    const usuario = await obtenerUsuarioAutenticado();
+    if (!usuario || usuario.id !== noticia.autor_id) {
+      notFound();
+    }
   }
 
   const formattedDate = noticia.fecha_publicacion
@@ -93,8 +109,18 @@ export default async function NoticiaDetailPage({
           </Badge>
         )}
 
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-          {noticia.titulo}
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight flex flex-wrap items-center gap-3">
+          <span>{noticia.titulo}</span>
+          {noticia.estado !== EstadoNoticia.PUBLICADA && (
+            <Badge
+              variant="secondary"
+              className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-200 dark:border-amber-900 text-sm font-semibold"
+            >
+              {noticia.estado === EstadoNoticia.BORRADOR
+                ? "Borrador - Solo visible para ti"
+                : "En revisión - Solo visible para ti"}
+            </Badge>
+          )}
         </h1>
 
         <p className="text-lg font-semibold text-muted-foreground leading-relaxed">

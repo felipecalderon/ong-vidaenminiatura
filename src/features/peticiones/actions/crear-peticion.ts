@@ -18,7 +18,8 @@ export async function crearPeticionAction(
   if (!usuario || !usuario.acceso.puedeCrearContenido) {
     return {
       success: false,
-      error: "No autorizado. Se requiere rol de Autor o Administrador.",
+      error:
+        "No autorizado. Tu usuario no tiene permisos para crear contenido o se encuentra suspendido.",
     };
   }
 

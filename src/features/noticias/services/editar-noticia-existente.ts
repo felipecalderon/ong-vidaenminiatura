@@ -1,7 +1,9 @@
+import { Prisma } from "@/generated/prisma/client";
+import { EstadoNoticia, Rol } from "@/generated/prisma/enums";
+import { generarSlugUnico } from "@/lib/generar-slug-unico";
 import { actualizarNoticia } from "../repositories/actualizar-noticia";
 import { obtenerNoticiaPorId } from "../repositories/obtener-noticia-por-id";
 import type { EditarNoticiaInput } from "../schemas/editar-noticia.schema";
-import { generarSlugNoticiaUnico } from "./generar-slug-noticia-unico";
 
 export async function editarNoticiaExistente(
   usuarioId: string,
@@ -23,8 +25,24 @@ export async function editarNoticiaExistente(
 
   let slug = noticia.slug;
   if (noticia.titulo !== input.titulo) {
-    slug = await generarSlugNoticiaUnico(input.titulo);
+    slug = await generarSlugUnico(input.titulo, "noticia");
   }
 
-  return actualizarNoticia(input.id, slug, input);
+  // Si el rol es USUARIO, requiere volver a REVISION tras ser editada
+  const nuevoEstado =
+    rolUsuario === Rol.USUARIO ? EstadoNoticia.REVISION : undefined;
+
+  try {
+    return await actualizarNoticia(input.id, slug, input, nuevoEstado);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      throw new Error(
+        "Ya existe una noticia con un título o slug similar. Por favor, intenta con otro título.",
+      );
+    }
+    throw error;
+  }
 }

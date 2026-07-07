@@ -16,7 +16,7 @@ import {
   toolbarPlugin,
   UndoRedo,
 } from "@mdxeditor/editor";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface NoticiaContentEditorProps {
@@ -37,6 +37,14 @@ export function NoticiaContentEditor({
   onChange,
 }: NoticiaContentEditorProps) {
   const [markdown, setMarkdown] = useState(initialMarkdown);
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   return (
     <div className={cn("space-y-2", className)}>
@@ -46,8 +54,10 @@ export function NoticiaContentEditor({
         <MDXEditor
           markdown={markdown}
           onChange={(value) => {
-            setMarkdown(value);
-            onChange?.(value);
+            if (isMounted.current) {
+              setMarkdown(value);
+              onChange?.(value);
+            }
           }}
           placeholder={placeholder}
           contentEditableClassName="min-h-[320px] px-4 py-4 text-base leading-7"

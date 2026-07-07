@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle, Edit, Eye, Trash2 } from "lucide-react";
+import { CheckCircle, Edit, Eye, Trash2, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -21,8 +21,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { actualizarEstadoPeticionAction } from "@/features/peticiones/actions/actualizar-estado-peticion";
 import { eliminarPeticionAction } from "@/features/peticiones/actions/eliminar-peticion";
 import { publicarPeticionAction } from "@/features/peticiones/actions/publicar-peticion";
+import { EstadoPeticion } from "@/generated/prisma/enums";
 import { EditarPeticionForm } from "./editar-peticion-form";
 
 type PeticionConRelaciones = {
@@ -61,6 +63,7 @@ export function MisPeticionesTable({
   const router = useRouter();
   const [eliminandoId, setEliminandoId] = useState<string | null>(null);
   const [publicandoId, setPublicandoId] = useState<string | null>(null);
+  const [cerrandoId, setCerrandoId] = useState<string | null>(null);
   const [peticionSeleccionada, setPeticionSeleccionada] =
     useState<PeticionConRelaciones | null>(null);
   const [modalAbierto, setModalAbierto] = useState(false);
@@ -101,6 +104,30 @@ export function MisPeticionesTable({
       alert(result.error || "Ocurrió un error al publicar la petición.");
     }
     setPublicandoId(null);
+  };
+
+  const handleCerrar = async (id: string) => {
+    if (
+      !confirm(
+        "¿Estás seguro de que quieres cerrar esta petición? Ya no se podrán recibir firmas.",
+      )
+    ) {
+      return;
+    }
+
+    setCerrandoId(id);
+    const result = await actualizarEstadoPeticionAction(
+      id,
+      EstadoPeticion.CERRADA,
+    );
+
+    if (result.success) {
+      alert("¡Petición cerrada con éxito!");
+      router.refresh();
+    } else {
+      alert(result.error || "Ocurrió un error al cerrar la petición.");
+    }
+    setCerrandoId(null);
   };
 
   const abrirModal = (peticion: PeticionConRelaciones) => {
@@ -208,15 +235,29 @@ export function MisPeticionesTable({
                         variant="outline"
                         size="icon"
                         className="border border-outline-variant dark: hover:shadow-none transition-all"
+                        title="Ver petición"
                       >
                         <Eye className="h-4 w-4" />
                       </Button>
                     </Link>
+                    {peticion.estado === EstadoPeticion.PUBLICADA && (
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border border-outline-variant hover:border-red-500 hover:text-red-500 dark: hover:shadow-none transition-all"
+                        onClick={() => handleCerrar(peticion.id)}
+                        disabled={cerrandoId === peticion.id}
+                        title="Cerrar petición"
+                      >
+                        <XCircle className="h-4 w-4" />
+                      </Button>
+                    )}
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => abrirModal(peticion)}
                       className="border border-outline-variant dark: hover:shadow-none transition-all"
+                      title="Editar petición"
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -226,6 +267,7 @@ export function MisPeticionesTable({
                       className="border border-outline-variant dark: hover:shadow-none transition-all"
                       onClick={() => handleEliminar(peticion.id)}
                       disabled={eliminandoId === peticion.id}
+                      title="Eliminar petición"
                     >
                       <Trash2 className="h-4 w-4" />
                     </Button>

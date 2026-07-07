@@ -1,7 +1,6 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
-import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,8 +11,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { useEditarNoticiaForm } from "../hooks/use-editar-noticia-form";
+import { ImageUploader } from "./image-uploader";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
 interface EditarNoticiaFormProps {
@@ -41,7 +40,7 @@ export function EditarNoticiaForm({
     isPending,
     previewUrl,
     validateField,
-    handleImageChange,
+    processImageFile,
     handleSubmit,
     getFieldError,
   } = useEditarNoticiaForm(noticia);
@@ -119,28 +118,6 @@ export function EditarNoticiaForm({
         )}
       </div>
 
-      {/* Resumen */}
-      <div className="space-y-2">
-        <Label htmlFor="resumen" className="text-lg font-bold">
-          Resumen o extracto *
-        </Label>
-        <Textarea
-          id="resumen"
-          name="resumen"
-          defaultValue={state.fields?.resumen ?? noticia.resumen}
-          onChange={(e) => validateField("resumen", e.target.value)}
-          onBlur={(e) => validateField("resumen", e.target.value)}
-          required
-          rows={3}
-          className="border border-outline-variant text-base"
-        />
-        {getFieldError("resumen") && (
-          <p className="text-red-600 text-sm font-semibold">
-            {getFieldError("resumen")}
-          </p>
-        )}
-      </div>
-
       {/* Contenido */}
       <div className="space-y-2">
         <Label htmlFor="contenido" className="text-lg font-bold">
@@ -159,25 +136,10 @@ export function EditarNoticiaForm({
         <Label htmlFor="imagen" className="text-lg font-bold">
           Imagen de portada
         </Label>
-        <Input
-          id="imagen"
-          name="imagen"
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="border border-outline-variant text-base py-3 bg-background file:mr-4 file:py-1 file:px-4 file:border file:border-outline-variant file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+        <ImageUploader
+          previewUrl={previewUrl}
+          onFileSelect={processImageFile}
         />
-        {previewUrl && (
-          <div className="relative aspect-video w-full border border-outline-variant overflow-hidden dark:">
-            <Image
-              src={previewUrl}
-              alt="Previsualización"
-              fill
-              sizes="(max-width: 768px) 100vw, 600px"
-              className="object-cover"
-            />
-          </div>
-        )}
         {getFieldError("imagen") && (
           <p className="text-red-600 text-sm font-semibold">
             {getFieldError("imagen")}

@@ -12,10 +12,9 @@ export async function eliminarNoticiaExistente(
     throw new Error("La noticia no existe.");
   }
 
-  const esAutor = noticia.autor_id === usuarioId;
   const esAdmin = rolUsuario === "ADMINISTRADOR";
 
-  if (!esAutor && !esAdmin) {
+  if (!esAdmin) {
     throw new Error("No tienes permisos para eliminar esta noticia.");
   }
 

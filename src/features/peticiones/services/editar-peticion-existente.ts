@@ -1,7 +1,9 @@
+import { Prisma } from "@/generated/prisma/client";
+import { EstadoPeticion } from "@/generated/prisma/enums";
+import { generarSlugUnico } from "@/lib/generar-slug-unico";
 import { actualizarPeticion } from "../repositories/actualizar-peticion";
 import { obtenerPeticionPorId } from "../repositories/obtener-peticion-por-id";
 import type { EditarPeticionInput } from "../schemas/editar-peticion.schema";
-import { generarSlugUnico } from "./generar-slug-unico";
 
 export async function editarPeticionExistente(
   usuarioId: string,
@@ -26,5 +28,21 @@ export async function editarPeticionExistente(
     slug = await generarSlugUnico(input.titulo);
   }
 
-  return actualizarPeticion(input.id, slug, input);
+  // Si el rol es USUARIO, requiere volver a REVISION tras ser editada
+  const nuevoEstado =
+    rolUsuario === "USUARIO" ? EstadoPeticion.REVISION : undefined;
+
+  try {
+    return await actualizarPeticion(input.id, slug, input, nuevoEstado);
+  } catch (error) {
+    if (
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2002"
+    ) {
+      throw new Error(
+        "Ya existe una petición con un título o slug similar. Por favor, intenta con otro título.",
+      );
+    }
+    throw error;
+  }
 }

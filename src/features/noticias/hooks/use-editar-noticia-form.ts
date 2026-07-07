@@ -1,6 +1,7 @@
 "use client";
 
 import { type ChangeEvent, useActionState, useState } from "react";
+import { toast } from "sonner";
 import { editarNoticiaAction } from "../actions/editar-noticia";
 import type { NoticiaActionState } from "../actions/noticia-action-state";
 import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
@@ -48,19 +49,46 @@ export function useEditarNoticiaForm(noticia: NoticiaData) {
     }
   };
 
+  const processImageFile = (file: File | undefined) => {
+    if (!file) {
+      setPreviewUrl(null);
+      return;
+    }
+
+    // Validar tipo de formato de imagen
+    const validTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "image/svg+xml",
+    ];
+    if (!validTypes.includes(file.type)) {
+      toast.error(
+        "Formato de imagen no permitido. Usa JPG, PNG, WEBP, GIF o SVG.",
+      );
+      return;
+    }
+
+    // Validar tamaño (máximo 5MB)
+    const maxSizeInBytes = 5 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      toast.error("La imagen es demasiado grande. El límite máximo es de 5MB.");
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url);
+    setClientErrors((prev) => {
+      const next = { ...prev };
+      delete next.imagen;
+      return next;
+    });
+  };
+
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-      setClientErrors((prev) => {
-        const next = { ...prev };
-        delete next.imagen;
-        return next;
-      });
-    } else {
-      setPreviewUrl(noticia.imagen);
-    }
+    processImageFile(file);
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -68,7 +96,6 @@ export function useEditarNoticiaForm(noticia: NoticiaData) {
     const data = {
       id: formData.get("id") as string,
       titulo: formData.get("titulo") as string,
-      resumen: formData.get("resumen") as string,
       contenido: formData.get("contenido") as string,
       categoriaId: formData.get("categoriaId") as string,
       imagen: previewUrl, // Para pasar validación Zod
@@ -108,6 +135,7 @@ export function useEditarNoticiaForm(noticia: NoticiaData) {
     previewUrl,
     validateField,
     handleImageChange,
+    processImageFile,
     handleSubmit,
     getFieldError,
   };

@@ -24,7 +24,3 @@ export function resolverAccesoUsuario(
     omitirRevision,
   };
 }
-
-export function puedeAccederUsuario(usuario: Pick<Usuario, "estado">): boolean {
-  return usuario.estado !== EstadoUsuario.SUSPENDIDO;
-}

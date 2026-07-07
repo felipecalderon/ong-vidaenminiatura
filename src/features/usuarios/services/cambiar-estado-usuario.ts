@@ -1,5 +1,6 @@
 import "server-only";
-import { EstadoUsuario, Rol } from "@/generated/prisma/enums";
+import type { EstadoUsuario } from "@/generated/prisma/enums";
+import { asegurarEsAdministradorActivo } from "@/lib/asegurar-es-administrador-activo";
 import { actualizarEstadoUsuario } from "../repositories/actualizar-estado-usuario";
 import { obtenerUsuarioPorId } from "../repositories/obtener-usuario-por-id";
 import type { Usuario } from "../types";
@@ -9,14 +10,7 @@ export async function cambiarEstadoUsuario(
   usuarioId: string,
   nuevoEstado: EstadoUsuario,
 ): Promise<Usuario> {
-  const operador = await obtenerUsuarioPorId(operadorId);
-  if (
-    !operador ||
-    operador.rol !== Rol.ADMINISTRADOR ||
-    operador.estado !== EstadoUsuario.ACTIVO
-  ) {
-    throw new Error("No autorizado");
-  }
+  await asegurarEsAdministradorActivo(operadorId);
 
   if (operadorId === usuarioId) {
     throw new Error("No puedes cambiar tu propio estado");

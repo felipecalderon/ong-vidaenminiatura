@@ -1,4 +1,5 @@
 import "server-only";
+import type { EstadoNoticia } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import type { EditarNoticiaInput } from "../schemas/editar-noticia.schema";
 
@@ -6,6 +7,7 @@ export async function actualizarNoticia(
   id: string,
   slug: string,
   input: Omit<EditarNoticiaInput, "id">,
+  estado?: EstadoNoticia,
 ) {
   return prisma.noticia.update({
     where: { id },
@@ -16,6 +18,7 @@ export async function actualizarNoticia(
       contenido: input.contenido,
       imagen: input.imagen ?? null,
       categoria_id: input.categoriaId,
+      estado,
     },
   });
 }
