@@ -11,6 +11,13 @@ export async function listarNoticiasPorUsuario(usuarioId: string) {
     },
     include: {
       categoria: true,
+      autor: {
+        select: {
+          id: true,
+          nombre: true,
+          picture: true,
+        },
+      },
     },
   });
 }

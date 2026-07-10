@@ -13,10 +13,11 @@ export function formatearEstado(estado: string) {
   }
 }
 
-export function formatearFecha(fecha: string | null) {
+export function formatearFecha(fecha: Date | string | null) {
   if (!fecha) return "-";
 
-  return new Date(fecha).toLocaleDateString("es-ES", {
+  const date = fecha instanceof Date ? fecha : new Date(fecha);
+  return date.toLocaleDateString("es-ES", {
     year: "numeric",
     month: "short",
     day: "numeric",

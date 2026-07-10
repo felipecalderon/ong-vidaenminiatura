@@ -38,15 +38,7 @@ export default async function MisNoticiasPage() {
         </div>
       </div>
 
-      <MisNoticiasTable
-        noticias={noticias.map((noticia) => ({
-          ...noticia,
-          fecha_publicacion: noticia.fecha_publicacion
-            ? noticia.fecha_publicacion.toISOString()
-            : null,
-        }))}
-        esAdmin={esAdmin}
-      />
+      <MisNoticiasTable noticias={noticias} esAdmin={esAdmin} />
     </div>
   );
 }

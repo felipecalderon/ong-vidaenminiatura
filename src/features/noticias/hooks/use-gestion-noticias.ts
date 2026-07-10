@@ -5,26 +5,10 @@ import { useTransition } from "react";
 import { toast } from "sonner";
 import { actualizarEstadoNoticiaAction } from "@/features/noticias/actions/actualizar-estado-noticia";
 import { eliminarNoticiaAction } from "@/features/noticias/actions/eliminar-noticia";
-import type { EstadoNoticia } from "@/generated/prisma/enums";
-
-type NoticiaConRelaciones = {
-  id: string;
-  titulo: string;
-  slug: string;
-  estado: EstadoNoticia;
-  resumen: string;
-  contenido: string;
-  imagen: string | null;
-  categoria_id: string;
-  categoria: {
-    nombre: string;
-    color: string | null;
-  } | null;
-  autor?: {
-    id: string;
-    nombre: string;
-  } | null;
-};
+import type {
+  EstadoNoticia,
+  NoticiaConRelaciones,
+} from "@/features/noticias/types";
 
 export function useGestionNoticias(initialNoticias: NoticiaConRelaciones[]) {
   const [isPending, startTransition] = useTransition();

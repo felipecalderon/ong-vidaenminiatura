@@ -18,7 +18,10 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import type { NoticiaConRelaciones } from "@/features/noticias/types";
+import {
+  EstadoNoticia,
+  type NoticiaConRelaciones,
+} from "@/features/noticias/types";
 import { useGestionNoticias } from "../hooks/use-gestion-noticias";
 
 interface GestionNoticiasProps {

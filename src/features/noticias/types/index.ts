@@ -1,8 +1,8 @@
-import type { EstadoNoticia } from "@/generated/prisma/enums";
+import { EstadoNoticia } from "@/generated/prisma/enums";
 import type { noticiaModel } from "@/generated/prisma/models/noticia";
 
 export type Noticia = noticiaModel;
-export type { EstadoNoticia };
+export { EstadoNoticia };
 
 export type NoticiaConRelaciones = {
   id: string;
@@ -13,13 +13,24 @@ export type NoticiaConRelaciones = {
   contenido: string;
   imagen: string | null;
   categoria_id: string;
-  fecha_publicacion: string | null;
+  autor_id: string;
+  fecha_publicacion: Date | null;
+  destacado: boolean;
+  fecha_creacion: Date;
+  fecha_actualizacion: Date;
   categoria: {
-    nombre: string;
-    color: string | null;
-  } | null;
-  autor?: {
     id: string;
     nombre: string;
-  } | null;
+    slug: string;
+    descripcion: string | null;
+    color: string | null;
+    activo: boolean;
+    fecha_creacion: Date;
+    fecha_actualizacion: Date;
+  };
+  autor: {
+    id: string;
+    nombre: string;
+    picture: string | null;
+  };
 };
