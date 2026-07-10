@@ -4,12 +4,6 @@ import { Edit, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-import {
   Select,
   SelectContent,
   SelectItem,
@@ -24,32 +18,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import type { PeticionConRelaciones } from "@/features/peticiones/types";
 import { EstadoPeticion } from "@/generated/prisma/enums";
 import { useGestionPeticiones } from "../hooks/use-gestion-peticiones";
 import { DescargarFirmasExcelButton } from "./descargar-firmas-excel-button";
-import { EditarPeticionForm } from "./editar-peticion-form";
-
-type PeticionConRelaciones = {
-  id: string;
-  titulo: string;
-  slug: string;
-  estado: EstadoPeticion;
-  resumen: string;
-  contenido: string;
-  imagen: string | null;
-  categoriaId?: string;
-  meta_firmas: number;
-  cantidad_firmas: number;
-  destacado: boolean;
-  categoria: {
-    nombre: string;
-    color: string | null;
-  } | null;
-  usuario?: {
-    id: string;
-    nombre: string;
-  } | null;
-};
+import { EditarPeticionDialog } from "./editar-peticion-dialog";
 
 interface GestionPeticionesProps {
   initialPeticiones: PeticionConRelaciones[];
@@ -217,37 +190,15 @@ export function GestionPeticiones({
         </Table>
       </div>
 
-      {/* MODAL EDITAR PETICIÓN */}
-      <Dialog
-        open={!!editingPeticion}
-        onOpenChange={(open) => !open && setEditingPeticion(null)}
-      >
-        <DialogContent className="border border-outline-variant bg-background p-6 dark: max-w-2xl max-h-[85vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="text-xl font-extrabold uppercase text-foreground">
-              Editar Petición
-            </DialogTitle>
-          </DialogHeader>
-          {editingPeticion && (
-            <div className="mt-4">
-              <EditarPeticionForm
-                peticion={{
-                  id: editingPeticion.id,
-                  titulo: editingPeticion.titulo,
-                  resumen: editingPeticion.resumen,
-                  contenido: editingPeticion.contenido,
-                  meta_firmas: editingPeticion.meta_firmas,
-                  categoriaId: editingPeticion.categoriaId,
-                  imagen: editingPeticion.imagen,
-                  destacado: editingPeticion.destacado,
-                }}
-                categorias={categorias}
-                onSuccess={() => setEditingPeticion(null)}
-              />
-            </div>
-          )}
-        </DialogContent>
-      </Dialog>
+      {editingPeticion && (
+        <EditarPeticionDialog
+          peticion={editingPeticion}
+          open={!!editingPeticion}
+          onOpenChange={(open) => !open && setEditingPeticion(null)}
+          categorias={categorias}
+          onSuccess={() => setEditingPeticion(null)}
+        />
+      )}
     </div>
   );
 }

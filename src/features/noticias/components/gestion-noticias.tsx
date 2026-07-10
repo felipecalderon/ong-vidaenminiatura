@@ -18,27 +18,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { EstadoNoticia } from "@/generated/prisma/enums";
+import type { NoticiaConRelaciones } from "@/features/noticias/types";
 import { useGestionNoticias } from "../hooks/use-gestion-noticias";
-
-type NoticiaConRelaciones = {
-  id: string;
-  titulo: string;
-  slug: string;
-  estado: EstadoNoticia;
-  resumen: string;
-  contenido: string;
-  imagen: string | null;
-  categoria_id: string;
-  categoria: {
-    nombre: string;
-    color: string | null;
-  } | null;
-  autor?: {
-    id: string;
-    nombre: string;
-  } | null;
-};
 
 interface GestionNoticiasProps {
   initialNoticias: NoticiaConRelaciones[];

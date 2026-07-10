@@ -1,14 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -17,9 +9,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { EstadoUsuario, Rol } from "@/generated/prisma/enums";
+import { EstadoUsuario } from "@/generated/prisma/enums";
 import { useGestionUsuarios } from "../hooks/use-gestion-usuarios";
 import type { Usuario, UsuarioAutenticadoResumen } from "../types";
+import { EstadoUsuarioSelector } from "./usuarios-table/estado-usuario-selector";
+import { RolSelector } from "./usuarios-table/rol-selector";
+import { UsuarioAvatarCell } from "./usuarios-table/usuario-avatar-cell";
 
 interface GestionUsuariosProps {
   initialUsuarios: Usuario[];
@@ -70,51 +65,23 @@ export function GestionUsuarios({
                   key={user.id}
                   className="border-b border-outline-variant/10"
                 >
-                  <TableCell className="flex items-center gap-3">
-                    <Avatar className="size-8 border border-outline-variant dark:">
-                      <AvatarImage src={user.picture ?? undefined} />
-                      <AvatarFallback className="font-extrabold">
-                        {user.nombre.substring(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <p className="font-bold text-foreground">
-                        {user.nombre}{" "}
-                        {esPropio && (
-                          <span className="text-xs text-primary font-extrabold">
-                            (Tú)
-                          </span>
-                        )}
-                      </p>
-                      {user.nickname && (
-                        <p className="text-xs text-muted-foreground">
-                          @{user.nickname}
-                        </p>
-                      )}
-                    </div>
+                  <TableCell>
+                    <UsuarioAvatarCell
+                      nombre={user.nombre}
+                      picture={user.picture}
+                      nickname={user.nickname}
+                      esPropio={esPropio}
+                    />
                   </TableCell>
                   <TableCell className="font-mono text-xs">
                     {user.correo}
                   </TableCell>
                   <TableCell>
-                    <Select
-                      disabled={esPropio || isPending}
+                    <RolSelector
                       value={user.rol}
-                      onValueChange={(val) =>
-                        handleRoleChange(user.id, val as Rol)
-                      }
-                    >
-                      <SelectTrigger className="w-40 border border-outline-variant font-semibold bg-background dark:">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="border border-outline-variant bg-popover font-semibold">
-                        <SelectItem value={Rol.USUARIO}>USUARIO</SelectItem>
-                        <SelectItem value={Rol.AUTOR}>AUTOR</SelectItem>
-                        <SelectItem value={Rol.ADMINISTRADOR}>
-                          ADMINISTRADOR
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
+                      disabled={esPropio || isPending}
+                      onValueChange={(val) => handleRoleChange(user.id, val)}
+                    />
                   </TableCell>
                   <TableCell>
                     <Badge
@@ -128,25 +95,11 @@ export function GestionUsuarios({
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Select
-                      disabled={esPropio || isPending}
+                    <EstadoUsuarioSelector
                       value={user.estado}
-                      onValueChange={(val) =>
-                        handleStatusChange(user.id, val as EstadoUsuario)
-                      }
-                    >
-                      <SelectTrigger className="w-35 ml-auto border border-outline-variant font-semibold bg-background dark:">
-                        <SelectValue />
-                      </SelectTrigger>
-                      <SelectContent className="border border-outline-variant bg-popover font-semibold">
-                        <SelectItem value={EstadoUsuario.ACTIVO}>
-                          ACTIVO
-                        </SelectItem>
-                        <SelectItem value={EstadoUsuario.SUSPENDIDO}>
-                          SUSPENDIDO
-                        </SelectItem>
-                      </SelectContent>
-                    </Select>
+                      disabled={esPropio || isPending}
+                      onValueChange={(val) => handleStatusChange(user.id, val)}
+                    />
                   </TableCell>
                 </TableRow>
               );

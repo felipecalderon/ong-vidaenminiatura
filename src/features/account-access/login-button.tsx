@@ -10,7 +10,7 @@ export function LoginButton() {
     >
       <a href="/auth/login" className="flex items-center gap-2">
         <LogIn className="size-4" />
-        <span>Accederr</span>
+        <span>Acceder</span>
       </a>
     </Button>
   );
