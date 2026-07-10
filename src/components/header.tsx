@@ -1,6 +1,5 @@
 import { Menu, Settings } from "lucide-react";
 import Link from "next/link";
-import { AccountAccess } from "@/components/account-access";
 import { Navigation } from "@/components/navigation";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { AccountAccess } from "@/features/account-access/account-access";
 import type { UsuarioAutenticadoResumen } from "@/features/usuarios/types";
 import type { Theme } from "@/lib/theme";
 import { LogoIcon } from "./compartido/logo";
@@ -31,9 +31,6 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
             <LogoIcon size={45} />
           </div>
           <div className="flex items-center gap-1 font-black tracking-tighter">
-            <span className="relative -top-0.5 text-4xl text-emerald-800 leading-none">
-              +
-            </span>
             <span className="text-xl leading-none">Insectos</span>
           </div>
         </Link>

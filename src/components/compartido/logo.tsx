@@ -15,15 +15,6 @@ export const LogoIcon = ({ size }: { size: number }) => {
       role="img"
       aria-label="Insecto animado moviendo sus patas y antenas"
     >
-      <defs>
-        {/* Degradado metálico del cuerpo */}
-        <linearGradient id="beetleBody" x1="6" y1="5" x2="18" y2="20">
-          <stop offset="0%" stopColor="#7C3AED" />
-          <stop offset="50%" stopColor="#9333EA" />
-          <stop offset="100%" stopColor="#C026D3" />
-        </linearGradient>
-      </defs>
-
       {/* Patas derechas */}
       <path
         className="origin-left animate-leg-r transform-fill"
@@ -70,21 +61,26 @@ export const LogoIcon = ({ size }: { size: number }) => {
           strokeWidth={2}
         />
 
-        {/* Línea central */}
-        <path d="M12 20v-9" stroke="#312E81" />
+        {/* Símbolo + */}
+        <path
+          d="M12 9v8M8 13h8"
+          stroke="#10b981"
+          strokeWidth={2}
+          strokeLinecap="butt"
+        />
 
         {/* Antena derecha */}
         <path
           className="origin-bottom-left animate-antenna transform-fill"
           d="M14.12 3.88 16 2"
-          stroke="#047857"
+          stroke="#312E81"
         />
 
         {/* Antena izquierda */}
         <path
           className="origin-bottom-right animate-antenna transform-fill [animation-delay:0.6s]"
           d="m8 2 1.88 1.88"
-          stroke="#047857"
+          stroke="#312E81"
         />
       </g>
     </svg>
