@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { Revelar } from "@/components/compartido/revelar";
 import { CTASection } from "./components/call-to-action";
 import { FundadoresSection } from "./components/fundadores";
-import { HeroSection } from "./components/hero";
 import { MisionSection } from "./components/mision";
 import { PerspectivasSection } from "./components/perspectivas-realidad";
 import { QuoteSection } from "./components/quote";
@@ -20,8 +19,6 @@ export const metadata: Metadata = {
 export default function NosotrosPage() {
   return (
     <div className="min-h-screen bg-background text-on-background overflow-hidden">
-      <HeroSection />
-
       <div className="mx-auto max-w-5xl px-6 py-16 md:py-24 space-y-24 md:space-y-36">
         <Revelar>
           <section id="mision-vision" className="relative">

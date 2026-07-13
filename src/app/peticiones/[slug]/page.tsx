@@ -2,6 +2,7 @@ import { Users } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { cache } from "react";
 import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-facebook";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
@@ -9,6 +10,7 @@ import { SignPetitionForm } from "@/features/firmas/components/sign-petition-for
 import { usuarioYaFirmopeticion } from "@/features/firmas/repositories/usuario-ya-firmo-peticion";
 import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries/obtener-peticion-detalle-por-slug";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
+import { EstadoPeticion } from "@/generated/prisma/enums";
 
 interface PeticionDetailPageProps {
   params: Promise<{
@@ -16,11 +18,31 @@ interface PeticionDetailPageProps {
   }>;
 }
 
+const obtenerPeticionVisiblePorSlug = cache(async (slug: string) => {
+  const peticion = await obtenerPeticionDetallePorSlug(slug);
+
+  if (!peticion) {
+    return null;
+  }
+
+  if (peticion.estado === EstadoPeticion.PUBLICADA) {
+    return peticion;
+  }
+
+  const usuario = await obtenerUsuarioAutenticado();
+
+  if (!usuario || usuario.id !== peticion.usuario.id) {
+    return null;
+  }
+
+  return peticion;
+});
+
 export async function generateMetadata({
   params,
 }: PeticionDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const peticion = await obtenerPeticionDetallePorSlug(slug);
+  const peticion = await obtenerPeticionVisiblePorSlug(slug);
 
   if (!peticion) {
     return {
@@ -55,7 +77,7 @@ export default async function PeticionDetailPage({
   params,
 }: PeticionDetailPageProps) {
   const { slug } = await params;
-  const peticion = await obtenerPeticionDetallePorSlug(slug);
+  const peticion = await obtenerPeticionVisiblePorSlug(slug);
 
   if (!peticion) {
     notFound();
@@ -64,7 +86,7 @@ export default async function PeticionDetailPage({
   const usuario = await obtenerUsuarioAutenticado();
   let yaFirmo = false;
 
-  if (usuario) {
+  if (usuario && peticion.estado === EstadoPeticion.PUBLICADA) {
     yaFirmo = await usuarioYaFirmopeticion(usuario.id, peticion.id);
   }
 
@@ -154,17 +176,21 @@ export default async function PeticionDetailPage({
             </div>
           </div>
 
-          <SignPetitionForm
-            peticionId={peticion.id}
-            usuarioAutenticado={!!usuario}
-            yaFirmoOriginal={yaFirmo}
-          />
+          {peticion.estado === EstadoPeticion.PUBLICADA && (
+            <>
+              <SignPetitionForm
+                peticionId={peticion.id}
+                usuarioAutenticado={!!usuario}
+                yaFirmoOriginal={yaFirmo}
+              />
 
-          <BotonCompartirFacebook
-            slug={slug}
-            tipo="peticion"
-            className="w-full"
-          />
+              <BotonCompartirFacebook
+                slug={slug}
+                tipo="peticion"
+                className="w-full"
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

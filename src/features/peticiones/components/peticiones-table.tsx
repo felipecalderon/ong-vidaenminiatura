@@ -1,11 +1,18 @@
 "use client";
 
-import { Edit, Eye, Trash2, XCircle } from "lucide-react";
+import { Edit, Eye, RotateCcw, Trash2, XCircle } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Table,
   TableBody,
@@ -17,24 +24,31 @@ import {
 import { actualizarEstadoPeticionAction } from "@/features/peticiones/actions/actualizar-estado-peticion";
 import { eliminarPeticionAction } from "@/features/peticiones/actions/eliminar-peticion";
 import { publicarPeticionAction } from "@/features/peticiones/actions/publicar-peticion";
+import { DescargarFirmasExcelButton } from "@/features/peticiones/components/descargar-firmas-excel-button";
 import type { PeticionConRelaciones } from "@/features/peticiones/types";
 import { EstadoPeticion } from "@/generated/prisma/enums";
 import { EditarPeticionDialog } from "./editar-peticion-dialog";
 
-interface MisPeticionesTableProps {
+interface PeticionesTableProps {
   peticiones: PeticionConRelaciones[];
-  esAdmin: boolean;
   categorias: { id: string; nombre: string }[];
+  esAdmin: boolean;
+  emptyCtaHref?: string;
+  emptyCtaLabel?: string;
 }
 
-export function MisPeticionesTable({
+export function PeticionesTable({
   peticiones,
-  esAdmin,
   categorias,
-}: MisPeticionesTableProps) {
+  esAdmin,
+  emptyCtaHref,
+  emptyCtaLabel,
+}: PeticionesTableProps) {
   const router = useRouter();
+  const [isPending, startTransition] = useTransition();
   const [eliminandoId, setEliminandoId] = useState<string | null>(null);
   const [publicandoId, setPublicandoId] = useState<string | null>(null);
+  const [reabriendoId, setReabriendoId] = useState<string | null>(null);
   const [cerrandoId, setCerrandoId] = useState<string | null>(null);
   const [peticionSeleccionada, setPeticionSeleccionada] =
     useState<PeticionConRelaciones | null>(null);
@@ -102,22 +116,57 @@ export function MisPeticionesTable({
     setCerrandoId(null);
   };
 
+  const handleReabrir = async (id: string) => {
+    if (
+      !confirm(
+        "¿Estás seguro de que quieres reabrir esta petición? Volverá a estar visible públicamente.",
+      )
+    ) {
+      return;
+    }
+
+    setReabriendoId(id);
+    const result = await actualizarEstadoPeticionAction(
+      id,
+      EstadoPeticion.PUBLICADA,
+    );
+
+    if (result.success) {
+      alert("¡Petición reabierta con éxito!");
+      router.refresh();
+    } else {
+      alert(result.error || "Ocurrió un error al reabrir la petición.");
+    }
+    setReabriendoId(null);
+  };
+
   const abrirModal = (peticion: PeticionConRelaciones) => {
     setPeticionSeleccionada(peticion);
     setModalAbierto(true);
   };
 
+  const handleEstadoChange = (id: string, nuevoEstado: EstadoPeticion) => {
+    startTransition(async () => {
+      const result = await actualizarEstadoPeticionAction(id, nuevoEstado);
+      if (result.success) {
+        router.refresh();
+      } else {
+        alert(result.error || "No se pudo cambiar el estado.");
+      }
+    });
+  };
+
   if (peticiones.length === 0) {
     return (
       <div className="text-center p-8 border border-outline-variant dark:">
-        <p className="text-lg font-bold mb-4">
-          No tienes peticiones creadas aún.
-        </p>
-        <Link href="/peticiones/crear">
-          <Button className="border border-outline-variant font-bold transition-all hover: dark: dark:hover:">
-            Crear Nueva Petición
-          </Button>
-        </Link>
+        <p className="text-lg font-bold mb-4">No hay peticiones registradas.</p>
+        {emptyCtaHref && emptyCtaLabel && (
+          <Link href={emptyCtaHref}>
+            <Button className="border border-outline-variant font-bold transition-all hover: dark: dark:hover:">
+              {emptyCtaLabel}
+            </Button>
+          </Link>
+        )}
       </div>
     );
   }
@@ -182,36 +231,80 @@ export function MisPeticionesTable({
                   )}
                 </TableCell>
                 <TableCell>
-                  <Badge
-                    variant={
-                      peticion.estado === "PUBLICADA" ? "default" : "secondary"
-                    }
-                    className={
-                      peticion.estado === "REVISION"
-                        ? "border border-amber-500 bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
-                        : undefined
-                    }
-                  >
-                    {peticion.estado === "REVISION"
-                      ? "En Revisión"
-                      : peticion.estado}
-                  </Badge>
+                  {esAdmin ? (
+                    <Select
+                      disabled={isPending}
+                      value={peticion.estado}
+                      onValueChange={(val) =>
+                        handleEstadoChange(peticion.id, val as EstadoPeticion)
+                      }
+                    >
+                      <SelectTrigger className="w-36 border border-outline-variant font-semibold bg-background dark:">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent className="border border-outline-variant bg-popover font-semibold">
+                        <SelectItem value={EstadoPeticion.BORRADOR}>
+                          BORRADOR
+                        </SelectItem>
+                        <SelectItem value={EstadoPeticion.REVISION}>
+                          REVISIÓN
+                        </SelectItem>
+                        <SelectItem value={EstadoPeticion.PUBLICADA}>
+                          PUBLICADA
+                        </SelectItem>
+                        <SelectItem value={EstadoPeticion.CERRADA}>
+                          CERRADA
+                        </SelectItem>
+                        <SelectItem value={EstadoPeticion.ARCHIVADA}>
+                          ARCHIVADA
+                        </SelectItem>
+                      </SelectContent>
+                    </Select>
+                  ) : (
+                    <Badge
+                      variant={
+                        peticion.estado === EstadoPeticion.PUBLICADA
+                          ? "default"
+                          : "secondary"
+                      }
+                      className={
+                        peticion.estado === EstadoPeticion.REVISION
+                          ? "border border-amber-500 bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300"
+                          : undefined
+                      }
+                    >
+                      {peticion.estado === EstadoPeticion.REVISION
+                        ? "En Revisión"
+                        : peticion.estado}
+                    </Badge>
+                  )}
                 </TableCell>
                 <TableCell className="text-right font-bold">
                   {peticion.cantidad_firmas.toLocaleString()}
                 </TableCell>
                 <TableCell className="text-right">
-                  <div className="flex justify-end gap-2">
-                    <Link href={`/peticiones/${peticion.slug}`}>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border border-outline-variant dark: hover:shadow-none transition-all"
-                        title="Ver petición"
+                  <div className="flex justify-end items-center gap-1.5">
+                    <Button
+                      asChild
+                      variant="ghost"
+                      size="icon"
+                      className="border border-outline-variant bg-card hover:bg-muted dark:"
+                      title="Ver petición"
+                    >
+                      <Link
+                        href={`/peticiones/${peticion.slug}`}
+                        target="_blank"
                       >
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                    </Link>
+                        <Eye className="size-3.5" />
+                      </Link>
+                    </Button>
+                    {esAdmin && (
+                      <DescargarFirmasExcelButton
+                        peticionId={peticion.id}
+                        tituloPeticion={peticion.titulo}
+                        cantidadFirmas={peticion.cantidad_firmas}
+                      />
+                    )}
                     {peticion.estado === EstadoPeticion.PUBLICADA && (
                       <Button
                         variant="outline"
@@ -224,14 +317,26 @@ export function MisPeticionesTable({
                         <XCircle className="h-4 w-4" />
                       </Button>
                     )}
+                    {esAdmin && peticion.estado === EstadoPeticion.CERRADA && (
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border border-outline-variant hover:border-primary hover:text-primary dark: hover:shadow-none transition-all"
+                        onClick={() => handleReabrir(peticion.id)}
+                        disabled={reabriendoId === peticion.id}
+                        title="Reabrir petición"
+                      >
+                        <RotateCcw className="h-4 w-4" />
+                      </Button>
+                    )}
                     <Button
+                      onClick={() => abrirModal(peticion)}
                       variant="outline"
                       size="icon"
-                      onClick={() => abrirModal(peticion)}
-                      className="border border-outline-variant dark: hover:shadow-none transition-all"
+                      className="border border-outline-variant bg-card hover:bg-muted dark:"
                       title="Editar petición"
                     >
-                      <Edit className="h-4 w-4" />
+                      <Edit className="size-3.5" />
                     </Button>
                     <Button
                       variant="destructive"
@@ -241,7 +346,7 @@ export function MisPeticionesTable({
                       disabled={eliminandoId === peticion.id}
                       title="Eliminar petición"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash2 className="size-3.5" />
                     </Button>
                   </div>
                 </TableCell>

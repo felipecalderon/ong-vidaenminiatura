@@ -2,9 +2,7 @@
 
 import { Download, Loader2 } from "lucide-react";
 import * as React from "react";
-import * as XLSX from "xlsx";
 import { Button } from "@/components/ui/button";
-import { obtenerFirmasParaExportarAction } from "@/features/firmas/actions/obtener-firmas-para-exportar";
 
 interface DescargarFirmasExcelButtonProps {
   peticionId: string;
@@ -22,48 +20,30 @@ export function DescargarFirmasExcelButton({
   const handleDownload = async () => {
     setIsLoading(true);
     try {
-      const result = await obtenerFirmasParaExportarAction(peticionId);
+      const response = await fetch(
+        `/api/peticiones/${peticionId}/firmas/excel`,
+      );
 
-      if (!result.success) {
-        alert(result.error);
+      if (!response.ok) {
+        const errorMessage = await response.text();
+        alert(errorMessage || "No se pudieron exportar las firmas.");
         return;
       }
-
-      if (result.data.length === 0) {
-        alert("Esta petición no tiene firmas registradas.");
-        return;
-      }
-
-      const filas = result.data.map((firma, index) => ({
-        "#": index + 1,
-        Nombre: firma.nombre,
-        Correo: firma.correo,
-        "Fecha de firma": new Date(firma.fecha_creacion).toLocaleString(
-          "es-ES",
-          {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          },
-        ),
-      }));
-
-      const hoja = XLSX.utils.json_to_sheet(filas);
-
-      // Ajustar anchos de columna
-      hoja["!cols"] = [{ wch: 5 }, { wch: 35 }, { wch: 40 }, { wch: 22 }];
-
-      const libro = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(libro, hoja, "Firmas");
 
       const nombreArchivo = `firmas_${tituloPeticion
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "_")
         .slice(0, 50)}.xlsx`;
-
-      XLSX.writeFile(libro, nombreArchivo);
+      const blob = await response.blob();
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = nombreArchivo;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+      return;
     } finally {
       setIsLoading(false);
     }

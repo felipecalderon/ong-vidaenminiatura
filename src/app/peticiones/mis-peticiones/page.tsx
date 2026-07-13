@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
-import { MisPeticionesTable } from "@/features/peticiones/components/mis-peticiones-table";
+import { PeticionesTable } from "@/features/peticiones/components/peticiones-table";
 import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obtener-peticiones-para-gestion";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
@@ -40,10 +40,12 @@ export default async function MisPeticionesPage() {
         </div>
       </div>
 
-      <MisPeticionesTable
+      <PeticionesTable
         peticiones={peticiones}
         esAdmin={esAdmin}
         categorias={categorias}
+        emptyCtaHref="/peticiones/crear"
+        emptyCtaLabel="Crear Nueva Petición"
       />
     </div>
   );

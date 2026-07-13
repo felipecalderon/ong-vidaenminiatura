@@ -5,7 +5,7 @@ import { GestionCategorias } from "@/features/categorias/components/gestion-cate
 import { obtenerTodasLasCategorias } from "@/features/categorias/queries/obtener-todas-las-categorias";
 import { GestionNoticias } from "@/features/noticias/components/gestion-noticias";
 import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-noticias-para-gestion";
-import { GestionPeticiones } from "@/features/peticiones/components/gestion-peticiones";
+import { PeticionesTable } from "@/features/peticiones/components/peticiones-table";
 import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obtener-peticiones-para-gestion";
 import { GestionUsuarios } from "@/features/usuarios/components/gestion-usuarios";
 import { obtenerTodosLosUsuarios } from "@/features/usuarios/queries/obtener-todos-los-usuarios";
@@ -49,34 +49,34 @@ export default async function AdministracionPage() {
 
       <div className="w-full">
         <Tabs defaultValue="categorias" className="w-full">
-          <TabsList className="mb-6 grid w-full max-w-2xl grid-cols-4 border border-outline-variant bg-background p-1 dark:">
+          <TabsList className="mb-6 grid w-full max-w-2xl grid-cols-2 md:grid-cols-4 gap-1 border border-outline-variant bg-background p-1 dark:">
             <TabsTrigger
               value="categorias"
-              className="flex items-center gap-2 text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
             >
-              <Settings className="size-4" />
-              Categorías
+              <Settings className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Categorías</span>
             </TabsTrigger>
             <TabsTrigger
               value="usuarios"
-              className="flex items-center gap-2 text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
             >
-              <User className="size-4" />
-              Usuarios
+              <User className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Usuarios</span>
             </TabsTrigger>
             <TabsTrigger
               value="peticiones"
-              className="flex items-center gap-2 text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
             >
-              <ClipboardList className="size-4" />
-              Peticiones
+              <ClipboardList className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Peticiones</span>
             </TabsTrigger>
             <TabsTrigger
               value="noticias"
-              className="flex items-center gap-2 text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
             >
-              <FileText className="size-4" />
-              Noticias
+              <FileText className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Noticias</span>
             </TabsTrigger>
           </TabsList>
 
@@ -92,8 +92,9 @@ export default async function AdministracionPage() {
           </TabsContent>
 
           <TabsContent value="peticiones" className="space-y-4">
-            <GestionPeticiones
-              initialPeticiones={peticiones}
+            <PeticionesTable
+              peticiones={peticiones}
+              esAdmin
               categorias={categorias.map((c) => ({
                 id: c.id,
                 nombre: c.nombre,
