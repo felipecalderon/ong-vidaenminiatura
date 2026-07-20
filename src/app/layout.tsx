@@ -1,4 +1,3 @@
-import "@mdxeditor/editor/style.css";
 import "./globals.css";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";

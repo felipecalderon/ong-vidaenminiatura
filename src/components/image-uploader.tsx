@@ -33,7 +33,6 @@ export function ImageUploader({
     if (file) {
       onFileSelect(file);
       if (fileInputRef.current) {
-        // Enlazar el archivo al input nativo para que se envíe en el FormData
         const dataTransfer = new DataTransfer();
         dataTransfer.items.add(file);
         fileInputRef.current.files = dataTransfer.files;

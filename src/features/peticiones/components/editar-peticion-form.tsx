@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
-import Image from "next/image";
+import { ImageUploader } from "@/components/image-uploader";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
@@ -45,7 +45,7 @@ export function EditarPeticionForm({
     isPending,
     previewUrl,
     validateField,
-    handleImageChange,
+    processImageFile,
     handleSubmit,
     getFieldError,
   } = useEditarPeticionForm(peticion);
@@ -183,29 +183,15 @@ export function EditarPeticionForm({
       </div>
 
       {/* Imagen */}
-      <div className="space-y-2">
+      <div className="space-y-3">
         <Label htmlFor="imagen" className="text-lg font-bold">
           Imagen destacada (Opcional, dejar vacío para mantener la actual)
         </Label>
-        <Input
-          id="imagen"
-          name="imagen"
-          type="file"
-          accept="image/*"
-          onChange={handleImageChange}
-          className="w-full overflow-hidden text-ellipsis border border-outline-variant text-base bg-background file:mr-4 file:py-1 file:px-4 file:border file:border-outline-variant file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+
+        <ImageUploader
+          previewUrl={previewUrl}
+          onFileSelect={processImageFile}
         />
-        {previewUrl && (
-          <div className="relative aspect-video w-full mt-4 border border-outline-variant overflow-hidden dark:">
-            <Image
-              src={previewUrl}
-              alt="Previsualización de la imagen"
-              fill
-              sizes="(max-width: 768px) 100vw, 600px"
-              className="object-cover"
-            />
-          </div>
-        )}
       </div>
 
       {/* Destacado */}

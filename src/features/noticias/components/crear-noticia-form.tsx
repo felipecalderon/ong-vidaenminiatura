@@ -1,6 +1,7 @@
 "use client";
 
 import { Loader2 } from "lucide-react";
+import { ImageUploader } from "@/components/image-uploader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +13,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useCrearNoticiaForm } from "../hooks/use-crear-noticia-form";
-import { ImageUploader } from "./image-uploader";
 import { NoticiaContentEditor } from "./noticia-content-editor";
 
 interface CrearNoticiaFormProps {

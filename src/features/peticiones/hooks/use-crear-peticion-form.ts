@@ -1,6 +1,7 @@
 "use client";
 
-import { type ChangeEvent, useActionState, useState } from "react";
+import { useActionState, useState } from "react";
+import { toast } from "sonner";
 import type { ActionState } from "../actions/action-state";
 import { crearPeticionAction } from "../actions/crear-peticion";
 import { crearPeticionSchema } from "../schemas/crear-peticion.schema";
@@ -46,19 +47,39 @@ export function useCrearPeticionForm() {
     }
   };
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setPreviewUrl(url);
-      setClientErrors((prev) => {
-        const next = { ...prev };
-        delete next.imagen;
-        return next;
-      });
-    } else {
+  const processImageFile = (file: File | undefined) => {
+    if (!file) {
       setPreviewUrl(null);
+      return;
     }
+
+    const validTypes = [
+      "image/jpeg",
+      "image/png",
+      "image/webp",
+      "image/gif",
+      "image/svg+xml",
+    ];
+    if (!validTypes.includes(file.type)) {
+      toast.error(
+        "Formato de imagen no permitido. Usa JPG, PNG, WEBP, GIF o SVG.",
+      );
+      return;
+    }
+
+    const maxSizeInBytes = 5 * 1024 * 1024;
+    if (file.size > maxSizeInBytes) {
+      toast.error("La imagen es demasiado grande. El límite máximo es de 5MB.");
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    setPreviewUrl(url);
+    setClientErrors((prev) => {
+      const next = { ...prev };
+      delete next.imagen;
+      return next;
+    });
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -110,7 +131,7 @@ export function useCrearPeticionForm() {
     isPending,
     previewUrl,
     validateField,
-    handleImageChange,
+    processImageFile,
     handleSubmit,
     getFieldError,
   };
