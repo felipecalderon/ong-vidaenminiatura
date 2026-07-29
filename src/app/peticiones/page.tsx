@@ -9,7 +9,7 @@ import type { QueryParams } from "@/types/paginacion";
 export const metadata: Metadata = {
   title: "Peticiones",
   description:
-    "Todas las peticiones activas de la Fundación InsectosVivos. Firma y marca la diferencia.",
+    "Todas las peticiones activas de la Fundación Más Insectos. Firma y marca la diferencia.",
 };
 
 interface PageProps {

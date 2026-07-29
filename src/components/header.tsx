@@ -21,30 +21,35 @@ interface HeaderProps {
 
 export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-outline-variant bg-surface/80 backdrop-blur-md">
-      <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-50 w-full border-b border-outline-variant/70 bg-background/85 backdrop-blur-xl">
+      <div className="container mx-auto flex h-[4.5rem] items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
           className="group flex items-center gap-3 active:scale-95 transition-transform duration-100"
         >
-          <div className="text-primary flex items-center justify-center">
+          <div className="flex items-center justify-center text-primary">
             <LogoIcon size={45} />
           </div>
-          <div className="flex items-center gap-1 font-black tracking-tighter">
-            <span className="text-xl leading-none">Insectos</span>
+          <div className="flex flex-col leading-none">
+            <span className="text-[0.65rem] font-bold uppercase tracking-[0.24em] text-primary">
+              Más
+            </span>
+            <span className="text-xl font-black tracking-[-0.06em]">
+              Insectos
+            </span>
           </div>
         </Link>
 
         <Navigation className="hidden md:flex" variant="desktop" />
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
           <ThemeToggle currentTheme={currentTheme} />
           <AccountAccess usuario={usuarioAutenticado} variant="desktop" />
 
           {usuarioAutenticado?.acceso.esAdministrador && (
             <Link
               href="/administracion"
-              className="hidden sm:flex text-on-surface-variant hover:text-on-surface transition-colors active:scale-95 duration-100 items-center justify-center"
+              className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
               title="Administración"
             >
               <Settings className="h-5 w-5" />
@@ -53,7 +58,7 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
           )}
 
           <Sheet>
-            <SheetTrigger className="inline-flex size-9 items-center justify-center rounded-md text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all active:scale-95 md:hidden">
+            <SheetTrigger className="inline-flex size-10 items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface md:hidden">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Abrir menú</span>
             </SheetTrigger>
@@ -67,9 +72,6 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
                   <LogoIcon size={36} />
                 </div>
                 <div className="flex items-center gap-0.5 font-black tracking-tighter">
-                  <span className="relative -top-0.5 text-2xl text-emerald-800 leading-none">
-                    +
-                  </span>
                   <span className="text-lg leading-none">Insectos</span>
                 </div>
               </div>

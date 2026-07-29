@@ -6,7 +6,7 @@ export function FooterBottom() {
     <div className="mt-12 pt-6 border-t border-outline-variant flex flex-col sm:flex-row justify-between items-center gap-4">
       <div className="flex flex-col sm:flex-row items-center gap-4 text-center sm:text-left">
         <p className="text-xs text-on-surface-variant font-body">
-          &copy; {new Date().getFullYear()} InsectosVivos. Todos los derechos
+          &copy; {new Date().getFullYear()} Más Insectos. Todos los derechos
           reservados.
         </p>
         <span className="hidden sm:inline text-outline-variant text-xs">

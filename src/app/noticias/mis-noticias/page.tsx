@@ -4,7 +4,7 @@ import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
-  title: "Mis Noticias | InsectosVivos",
+  title: "Mis Noticias | Más Insectos",
   description: "Gestiona tus noticias creadas",
 };
 

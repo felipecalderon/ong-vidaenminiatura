@@ -4,8 +4,8 @@ const BASE_URL = process.env.APP_BASE_URL || "https://www.insectosvivos.org";
 
 export const metadataSEO: Metadata = {
   title: {
-    default: "MasInsectos",
-    template: "%s | MasInsectos",
+    default: "Más Insectos",
+    template: "%s | Más Insectos",
   },
   description:
     "Fundación para la protección y conservación de seres vivos enfocado en insectos y arácnidos. Conoce nuestra misión, proyectos y cómo puedes ayudar.",
@@ -19,8 +19,8 @@ export const metadataSEO: Metadata = {
     type: "website",
     locale: "es_CL",
     url: BASE_URL,
-    siteName: "MasInsectos",
-    title: "MasInsectos - Fundación para la conservación de insectos",
+    siteName: "Más Insectos",
+    title: "Más Insectos - Fundación para la conservación de insectos",
     description:
       "Fundación para la protección y conservación de insectos y arácnidos. Conoce nuestra misión, proyectos y cómo puedes ayudar.",
     images: [
@@ -28,7 +28,7 @@ export const metadataSEO: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "MasInsectos - Fundación para la conservación de insectos",
+        alt: "Más Insectos - Fundación para la conservación de insectos",
       },
     ],
   },

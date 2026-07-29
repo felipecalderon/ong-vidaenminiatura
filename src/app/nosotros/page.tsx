@@ -13,7 +13,7 @@ import { VisionSection } from "./components/vision";
 export const metadata: Metadata = {
   title: "Nosotros",
   description:
-    "Conoce a InsectosVivos: una fundación nacida en Temuco, Chile, dedicada a educar y preservar el bienestar animal con foco en el mundo de los insectos.",
+    "Conoce a Más Insectos: una fundación nacida en Temuco, Chile, dedicada a educar y preservar el bienestar animal con foco en el mundo de los insectos.",
 };
 
 export default function NosotrosPage() {

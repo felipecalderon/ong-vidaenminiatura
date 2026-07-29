@@ -9,7 +9,7 @@ export function FooterContact() {
       <ul className="space-y-3 text-sm font-body">
         <li className="flex items-center gap-3 text-on-surface-variant hover:text-primary transition-colors">
           <Mail className="h-4 w-4" />
-          <a href="mailto:info@insectosvivos.org">hola@masinsectos.org</a>
+          <a href="mailto:hola@masinsectos.org">hola@masinsectos.org</a>
         </li>
         <li className="mt-4">
           <p className="text-on-surface-variant text-sm leading-relaxed">

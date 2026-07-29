@@ -1,12 +1,12 @@
-import { Bug } from "lucide-react";
 import Link from "next/link";
+import { LogoIcon } from "@/components/compartido/logo";
 
 export function FooterBrand() {
   return (
     <div className="space-y-4">
       <Link href="/" className="flex items-center gap-3">
         <div className="text-primary flex items-center justify-center">
-          <Bug className="h-6 w-6" />
+          <LogoIcon size={28} />
         </div>
         <span className="font-black text-xl tracking-tighter text-on-background">
           Más Insectos

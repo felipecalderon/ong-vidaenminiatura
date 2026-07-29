@@ -18,12 +18,19 @@ export default async function HomePage() {
   const otherPeticiones = peticiones.slice(1);
 
   return (
-    <div className="min-h-screen bg-background text-on-background">
+    /*
+     * THESIS: La portada es una ventana de observación ultravioleta, no un mosaico de tarjetas.
+     * OWN-WORLD: superficies violetas profundas, bordes precisos, cian para vida y tipografía compacta.
+     * STORY: comprender por qué importan los insectos, descubrir una causa y participar.
+     * FIRST VIEWPORT: declaración + ojo de abeja arriba; la petición activa aparece como acción inmediata.
+     * FORM: Persuade / editorial de campo, con composición asimétrica y paneles de lectura corta.
+     */
+    <div className="min-h-screen bg-background text-on-background ultraviolet-canvas">
       {/* Hero Section */}
       <HeroSection />
       {featuredPeticion && (
-        <section className="mb-16 relative overflow-hidden bg-surface-container group">
-          <div className="absolute inset-0 z-0">
+        <section className="group relative mb-20 overflow-hidden border-y border-outline-variant/70 bg-surface-container-low">
+          <div className="absolute inset-0 z-0 opacity-70">
             <Image
               src={featuredPeticion.imagen || "none.jpg"}
               alt={featuredPeticion.titulo}
@@ -32,51 +39,46 @@ export default async function HomePage() {
               className="object-cover ultraviolet-image"
               priority
             />
-            <div className="absolute inset-0 bg-linear-to-t from-background via-background/60 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-background via-background/70 to-transparent"></div>
+            <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-background/20"></div>
           </div>
-          <div className="relative z-10 p-8 md:p-12 lg:p-16 flex flex-col md:flex-row gap-8 items-end justify-between min-h-150">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary/60 border border-tertiary/20 text-white text-xs font-label uppercase tracking-widest mb-6">
+          <div className="relative z-10 mx-auto flex min-h-[34rem] max-w-7xl flex-col items-start justify-end gap-10 px-4 py-12 sm:px-6 md:flex-row md:items-end md:justify-between md:py-16 lg:min-h-[39rem]">
+            <div className="max-w-3xl">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-tertiary/30 bg-tertiary/10 px-3 py-2 text-xs font-label uppercase tracking-widest text-tertiary">
                 {featuredPeticion.categoria.nombre}
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-black tracking-tighter mb-4 text-on-background leading-tight">
+              <h1 className="mb-5 text-4xl font-headline font-black leading-[0.95] tracking-[-0.045em] text-on-background md:text-6xl lg:text-7xl">
                 {featuredPeticion.titulo}
               </h1>
-              <p className="text-on-surface-variant text-lg md:text-xl font-body mb-8 max-w-xl">
+              <p className="mb-8 max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
                 {featuredPeticion.resumen}
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href={`/peticiones/${featuredPeticion.slug}`}>
-                  <button
-                    type="button"
-                    className="w-full sm:w-auto bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-                  >
+                  <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary shadow-[0_12px_30px_-14px_var(--primary)] transition-all hover:bg-primary-fixed-dim sm:w-auto">
                     Ver Petición
                     <ArrowRight className="w-5 h-5" />
-                  </button>
+                  </span>
                 </Link>
                 <Link href="/nosotros">
-                  <button
-                    type="button"
-                    className="w-full sm:w-auto bg-transparent border border-outline-variant text-on-background px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-                  >
+                  <span className="flex w-full items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high sm:w-auto">
                     Quienes somos
-                  </button>
+                  </span>
                 </Link>
               </div>
             </div>
 
-            <div className="bg-surface-container-highest/80 backdrop-blur-md border border-outline-variant rounded-lg p-6 w-full md:w-80 shadow-2xl">
-              <div className="text-sm font-label text-on-surface-variant uppercase tracking-widest mb-2 line-clamp-1">
+            <div className="w-full rounded-2xl border border-outline-variant/80 bg-background/75 p-5 backdrop-blur-md md:w-80">
+              <div className="mb-3 text-[0.68rem] font-label uppercase tracking-widest text-on-surface-variant line-clamp-1">
                 Destacado: {featuredPeticion.titulo}
               </div>
-              <div className="text-3xl font-headline font-black tracking-tighter text-on-background mb-4">
+              <div className="mb-4 text-4xl font-headline font-black tracking-[-0.04em] text-on-background">
                 {featuredPeticion.cantidad_firmas.toLocaleString()}
                 <span className="text-sm font-body text-secondary font-normal tracking-normal">
                   {""}/ {featuredPeticion.meta_firmas.toLocaleString()}
                 </span>
               </div>
-              <div className="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden mb-4 border border-outline-variant">
+              <div className="mb-4 h-2 w-full overflow-hidden rounded-full bg-surface-container-lowest">
                 <div
                   className="h-full bg-tertiary rounded-full relative transition-all duration-1000 ease-out"
                   style={{
@@ -101,12 +103,12 @@ export default async function HomePage() {
       )}
 
       {/* Main Content Container */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         {/* Active Petitions */}
-        <section className="mb-16">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <section className="mb-20">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <h2 className="text-2xl md:text-3xl font-headline font-black tracking-tighter text-on-background">
+              <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
                 Peticiones activas
               </h2>
               <p className="text-on-surface-variant font-body mt-2">
@@ -114,16 +116,13 @@ export default async function HomePage() {
               </p>
             </div>
             <Link href="/peticiones">
-              <button
-                type="button"
-                className="bg-transparent border border-outline-variant text-on-background px-4 py-2 rounded-lg font-label text-sm uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-              >
+              <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
                 Ver todas
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </span>
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {otherPeticiones.map((peticion) => (
               <PeticionCard key={peticion.id} peticion={peticion} />
             ))}
@@ -131,10 +130,10 @@ export default async function HomePage() {
         </section>
 
         {/* News Section */}
-        <section className="mb-16">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-8">
+        <section className="mb-20">
+          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
-              <h2 className="text-2xl md:text-3xl font-headline font-black tracking-tighter text-on-background">
+              <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
                 Últimas noticias
               </h2>
               <p className="text-on-surface-variant font-body mt-2">
@@ -142,16 +141,13 @@ export default async function HomePage() {
               </p>
             </div>
             <Link href="/noticias">
-              <button
-                type="button"
-                className="bg-transparent border border-outline-variant text-on-background px-4 py-2 rounded-lg font-label text-sm uppercase tracking-widest font-bold hover:bg-surface-container-high transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-              >
+              <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
                 Ver todas
                 <ArrowRight className="h-4 w-4" />
-              </button>
+              </span>
             </Link>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {noticias.map((noticia) => (
               <NoticiaCard key={noticia.id} noticia={noticia} />
             ))}
@@ -159,10 +155,10 @@ export default async function HomePage() {
         </section>
 
         {/* CTA Section */}
-        <section className="relative overflow-hidden border border-outline-variant rounded-xl bg-surface-container group">
-          <div className="absolute inset-0 bg-primary/5 group-hover:bg-primary/10 transition-colors duration-500"></div>
-          <div className="relative z-10 p-8 md:p-16 text-center max-w-3xl mx-auto flex flex-col items-center">
-            <Edit className="w-12 h-12 text-primary mb-6" />
+        <section className="group relative mb-12 overflow-hidden rounded-2xl border border-primary/30 bg-primary/10">
+          <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-primary/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
+          <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center p-8 text-center md:p-16">
+            <Edit className="mb-6 h-10 w-10 text-primary" />
             <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4">
               ¿Tienes una causa que defender?
             </h2>
@@ -171,13 +167,10 @@ export default async function HomePage() {
               proteger a los insectos y arácnidos que más lo necesitan.
             </p>
             <Link href="/peticiones/crear">
-              <button
-                type="button"
-                className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100"
-              >
+              <span className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100">
                 Crear mi petición
                 <ArrowRight className="ml-2 h-5 w-5" />
-              </button>
+              </span>
             </Link>
           </div>
         </section>

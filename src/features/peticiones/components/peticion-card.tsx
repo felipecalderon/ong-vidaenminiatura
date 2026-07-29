@@ -34,7 +34,7 @@ export function PeticionCard({
   return (
     <Link href={`/peticiones/${peticion.slug}`} className="group block h-full">
       <div
-        className={`h-full border border-outline-variant bg-surface-container rounded-lg overflow-hidden transition-all duration-200 hover:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background ${featured ? "md:flex md:flex-row" : "flex flex-col"}`}
+        className={`h-full overflow-hidden rounded-2xl border border-outline-variant/80 bg-surface-container/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-surface-container-high hover:shadow-[0_20px_45px_-24px_var(--primary)] focus-ring ${featured ? "md:flex md:flex-row" : "flex flex-col"}`}
       >
         <div
           className={`relative overflow-hidden ${featured ? "md:w-1/2" : "aspect-video w-full"}`}
@@ -47,11 +47,11 @@ export function PeticionCard({
             alt={peticion.titulo}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal opacity-80 group-hover:opacity-100 ultraviolet-image"
+            className="object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100 ultraviolet-image"
           />
           {peticion.categoria && (
             <Badge
-              className="absolute top-4 left-4 bg-surface-container-highest/80 backdrop-blur-md font-label text-xs uppercase tracking-widest text-on-surface"
+              className="absolute left-4 top-4 border-primary/30 bg-background/75 font-label text-xs uppercase tracking-widest text-on-surface backdrop-blur-md"
               style={{
                 borderColor: peticion.categoria.color ?? undefined,
                 borderWidth: "1.5px",

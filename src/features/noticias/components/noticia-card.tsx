@@ -31,7 +31,7 @@ export function NoticiaCard({ noticia, featured = false }: NoticiaCardProps) {
   return (
     <Link href={`/noticias/${noticia.slug}`} className="group block h-full">
       <div
-        className={`h-full border border-outline-variant bg-surface-container rounded-lg overflow-hidden transition-all duration-200 hover:bg-surface-container-high focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background ${featured ? "md:flex md:flex-row" : "flex flex-col"}`}
+        className={`h-full overflow-hidden rounded-2xl border border-outline-variant/80 bg-surface-container/70 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:bg-surface-container-high hover:shadow-[0_20px_45px_-24px_var(--primary)] focus-ring ${featured ? "md:flex md:flex-row" : "flex flex-col"}`}
       >
         <div
           className={`relative overflow-hidden ${featured ? "md:w-1/2 aspect-4/3 md:aspect-auto" : "aspect-video w-full"}`}
@@ -44,7 +44,7 @@ export function NoticiaCard({ noticia, featured = false }: NoticiaCardProps) {
             alt={noticia.titulo}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover group-hover:scale-105 transition-all duration-500 mix-blend-luminosity group-hover:mix-blend-normal opacity-80 group-hover:opacity-100 ultraviolet-image"
+            className="object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100 ultraviolet-image"
           />
           {noticia.categoria && (
             <Badge

@@ -15,7 +15,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Política de Privacidad",
   description:
-    "Política de Privacidad de la plataforma +Insectos - Fundación Más Insectos.",
+    "Política de Privacidad de la plataforma Más Insectos - Fundación Más Insectos.",
 };
 
 const sections = [
@@ -228,12 +228,12 @@ export default function PrivacidadPage() {
             <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
               Política de Privacidad
               <span className="block text-primary text-2xl md:text-3xl font-bold mt-2">
-                Fundación +Insectos
+                Fundación Más Insectos
               </span>
             </h1>
 
             <p className="text-lg text-on-surface-variant max-w-3xl leading-relaxed">
-              En <strong className="text-foreground">+Insectos</strong>, nos
+              En <strong className="text-foreground">Más Insectos</strong>, nos
               tomamos muy en serio la privacidad de nuestra comunidad. Esta
               Política de Privacidad describe cómo recopilamos, utilizamos y
               protegemos la información personal de los usuarios que participan
@@ -279,7 +279,7 @@ export default function PrivacidadPage() {
                     Entidad
                   </p>
                   <p className="text-sm font-bold text-foreground">
-                    Fundación +Insectos
+                    Fundación Más Insectos
                   </p>
                 </div>
               </div>

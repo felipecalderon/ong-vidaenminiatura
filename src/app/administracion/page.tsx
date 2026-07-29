@@ -12,7 +12,7 @@ import { obtenerTodosLosUsuarios } from "@/features/usuarios/queries/obtener-tod
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
-  title: "Administración | InsectosVivos",
+  title: "Administración | Más Insectos",
   description:
     "Panel de administración para configurar categorías, usuarios, peticiones y noticias.",
 };

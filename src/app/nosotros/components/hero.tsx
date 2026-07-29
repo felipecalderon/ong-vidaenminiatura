@@ -3,14 +3,14 @@ import Image from "next/image";
 
 export const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-linear-to-b from-surface-container via-surface-container/50 to-background">
+    <section className="relative overflow-hidden bg-background ultraviolet-canvas">
       {/* Decorative floating elements */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 overflow-hidden"
       >
-        <div className="absolute -top-40 -left-40 h-[500px] w-[500px] rounded-full bg-primary/5 blur-[100px]" />
-        <div className="absolute -bottom-40 -right-40 h-[400px] w-[400px] rounded-full bg-tertiary/5 blur-[100px]" />
+        <div className="absolute -top-40 -left-40 h-125 w-125 rounded-full bg-primary/5 blur-[100px]" />
+        <div className="absolute -bottom-40 -right-40 h-100 w-100 rounded-full bg-tertiary/5 blur-[100px]" />
 
         {/* Decorative floating animal/bug icons */}
         <Bug className="absolute rotate-12 top-20 right-[13%] h-32 w-32 text-primary dark:text-primary opacity-10 stroke-1" />
@@ -25,27 +25,24 @@ export const HeroSection = () => {
         </div>
       </div>
 
-      <div className="relative z-10 mx-auto max-w-5xl px-6 pb-24 pt-20 md:pb-40 md:pt-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 md:pb-28 md:pt-24">
         {/* Eyebrow */}
-        <div className="mb-10 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-full border border-primary/15 bg-linear-to-r from-primary/7 to-primary/3 px-4 py-1.5 text-xs font-label uppercase tracking-[0.15em] text-primary">
+        <div className="mb-8 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-[0.68rem] font-label uppercase tracking-[0.18em] text-primary">
           <MapPin className="h-3 w-3" />
           Temuco, Chile · Fundada 2026
         </div>
 
-        <div className="grid md:grid-cols-5 gap-10 md:gap-16 items-end">
-          <div className="md:col-span-3 animate-[fadeIn_0.8s_ease-out]">
-            <h1 className="text-[clamp(2.5rem,7vw,5rem)] font-headline font-black tracking-[-0.03em] text-on-background leading-[0.92] mb-6">
-              Cada insecto{" "}
-              <span className="bg-linear-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                importa.
-              </span>
+        <div className="grid items-end gap-12 md:grid-cols-[1.3fr_0.7fr] md:gap-20">
+          <div className="animate-[fadeIn_0.8s_ease-out]">
+            <h1 className="mb-7 text-[clamp(3rem,8vw,6.5rem)] font-headline font-black leading-[0.88] tracking-tighter text-on-background">
+              Cada insecto <span className="text-primary">importa.</span>
               <br />
-              <span className="text-[0.6em] font-bold tracking-tight text-on-surface-variant">
+              <span className="mt-5 block max-w-md text-[0.27em] font-semibold leading-[1.2] tracking-[-0.02em] text-on-surface-variant">
                 Esos pequeños seres te necesitan
               </span>
             </h1>
 
-            <p className="max-w-xl text-base md:text-lg text-on-surface-variant font-body leading-relaxed">
+            <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
               Somos una organización de derecho animal nacida en el corazón de
               La Araucanía. Bajo la firme convicción de que los insectos y todos
               los animales no humanos sostienen la vida en la Tierra, trabajamos
@@ -55,13 +52,16 @@ export const HeroSection = () => {
           </div>
 
           {/* Stats as floating badges */}
-          <div className="md:col-span-2 animate-[fadeIn_1s_ease-out]">
+          <div className="relative animate-[fadeIn_1s_ease-out] md:justify-self-end">
+            <div className="absolute -inset-5 rounded-full border border-primary/15" />
+            <div className="absolute -inset-10 rounded-full border border-tertiary/10" />
             <Image
               width={500}
               height={600}
-              alt="Felipe"
+              loading="eager"
+              alt="Vista ultravioleta del ojo de una abeja"
               src={"/assets/bee-eye.jpg"}
-              className="rounded-full"
+              className="relative aspect-square w-full max-w-md rounded-4xl border border-primary/30 object-cover p-2 ultraviolet-image shadow-[0_30px_90px_-30px_var(--primary)] md:rounded-[2.5rem]"
             />
           </div>
         </div>

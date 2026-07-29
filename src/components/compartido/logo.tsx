@@ -13,7 +13,7 @@ export const LogoIcon = ({ size }: { size: number }) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       role="img"
-      aria-label="Insecto animado moviendo sus patas y antenas"
+      aria-label="Logo Más Insectos"
     >
       {/* Patas derechas */}
       <path

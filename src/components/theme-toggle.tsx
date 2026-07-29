@@ -27,14 +27,14 @@ export function ThemeToggle({ currentTheme }: ThemeToggleProps) {
             type="submit"
             variant="outline"
             size="icon"
-            className="border border-outline-variant text-xl flex items-center justify-center"
+            className="border-outline-variant bg-surface-container-low text-base shadow-none hover:border-primary/60"
           >
             {currentTheme === "dark" ? (
-              <span role="img" aria-label="Sol">
+              <span role="img" aria-label="Cambiar a modo claro">
                 😉
               </span>
             ) : (
-              <span role="img" aria-label="Luna">
+              <span role="img" aria-label="Cambiar a visión ultravioleta">
                 🐝
               </span>
             )}

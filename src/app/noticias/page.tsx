@@ -9,7 +9,7 @@ import type { QueryParams } from "@/types/paginacion";
 export const metadata: Metadata = {
   title: "Noticias",
   description:
-    "Mantente informado sobre conservación de insectos y arácnidos. Artículos y novedades de la Fundación InsectosVivos.",
+    "Mantente informado sobre conservación de insectos y arácnidos. Artículos y novedades de la Fundación Más Insectos.",
 };
 
 interface PageProps {

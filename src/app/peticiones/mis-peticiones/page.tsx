@@ -5,7 +5,7 @@ import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obte
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
-  title: "Mis Peticiones | InsectosVivos",
+  title: "Mis Peticiones | Más Insectos",
   description: "Gestiona tus peticiones creadas",
 };
 

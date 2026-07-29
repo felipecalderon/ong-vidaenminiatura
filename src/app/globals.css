@@ -41,8 +41,8 @@
 
   --radius-sm: 0.25rem;
   --radius-md: 0.5rem;
-  --radius-lg: 0.5rem; /* Based on DESIGN.md: 8px radius */
-  --radius-xl: 0.75rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
   --radius-full: 9999px;
 
   /* shadcn mapping */
@@ -124,7 +124,7 @@
 }
 
 .dark {
-  --background: #080214;
+  --background: #070414;
   --foreground: #f5f3ff;
 
   --primary: #c084fc;
@@ -138,21 +138,21 @@
 
   --tertiary: #22d3ee;
 
-  --surface: #0d0620;
-  --surface-dim: #0d0620;
-  --surface-bright: #1b0e3d;
+  --surface: #0d0820;
+  --surface-dim: #0b0619;
+  --surface-bright: #211044;
 
   --surface-container-lowest: #070114;
-  --surface-container-low: #0c0422;
-  --surface-container: #140933;
-  --surface-container-high: #1c0e45;
-  --surface-container-highest: #28175c;
+  --surface-container-low: #0c071c;
+  --surface-container: #120a2d;
+  --surface-container-high: #1b1040;
+  --surface-container-highest: #291858;
 
   --on-surface: #fafafa;
   --on-surface-variant: #c084fc;
 
-  --outline: #581c87;
-  --outline-variant: #3b0764;
+  --outline: #7e22ce;
+  --outline-variant: #44206d;
   --error: #ef4444;
 }
 
@@ -183,6 +183,34 @@
   text-shadow: 0 0 6px rgba(250, 204, 21, 0.6);
 }
 
+@utility ultraviolet-canvas {
+  background-image:
+    radial-gradient(
+      circle at 12% 0%,
+      color-mix(in srgb, var(--primary) 12%, transparent),
+      transparent 32rem
+    ),
+    radial-gradient(
+      circle at 88% 18%,
+      color-mix(in srgb, var(--tertiary) 8%, transparent),
+      transparent 28rem
+    );
+}
+
+@utility surface-lift {
+  border: 1px solid color-mix(in srgb, var(--outline-variant) 70%, transparent);
+  box-shadow: 0 18px 50px -30px rgba(0, 0, 0, 0.8);
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+@utility focus-ring {
+  @apply outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+}
+
 @layer base {
   * {
     @apply border-outline-variant outline-ring/50;
@@ -190,6 +218,11 @@
   body {
     @apply bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary;
     letter-spacing: normal;
+    background-image: radial-gradient(
+      circle at 50% -20%,
+      color-mix(in srgb, var(--primary) 5%, transparent),
+      transparent 34rem
+    );
   }
   h1,
   h2,

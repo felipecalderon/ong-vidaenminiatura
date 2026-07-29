@@ -17,7 +17,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Términos y Condiciones de Uso",
   description:
-    "Términos y Condiciones de Uso de la plataforma +Insectos - Fundación Más Insectos.",
+    "Términos y Condiciones de Uso de la plataforma Más Insectos - Fundación Más Insectos.",
 };
 
 const sections = [
@@ -28,8 +28,8 @@ const sections = [
     content: (
       <div className="space-y-4">
         <p>
-          <strong>+Insectos</strong> es un ecosistema digital abierto diseñado
-          para:
+          <strong>Más Insectos</strong> es un ecosistema digital abierto
+          diseñado para:
         </p>
         <ol className="list-decimal pl-6 space-y-2 text-on-surface-variant">
           <li>
@@ -122,7 +122,7 @@ const sections = [
             <strong className="text-foreground">
               Licencia de Uso Exclusiva para la ONG:
             </strong>{" "}
-            Al subir contenido, usted otorga a la Fundación +Insectos una
+            Al subir contenido, usted otorga a la Fundación Más Insectos una
             licencia gratuita, no exclusiva, mundial y perpetua para alojar,
             indexar, difundir y maquetar dicho contenido dentro de los fines
             educativos y comunicacionales de la ONG, manteniendo siempre el
@@ -162,8 +162,8 @@ const sections = [
           </li>
           <li>
             <strong className="text-foreground">Uso de las Firmas:</strong> Al
-            firmar una petición, usted autoriza expresamente a la Fundación
-            +Insectos a incluir su nombre, apellido y el dato de validación
+            firmar una petición, usted autoriza expresamente a la Fundación Más
+            Insectos a incluir su nombre, apellido y el dato de validación
             pertinente en los documentos formales que se presenten ante las
             autoridades o entidades destinatarias de la petición.
           </li>
@@ -187,13 +187,14 @@ const sections = [
     icon: ShieldCheck,
     content: (
       <p className="leading-relaxed">
-        Los nombres, logotipos (incluyendo la marca <strong>"+Insectos"</strong>{" "}
-        y sus variantes visuales), el código fuente de la plataforma, el diseño
-        de la interfaz (incluyendo el <em>Modo Ultravioleta</em>), la
-        arquitectura del sistema y los contenidos institucionales propios son
-        propiedad exclusiva de la fundación o de sus desarrolladores originales
-        y están protegidos por las leyes de propiedad intelectual e industrial
-        de Chile e instrumentos internacionales.
+        Los nombres, logotipos (incluyendo la marca{" "}
+        <strong>"Más Insectos"</strong> y sus variantes visuales), el código
+        fuente de la plataforma, el diseño de la interfaz (incluyendo el{" "}
+        <em>Modo Ultravioleta</em>), la arquitectura del sistema y los
+        contenidos institucionales propios son propiedad exclusiva de la
+        fundación o de sus desarrolladores originales y están protegidos por las
+        leyes de propiedad intelectual e industrial de Chile e instrumentos
+        internacionales.
       </p>
     ),
   },
@@ -270,13 +271,13 @@ export default function TerminosDeUsoPage() {
             <h1 className="text-4xl md:text-5xl font-black tracking-tight text-foreground leading-tight">
               Términos y Condiciones de Uso
               <span className="block text-primary text-2xl md:text-3xl font-bold mt-2">
-                Fundación +Insectos
+                Fundación Más Insectos
               </span>
             </h1>
 
             <p className="text-lg text-on-surface-variant max-w-3xl leading-relaxed">
               Bienvenido/a a{" "}
-              <strong className="text-foreground">+Insectos</strong>, una
+              <strong className="text-foreground">Más Insectos</strong>, una
               plataforma tecnológica y comunitaria impulsada por nuestra
               organización sin fines de lucro, dedicada a la difusión
               científica, la educación ambiental, la exploración filosófica del

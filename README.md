@@ -1,6 +1,6 @@
-# MasInsectos
+# Más Insectos
 
-Plataforma web de la fundación **MasInsectos** — organización sin fines de lucro con sede en Temuco, Chile, dedicada a reconocer, educar y proteger a los insectos y arácnidos como pilares del equilibrio ecológico.
+Plataforma web de la fundación **Más Insectos** — organización sin fines de lucro con sede en Temuco, Chile, dedicada a reconocer, educar y proteger a los insectos y arácnidos como pilares del equilibrio ecológico.
 
 Creemos que el bienestar animal no tiene jerarquías: toda vida merece respeto, sin importar su tamaño.
 
@@ -91,4 +91,4 @@ La sincronización de usuarios Auth0 con la base de datos ocurre automáticament
 
 ---
 
-**MasInsectos** — Porque cada forma de vida es una manera distinta en que el universo se observa a sí mismo.
+**Más Insectos** — Porque cada forma de vida es una manera distinta en que el universo se observa a sí mismo.

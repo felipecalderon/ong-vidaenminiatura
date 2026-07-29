@@ -60,7 +60,7 @@ export function Navigation({
 
   // Desktop variant
   return (
-    <nav className={cn("flex items-center gap-1.5", className)}>
+    <nav className={cn("flex items-center gap-1", className)}>
       {navLinks.map((link) => {
         const active = isLinkActive(link.href);
         return (
@@ -68,9 +68,9 @@ export function Navigation({
             key={link.href}
             href={link.href}
             className={cn(
-              "relative px-4 py-2 text-sm font-semibold font-headline tracking-tight rounded-full transition-all duration-300 active:scale-95 flex items-center justify-center overflow-hidden border",
+              "relative px-3 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all duration-200 active:scale-95 flex items-center justify-center overflow-hidden border",
               active
-                ? "bg-primary/8 text-primary border-primary/20 shadow-xs"
+                ? "bg-primary/12 text-primary border-primary/25"
                 : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 border-transparent",
             )}
           >

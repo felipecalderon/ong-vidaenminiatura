@@ -3,7 +3,7 @@ import { EditarPerfilForm } from "@/features/usuarios/components/editar-perfil-f
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 export const metadata = {
-  title: "Mis Datos | InsectosVivos",
+  title: "Mis Datos | Más Insectos",
   description: "Actualiza tu información personal y foto de perfil",
 };
 
