@@ -29,7 +29,7 @@ export default async function HomePage() {
       {/* Hero Section */}
       <HeroSection />
       {featuredPeticion && (
-        <section className="group relative mb-20 overflow-hidden border-y border-outline-variant/70 bg-surface-container-low">
+        <section className="group relative overflow-hidden border-y border-outline-variant/70 bg-surface-container-low">
           <div className="absolute inset-0 z-0 opacity-70">
             <Image
               src={featuredPeticion.imagen || "none.jpg"}
@@ -102,6 +102,27 @@ export default async function HomePage() {
         </section>
       )}
 
+      {/* CTA Section */}
+      <section className="group relative mb-12 overflow-hidden rounded-2xl border border-primary/30 bg-primary/10">
+        <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-primary/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
+        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center p-8 text-center md:p-16">
+          <Edit className="mb-6 h-10 w-10 text-primary" />
+          <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4">
+            ¿Tienes una causa que defender?
+          </h2>
+          <p className="text-lg text-on-surface-variant font-body mb-8">
+            Crea tu propia petición y moviliza a miles de personas para proteger
+            a los insectos y arácnidos que más lo necesitan.
+          </p>
+          <Link href="/peticiones/crear">
+            <span className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100">
+              Crear mi petición
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </span>
+          </Link>
+        </div>
+      </section>
+
       {/* Main Content Container */}
       <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         {/* Active Petitions */}
@@ -151,27 +172,6 @@ export default async function HomePage() {
             {noticias.map((noticia) => (
               <NoticiaCard key={noticia.id} noticia={noticia} />
             ))}
-          </div>
-        </section>
-
-        {/* CTA Section */}
-        <section className="group relative mb-12 overflow-hidden rounded-2xl border border-primary/30 bg-primary/10">
-          <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-primary/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
-          <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center p-8 text-center md:p-16">
-            <Edit className="mb-6 h-10 w-10 text-primary" />
-            <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4">
-              ¿Tienes una causa que defender?
-            </h2>
-            <p className="text-lg text-on-surface-variant font-body mb-8">
-              Crea tu propia petición y moviliza a miles de personas para
-              proteger a los insectos y arácnidos que más lo necesitan.
-            </p>
-            <Link href="/peticiones/crear">
-              <span className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100">
-                Crear mi petición
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </span>
-            </Link>
           </div>
         </section>
       </main>

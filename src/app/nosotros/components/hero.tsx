@@ -34,7 +34,7 @@ export const HeroSection = () => {
 
         <div className="grid items-end gap-12 md:grid-cols-[1.3fr_0.7fr] md:gap-20">
           <div className="animate-[fadeIn_0.8s_ease-out]">
-            <h1 className="mb-7 text-[clamp(3rem,8vw,6.5rem)] font-headline font-black leading-[0.88] tracking-tighter text-on-background">
+            <h1 className="mb-7 text-[clamp(3rem,8vw,6.5rem)] font-headline font-black leading-[0.8] tracking-tight text-on-background">
               Cada insecto <span className="text-primary">importa.</span>
               <br />
               <span className="mt-5 block max-w-md text-[0.27em] font-semibold leading-[1.2] tracking-[-0.02em] text-on-surface-variant">
@@ -53,8 +53,6 @@ export const HeroSection = () => {
 
           {/* Stats as floating badges */}
           <div className="relative animate-[fadeIn_1s_ease-out] md:justify-self-end">
-            <div className="absolute -inset-5 rounded-full border border-primary/15" />
-            <div className="absolute -inset-10 rounded-full border border-tertiary/10" />
             <Image
               width={500}
               height={600}
