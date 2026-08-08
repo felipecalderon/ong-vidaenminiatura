@@ -1,30 +1,9 @@
-import { Bug, MapPin, Snail, Worm } from "lucide-react";
+import { MapPin } from "lucide-react";
 import Image from "next/image";
 
 export const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden bg-background ultraviolet-canvas">
-      {/* Decorative floating elements */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden"
-      >
-        <div className="absolute -top-40 -left-40 h-125 w-125 rounded-full bg-primary/5 blur-[100px]" />
-        <div className="absolute -bottom-40 -right-40 h-100 w-100 rounded-full bg-tertiary/5 blur-[100px]" />
-
-        {/* Decorative floating animal/bug icons */}
-        <Bug className="absolute rotate-12 top-20 right-[13%] h-32 w-32 text-primary dark:text-primary opacity-10 stroke-1" />
-        <Snail className="absolute bottom-40 left-[5%] h-40 w-40 text-tertiary dark:text-tertiary opacity-10 stroke-1" />
-        <Worm className="absolute top-30 left-[13%] h-20 w-20 text-primary dark:text-primary opacity-10 stroke-1" />
-
-        {/* Dots pattern */}
-        <div className="absolute top-32 right-[8%] grid grid-cols-3 gap-2 opacity-[0.04] dark:opacity-[0.08]">
-          {[...Array(9)].map((_, i) => (
-            <div key={i} className="h-1.5 w-1.5 rounded-full bg-primary" />
-          ))}
-        </div>
-      </div>
-
+    <section className="relative overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 md:pb-28 md:pt-24">
         {/* Eyebrow */}
         <div className="mb-8 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-[0.68rem] font-label uppercase tracking-[0.18em] text-primary">

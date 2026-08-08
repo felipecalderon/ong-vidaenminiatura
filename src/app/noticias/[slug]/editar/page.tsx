@@ -40,7 +40,7 @@ export default async function EditarNoticiaPage({
   }
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen bg-background container mx-auto px-4 py-12">
       <EditarNoticiaForm
         noticia={{
           id: noticia.id,

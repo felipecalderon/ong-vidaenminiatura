@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function NosotrosLoading() {
   return (
-    <div className="min-h-screen bg-background text-on-background overflow-hidden">
+    <div className="min-h-screen text-on-background overflow-hidden">
       {/* Hero Section Skeleton */}
       <section className="relative overflow-hidden bg-linear-to-b from-surface-container via-surface-container/50 to-background">
         <div className="relative z-10 mx-auto max-w-6xl px-6 pb-24 pt-20 md:pb-40 md:pt-32">

@@ -218,11 +218,6 @@
   body {
     @apply bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary;
     letter-spacing: normal;
-    background-image: radial-gradient(
-      circle at 50% -20%,
-      color-mix(in srgb, var(--primary) 5%, transparent),
-      transparent 34rem
-    );
   }
   h1,
   h2,

@@ -2,6 +2,7 @@ import "./globals.css";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { SiteBackground } from "@/components/site-background";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { figtree, geistMono, geistSans } from "@/lib/fonts";
 import { metadataSEO } from "@/lib/metadata-seo";
@@ -32,6 +33,7 @@ export default async function RootLayout({
       )}
     >
       <body className="min-h-full bg-background text-on-background selection:bg-primary-container selection:text-on-primary-container">
+        <SiteBackground />
         <div className="flex min-h-screen flex-col">
           <Header
             usuarioAutenticado={usuarioAutenticado}

@@ -19,7 +19,7 @@ export default async function CrearNoticiaPage() {
   const categorias = await obtenerCategoriasActivas();
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen bg-background container mx-auto px-4 py-12">
       <CrearNoticiaForm
         categorias={categorias.map((categoria) => ({
           id: categoria.id,

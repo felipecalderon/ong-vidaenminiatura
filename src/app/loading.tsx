@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 export default function Loading() {
   return (
-    <div className="min-h-screen bg-background text-on-background">
+    <div className="min-h-screen text-on-background">
       {/* Hero Section Skeleton */}
       <section className="mb-16 relative overflow-hidden bg-surface-container min-h-150 flex items-end">
         {/* Animated Background skeleton */}

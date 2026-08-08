@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function NosotrosPage() {
   return (
-    <div className="min-h-screen bg-background text-on-background overflow-hidden">
+    <div className="min-h-screen text-on-background overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 py-16 md:py-24 space-y-24 md:space-y-36">
         <Revelar>
           <section id="mision-vision" className="relative">

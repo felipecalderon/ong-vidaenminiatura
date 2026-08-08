@@ -36,7 +36,7 @@ export default async function AdministracionPage() {
   const noticias = noticiasData || [];
 
   return (
-    <div className="container mx-auto py-8 px-4">
+    <div className="min-h-screen bg-background container mx-auto py-8 px-4">
       <div className="mb-8 border border-outline-variant bg-primary/10 p-6 dark:bg-primary-foreground/10 dark:">
         <h1 className="text-3xl font-extrabold text-foreground uppercase tracking-wider">
           Panel de Administración

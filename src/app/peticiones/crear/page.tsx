@@ -20,7 +20,7 @@ export default async function CrearPeticionPage() {
   const categorias = await obtenerCategoriasActivas();
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen bg-background container mx-auto px-4 py-12">
       <CrearPeticionForm
         categorias={categorias.map((c) => ({
           id: c.id,

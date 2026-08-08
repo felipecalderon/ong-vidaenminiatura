@@ -7,9 +7,9 @@ import { cn } from "@/lib/utils";
 
 export const navLinks = [
   { href: "/", label: "Inicio" },
+  { href: "/nosotros", label: "Nosotros" },
   { href: "/peticiones", label: "Peticiones" },
   { href: "/noticias", label: "Noticias" },
-  { href: "/nosotros", label: "Nosotros" },
 ];
 
 interface NavigationProps {

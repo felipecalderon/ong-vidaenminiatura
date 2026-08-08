@@ -26,7 +26,7 @@ export default async function MisPeticionesPage() {
   const esAdmin = usuario.rol === "ADMINISTRADOR";
 
   return (
-    <div className="container mx-auto px-4 py-12 md:py-16">
+    <div className="min-h-screen bg-background container mx-auto px-4 py-12 md:py-16">
       <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
           <h1 className="mb-2 text-4xl font-black uppercase md:text-5xl lg:text-6xl">

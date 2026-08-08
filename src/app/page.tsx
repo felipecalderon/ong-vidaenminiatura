@@ -25,7 +25,7 @@ export default async function HomePage() {
      * FIRST VIEWPORT: declaración + ojo de abeja arriba; la petición activa aparece como acción inmediata.
      * FORM: Persuade / editorial de campo, con composición asimétrica y paneles de lectura corta.
      */
-    <div className="min-h-screen bg-background text-on-background ultraviolet-canvas">
+    <div className="min-h-screen text-on-background">
       {/* Hero Section */}
       <HeroSection />
       {featuredPeticion && (
@@ -103,11 +103,11 @@ export default async function HomePage() {
       )}
 
       {/* CTA Section */}
-      <section className="group relative mb-12 overflow-hidden rounded-2xl border border-primary/30 bg-primary/10">
+      <section className="group relative mb-12 overflow-hidden rounded-2xl border border-primary/30 bg-violet-100">
         <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-primary/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
         <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center p-8 text-center md:p-16">
           <Edit className="mb-6 h-10 w-10 text-primary" />
-          <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4">
+          <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4 dark:text-violet-900">
             ¿Tienes una causa que defender?
           </h2>
           <p className="text-lg text-on-surface-variant font-body mb-8">
