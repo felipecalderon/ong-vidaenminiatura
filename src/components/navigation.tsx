@@ -76,7 +76,7 @@ export function Navigation({
           >
             <span className="relative z-10">{link.label}</span>
             {active && (
-              <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-primary rounded-full mx-4" />
+              <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full mx-4" />
             )}
           </Link>
         );

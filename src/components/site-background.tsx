@@ -46,35 +46,28 @@ export const SiteBackground = () => {
       <Insect
         src="/assets/png/mariposa.png"
         tint="primary"
-        className="left-[5%] top-[9%] aspect-500/495 w-36 -rotate-12 sm:w-52 lg:w-72"
+        className="left-[5%] top-[6%] aspect-500/495 w-36 -rotate-12 sm:w-52 lg:w-72"
       />
       <Insect
         src="/assets/png/libelula.png"
         tint="tertiary"
-        className="right-[8%] top-[15%] aspect-500/422 w-40 rotate-6 sm:w-56 lg:w-80"
+        className="right-[8%] top-[8%] aspect-500/422 w-40 rotate-45 sm:w-56 lg:w-80"
       />
       <Insect
         src="/assets/png/grillo.png"
         tint="tertiary"
-        className="bottom-[4%] left-[4%] aspect-500/700 w-32 -rotate-6 sm:w-44 lg:w-60"
+        className="bottom-[4%] left-[4%] aspect-500/700 w-32 -rotate-80 sm:w-44 lg:w-60"
       />
       <Insect
         src="/assets/png/hormiga.png"
         tint="primary"
-        className="bottom-[12%] right-[5%] aspect-500/650 w-20 rotate-12 sm:w-28 lg:w-36"
+        className="bottom-[12%] right-[5%] aspect-500/650 w-20 rotate-90 sm:w-28 lg:w-36"
       />
       <Insect
         src="/assets/png/cucaracha.png"
         tint="primary"
-        className="left-[24%] top-[44%] aspect-500/557 w-24 rotate-12 sm:w-32 lg:w-44"
+        className="left-[40%] top-[47%] aspect-500/557 w-24 rotate-12 sm:w-32 lg:w-44"
       />
-
-      {/* Dots pattern */}
-      <div className="absolute top-50 right-[8%] grid grid-cols-3 gap-2 opacity-[0.1] dark:opacity-[0.08]">
-        {[...Array(9)].map((_, i) => (
-          <div key={i} className="h-1.5 w-1.5 rounded-full bg-primary" />
-        ))}
-      </div>
     </div>
   );
 };

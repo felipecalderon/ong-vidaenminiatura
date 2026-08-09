@@ -63,9 +63,9 @@ export const LogoIcon = ({ size }: { size: number }) => {
 
         {/* Símbolo + */}
         <path
-          d="M12 9v8M8 13h8"
+          d="M12 10v6M9 13h6"
           stroke="#10b981"
-          strokeWidth={2}
+          strokeWidth={1.3}
           strokeLinecap="butt"
         />
 

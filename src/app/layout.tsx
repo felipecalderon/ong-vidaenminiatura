@@ -8,6 +8,7 @@ import { figtree, geistMono, geistSans } from "@/lib/fonts";
 import { metadataSEO } from "@/lib/metadata-seo";
 import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
+import { CursorSwarm } from "@/components/compartido/cursor-swarm";
 
 export const metadata = metadataSEO;
 
@@ -39,6 +40,7 @@ export default async function RootLayout({
             usuarioAutenticado={usuarioAutenticado}
             currentTheme={theme}
           />
+          <CursorSwarm />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>

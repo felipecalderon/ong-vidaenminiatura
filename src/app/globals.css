@@ -88,6 +88,26 @@
       transform: translateY(-0.4px) rotate(0.6deg);
     }
   }
+
+  /* Insect wing flapping */
+  @keyframes wingUp {
+    0%,
+    100% {
+      transform: rotateX(0deg) scaleY(1);
+    }
+    50% {
+      transform: rotateX(0deg) scaleY(0.15) translateY(-3px);
+    }
+  }
+  @keyframes wingDown {
+    0%,
+    100% {
+      transform: rotateX(0deg) scaleY(1);
+    }
+    50% {
+      transform: rotateX(0deg) scaleY(0.15) translateY(3px);
+    }
+  }
 }
 
 :root {
