@@ -17,7 +17,7 @@ type Bug = {
   angle: number; // smoothed facing angle (rad)
 };
 
-const COUNT = 9;
+const COUNT = 6;
 
 // Behaviour tuning
 const FLEE_RADIUS = 90; // strong push when cursor is this close
@@ -43,8 +43,8 @@ export function CursorSwarm() {
         hue:
           [150, 165, 190, 45, 265][i % 5] +
           Math.round((Math.random() - 0.5) * 20),
-        flap: 0.16 + Math.random() * 0.12,
-        scale: 0.55 + Math.random() * 0.55,
+        flap: 0.18 + Math.random() * 0.14,
+        scale: 0.4 + Math.random() * 0.25,
       })),
     );
   }, []);
