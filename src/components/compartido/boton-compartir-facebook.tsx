@@ -18,9 +18,7 @@ export function BotonCompartirFacebook({
 
     // Determinar URL de forma dinámica
     const origin =
-      typeof window !== "undefined"
-        ? window.location.origin
-        : process.env.APP_BASE_URL || "https://vidaenminiatura.org";
+      process.env.NEXT_PUBLIC_BASE_URL || "https://vidaenminiatura.org";
     const path =
       tipo === "peticion" ? `/peticiones/${slug}` : `/noticias/${slug}`;
     const shareUrl = `${origin}${path}`;
