@@ -46,9 +46,12 @@ export function Insect({ hue, flap, scale }: InsectProps) {
       <g style={{ transformOrigin: "30px 22px" }}>
         {/* forewing upper */}
         <g
+          className="insect-wing"
           style={{
             transformOrigin: "30px 22px",
-            animation: `wingUp ${flap}s ease-in-out infinite`,
+            transformBox: "view-box",
+            animation: `insect-wing-upper ${flap}s ease-in-out infinite`,
+            animationDelay: "-0.03s",
           }}
         >
           <path
@@ -70,9 +73,12 @@ export function Insect({ hue, flap, scale }: InsectProps) {
 
         {/* hindwing upper */}
         <g
+          className="insect-wing"
           style={{
             transformOrigin: "30px 22px",
-            animation: `wingUp ${flap * 1.15}s ease-in-out infinite`,
+            transformBox: "view-box",
+            animation: `insect-wing-upper ${flap * 1.15}s ease-in-out infinite`,
+            animationDelay: "-0.08s",
           }}
         >
           <path
@@ -94,9 +100,12 @@ export function Insect({ hue, flap, scale }: InsectProps) {
 
         {/* forewing lower */}
         <g
+          className="insect-wing"
           style={{
             transformOrigin: "30px 22px",
-            animation: `wingDown ${flap}s ease-in-out infinite`,
+            transformBox: "view-box",
+            animation: `insect-wing-lower ${flap}s ease-in-out infinite`,
+            animationDelay: "-0.06s",
           }}
         >
           <path
@@ -118,9 +127,12 @@ export function Insect({ hue, flap, scale }: InsectProps) {
 
         {/* hindwing lower */}
         <g
+          className="insect-wing"
           style={{
             transformOrigin: "30px 22px",
-            animation: `wingDown ${flap * 1.15}s ease-in-out infinite`,
+            transformBox: "view-box",
+            animation: `insect-wing-lower ${flap * 1.15}s ease-in-out infinite`,
+            animationDelay: "-0.12s",
           }}
         >
           <path
@@ -141,93 +153,103 @@ export function Insect({ hue, flap, scale }: InsectProps) {
         </g>
       </g>
 
-      {/* ---- Soft tail glow (localized, no halo around the insect) ---- */}
-      <circle
-        cx="9.5"
-        cy="22"
-        r="3.5"
-        fill={`url(#${glowId})`}
-        opacity="0.55"
-      />
-      <circle cx="9" cy="22" r="1.5" fill={glow} />
+      {/* ---- Body (subtle hover) ---- */}
+      <g
+        className="insect-hover"
+        style={{
+          transformOrigin: "30px 22px",
+          transformBox: "view-box",
+          animation: "insect-hover 1.4s ease-in-out infinite",
+        }}
+      >
+        {/* ---- Soft tail glow (localized, no halo around the insect) ---- */}
+        <circle
+          cx="9.5"
+          cy="22"
+          r="3.5"
+          fill={`url(#${glowId})`}
+          opacity="0.55"
+        />
+        <circle cx="9" cy="22" r="1.5" fill={glow} />
 
-      {/* ---- Abdomen (slender, segmented) ---- */}
-      <path
-        d="M10.5 21.2 C14 19.8, 21 19.9, 27 20.5 L27 23.5 C21 24.1, 14 24.2, 10.5 22.8 Z"
-        fill={body}
-      />
-      <path
-        d="M14 20.5 L14 23.5"
-        stroke={bodyDark}
-        strokeOpacity="0.5"
-        strokeWidth="0.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18 20.4 L18 23.6"
-        stroke={bodyDark}
-        strokeOpacity="0.5"
-        strokeWidth="0.5"
-        strokeLinecap="round"
-      />
-      <path
-        d="M22 20.5 L22 23.4"
-        stroke={bodyDark}
-        strokeOpacity="0.5"
-        strokeWidth="0.5"
-        strokeLinecap="round"
-      />
+        {/* ---- Abdomen (slender, segmented) ---- */}
+        <path
+          d="M10.5 21.2 C14 19.8, 21 19.9, 27 20.5 L27 23.5 C21 24.1, 14 24.2, 10.5 22.8 Z"
+          fill={body}
+        />
+        <path
+          d="M14 20.5 L14 23.5"
+          stroke={bodyDark}
+          strokeOpacity="0.5"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M18 20.4 L18 23.6"
+          stroke={bodyDark}
+          strokeOpacity="0.5"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+        />
+        <path
+          d="M22 20.5 L22 23.4"
+          stroke={bodyDark}
+          strokeOpacity="0.5"
+          strokeWidth="0.5"
+          strokeLinecap="round"
+        />
 
-      {/* ---- Thorax ---- */}
-      <ellipse cx="30" cy="22" rx="3.4" ry="2.5" fill={bodyDark} />
-      <ellipse
-        cx="30"
-        cy="21.3"
-        rx="2.1"
-        ry="1.35"
-        fill={body}
-        fillOpacity="0.65"
-      />
+        {/* ---- Thorax ---- */}
+        <ellipse cx="30" cy="22" rx="3.4" ry="2.5" fill={bodyDark} />
+        <ellipse
+          cx="30"
+          cy="21.3"
+          rx="2.1"
+          ry="1.35"
+          fill={body}
+          fillOpacity="0.65"
+        />
 
-      {/* ---- Head + tiny eye ---- */}
-      <circle cx="35.2" cy="22" r="1.8" fill={bodyDark} />
-      <circle cx="35.9" cy="21.1" r="0.55" fill={glow} fillOpacity="0.85" />
+        {/* ---- Head + tiny eye ---- */}
+        <circle cx="35.2" cy="22" r="1.8" fill={bodyDark} />
+        <circle cx="35.9" cy="21.1" r="0.55" fill={glow} fillOpacity="0.85" />
 
-      {/* ---- Antennae ---- */}
-      <path
-        d="M36.6 20.7 Q40 17.5 42.3 18.8"
-        stroke={body}
-        strokeWidth="0.7"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M36.6 23.3 Q40 26.5 42.3 25.2"
-        stroke={body}
-        strokeWidth="0.7"
-        strokeLinecap="round"
-        fill="none"
-      />
+        {/* ---- Antennae ---- */}
+        <path
+          d="M36.6 20.7 Q40 17.5 42.3 18.8"
+          stroke={body}
+          strokeWidth="0.7"
+          strokeLinecap="round"
+          fill="none"
+        />
+        <path
+          d="M36.6 23.3 Q40 26.5 42.3 25.2"
+          stroke={body}
+          strokeWidth="0.7"
+          strokeLinecap="round"
+          fill="none"
+        />
 
-      {/* ---- Legs ---- */}
-      <path
-        d="M27.7 24.3 L26 26.7 L23.8 28.7"
-        stroke={bodyDark}
-        strokeWidth="0.7"
-        strokeLinecap="round"
-      />
-      <path
-        d="M30 24.5 L30 27 L30 29.3"
-        stroke={bodyDark}
-        strokeWidth="0.7"
-        strokeLinecap="round"
-      />
-      <path
-        d="M32.3 24.3 L34 26.7 L36.2 28.7"
-        stroke={bodyDark}
-        strokeWidth="0.7"
-        strokeLinecap="round"
-      />
+        {/* ---- Legs ---- */}
+        <path
+          d="M27.7 24.3 L26 26.7 L23.8 28.7"
+          stroke={bodyDark}
+          strokeWidth="0.7"
+          strokeLinecap="round"
+        />
+        <path
+          d="M30 24.5 L30 27 L30 29.3"
+          stroke={bodyDark}
+          strokeWidth="0.7"
+          strokeLinecap="round"
+        />
+        <path
+          d="M32.3 24.3 L34 26.7 L36.2 28.7"
+          stroke={bodyDark}
+          strokeWidth="0.7"
+          strokeLinecap="round"
+        />
+      </g>
     </svg>
   );
 }

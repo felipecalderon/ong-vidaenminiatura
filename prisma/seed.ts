@@ -12,13 +12,15 @@ const categoriasIniciales = [
   {
     nombre: "Conservación y Hábitat",
     slug: "conservacion-habitat",
-    descripcion: "Ecosistemas, deforestación, especies y sus hábitats en riesgo",
+    descripcion:
+      "Ecosistemas, deforestación, especies y sus hábitats en riesgo",
     color: "#16a34a",
   },
   {
     nombre: "Bienestar Animal",
     slug: "bienestar-animal",
-    descripcion: "Maltrato, rescate, condiciones de vida — no legal, no ecosistémico",
+    descripcion:
+      "Maltrato, rescate, condiciones de vida — no legal, no ecosistémico",
     color: "#db2777",
   },
   {
@@ -36,7 +38,8 @@ const categoriasIniciales = [
   {
     nombre: "Comunidad y Participación",
     slug: "comunidad-participacion",
-    descripcion: "Voluntariado, eventos, avances de campañas, llamados a la acción",
+    descripcion:
+      "Voluntariado, eventos, avances de campañas, llamados a la acción",
     color: "#eab308",
   },
   {

@@ -88,25 +88,43 @@
       transform: translateY(-0.4px) rotate(0.6deg);
     }
   }
+}
 
-  /* Insect wing flapping */
-  @keyframes wingUp {
-    0%,
-    100% {
-      transform: rotateX(0deg) scaleY(1);
-    }
-    50% {
-      transform: rotateX(0deg) scaleY(0.3) translateY(-2px);
-    }
+/* Insect wing flapping: high-frequency micro-vibration around the wing base */
+@keyframes insect-wing-upper {
+  0%,
+  100% {
+    transform: rotate(0deg) scaleY(1);
   }
-  @keyframes wingDown {
-    0%,
-    100% {
-      transform: rotateX(0deg) scaleY(1);
-    }
-    50% {
-      transform: rotateX(0deg) scaleY(0.3) translateY(2px);
-    }
+  50% {
+    transform: rotate(-3deg) scaleY(0.6);
+  }
+}
+
+@keyframes insect-wing-lower {
+  0%,
+  100% {
+    transform: rotate(0deg) scaleY(1);
+  }
+  50% {
+    transform: rotate(3deg) scaleY(0.6);
+  }
+}
+
+@keyframes insect-hover {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-0.6px) rotate(0.4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .insect-wing,
+  .insect-hover {
+    animation: none !important;
   }
 }
 

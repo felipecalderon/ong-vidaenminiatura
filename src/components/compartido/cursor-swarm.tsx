@@ -43,7 +43,7 @@ export function CursorSwarm() {
         hue:
           [150, 165, 190, 45, 265][i % 5] +
           Math.round((Math.random() - 0.5) * 20),
-        flap: 0.18 + Math.random() * 0.14,
+        flap: 0.09 + Math.random() * 0.07,
         scale: 0.4 + Math.random() * 0.25,
       })),
     );
