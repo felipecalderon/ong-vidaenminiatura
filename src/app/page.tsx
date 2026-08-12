@@ -42,7 +42,7 @@ export default async function HomePage() {
             <div className="absolute inset-0 bg-linear-to-r from-background via-background/70 to-transparent"></div>
             <div className="absolute inset-0 bg-linear-to-t from-background/90 via-transparent to-background/20"></div>
           </div>
-          <div className="relative z-10 mx-auto flex min-h-[34rem] max-w-7xl flex-col items-start justify-end gap-10 px-4 py-12 sm:px-6 md:flex-row md:items-end md:justify-between md:py-16 lg:min-h-[39rem]">
+          <div className="relative z-10 mx-auto flex min-h-136 max-w-7xl flex-col items-start justify-end gap-10 px-4 py-12 sm:px-6 md:flex-row md:items-end md:justify-between md:py-16 lg:min-h-156">
             <div className="max-w-3xl">
               <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-tertiary/30 bg-tertiary/10 px-3 py-2 text-xs font-label uppercase tracking-widest text-tertiary">
                 {featuredPeticion.categoria.nombre}

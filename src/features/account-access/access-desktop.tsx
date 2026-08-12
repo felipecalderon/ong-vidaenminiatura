@@ -122,7 +122,11 @@ export function DesktopAccountAccess({
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
-          <Link href="/auth/logout" className="flex w-full items-center gap-2">
+          <Link
+            href="/auth/logout"
+            prefetch={false}
+            className="flex w-full items-center gap-2"
+          >
             <LogOut className="size-4" />
             Cerrar sesión
           </Link>

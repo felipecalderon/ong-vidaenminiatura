@@ -100,6 +100,7 @@ export function MobileAccountAccess({
         <SheetClose asChild>
           <Link
             href="/auth/logout"
+            prefetch={false}
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high text-destructive active:scale-[0.98]"
           >
             <LogOut className="size-4" />

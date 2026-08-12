@@ -1,6 +1,7 @@
 "use server";
 
 import openai from "@/lib/openai";
+import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 
 const SYSTEM_PROMPT = `Eres editor SEO de un medio digital.
 
@@ -37,6 +38,15 @@ export type GenerarExtractoResult2 =
 export async function generarExtractoAction(
   input: GenerarExtractoInput,
 ): Promise<GenerarExtractoResult | GenerarExtractoError> {
+  const usuario = await obtenerUsuarioAutenticado();
+
+  if (!usuario || !usuario.acceso.puedeCrearContenido) {
+    return {
+      success: false,
+      error: "No autorizado.",
+    };
+  }
+
   const { titulo, contenido } = input;
 
   if (!titulo?.trim() || !contenido?.trim()) {

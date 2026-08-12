@@ -46,7 +46,9 @@ export function SignPetitionForm({
           size="lg"
           className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: transition-all"
         >
-          <Link href="/auth/login">Iniciar sesión</Link>
+          <Link href="/auth/login" prefetch={false}>
+            Iniciar sesión
+          </Link>
         </Button>
       </div>
     );
