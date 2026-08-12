@@ -88,7 +88,7 @@ export default async function NoticiaDetailPage({
       <Button
         variant="outline"
         asChild
-        className="mb-8 border border-outline-variant font-semibold dark: hover: dark:hover: transition-all"
+        className="mb-8 border border-outline-variant font-semibold dark: hover: dark:hover:"
       >
         <Link href="/noticias">
           <ArrowLeft className="mr-2 h-4 w-4" />

@@ -184,7 +184,7 @@ export function EditarPerfilForm({ usuario }: EditarPerfilFormProps) {
         <Button
           type="submit"
           disabled={isPending || comprimiendo}
-          className="w-full sm:w-auto px-8 py-6 text-base font-bold transition-all shadow-md hover:shadow-lg active:scale-[0.98]"
+          className="w-full sm:w-auto px-8 py-6 text-base font-bold shadow-md hover:shadow-lg active:scale-[0.98]"
         >
           {isPending ? (
             <>

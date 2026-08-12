@@ -19,8 +19,10 @@ export const metadata: Metadata = {
 export default async function EditarNoticiaPage({
   params,
 }: EditarNoticiaPageProps) {
-  const { slug } = await params;
-  const usuario = await obtenerUsuarioAutenticado();
+  const [{ slug }, usuario] = await Promise.all([
+    params,
+    obtenerUsuarioAutenticado(),
+  ]);
 
   if (!usuario || !usuario.acceso.puedeAcceder) {
     redirect(`/auth/login?returnTo=/noticias/${slug}/editar`);

@@ -95,12 +95,12 @@ export function BarraFiltros({
   );
 
   return (
-    <div className="w-full bg-surface/60 backdrop-blur-md border border-outline-variant rounded-xl p-5 mb-10 shadow-xs transition-all duration-300 hover:shadow-sm">
+    <div className="w-full bg-surface/60 backdrop-blur-md border border-outline-variant rounded-xl p-5 mb-10 shadow-xs transition-shadow duration-300 hover:shadow-sm">
       <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
         <div className="flex-1 w-full flex flex-col sm:flex-row gap-3 items-center">
           {/* Search Input */}
           <div className="flex-1 w-full relative">
-            <InputGroup className="w-full bg-background/50 border-outline-variant hover:border-outline focus-within:border-primary transition-all duration-200">
+            <InputGroup className="w-full bg-background/50 border-outline-variant hover:border-outline focus-within:border-primary transition-[color,border-color,box-shadow] duration-200">
               <InputGroupAddon align="inline-start">
                 <Search className="size-4 text-muted-foreground" />
               </InputGroupAddon>
@@ -128,7 +128,7 @@ export function BarraFiltros({
               <select
                 value={searchParams.get("categoriaId") || ""}
                 onChange={handleCategoryChange}
-                className="flex h-9 w-full rounded-md border border-outline-variant bg-background/50 pl-9 pr-3 py-1 text-sm shadow-xs transition-all duration-200 outline-none hover:border-outline focus:border-primary focus:ring-1 focus:ring-primary text-foreground cursor-pointer appearance-none"
+                className="flex h-9 w-full rounded-md border border-outline-variant bg-background/50 pl-9 pr-3 py-1 text-sm shadow-xs transition-[border-color,box-shadow] duration-200 outline-none hover:border-outline focus:border-primary focus:ring-1 focus:ring-primary text-foreground cursor-pointer appearance-none"
               >
                 <option value="">Todas las categorías</option>
                 {categorias.map((cat) => (
@@ -159,7 +159,7 @@ export function BarraFiltros({
           <Button
             variant="outline"
             onClick={handleClearFilters}
-            className="w-full md:w-auto h-9 gap-2 text-muted-foreground hover:text-foreground border-dashed border-outline-variant hover:border-outline transition-all duration-200"
+            className="w-full md:w-auto h-9 gap-2 text-muted-foreground hover:text-foreground border-dashed border-outline-variant hover:border-outline transition-[color,background-color,border-color,box-shadow,transform,opacity] duration-200"
           >
             <X className="size-4" />
             Limpiar filtros

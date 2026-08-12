@@ -58,7 +58,7 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
           )}
 
           <Sheet>
-            <SheetTrigger className="inline-flex size-10 items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant transition-all hover:bg-surface-container-high hover:text-on-surface md:hidden">
+            <SheetTrigger className="inline-flex size-10 items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface md:hidden">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Abrir menú</span>
             </SheetTrigger>

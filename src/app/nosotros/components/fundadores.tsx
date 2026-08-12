@@ -21,7 +21,7 @@ export const FundadoresSection = () => {
         {fundadores.map((f) => (
           <div
             key={f.nombre}
-            className="group relative flex flex-col overflow-hidden rounded-3xl border border-outline-variant/60 bg-surface transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lg"
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-outline-variant/60 bg-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lg"
           >
             {/* Image Container */}
             <div className="relative aspect-4/3 w-full transition-transform duration-500 group-hover:scale-103">
@@ -34,7 +34,7 @@ export const FundadoresSection = () => {
                 priority
               />
               {/* Gradient Overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/20 to-transparent duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-linear-to-t from-surface via-surface/20 to-transparent transition-transform duration-500 group-hover:scale-105" />
 
               {/* Floating emoji/icon */}
               <div

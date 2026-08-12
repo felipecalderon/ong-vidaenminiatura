@@ -17,8 +17,10 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const usuarioAutenticado = await obtenerUsuarioAutenticado();
-  const theme = await getTheme();
+  const [usuarioAutenticado, theme] = await Promise.all([
+    obtenerUsuarioAutenticado(),
+    getTheme(),
+  ]);
 
   return (
     <html

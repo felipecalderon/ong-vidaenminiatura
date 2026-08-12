@@ -37,14 +37,14 @@ export const CTASection = () => {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             href="/peticiones"
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-on-primary px-8 py-4 font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-all duration-300 active:scale-95"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-on-primary px-8 py-4 font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-[background-color,transform] duration-300 active:scale-95"
           >
             Ver peticiones activas
             <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-0.5 transition-transform" />
           </Link>
           <Link
             href="/noticias"
-            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-transparent border border-outline-variant text-on-background px-8 py-4 font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-all duration-300 active:scale-95"
+            className="group inline-flex items-center justify-center gap-2 rounded-xl bg-transparent border border-outline-variant text-on-background px-8 py-4 font-label uppercase tracking-widest font-bold hover:bg-surface-container-high transition-[background-color,transform] duration-300 active:scale-95"
           >
             Leer noticias
           </Link>

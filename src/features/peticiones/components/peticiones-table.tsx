@@ -162,7 +162,7 @@ export function PeticionesTable({
         <p className="text-lg font-bold mb-4">No hay peticiones registradas.</p>
         {emptyCtaHref && emptyCtaLabel && (
           <Link href={emptyCtaHref}>
-            <Button className="border border-outline-variant font-bold transition-all hover: dark: dark:hover:">
+            <Button className="border border-outline-variant font-bold hover: dark: dark:hover:">
               {emptyCtaLabel}
             </Button>
           </Link>
@@ -309,7 +309,7 @@ export function PeticionesTable({
                       <Button
                         variant="outline"
                         size="icon"
-                        className="border border-outline-variant hover:border-red-500 hover:text-red-500 dark: hover:shadow-none transition-all"
+                        className="border border-outline-variant hover:border-red-500 hover:text-red-500 dark: hover:shadow-none"
                         onClick={() => handleCerrar(peticion.id)}
                         disabled={cerrandoId === peticion.id}
                         title="Cerrar petición"
@@ -321,7 +321,7 @@ export function PeticionesTable({
                       <Button
                         variant="outline"
                         size="icon"
-                        className="border border-outline-variant hover:border-primary hover:text-primary dark: hover:shadow-none transition-all"
+                        className="border border-outline-variant hover:border-primary hover:text-primary dark: hover:shadow-none"
                         onClick={() => handleReabrir(peticion.id)}
                         disabled={reabriendoId === peticion.id}
                         title="Reabrir petición"
@@ -341,7 +341,7 @@ export function PeticionesTable({
                     <Button
                       variant="destructive"
                       size="icon"
-                      className="border border-outline-variant dark: hover:shadow-none transition-all"
+                      className="border border-outline-variant dark: hover:shadow-none"
                       onClick={() => handleEliminar(peticion.id)}
                       disabled={eliminandoId === peticion.id}
                       title="Eliminar petición"

@@ -51,7 +51,7 @@ export function MobileAccountAccess({
         <SheetClose asChild>
           <Link
             href="/usuario/mis-datos"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
           >
             <User2 className="size-4" />
             Mis datos
@@ -60,7 +60,7 @@ export function MobileAccountAccess({
         <SheetClose asChild>
           <Link
             href="/peticiones/crear"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
           >
             <FilePlus2 className="size-4" />
             Crear Petición
@@ -69,7 +69,7 @@ export function MobileAccountAccess({
         <SheetClose asChild>
           <Link
             href="/peticiones/mis-peticiones"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
           >
             <ClipboardList className="size-4" />
             {usuario.rol === "ADMINISTRADOR"
@@ -80,7 +80,7 @@ export function MobileAccountAccess({
         <SheetClose asChild>
           <Link
             href="/noticias/crear"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
           >
             <Newspaper className="size-4" />
             Crear Noticia
@@ -89,7 +89,7 @@ export function MobileAccountAccess({
         <SheetClose asChild>
           <Link
             href="/noticias/mis-noticias"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high active:scale-[0.98]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
           >
             <Edit className="size-4" />
             {usuario.rol === "ADMINISTRADOR"
@@ -101,7 +101,7 @@ export function MobileAccountAccess({
           <Link
             href="/auth/logout"
             prefetch={false}
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-all hover:bg-surface-container-high text-destructive active:scale-[0.98]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high text-destructive active:scale-[0.98]"
           >
             <LogOut className="size-4" />
             Cerrar sesión

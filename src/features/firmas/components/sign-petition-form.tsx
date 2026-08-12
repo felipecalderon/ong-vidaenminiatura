@@ -44,7 +44,7 @@ export function SignPetitionForm({
         <Button
           asChild
           size="lg"
-          className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: transition-all"
+          className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover:"
         >
           <Link href="/auth/login" prefetch={false}>
             Iniciar sesión
@@ -88,7 +88,7 @@ export function SignPetitionForm({
       <Button
         onClick={handleSign}
         disabled={isPending}
-        className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isPending ? (
           <>

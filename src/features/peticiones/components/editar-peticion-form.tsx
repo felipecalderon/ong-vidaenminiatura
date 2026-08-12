@@ -215,7 +215,7 @@ export function EditarPeticionForm({
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full text-lg font-bold py-6 border border-outline-variant dark: hover: transition-all disabled:opacity-50"
+        className="w-full text-lg font-bold py-6 border border-outline-variant dark: hover: disabled:opacity-50"
       >
         {isPending ? (
           <>

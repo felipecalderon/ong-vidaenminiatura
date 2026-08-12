@@ -29,7 +29,7 @@ export default function NoticiasNotFound() {
           <Button
             variant="default"
             asChild
-            className="font-semibold px-6 py-5 h-auto transition-all"
+            className="font-semibold px-6 py-5 h-auto"
           >
             <Link href="/noticias">
               <Newspaper className="mr-2 h-5 w-5" />
@@ -40,7 +40,7 @@ export default function NoticiasNotFound() {
           <Button
             variant="outline"
             asChild
-            className="font-semibold px-6 py-5 h-auto border border-outline-variant transition-all"
+            className="font-semibold px-6 py-5 h-auto border border-outline-variant"
           >
             <Link href="/">
               <Home className="mr-2 h-5 w-5" />

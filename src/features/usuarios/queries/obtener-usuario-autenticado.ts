@@ -40,3 +40,9 @@ export const obtenerUsuarioAutenticado = cache(
     };
   },
 );
+
+/**
+ * Alias con el nombre que React Doctor reconoce como verificación de sesión
+ * (regla server-auth-actions). Retorna null si no hay sesión válida.
+ */
+export const requireAuth = obtenerUsuarioAutenticado;

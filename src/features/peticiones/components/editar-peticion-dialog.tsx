@@ -56,7 +56,7 @@ export function EditarPeticionDialog({
                 </p>
               </div>
               <Button
-                className="w-full sm:w-auto font-bold border border-outline-variant py-5 hover: transition-all shrink-0"
+                className="w-full sm:w-auto font-bold border border-outline-variant py-5 hover: shrink-0"
                 onClick={() => onPublicar(peticion.id)}
                 disabled={publicandoId === peticion.id}
               >

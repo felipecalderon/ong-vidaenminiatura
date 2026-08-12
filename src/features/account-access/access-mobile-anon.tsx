@@ -8,7 +8,7 @@ export function MobileAnonymousAccess() {
       <Link
         href="/auth/login"
         prefetch={false}
-        className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-transparent bg-primary px-4 py-3.5 font-bold text-on-primary transition-all hover:bg-primary/90 active:scale-[0.98] shadow-sm shadow-primary/20"
+        className="inline-flex w-full items-center justify-center gap-2.5 rounded-xl border border-transparent bg-primary px-4 py-3.5 font-bold text-on-primary transition-[background-color,transform] hover:bg-primary/90 active:scale-[0.98] shadow-sm shadow-primary/20"
       >
         <LogIn className="size-4" />
         Acceder

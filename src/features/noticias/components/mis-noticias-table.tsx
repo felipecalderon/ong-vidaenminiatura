@@ -59,7 +59,7 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
           No tienes noticias creadas aún.
         </p>
         <Link href="/noticias/crear">
-          <Button className="border border-outline-variant font-bold transition-all hover: dark: dark:hover:">
+          <Button className="border border-outline-variant font-bold hover: dark: dark:hover:">
             Crear Nueva Noticia
           </Button>
         </Link>
@@ -144,7 +144,7 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="border border-outline-variant dark: hover:shadow-none transition-all"
+                      className="border border-outline-variant dark: hover:shadow-none"
                     >
                       <Eye className="h-4 w-4" />
                     </Button>
@@ -153,7 +153,7 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
                     <Button
                       variant="outline"
                       size="icon"
-                      className="border border-outline-variant dark: hover:shadow-none transition-all"
+                      className="border border-outline-variant dark: hover:shadow-none"
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
@@ -162,7 +162,7 @@ export function MisNoticiasTable({ noticias, esAdmin }: MisNoticiasTableProps) {
                     <Button
                       variant="default"
                       size="icon"
-                      className="border border-outline-variant dark: hover:shadow-none transition-all"
+                      className="border border-outline-variant dark: hover:shadow-none"
                       onClick={() => handlePublicar(noticia.id)}
                       disabled={publicandoId === noticia.id}
                     >

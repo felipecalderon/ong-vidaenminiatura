@@ -135,7 +135,7 @@ export function CrearNoticiaForm({ categorias }: CrearNoticiaFormProps) {
       <Button
         type="submit"
         disabled={isPending}
-        className="w-full text-xl font-bold py-6 border border-outline-variant dark: hover: dark:hover: transition-all disabled:opacity-50"
+        className="w-full text-xl font-bold py-6 border border-outline-variant dark: hover: dark:hover: disabled:opacity-50"
       >
         {isPending ? (
           <>

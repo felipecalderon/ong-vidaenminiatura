@@ -8,12 +8,10 @@ import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries/obt
 import { HeroSection } from "./nosotros/components/hero";
 
 export default async function HomePage() {
-  const { data: peticiones } = await obtenerListaPeticionesActivas({
-    limit: "4",
-  });
-  const { data: noticias } = await obtenerListaNoticiasPublicadas({
-    limit: "3",
-  });
+  const [{ data: peticiones }, { data: noticias }] = await Promise.all([
+    obtenerListaPeticionesActivas({ limit: "4" }),
+    obtenerListaNoticiasPublicadas({ limit: "3" }),
+  ]);
   const featuredPeticion = peticiones[0];
   const otherPeticiones = peticiones.slice(1);
 
@@ -55,7 +53,7 @@ export default async function HomePage() {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href={`/peticiones/${featuredPeticion.slug}`}>
-                  <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary shadow-[0_12px_30px_-14px_var(--primary)] transition-all hover:bg-primary-fixed-dim sm:w-auto">
+                  <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary shadow-[0_12px_30px_-14px_var(--primary)] transition-colors hover:bg-primary-fixed-dim sm:w-auto">
                     Ver Petición
                     <ArrowRight className="w-5 h-5" />
                   </span>
@@ -80,7 +78,7 @@ export default async function HomePage() {
               </div>
               <div className="mb-4 h-2 w-full overflow-hidden rounded-full bg-surface-container-lowest">
                 <div
-                  className="h-full bg-tertiary rounded-full relative transition-all duration-1000 ease-out"
+                  className="h-full bg-tertiary rounded-full relative transition-[width] duration-1000 ease-out"
                   style={{
                     width: `${Math.min((featuredPeticion.cantidad_firmas / featuredPeticion.meta_firmas) * 100, 100)}%`,
                   }}

@@ -52,28 +52,28 @@ export default async function AdministracionPage() {
           <TabsList className="mb-6 grid w-full max-w-2xl grid-cols-2 md:grid-cols-4 gap-1 border border-outline-variant bg-background p-1 dark:">
             <TabsTrigger
               value="categorias"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
             >
               <Settings className="size-4 shrink-0" />
               <span className="hidden sm:inline">Categorías</span>
             </TabsTrigger>
             <TabsTrigger
               value="usuarios"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
             >
               <User className="size-4 shrink-0" />
               <span className="hidden sm:inline">Usuarios</span>
             </TabsTrigger>
             <TabsTrigger
               value="peticiones"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
             >
               <ClipboardList className="size-4 shrink-0" />
               <span className="hidden sm:inline">Peticiones</span>
             </TabsTrigger>
             <TabsTrigger
               value="noticias"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-all border border-transparent data-[state=active]:border-primary"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
             >
               <FileText className="size-4 shrink-0" />
               <span className="hidden sm:inline">Noticias</span>

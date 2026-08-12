@@ -22,7 +22,7 @@ export const PerspectivasSection = () => {
 
       <div className="grid md:grid-cols-3 gap-6">
         {/* Humanos */}
-        <div className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm">
+        <div className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-8 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-sm">
           <div className="absolute top-0 right-0 h-24 w-24 translate-x-1/3 -translate-y-1/3 rounded-full bg-linear-to-br from-primary/5 to-transparent group-hover:scale-150 transition-transform duration-700" />
           <div className="relative z-10">
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-primary/10 to-primary/5 border border-primary/10">
@@ -39,7 +39,7 @@ export const PerspectivasSection = () => {
         </div>
 
         {/* Abejas */}
-        <div className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm">
+        <div className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-8 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-sm">
           <div className="absolute top-0 right-0 h-24 w-24 translate-x-1/3 -translate-y-1/3 rounded-full bg-linear-to-br from-tertiary/5 to-transparent group-hover:scale-150 transition-transform duration-700" />
           <div className="relative z-10">
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-tertiary/10 to-tertiary/5 border border-tertiary/10">
@@ -57,7 +57,7 @@ export const PerspectivasSection = () => {
         </div>
 
         {/* Cetáceos */}
-        <div className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-sm">
+        <div className="group relative overflow-hidden rounded-2xl border border-outline-variant/60 bg-surface p-8 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-sm">
           <div className="absolute top-0 right-0 h-24 w-24 translate-x-1/3 -translate-y-1/3 rounded-full bg-linear-to-br from-primary/5 to-transparent group-hover:scale-150 transition-transform duration-700" />
           <div className="relative z-10">
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-primary/10 to-primary/5 border border-primary/10">

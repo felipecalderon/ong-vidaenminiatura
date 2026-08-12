@@ -7,7 +7,7 @@ export default function GlobalNotFound() {
     <div className="container mx-auto px-4 py-28 max-w-2xl text-center">
       <div className="flex flex-col items-center justify-center space-y-8">
         {/* Decorative Graphic Element */}
-        <div className="relative p-8 bg-primary/5 dark:bg-primary/10 border border-outline-variant rounded-full animate-bounce duration-1000">
+        <div className="relative p-8 bg-primary/5 dark:bg-primary/10 border border-outline-variant rounded-full animate-bounce">
           <MapPinX className="h-20 w-20 text-primary" />
         </div>
 

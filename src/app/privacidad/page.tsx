@@ -302,7 +302,7 @@ export default function PrivacidadPage() {
                     <a
                       key={section.id}
                       href={`#${section.id}`}
-                      className="flex items-center gap-3 px-3 py-2 text-sm rounded-xl text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-all group"
+                      className="flex items-center gap-3 px-3 py-2 text-sm rounded-xl text-on-surface-variant hover:text-primary hover:bg-primary/5 transition-colors group"
                     >
                       <Icon className="w-4 h-4 text-on-surface-variant/60 group-hover:text-primary transition-colors shrink-0" />
                       <span className="truncate">

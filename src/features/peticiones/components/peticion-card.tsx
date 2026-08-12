@@ -47,7 +47,7 @@ export function PeticionCard({
             alt={peticion.titulo}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100 ultraviolet-image"
+            className="object-cover opacity-80 transition-[transform,opacity] duration-500 group-hover:scale-105 group-hover:opacity-100 ultraviolet-image"
           />
           {peticion.categoria && (
             <Badge
@@ -89,7 +89,7 @@ export function PeticionCard({
 
             <div className="h-2 w-full bg-surface-container-lowest rounded-full overflow-hidden border border-outline-variant">
               <div
-                className="h-full bg-tertiary rounded-full relative transition-all duration-1000 ease-out"
+                className="h-full bg-tertiary rounded-full relative transition-[width] duration-1000 ease-out"
                 style={{ width: `${progress}%` }}
               >
                 <div className="absolute inset-0 bg-white/20 w-full animate-pulse"></div>
