@@ -1,7 +1,7 @@
 "use client";
 
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
-import type React from "react";
+import React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -18,12 +18,46 @@ function TooltipProvider({
   );
 }
 
+function useCanHover() {
+  const [canHover, setCanHover] = React.useState(() => {
+    if (typeof window === "undefined") return true;
+    return window.matchMedia("(hover: hover)").matches;
+  });
+
+  React.useEffect(() => {
+    const mql = window.matchMedia("(hover: hover)");
+    const update = () => setCanHover(mql.matches);
+    update();
+    mql.addEventListener("change", update);
+    return () => mql.removeEventListener("change", update);
+  }, []);
+
+  return canHover;
+}
+
 function Tooltip({
+  open: openProp,
+  defaultOpen = false,
+  onOpenChange,
   ...props
 }: React.ComponentProps<typeof TooltipPrimitive.Root>) {
+  const [open, setOpen] = React.useState(defaultOpen);
+  const canHover = useCanHover();
+
   return (
     <TooltipProvider>
-      <TooltipPrimitive.Root data-slot="tooltip" {...props} />
+      <TooltipPrimitive.Root
+        data-slot="tooltip"
+        open={canHover ? (openProp ?? open) : false}
+        onOpenChange={(nextOpen) => {
+          // En táctiles no hay hover: los tooltips no deben abrirse ni por
+          // foco programático (p. ej. cuando un diálogo mueve el foco).
+          if (nextOpen && !canHover) return;
+          setOpen(nextOpen);
+          onOpenChange?.(nextOpen);
+        }}
+        {...props}
+      />
     </TooltipProvider>
   );
 }

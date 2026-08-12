@@ -31,7 +31,7 @@ export const HeroSection = () => {
           </div>
 
           {/* Stats as floating badges */}
-          <div className="relative animate-[fadeIn_1s_ease-out] md:justify-self-end">
+          <div className="relative animate-[fadeIn_ease-out] md:justify-self-end">
             <Image
               width={500}
               height={600}
