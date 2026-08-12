@@ -57,23 +57,27 @@ async function main(): Promise<void> {
   const prisma = new PrismaClient({ adapter });
 
   try {
-    for (const categoria of categoriasIniciales) {
-      const resultado = await prisma.categoria.upsert({
-        where: { slug: categoria.slug },
-        update: {
-          nombre: categoria.nombre,
-          descripcion: categoria.descripcion,
-          color: categoria.color,
-        },
-        create: {
-          nombre: categoria.nombre,
-          slug: categoria.slug,
-          descripcion: categoria.descripcion,
-          color: categoria.color,
-          activo: true,
-        },
-      });
+    const resultados = await Promise.all(
+      categoriasIniciales.map((categoria) =>
+        prisma.categoria.upsert({
+          where: { slug: categoria.slug },
+          update: {
+            nombre: categoria.nombre,
+            descripcion: categoria.descripcion,
+            color: categoria.color,
+          },
+          create: {
+            nombre: categoria.nombre,
+            slug: categoria.slug,
+            descripcion: categoria.descripcion,
+            color: categoria.color,
+            activo: true,
+          },
+        }),
+      ),
+    );
 
+    for (const resultado of resultados) {
       console.log(`✓ ${resultado.nombre} (${resultado.slug})`);
     }
   } finally {
