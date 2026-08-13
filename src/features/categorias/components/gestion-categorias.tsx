@@ -1,6 +1,6 @@
 "use client";
 
-import { Edit2, Plus } from "lucide-react";
+import { Edit2, Plus, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,6 +15,7 @@ import { useGestionCategorias } from "../hooks/use-gestion-categorias";
 import type { Categoria } from "../types";
 import { CrearCategoriaDialog } from "./crear-categoria-dialog";
 import { EditarCategoriaDialog } from "./editar-categoria-dialog";
+import { EliminarCategoriaDialog } from "./eliminar-categoria-dialog";
 
 interface GestionCategoriasProps {
   initialCategorias: Categoria[];
@@ -30,6 +31,14 @@ export function GestionCategorias({
     setIsNewCategoryOpen,
     editingCategory,
     setEditingCategory,
+    deletingCategory,
+    setDeletingCategory,
+    conteos,
+    setConteos,
+    conteosError,
+    setConteosError,
+    reemplazoCategoriaId,
+    setReemplazoCategoriaId,
     newCatName,
     setNewCatName,
     newCatDesc,
@@ -45,8 +54,10 @@ export function GestionCategorias({
     editCatActive,
     setEditCatActive,
     handleOpenEdit,
+    handleOpenDelete,
     handleCreateCategory,
     handleEditCategory,
+    handleDeleteCategory,
   } = useGestionCategorias(initialCategorias);
 
   return (
@@ -130,14 +141,31 @@ export function GestionCategorias({
                     </Badge>
                   </TableCell>
                   <TableCell className="text-right">
-                    <Button
-                      onClick={() => handleOpenEdit(categoria)}
-                      variant="ghost"
-                      size="icon"
-                      className="border border-outline-variant bg-card hover:bg-muted dark:"
-                    >
-                      <Edit2 className="size-3.5" />
-                    </Button>
+                    <div className="flex justify-end items-center gap-1.5">
+                      <Button
+                        onClick={() => handleOpenEdit(categoria)}
+                        variant="ghost"
+                        size="icon"
+                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        title="Editar categoría"
+                      >
+                        <Edit2 className="size-3.5" />
+                      </Button>
+                      <Button
+                        onClick={() => handleOpenDelete(categoria)}
+                        disabled={isPending || categorias.length <= 1}
+                        variant="ghost"
+                        size="icon"
+                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10 dark:"
+                        title={
+                          categorias.length <= 1
+                            ? "No se puede eliminar la última categoría"
+                            : "Eliminar categoría"
+                        }
+                      >
+                        <Trash2 className="size-3.5" />
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
               ))
@@ -172,6 +200,26 @@ export function GestionCategorias({
         onActivoChange={setEditCatActive}
         isPending={isPending}
         onSubmit={handleEditCategory}
+      />
+
+      <EliminarCategoriaDialog
+        open={!!deletingCategory}
+        onOpenChange={(open) => {
+          if (!open) {
+            setDeletingCategory(null);
+            setConteos(null);
+            setConteosError(null);
+            setReemplazoCategoriaId("");
+          }
+        }}
+        categoria={deletingCategory}
+        categorias={categorias}
+        conteos={conteos}
+        conteosError={conteosError}
+        reemplazoId={reemplazoCategoriaId}
+        onReemplazoChange={setReemplazoCategoriaId}
+        isPending={isPending}
+        onConfirm={handleDeleteCategory}
       />
     </div>
   );

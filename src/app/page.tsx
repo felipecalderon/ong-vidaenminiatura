@@ -58,9 +58,9 @@ export default async function HomePage() {
                     <ArrowRight className="w-5 h-5" />
                   </span>
                 </Link>
-                <Link href="/nosotros">
+                <Link href="/peticiones">
                   <span className="flex w-full items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high sm:w-auto">
-                    Quienes somos
+                    Todas las peticiones
                   </span>
                 </Link>
               </div>
@@ -114,7 +114,7 @@ export default async function HomePage() {
           </p>
           <Link href="/peticiones/crear">
             <span className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100">
-              Crear mi petición
+              Crear una petición
               <ArrowRight className="ml-2 h-5 w-5" />
             </span>
           </Link>
@@ -123,45 +123,20 @@ export default async function HomePage() {
 
       {/* Main Content Container */}
       <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        {/* Active Petitions */}
-        <section className="mb-20">
-          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
-                Peticiones activas
-              </h2>
-              <p className="text-on-surface-variant font-body mt-2">
-                Firma y haz la diferencia. Cada apoyo cuenta.
-              </p>
-            </div>
-            <Link href="/peticiones">
-              <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
-                Ver todas
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {otherPeticiones.map((peticion) => (
-              <PeticionCard key={peticion.id} peticion={peticion} />
-            ))}
-          </div>
-        </section>
-
         {/* News Section */}
         <section className="mb-20">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
             <div>
               <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
-                Últimas noticias
+                Artículos de interés
               </h2>
               <p className="text-on-surface-variant font-body mt-2">
-                Mantente informado sobre conservación e impacto.
+                Publicaciones, investigación, ciencia, noticias y más...
               </p>
             </div>
             <Link href="/noticias">
               <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
-                Ver todas
+                Ver todo
                 <ArrowRight className="h-4 w-4" />
               </span>
             </Link>
