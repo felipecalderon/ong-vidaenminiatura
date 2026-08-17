@@ -229,26 +229,6 @@ export function Insect({ hue, flap, scale }: InsectProps) {
           strokeLinecap="round"
           fill="none"
         />
-
-        {/* ---- Legs ---- */}
-        <path
-          d="M27.7 24.3 L26 26.7 L23.8 28.7"
-          stroke={bodyDark}
-          strokeWidth="0.7"
-          strokeLinecap="round"
-        />
-        <path
-          d="M30 24.5 L30 27 L30 29.3"
-          stroke={bodyDark}
-          strokeWidth="0.7"
-          strokeLinecap="round"
-        />
-        <path
-          d="M32.3 24.3 L34 26.7 L36.2 28.7"
-          stroke={bodyDark}
-          strokeWidth="0.7"
-          strokeLinecap="round"
-        />
       </g>
     </svg>
   );
