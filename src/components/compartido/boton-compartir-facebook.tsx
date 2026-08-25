@@ -18,7 +18,7 @@ export function BotonCompartirFacebook({
 
     // Determinar URL de forma dinámica
     const origin =
-      process.env.NEXT_PUBLIC_BASE_URL || "https://vidaenminiatura.org";
+      process.env.NEXT_PUBLIC_BASE_URL || "https://masinsectos.vercel.app";
     const path =
       tipo === "peticion" ? `/peticiones/${slug}` : `/noticias/${slug}`;
     const shareUrl = `${origin}${path}`;

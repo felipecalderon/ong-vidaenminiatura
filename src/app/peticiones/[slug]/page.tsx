@@ -51,7 +51,7 @@ export async function generateMetadata({
   }
 
   const appUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "https://vidaenminiatura.org";
+    process.env.NEXT_PUBLIC_APP_URL || "https://masinsectos.vercel.app";
 
   return {
     title: peticion.titulo,
