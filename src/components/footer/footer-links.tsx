@@ -9,6 +9,14 @@ export function FooterLinks() {
       <ul className="space-y-3 text-sm font-body">
         <li>
           <Link
+            href="/aprende"
+            className="text-on-surface-variant hover:text-primary transition-colors"
+          >
+            Aprende
+          </Link>
+        </li>
+        <li>
+          <Link
             href="/peticiones"
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
@@ -21,6 +29,14 @@ export function FooterLinks() {
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
             Blog y Noticias
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/investigacion"
+            className="text-on-surface-variant hover:text-primary transition-colors"
+          >
+            Investigación y Ciencia
           </Link>
         </li>
         <li>

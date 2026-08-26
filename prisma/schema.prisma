@@ -33,6 +33,33 @@ enum EstadoNoticia {
   ARCHIVADA
 }
 
+enum TipoPublicacion {
+  ESTUDIO
+  PUBLICACION
+  EVENTO
+}
+
+enum EstadoPublicacion {
+  BORRADOR
+  REVISION
+  PUBLICADA
+  ARCHIVADA
+}
+
+enum TipoRecursoEducativo {
+  CONCEPTO
+  GUIA
+  PREGUNTA
+  ACCION
+}
+
+enum EstadoRecursoEducativo {
+  BORRADOR
+  REVISION
+  PUBLICADA
+  ARCHIVADA
+}
+
 model usuario {
   id                  String        @id @default(uuid()) @db.Uuid
   auth0_id            String        @unique
@@ -50,6 +77,8 @@ model usuario {
 
   peticiones peticion[]
   noticias   noticia[] @relation("AutorNoticias")
+  publicaciones publicacion[] @relation("AutorPublicaciones")
+  recursosEducativos recursoEducativo[] @relation("AutorRecursosEducativos")
   firmas     firma[]
 
   @@index([rol])
@@ -68,6 +97,7 @@ model categoria {
 
   peticiones peticion[]
   noticias   noticia[]
+  recursosEducativos recursoEducativo[]
 
   @@index([activo])
 }
@@ -136,5 +166,56 @@ model noticia {
   @@index([categoria_id])
   @@index([autor_id])
   @@index([autor_id, fecha_creacion])
+}
+
+model publicacion {
+  id                  String             @id @default(uuid()) @db.Uuid
+  titulo              String
+  slug                String             @unique
+  resumen             String
+  contenido           String
+  imagen              String?
+  tipo                TipoPublicacion
+  autores             String[]
+  anio                Int?
+  enlace              String?
+  lugar               String?
+  fecha_evento        DateTime?
+  estado              EstadoPublicacion  @default(BORRADOR)
+  autor_id            String             @db.Uuid
+  fecha_publicacion   DateTime?
+  destacado           Boolean            @default(false)
+  fecha_creacion      DateTime           @default(now())
+  fecha_actualizacion DateTime           @updatedAt
+
+  autor usuario @relation("AutorPublicaciones", fields: [autor_id], references: [id], onDelete: Restrict)
+
+  @@index([estado, fecha_publicacion])
+  @@index([tipo])
+  @@index([autor_id])
+}
+
+model recursoEducativo {
+  id                  String                   @id @default(uuid()) @db.Uuid
+  titulo              String
+  slug                String                   @unique
+  resumen             String
+  contenido           String
+  imagen              String?
+  tipo                TipoRecursoEducativo
+  categoria_id        String?                  @db.Uuid
+  estado              EstadoRecursoEducativo   @default(BORRADOR)
+  autor_id            String                   @db.Uuid
+  fecha_publicacion   DateTime?
+  destacado           Boolean                  @default(false)
+  fecha_creacion      DateTime                 @default(now())
+  fecha_actualizacion DateTime                 @updatedAt
+
+  categoria categoria? @relation(fields: [categoria_id], references: [id], onDelete: SetNull)
+  autor     usuario   @relation("AutorRecursosEducativos", fields: [autor_id], references: [id], onDelete: Restrict)
+
+  @@index([estado, fecha_publicacion])
+  @@index([tipo])
+  @@index([autor_id])
 }
 

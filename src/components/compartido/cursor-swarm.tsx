@@ -106,9 +106,9 @@ export function CursorSwarm() {
       for (let i = 0; i < bugsRef.current.length; i++) {
         const b = bugsRef.current[i];
 
-        let dx = targetX - b.x;
-        let dy = targetY - b.y;
-        let dist = Math.hypot(dx, dy) || 0.001;
+        const dx = targetX - b.x;
+        const dy = targetY - b.y;
+        const dist = Math.hypot(dx, dy) || 0.001;
         const nx = dx / dist;
         const ny = dy / dist;
 

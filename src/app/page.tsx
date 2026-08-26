@@ -3,17 +3,27 @@ import Image from "next/image";
 import Link from "next/link";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
 import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
-import { PeticionCard } from "@/features/peticiones/components/peticion-card";
 import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries/obtener-lista-peticiones-activas";
+import { PublicacionCard } from "@/features/publicaciones/components/publicacion-card";
+import { obtenerPublicacionesRecientes } from "@/features/publicaciones/queries/obtener-publicaciones-recientes";
+import { RecursoEducativoCard } from "@/features/recursos-educativos/components/recurso-educativo-card";
+import { obtenerRecursosEducativosRecientes } from "@/features/recursos-educativos/queries/obtener-recursos-educativos-recientes";
 import { HeroSection } from "./nosotros/components/hero";
 
 export default async function HomePage() {
-  const [{ data: peticiones }, { data: noticias }] = await Promise.all([
+  const [
+    { data: peticiones },
+    { data: noticias },
+    publicaciones,
+    recursosEducativos,
+  ] = await Promise.all([
     obtenerListaPeticionesActivas({ limit: "4" }),
     obtenerListaNoticiasPublicadas({ limit: "3" }),
+    obtenerPublicacionesRecientes("3"),
+    obtenerRecursosEducativosRecientes("3"),
   ]);
   const featuredPeticion = peticiones[0];
-  const otherPeticiones = peticiones.slice(1);
+  const _otherPeticiones = peticiones.slice(1);
 
   return (
     /*
@@ -123,6 +133,65 @@ export default async function HomePage() {
 
       {/* Main Content Container */}
       <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
+        {/* Educación Section */}
+        {recursosEducativos.length > 0 && (
+          <section className="mb-20">
+            <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
+                  Educación y Concientización
+                </h2>
+                <p className="text-on-surface-variant font-body mt-2">
+                  Conceptos clave, guías de identificación, mitos y preguntas
+                  frecuentes, y cómo actuar por los invertebrados.
+                </p>
+              </div>
+              <Link href="/aprende">
+                <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
+                  Ver todo
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {recursosEducativos.map((recurso) => (
+                <RecursoEducativoCard key={recurso.id} recurso={recurso} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Research Section */}
+        {publicaciones.length > 0 && (
+          <section className="mb-20">
+            <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+              <div>
+                <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
+                  Investigación y Difusión Científica
+                </h2>
+                <p className="text-on-surface-variant font-body mt-2">
+                  Estudios, publicaciones, seminarios y talleres sobre insectos,
+                  arácnidos y otros invertebrados.
+                </p>
+              </div>
+              <Link href="/investigacion">
+                <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
+                  Ver todo
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </Link>
+            </div>
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {publicaciones.map((publicacion) => (
+                <PublicacionCard
+                  key={publicacion.id}
+                  publicacion={publicacion}
+                />
+              ))}
+            </div>
+          </section>
+        )}
+
         {/* News Section */}
         <section className="mb-20">
           <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">

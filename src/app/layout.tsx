@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Toaster } from "sonner";
+import { CursorSwarm } from "@/components/compartido/cursor-swarm";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { SiteBackground } from "@/components/site-background";
@@ -8,7 +9,6 @@ import { figtree, geistMono, geistSans } from "@/lib/fonts";
 import { metadataSEO } from "@/lib/metadata-seo";
 import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
-import { CursorSwarm } from "@/components/compartido/cursor-swarm";
 
 export const metadata = metadataSEO;
 

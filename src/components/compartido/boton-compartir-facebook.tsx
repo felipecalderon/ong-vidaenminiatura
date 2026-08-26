@@ -1,10 +1,11 @@
 "use client";
 
+import { cn } from "@/lib/utils";
 import { Facebook } from "../ui/facebook-icon";
 
 interface BotonCompartirFacebookProps {
   slug: string;
-  tipo: "peticion" | "noticia";
+  tipo: "peticion" | "noticia" | "publicacion" | "recurso";
   className?: string;
 }
 
@@ -19,8 +20,13 @@ export function BotonCompartirFacebook({
     // Determinar URL de forma dinámica
     const origin =
       process.env.NEXT_PUBLIC_BASE_URL || "https://masinsectos.vercel.app";
-    const path =
-      tipo === "peticion" ? `/peticiones/${slug}` : `/noticias/${slug}`;
+    const pathMap = {
+      peticion: `/peticiones/${slug}`,
+      noticia: `/noticias/${slug}`,
+      publicacion: `/investigacion/${slug}`,
+      recurso: slug ? `/aprende/${slug}` : "/aprende",
+    } as const;
+    const path = pathMap[tipo];
     const shareUrl = `${origin}${path}`;
 
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
@@ -48,7 +54,7 @@ export function BotonCompartirFacebook({
     <button
       type="button"
       onClick={handleShare}
-      className="w-10 h-10 cursor-pointer"
+      className={cn("w-10 h-10 cursor-pointer", className)}
       title="compartir en Facebook"
     >
       <Facebook />

@@ -3,7 +3,11 @@ import { slugify } from "./slugify";
 
 export async function generarSlugUnico(
   titulo: string,
-  modelName: "peticion" | "noticia" = "peticion",
+  modelName:
+    | "peticion"
+    | "noticia"
+    | "publicacion"
+    | "recursoEducativo" = "peticion",
 ): Promise<string> {
   const slugOriginal = slugify(titulo);
   let slug = slugOriginal;
@@ -11,7 +15,13 @@ export async function generarSlugUnico(
 
   while (true) {
     let existe = false;
-    if (modelName === "peticion") {
+    if (modelName === "publicacion") {
+      const p = await prisma.publicacion.findUnique({ where: { slug } });
+      existe = !!p;
+    } else if (modelName === "recursoEducativo") {
+      const r = await prisma.recursoEducativo.findUnique({ where: { slug } });
+      existe = !!r;
+    } else if (modelName === "peticion") {
       const p = await prisma.peticion.findUnique({ where: { slug } });
       existe = !!p;
     } else {

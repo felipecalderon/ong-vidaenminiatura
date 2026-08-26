@@ -1,4 +1,11 @@
-import { ClipboardList, FileText, Settings, User } from "lucide-react";
+import {
+  BookOpen,
+  ClipboardList,
+  FileText,
+  GraduationCap,
+  Settings,
+  User,
+} from "lucide-react";
 import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GestionCategorias } from "@/features/categorias/components/gestion-categorias";
@@ -7,6 +14,10 @@ import { GestionNoticias } from "@/features/noticias/components/gestion-noticias
 import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-noticias-para-gestion";
 import { PeticionesTable } from "@/features/peticiones/components/peticiones-table";
 import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obtener-peticiones-para-gestion";
+import { GestionPublicaciones } from "@/features/publicaciones/components/gestion-publicaciones";
+import { obtenerPublicacionesParaGestion } from "@/features/publicaciones/queries/obtener-publicaciones-para-gestion";
+import { GestionRecursosEducativos } from "@/features/recursos-educativos/components/gestion-recursos-educativos";
+import { obtenerRecursosEducativosParaGestion } from "@/features/recursos-educativos/queries/obtener-recursos-educativos-para-gestion";
 import { GestionUsuarios } from "@/features/usuarios/components/gestion-usuarios";
 import { obtenerTodosLosUsuarios } from "@/features/usuarios/queries/obtener-todos-los-usuarios";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
@@ -24,16 +35,26 @@ export default async function AdministracionPage() {
     redirect("/");
   }
 
-  const [usuarios, categorias, peticionesData, noticiasData] =
-    await Promise.all([
-      obtenerTodosLosUsuarios(),
-      obtenerTodasLasCategorias(),
-      obtenerPeticionesParaGestion(),
-      obtenerNoticiasParaGestion(),
-    ]);
+  const [
+    usuarios,
+    categorias,
+    peticionesData,
+    noticiasData,
+    publicacionesData,
+    recursosEducativosData,
+  ] = await Promise.all([
+    obtenerTodosLosUsuarios(),
+    obtenerTodasLasCategorias(),
+    obtenerPeticionesParaGestion(),
+    obtenerNoticiasParaGestion(),
+    obtenerPublicacionesParaGestion(),
+    obtenerRecursosEducativosParaGestion(),
+  ]);
 
   const peticiones = peticionesData || [];
   const noticias = noticiasData || [];
+  const publicaciones = publicacionesData || [];
+  const recursosEducativos = recursosEducativosData || [];
 
   return (
     <div className="min-h-screen bg-background container mx-auto py-8 px-4">
@@ -49,7 +70,7 @@ export default async function AdministracionPage() {
 
       <div className="w-full">
         <Tabs defaultValue="categorias" className="w-full">
-          <TabsList className="mb-6 grid w-full max-w-2xl grid-cols-2 md:grid-cols-4 gap-1 border border-outline-variant bg-background p-1 dark:">
+          <TabsList className="mb-6 grid w-full max-w-3xl grid-cols-2 md:grid-cols-6 gap-1 border border-outline-variant bg-background p-1 dark:">
             <TabsTrigger
               value="categorias"
               className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
@@ -78,6 +99,20 @@ export default async function AdministracionPage() {
               <FileText className="size-4 shrink-0" />
               <span className="hidden sm:inline">Noticias</span>
             </TabsTrigger>
+            <TabsTrigger
+              value="publicaciones"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+            >
+              <BookOpen className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Publicaciones</span>
+            </TabsTrigger>
+            <TabsTrigger
+              value="recursos"
+              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+            >
+              <GraduationCap className="size-4 shrink-0" />
+              <span className="hidden sm:inline">Recursos</span>
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="categorias" className="space-y-4">
@@ -104,6 +139,16 @@ export default async function AdministracionPage() {
 
           <TabsContent value="noticias" className="space-y-4">
             <GestionNoticias initialNoticias={noticias} />
+          </TabsContent>
+
+          <TabsContent value="publicaciones" className="space-y-4">
+            <GestionPublicaciones initialPublicaciones={publicaciones} />
+          </TabsContent>
+
+          <TabsContent value="recursos" className="space-y-4">
+            <GestionRecursosEducativos
+              initialRecursosEducativos={recursosEducativos}
+            />
           </TabsContent>
         </Tabs>
       </div>

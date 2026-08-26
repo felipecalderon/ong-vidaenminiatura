@@ -1,7 +1,7 @@
 "use server";
 
-import openai from "@/lib/openai";
 import { requireAuth } from "@/features/usuarios/queries/obtener-usuario-autenticado";
+import openai from "@/lib/openai";
 
 const SYSTEM_PROMPT = `Eres editor SEO de un medio digital.
 

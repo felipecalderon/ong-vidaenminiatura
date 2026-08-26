@@ -124,7 +124,7 @@
 @media (prefers-reduced-motion: reduce) {
   .insect-wing,
   .insect-hover {
-    animation: none !important;
+    animation: none;
   }
 }
 
