@@ -8,5 +8,6 @@ export type RecursoEducativoActionState = {
     contenido?: string;
     tipo?: string;
     categoriaId?: string;
+    videoYoutube?: string;
   };
 };

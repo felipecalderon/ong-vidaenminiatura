@@ -164,6 +164,31 @@ export function CrearRecursoEducativoForm({
         )}
       </div>
 
+      {/* Video de YouTube */}
+      <div className="space-y-2">
+        <Label htmlFor="videoYoutube" className="text-lg font-bold">
+          Video de YouTube
+        </Label>
+        <Input
+          id="videoYoutube"
+          name="videoYoutube"
+          type="url"
+          placeholder="https://www.youtube.com/watch?v=..."
+          defaultValue={state.fields?.videoYoutube || ""}
+          onChange={(e) => validateField("videoYoutube", e.target.value)}
+          onBlur={(e) => validateField("videoYoutube", e.target.value)}
+          className="border border-outline-variant text-base py-6"
+        />
+        <p className="text-sm text-muted-foreground">
+          Opcional. Se mostrará como video dentro del recurso publicado.
+        </p>
+        {getFieldError("videoYoutube") && (
+          <p className="text-red-600 text-sm font-semibold">
+            {getFieldError("videoYoutube")}
+          </p>
+        )}
+      </div>
+
       <Button
         type="submit"
         disabled={isPending}

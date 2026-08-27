@@ -17,6 +17,7 @@ export async function actualizarRecursoEducativo(
       resumen: input.resumen,
       contenido: input.contenido,
       imagen: input.imagen ?? null,
+      video_youtube: input.videoYoutube ?? null,
       tipo: input.tipo,
       categoria_id: input.categoriaId,
       estado,

@@ -94,6 +94,7 @@ export function useCrearRecursoEducativoForm() {
       tipo: formData.get("tipo") as string,
       contenido: formData.get("contenido") as string,
       categoriaId: formData.get("categoriaId") as string,
+      videoYoutube: formData.get("videoYoutube") as string,
       imagen: null,
     };
 

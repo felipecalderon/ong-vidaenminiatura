@@ -20,6 +20,7 @@ export async function crearRecursoEducativo(
       resumen: input.resumen,
       contenido: input.contenido,
       imagen: input.imagen ?? null,
+      video_youtube: input.videoYoutube ?? null,
       tipo: input.tipo,
       categoria_id: input.categoriaId,
       autor_id: autorId,

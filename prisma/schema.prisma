@@ -202,6 +202,7 @@ model recursoEducativo {
   resumen             String
   contenido           String
   imagen              String?
+  video_youtube       String?
   tipo                TipoRecursoEducativo
   categoria_id        String?                  @db.Uuid
   estado              EstadoRecursoEducativo   @default(BORRADOR)

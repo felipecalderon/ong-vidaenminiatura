@@ -7,6 +7,7 @@ import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { NoticiaMarkdownContent } from "@/features/noticias/components/noticia-markdown-content";
+import { VideoYoutubeFacade } from "@/features/recursos-educativos/components/video-youtube-facade";
 import {
   formatearFecha,
   formatearTipo,
@@ -138,7 +139,7 @@ export default async function RecursoEducativoDetailPage({
         <BotonCompartirFacebook slug={slug} tipo="recurso" />
       </div>
 
-      {recurso.imagen && (
+      {recurso.imagen ? (
         <div className="relative aspect-video w-full mb-10 border border-outline-variant overflow-hidden">
           <Image
             src={recurso.imagen}
@@ -149,9 +150,25 @@ export default async function RecursoEducativoDetailPage({
             priority
           />
         </div>
-      )}
+      ) : recurso.video_youtube ? (
+        <div className="mb-10">
+          <VideoYoutubeFacade
+            url={recurso.video_youtube}
+            titulo={recurso.titulo}
+          />
+        </div>
+      ) : null}
 
       <NoticiaMarkdownContent content={recurso.contenido} />
+
+      {recurso.imagen && recurso.video_youtube && (
+        <div className="my-10">
+          <VideoYoutubeFacade
+            url={recurso.video_youtube}
+            titulo={recurso.titulo}
+          />
+        </div>
+      )}
 
       {/* CTA final */}
       <section className="mt-16 rounded-2xl border border-primary/30 bg-primary/5 p-8 text-center md:p-12">

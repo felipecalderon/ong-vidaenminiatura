@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { TipoRecursoEducativo } from "@/generated/prisma/enums";
+import { esUrlYoutubeValida } from "../lib/youtube";
 
 export const editarRecursoEducativoSchema = z.object({
   id: z.string().uuid("ID de recurso educativo inválido"),
@@ -29,6 +30,22 @@ export const editarRecursoEducativoSchema = z.object({
     .default("")
     .transform((value) => (value === "" ? null : value)),
   imagen: z.string().optional().nullable(),
+  videoYoutube: z
+    .string()
+    .optional()
+    .nullable()
+    .transform((value) =>
+      typeof value === "string" ? value.trim() : value,
+    )
+    .refine(
+      (value) =>
+        value === null ||
+        value === undefined ||
+        value === "" ||
+        esUrlYoutubeValida(value),
+      "Debe ser un enlace de YouTube válido (watch, youtu.be, embed o shorts)",
+    )
+    .transform((value) => (value ? value : null)),
 });
 
 export type EditarRecursoEducativoInput = z.infer<

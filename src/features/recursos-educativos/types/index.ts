@@ -14,6 +14,7 @@ export type RecursoEducativoConRelaciones = {
   resumen: string;
   contenido: string;
   imagen: string | null;
+  video_youtube: string | null;
   tipo: TipoRecursoEducativo;
   categoria_id: string | null;
   estado: EstadoRecursoEducativo;

@@ -1,4 +1,4 @@
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight, Calendar, Play } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -18,6 +18,7 @@ interface RecursoEducativoCardData {
   titulo: string;
   resumen: string;
   imagen: string | null;
+  video_youtube: string | null;
   tipo: TipoRecursoEducativo;
   fecha_publicacion: Date | null;
   categoria: {
@@ -55,6 +56,14 @@ export function RecursoEducativoCard({ recurso }: RecursoEducativoCardProps) {
           >
             {formatearTipo(recurso.tipo)}
           </Badge>
+
+          {recurso.video_youtube && (
+            <span className="pointer-events-none absolute inset-0 flex items-center justify-center">
+              <span className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/90 text-on-primary shadow-lg ring-2 ring-white/70 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
+                <Play className="h-5 w-5 translate-x-0.5 fill-current" />
+              </span>
+            </span>
+          )}
         </div>
 
         <div className="flex flex-1 flex-col p-6">

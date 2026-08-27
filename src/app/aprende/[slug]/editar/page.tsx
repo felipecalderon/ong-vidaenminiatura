@@ -50,6 +50,7 @@ export default async function EditarRecursoEducativoPage({
           tipo: recurso.tipo,
           categoriaId: recurso.categoria_id,
           imagen: recurso.imagen,
+          videoYoutube: recurso.video_youtube,
         }}
         categorias={categorias.map((categoria) => ({
           id: categoria.id,

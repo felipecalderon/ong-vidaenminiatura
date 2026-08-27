@@ -16,6 +16,7 @@ interface RecursoEducativoData {
   tipo: string;
   categoriaId: string | null;
   imagen: string | null;
+  videoYoutube: string | null;
 }
 
 export function useEditarRecursoEducativoForm(recurso: RecursoEducativoData) {
@@ -98,6 +99,7 @@ export function useEditarRecursoEducativoForm(recurso: RecursoEducativoData) {
       tipo: formData.get("tipo") as string,
       contenido: formData.get("contenido") as string,
       categoriaId: formData.get("categoriaId") as string,
+      videoYoutube: formData.get("videoYoutube") as string,
       imagen: previewUrl, // Para pasar validación Zod
     };
 
