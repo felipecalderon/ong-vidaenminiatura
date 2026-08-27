@@ -1,4 +1,4 @@
-import { Eye, Flower2, Waves } from "lucide-react";
+import { Eye, Flower2, Waves, Waypoints } from "lucide-react";
 
 export const PerspectivasSection = () => {
   return (
@@ -61,14 +61,16 @@ export const PerspectivasSection = () => {
           <div className="absolute top-0 right-0 h-24 w-24 translate-x-1/3 -translate-y-1/3 rounded-full bg-linear-to-br from-primary/5 to-transparent group-hover:scale-150 transition-transform duration-700" />
           <div className="relative z-10">
             <div className="mb-6 flex h-12 w-12 items-center justify-center rounded-2xl bg-linear-to-br from-primary/10 to-primary/5 border border-primary/10">
-              <Waves className="h-5 w-5 text-primary" />
+              <Waypoints className="h-5 w-5 text-primary" />
             </div>
             <h3 className="text-lg font-headline font-bold text-on-background mb-3">
-              El Eco de los Cantos
+              El Tejido del Tiempo y la Gravedad
             </h3>
             <p className="text-sm text-on-surface-variant font-body leading-relaxed">
-              Los cetáceos &ldquo;dibujan&rdquo; el océano en su mente a través
-              del mapa tridimensional del eco de sus cantos.
+              Las arañas no solo construyen una red, extienden su sistema
+              nervioso hacia el vacío, transformando el espacio tridimensional
+              en una partitura de vibraciones donde el tiempo y la masa se
+              traducen en la tensión del sonido.
             </p>
           </div>
         </div>
