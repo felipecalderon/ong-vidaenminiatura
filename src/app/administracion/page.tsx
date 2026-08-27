@@ -58,7 +58,7 @@ export default async function AdministracionPage() {
 
   return (
     <div className="min-h-screen bg-background container mx-auto py-8 px-4">
-      <div className="mb-8 border border-outline-variant bg-primary/10 p-6 dark:bg-primary-foreground/10 dark:">
+      <div className="mb-8 rounded-xl border border-outline-variant bg-primary/10 p-6 dark:bg-primary/10">
         <h1 className="text-3xl font-extrabold text-foreground uppercase tracking-wider">
           Panel de Administración
         </h1>
@@ -70,48 +70,51 @@ export default async function AdministracionPage() {
 
       <div className="w-full">
         <Tabs defaultValue="categorias" className="w-full">
-          <TabsList className="mb-6 grid w-full max-w-3xl grid-cols-2 md:grid-cols-6 gap-1 border border-outline-variant bg-background p-1 dark:">
+          <TabsList
+            aria-label="Secciones de administración"
+            className="mb-6 grid h-auto w-full max-w-4xl grid-cols-2 gap-1.5 rounded-xl border border-outline-variant bg-surface-container p-1.5 sm:grid-cols-3"
+          >
             <TabsTrigger
               value="categorias"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+              className="flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold uppercase transition-[color,background-color,border-color,box-shadow] hover:bg-surface-container-high hover:text-foreground data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm data-[state=active]:hover:bg-primary-container data-[state=active]:hover:text-on-primary-container sm:text-sm dark:hover:text-foreground dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-primary-container dark:data-[state=active]:text-on-primary-container dark:data-[state=active]:hover:bg-primary-container dark:data-[state=active]:hover:text-on-primary-container"
             >
               <Settings className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Categorías</span>
+              <span>Categorías</span>
             </TabsTrigger>
             <TabsTrigger
               value="usuarios"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+              className="flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold uppercase transition-[color,background-color,border-color,box-shadow] hover:bg-surface-container-high hover:text-foreground data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm data-[state=active]:hover:bg-primary-container data-[state=active]:hover:text-on-primary-container sm:text-sm dark:hover:text-foreground dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-primary-container dark:data-[state=active]:text-on-primary-container dark:data-[state=active]:hover:bg-primary-container dark:data-[state=active]:hover:text-on-primary-container"
             >
               <User className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Usuarios</span>
+              <span>Usuarios</span>
             </TabsTrigger>
             <TabsTrigger
               value="peticiones"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+              className="flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold uppercase transition-[color,background-color,border-color,box-shadow] hover:bg-surface-container-high hover:text-foreground data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm data-[state=active]:hover:bg-primary-container data-[state=active]:hover:text-on-primary-container sm:text-sm dark:hover:text-foreground dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-primary-container dark:data-[state=active]:text-on-primary-container dark:data-[state=active]:hover:bg-primary-container dark:data-[state=active]:hover:text-on-primary-container"
             >
               <ClipboardList className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Peticiones</span>
+              <span>Peticiones</span>
             </TabsTrigger>
             <TabsTrigger
               value="noticias"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+              className="flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold uppercase transition-[color,background-color,border-color,box-shadow] hover:bg-surface-container-high hover:text-foreground data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm data-[state=active]:hover:bg-primary-container data-[state=active]:hover:text-on-primary-container sm:text-sm dark:hover:text-foreground dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-primary-container dark:data-[state=active]:text-on-primary-container dark:data-[state=active]:hover:bg-primary-container dark:data-[state=active]:hover:text-on-primary-container"
             >
               <FileText className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Noticias</span>
+              <span>Noticias</span>
             </TabsTrigger>
             <TabsTrigger
               value="publicaciones"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+              className="flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold uppercase transition-[color,background-color,border-color,box-shadow] hover:bg-surface-container-high hover:text-foreground data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm data-[state=active]:hover:bg-primary-container data-[state=active]:hover:text-on-primary-container sm:text-sm dark:hover:text-foreground dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-primary-container dark:data-[state=active]:text-on-primary-container dark:data-[state=active]:hover:bg-primary-container dark:data-[state=active]:hover:text-on-primary-container"
             >
               <BookOpen className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Publicaciones</span>
+              <span>Publicaciones</span>
             </TabsTrigger>
             <TabsTrigger
               value="recursos"
-              className="flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase transition-[color,background-color,border-color,box-shadow] border border-transparent data-[state=active]:border-primary"
+              className="flex min-h-11 items-center justify-center gap-2 rounded-lg px-3 py-2.5 text-xs font-bold uppercase transition-[color,background-color,border-color,box-shadow] hover:bg-surface-container-high hover:text-foreground data-[state=active]:bg-primary-container data-[state=active]:text-on-primary-container data-[state=active]:shadow-sm data-[state=active]:hover:bg-primary-container data-[state=active]:hover:text-on-primary-container sm:text-sm dark:hover:text-foreground dark:data-[state=active]:border-transparent dark:data-[state=active]:bg-primary-container dark:data-[state=active]:text-on-primary-container dark:data-[state=active]:hover:bg-primary-container dark:data-[state=active]:hover:text-on-primary-container"
             >
               <GraduationCap className="size-4 shrink-0" />
-              <span className="hidden sm:inline">Recursos</span>
+              <span>Recursos</span>
             </TabsTrigger>
           </TabsList>
 

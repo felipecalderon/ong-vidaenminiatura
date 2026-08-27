@@ -200,7 +200,9 @@ export function EditarRecursoEducativoForm({
           name="videoYoutube"
           type="url"
           placeholder="https://www.youtube.com/watch?v=..."
-          defaultValue={state.fields?.videoYoutube ?? recurso.videoYoutube ?? ""}
+          defaultValue={
+            state.fields?.videoYoutube ?? recurso.videoYoutube ?? ""
+          }
           onChange={(e) => validateField("videoYoutube", e.target.value)}
           onBlur={(e) => validateField("videoYoutube", e.target.value)}
           className="border border-outline-variant text-base py-6"

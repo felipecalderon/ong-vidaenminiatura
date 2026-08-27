@@ -1,4 +1,4 @@
-import { Eye, Flower2, Waves, Waypoints } from "lucide-react";
+import { Eye, Flower2, Waypoints } from "lucide-react";
 
 export const PerspectivasSection = () => {
   return (

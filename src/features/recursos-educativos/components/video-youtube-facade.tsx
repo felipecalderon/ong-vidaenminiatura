@@ -3,10 +3,7 @@
 import { Play } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import {
-  cargarApiYouTube,
-  extraerVideoIdYoutube,
-} from "../lib/youtube";
+import { cargarApiYouTube, extraerVideoIdYoutube } from "../lib/youtube";
 
 interface VideoYoutubeFacadeProps {
   url: string;

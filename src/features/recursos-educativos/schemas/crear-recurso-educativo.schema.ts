@@ -33,9 +33,7 @@ export const crearRecursoEducativoSchema = z.object({
     .string()
     .optional()
     .nullable()
-    .transform((value) =>
-      typeof value === "string" ? value.trim() : value,
-    )
+    .transform((value) => (typeof value === "string" ? value.trim() : value))
     .refine(
       (value) =>
         value === null ||
