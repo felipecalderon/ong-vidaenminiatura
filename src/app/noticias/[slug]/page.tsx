@@ -34,8 +34,7 @@ export async function generateMetadata({
     }
   }
 
-  const appUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "https://masinsectos.vercel.app";
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL || "https://masinsectos.org";
 
   return {
     title: noticia.titulo,

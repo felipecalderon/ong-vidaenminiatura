@@ -19,7 +19,7 @@ export function BotonCompartirFacebook({
 
     // Determinar URL de forma dinámica
     const origin =
-      process.env.NEXT_PUBLIC_BASE_URL || "https://masinsectos.vercel.app";
+      process.env.NEXT_PUBLIC_BASE_URL || "https://masinsectos.org";
     const pathMap = {
       peticion: `/peticiones/${slug}`,
       noticia: `/noticias/${slug}`,

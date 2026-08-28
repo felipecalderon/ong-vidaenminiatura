@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const BASE_URL = process.env.BASE_URL || "https://masinsectos.vercel.app";
+const BASE_URL = process.env.BASE_URL || "https://masinsectos.org";
 
 export const metadataSEO: Metadata = {
   title: {
