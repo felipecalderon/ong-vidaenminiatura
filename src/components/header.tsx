@@ -22,7 +22,7 @@ interface HeaderProps {
 export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-outline-variant/70 bg-background/85 backdrop-blur-xl">
-      <div className="container mx-auto flex h-[4.5rem] items-center justify-between px-4 sm:px-6">
+      <div className="container mx-auto flex h-18 items-center justify-between px-4 sm:px-6">
         <Link
           href="/"
           className="group flex items-center gap-3 active:scale-95 transition-transform duration-100"
@@ -31,7 +31,7 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
             <LogoIcon size={45} />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-[0.65rem] font-bold uppercase tracking-[0.24em] text-primary">
+            <span className="text-[0.8rem] font-extrabold uppercase tracking-[0.12em] text-green-600">
               Más
             </span>
             <span className="text-xl font-black tracking-[-0.06em]">

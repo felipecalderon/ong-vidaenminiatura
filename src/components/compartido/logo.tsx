@@ -1,9 +1,17 @@
 "use client";
-export const LogoIcon = ({ size }: { size: number }) => {
+export const LogoIcon = ({
+  size,
+  animated = true,
+}: {
+  size: number;
+  animated?: boolean;
+}) => {
+  const anim = (className: string) => (animated ? className : undefined);
+
   return (
     <svg
       suppressHydrationWarning
-      className="motion-reduce:**:animate-none"
+      className={animated ? "motion-reduce:**:animate-none" : undefined}
       xmlns="http://www.w3.org/2000/svg"
       width={size}
       height={size}
@@ -17,40 +25,46 @@ export const LogoIcon = ({ size }: { size: number }) => {
     >
       {/* Patas derechas */}
       <path
-        className="origin-left animate-leg-r transform-fill"
+        className={anim("origin-left animate-leg-r transform-fill")}
         d="M21 5a4 4 0 0 1-3.55 3.97"
         stroke="#312E81"
       />
       <path
-        className="origin-left animate-leg-r transform-fill [animation-delay:0.8s]"
+        className={anim(
+          "origin-left animate-leg-r transform-fill [animation-delay:0.8s]",
+        )}
         d="M22 13h-4"
         stroke="#312E81"
       />
       <path
-        className="origin-left animate-leg-r transform-fill"
+        className={anim("origin-left animate-leg-r transform-fill")}
         d="M21 21a4 4 0 0 0-3.81-4"
         stroke="#312E81"
       />
 
       {/* Patas izquierdas */}
       <path
-        className="origin-right animate-leg-l transform-fill [animation-delay:0.8s]"
+        className={anim(
+          "origin-right animate-leg-l transform-fill [animation-delay:0.8s]",
+        )}
         d="M3 5a4 4 0 0 0 3.55 3.97"
         stroke="#312E81"
       />
       <path
-        className="origin-right animate-leg-l transform-fill"
+        className={anim("origin-right animate-leg-l transform-fill")}
         d="M6 13H2"
         stroke="#312E81"
       />
       <path
-        className="origin-right animate-leg-l transform-fill [animation-delay:0.8s]"
+        className={anim(
+          "origin-right animate-leg-l transform-fill [animation-delay:0.8s]",
+        )}
         d="M3 21a4 4 0 0 1 3.81-4"
         stroke="#312E81"
       />
 
       {/* Cuerpo */}
-      <g className="origin-center animate-sway transform-fill">
+      <g className={anim("origin-center animate-sway transform-fill")}>
         {/* Cabeza */}
         <path d="M9 7.13V6a3 3 0 1 1 6 0v1.13" stroke="#312E81" />
 
@@ -64,21 +78,23 @@ export const LogoIcon = ({ size }: { size: number }) => {
         {/* Símbolo + */}
         <path
           d="M12 10v6M9 13h6"
-          stroke="#10b981"
-          strokeWidth={1.3}
+          stroke="#312E81"
+          strokeWidth={1.8}
           strokeLinecap="butt"
         />
 
         {/* Antena derecha */}
         <path
-          className="origin-bottom-left animate-antenna transform-fill"
+          className={anim("origin-bottom-left animate-antenna transform-fill")}
           d="M14.12 3.88 16 2"
           stroke="#312E81"
         />
 
         {/* Antena izquierda */}
         <path
-          className="origin-bottom-right animate-antenna transform-fill [animation-delay:0.6s]"
+          className={anim(
+            "origin-bottom-right animate-antenna transform-fill [animation-delay:0.6s]",
+          )}
           d="m8 2 1.88 1.88"
           stroke="#312E81"
         />
