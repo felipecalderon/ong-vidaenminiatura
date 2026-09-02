@@ -2,24 +2,28 @@ import { Bug, Fish, Leaf, Rabbit, Worm } from "lucide-react";
 import type { Metadata } from "next";
 import { Revelar } from "@/components/compartido/revelar";
 import { CTASection } from "./components/call-to-action";
+import { EjesAccionSection } from "./components/ejes-accion";
 import { FundadoresSection } from "./components/fundadores";
+import { MarcoEstatutarioSection } from "./components/marco-estatutario";
 import { MisionSection } from "./components/mision";
 import { PerspectivasSection } from "./components/perspectivas-realidad";
 import { QuoteSection } from "./components/quote";
 import { ResponsabilidadSection } from "./components/responsabilidad-cosmica";
 import { ValoresSection } from "./components/valores";
 import { VisionSection } from "./components/vision";
+import { VoluntariadoSection } from "./components/voluntariado-section";
 
 export const metadata: Metadata = {
-  title: "Nosotros",
+  title: "Nosotros | Fundación Más Insectos",
   description:
-    "Conoce a Más Insectos: una fundación nacida en Temuco, Chile, dedicada a educar y preservar el bienestar animal con foco en el mundo de los insectos.",
+    "Conoce a la Fundación Más Insectos (+ Insectos): institución de derecho privado sin fines de lucro en Temuco, dedicada a la investigación, educación, defensa legal y conservación de los invertebrados y la biodiversidad.",
 };
 
 export default function NosotrosPage() {
   return (
     <div className="min-h-screen text-on-background overflow-hidden">
       <div className="mx-auto max-w-5xl px-6 py-16 md:py-24 space-y-24 md:space-y-36">
+        {/* ── Misión y Visión ──────────────────────────────── */}
         <Revelar>
           <section id="mision-vision" className="relative">
             <div className="grid md:grid-cols-2 gap-6 md:gap-8">
@@ -39,15 +43,27 @@ export default function NosotrosPage() {
           </section>
         </Revelar>
 
+        {/* ── Marco Estatutario y Objeto Legal ──────────────── */}
+        <Revelar delay={0.1}>
+          <MarcoEstatutarioSection />
+        </Revelar>
+
+        {/* ── Los 6 Ejes de Acción Estratégica ──────────────── */}
+        <Revelar delay={0.1}>
+          <EjesAccionSection />
+        </Revelar>
+
+        {/* ── Perspectivas de la Realidad ──────────────────── */}
         <Revelar delay={0.1}>
           <PerspectivasSection />
         </Revelar>
 
+        {/* ── Fundadores ───────────────────────────────────── */}
         <Revelar delay={0.1}>
           <FundadoresSection />
         </Revelar>
 
-        {/* ── Quote 1 ──────────────────────────────────────── */}
+        {/* ── Quote 1 (Bárbara) ────────────────────────────── */}
         <Revelar delay={0.1}>
           <QuoteSection
             quote="Los insectos y demás seres vivos son la prueba de que el universo no buscó contemplarse de una sola manera. La evolución junto al universo crearon millones de ojos, cerebros y formas de percibir el mismo mundo. Y nosotros los humanos solo somos una pequeña parte de ellas."
@@ -59,6 +75,7 @@ export default function NosotrosPage() {
           />
         </Revelar>
 
+        {/* ── Valores Institucionales ──────────────────────── */}
         <Revelar delay={0.1}>
           <ValoresSection />
         </Revelar>
@@ -75,10 +92,17 @@ export default function NosotrosPage() {
           />
         </Revelar>
 
+        {/* ── Red Oficial de Voluntariado (Formulario) ─────── */}
+        <Revelar delay={0.1}>
+          <VoluntariadoSection />
+        </Revelar>
+
+        {/* ── Llamado a la Acción ──────────────────────────── */}
         <Revelar delay={0.1}>
           <CTASection />
         </Revelar>
 
+        {/* ── Responsabilidad Universal ────────────────────── */}
         <Revelar delay={0.1}>
           <ResponsabilidadSection />
         </Revelar>

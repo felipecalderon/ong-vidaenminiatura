@@ -48,6 +48,22 @@ export function FooterLinks() {
           </Link>
         </li>
         <li>
+          <Link
+            href="/nosotros#voluntariado"
+            className="text-on-surface-variant hover:text-primary transition-colors"
+          >
+            Voluntariado
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/nosotros#ejes-estrategicos"
+            className="text-on-surface-variant hover:text-primary transition-colors"
+          >
+            Ejes Estatutarios
+          </Link>
+        </li>
+        <li>
           <a
             href="/peticiones/crear"
             className="text-on-surface-variant hover:text-primary transition-colors"
