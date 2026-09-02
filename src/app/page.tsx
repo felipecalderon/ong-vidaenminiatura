@@ -9,6 +9,8 @@ import { obtenerPublicacionesRecientes } from "@/features/publicaciones/queries/
 import { RecursoEducativoCard } from "@/features/recursos-educativos/components/recurso-educativo-card";
 import { obtenerRecursosEducativosRecientes } from "@/features/recursos-educativos/queries/obtener-recursos-educativos-recientes";
 import { HeroSection } from "./nosotros/components/hero";
+import { EjesAccionSection } from "./nosotros/components/ejes-accion";
+import { VoluntariadoSection } from "./nosotros/components/voluntariado-section";
 
 export default async function HomePage() {
   const [
@@ -33,9 +35,15 @@ export default async function HomePage() {
      * FIRST VIEWPORT: declaración + ojo de abeja arriba; la petición activa aparece como acción inmediata.
      * FORM: Persuade / editorial de campo, con composición asimétrica y paneles de lectura corta.
      */
-    <div className="min-h-screen text-on-background">
+    <main className="min-h-screen text-on-background">
       {/* Hero Section */}
       <HeroSection />
+
+      {/* Ejes de acción */}
+      <section className="mx-auto max-w-5xl px-6 pb-20 space-y-24 md:space-y-36">
+        <EjesAccionSection />
+      </section>
+
       {featuredPeticion && (
         <section className="group relative overflow-hidden border-y border-outline-variant/70 bg-surface-container-low">
           <div className="absolute inset-0 z-0 opacity-70">
@@ -110,113 +118,10 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="group relative mb-12 overflow-hidden rounded-2xl border border-primary/30 bg-violet-100">
-        <div className="absolute -right-20 -top-28 h-80 w-80 rounded-full bg-primary/20 blur-3xl transition-opacity duration-500 group-hover:opacity-80" />
-        <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center p-8 text-center md:p-16">
-          <Edit className="mb-6 h-10 w-10 text-primary" />
-          <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4 dark:text-violet-900">
-            ¿Tienes una causa que defender?
-          </h2>
-          <p className="text-lg text-on-surface-variant font-body mb-8">
-            Crea tu propia petición y moviliza a miles de personas para proteger
-            a los insectos y arácnidos que más lo necesitan.
-          </p>
-          <Link href="/peticiones/crear">
-            <span className="bg-primary text-on-primary px-8 py-4 rounded-lg font-label uppercase tracking-widest font-bold hover:bg-primary-fixed-dim transition-colors flex items-center justify-center gap-2 active:scale-95 duration-100">
-              Crear una petición
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </span>
-          </Link>
-        </div>
+      {/* Formulario de voluntariado */}
+      <section className="mx-auto max-w-5xl px-6 py-16 md:py-24 space-y-24 md:space-y-36">
+        <VoluntariadoSection />
       </section>
-
-      {/* Main Content Container */}
-      <main className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-        {/* Educación Section */}
-        {recursosEducativos.length > 0 && (
-          <section className="mb-20">
-            <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-              <div>
-                <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
-                  Educación y Concientización
-                </h2>
-                <p className="text-on-surface-variant font-body mt-2">
-                  Conceptos clave, guías de identificación, mitos y preguntas
-                  frecuentes, y cómo actuar por los invertebrados.
-                </p>
-              </div>
-              <Link href="/aprende">
-                <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
-                  Ver todo
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </Link>
-            </div>
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {recursosEducativos.map((recurso) => (
-                <RecursoEducativoCard key={recurso.id} recurso={recurso} />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* Research Section */}
-        {publicaciones.length > 0 && (
-          <section className="mb-20">
-            <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-              <div>
-                <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
-                  Investigación y Difusión Científica
-                </h2>
-                <p className="text-on-surface-variant font-body mt-2">
-                  Estudios, publicaciones, seminarios y talleres sobre insectos,
-                  arácnidos y otros invertebrados.
-                </p>
-              </div>
-              <Link href="/investigacion">
-                <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
-                  Ver todo
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </Link>
-            </div>
-            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {publicaciones.map((publicacion) => (
-                <PublicacionCard
-                  key={publicacion.id}
-                  publicacion={publicacion}
-                />
-              ))}
-            </div>
-          </section>
-        )}
-
-        {/* News Section */}
-        <section className="mb-20">
-          <div className="mb-8 flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
-            <div>
-              <h2 className="text-3xl font-headline font-black tracking-[-0.04em] text-on-background md:text-4xl">
-                Artículos de interés
-              </h2>
-              <p className="text-on-surface-variant font-body mt-2">
-                Publicaciones, investigación, ciencia, noticias y más...
-              </p>
-            </div>
-            <Link href="/noticias">
-              <span className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant px-4 py-2.5 font-label text-xs font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high">
-                Ver todo
-                <ArrowRight className="h-4 w-4" />
-              </span>
-            </Link>
-          </div>
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {noticias.map((noticia) => (
-              <NoticiaCard key={noticia.id} noticia={noticia} />
-            ))}
-          </div>
-        </section>
-      </main>
-    </div>
+    </main>
   );
 }

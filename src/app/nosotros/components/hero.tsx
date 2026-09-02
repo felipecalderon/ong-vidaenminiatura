@@ -8,7 +8,7 @@ export const HeroSection = () => {
         {/* Eyebrow */}
         <div className="mb-8 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-[0.68rem] font-label uppercase tracking-[0.18em] text-primary">
           <MapPin className="h-3 w-3" />
-          Temuco, Chile · Fundada 2026
+          Temuco, Chile · Fundada en septiembre, 2026
         </div>
 
         <div className="grid items-end gap-12 md:grid-cols-[1.3fr_0.7fr] md:gap-20">
@@ -23,10 +23,9 @@ export const HeroSection = () => {
 
             <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
               Somos una organización de derecho animal nacida en el corazón de
-              La Araucanía. Bajo la firme convicción de que los insectos y todos
-              los animales no humanos sostienen la vida en la Tierra, trabajamos
-              para garantizar su protección, entendiendo que educar sobre ellos
-              es el primer paso para preservarla.
+              La Araucanía. Bajo la firme convicción de que los insectos,
+              arácnidos y todos los animales no humanos son seres sintientes,
+              trabajamos para garantizar su protección.
             </p>
           </div>
 
@@ -43,12 +42,6 @@ export const HeroSection = () => {
           </div>
         </div>
       </div>
-
-      {/* Organic bottom transition */}
-      <div
-        aria-hidden
-        className="absolute bottom-0 left-0 right-0 h-16 bg-linear-to-t from-background to-transparent"
-      />
     </section>
   );
 };

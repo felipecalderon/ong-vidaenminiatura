@@ -31,12 +31,10 @@ export default async function NoticiasPage({ searchParams }: PageProps) {
         <div className="inline-block bg-primary text-on-primary px-4 py-2 border border-outline-variant dark:font-bold">
           📰 Últimas Noticias
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold">
-          Actualidad en conservación
-        </h1>
+        <h1 className="text-4xl md:text-5xl font-bold">Actualidad</h1>
         <p className="text-lg text-muted-foreground max-w-2xl">
-          Artículos, victorias y descubrimientos sobre el mundo de los insectos
-          y arácnidos que merecen ser conocidos.
+          Artículos, victorias y descubrimientos sobre el mundo de los insectos,
+          arácnidos y otros invertebrados que merecen ser conocidos.
         </p>
       </div>
 

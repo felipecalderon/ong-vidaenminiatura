@@ -13,7 +13,7 @@ export const FundadoresSection = () => {
           <div className="h-px w-8 bg-outline-variant" />
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background">
-          Quiénes somos
+          Nuestro equipo
         </h2>
       </div>
 

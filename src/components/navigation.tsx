@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 export const navLinks = [
   { href: "/", label: "Inicio" },
-  { href: "/nosotros", label: "Nosotros" },
+  { href: "/nosotros", label: "Quienes somos" },
   { href: "/aprende", label: "Aprende" },
   { href: "/investigacion", label: "Investigación" },
   { href: "/peticiones", label: "Peticiones" },
