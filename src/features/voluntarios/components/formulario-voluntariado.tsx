@@ -330,8 +330,8 @@ export const FormularioVoluntariado = () => {
                 Formulario de Postulación a Voluntariado
               </h3>
               <p className="text-xs text-on-surface-variant font-body">
-                Únete a nuestras brigadas de educación, ciencia, leyes y
-                territorio.
+                Únete a nuestras brigadas de ciencia, el derecho, la educación y
+                el territorio.
               </p>
             </div>
           </div>

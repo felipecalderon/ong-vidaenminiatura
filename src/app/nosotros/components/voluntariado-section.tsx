@@ -10,11 +10,12 @@ export const VoluntariadoSection = () => {
           <span>Participación Ciudadana</span>
         </div>
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background">
-          Red de Voluntariado + Insectos
+          Red de Voluntariado
+          <p>+ Insectos</p>
         </h2>
         <p className="text-sm md:text-base text-on-surface-variant font-body leading-relaxed">
-          Buscamos personas apasionadas por la ciencia, la educación, el derecho
-          y el territorio. No importa tu área de formación: cada disciplina
+          Buscamos personas apasionadas por la ciencia, el derecho, la educación
+          y el territorio. No importa tu área de formación, cada disciplina
           aporta a la protección de los invertebrados.
         </p>
       </div>

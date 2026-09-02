@@ -21,7 +21,7 @@ export const denominacionInstitucional = {
 export const objetoPrincipal = {
   titulo: "Objeto Estatutario Principal",
   declaracion:
-    "Promover la conservación, investigación, defensa y protección de los insectos, arácnidos y otros invertebrados, así como de sus ecosistemas y la biodiversidad general, impulsando transformaciones legislativas, institucionales, culturales, educativas, sociales y ambientales.",
+    "Proteger los animales no humanos, con enfoque prioritario en la defensa y conservación de los insectos, arácnidos y otros invertebrados, instaurando cambios legislativos, institucionales, culturales, sociales y medioambientales en relación a ellos",
 };
 
 export interface EjeEstrategico {
@@ -42,7 +42,7 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     nombre: "Investigación y Difusión Científica",
     subtitulo: "Generación de evidencia y divulgación técnica",
     descripcion:
-      "Promover, patrocinar y difundir estudios científicos, publicaciones técnicas, material bibliográfico y encuestas de percepción social sobre la biodiversidad y el bienestar de los invertebrados.",
+      "Generar, promover, patrocinar y difundir estudios científicos, publicaciones técnicas, material bibliográfico y encuestas de percepción social.",
     icon: Microscope,
     ruta: "/investigacion",
     estado: "activo",
@@ -55,26 +55,10 @@ export const ejesEstrategicos: EjeEstrategico[] = [
   },
   {
     id: 2,
-    nombre: "Educación y Concientización",
-    subtitulo: "Formación ciudadana y cultura multiespecie",
-    descripcion:
-      "Desarrollar programas educativos, talleres, charlas y recursos multimedia para promover el respeto, el asombro y la coexistencia empática con las especies más pequeñas del planeta.",
-    icon: BookOpen,
-    ruta: "/aprende",
-    estado: "activo",
-    objetivosAsociados: [3, 5, 10],
-    puntosClave: [
-      "Cursos, talleres y actividades formativas en establecimientos educativos",
-      "Producción de contenidos visuales e interactivos accesibles",
-      "Transformación cultural hacia una ética antiespecista integral",
-    ],
-  },
-  {
-    id: 3,
     nombre: "Acción Legal e Incidencia Institucional",
     subtitulo: "Defensa jurídica y políticas públicas",
     descripcion:
-      "Impulsar reformas normativas, participar en discusiones legislativas y ejercer acciones judiciales y ciudadanas para dotar de amparo legal efectivo a los insectos y arácnidos.",
+      "Impulsar reformas normativas, participar en discusiones legislativas y ejercer acciones judiciales y extrajudiciales.",
     icon: Scale,
     ruta: "/peticiones",
     estado: "activo",
@@ -83,6 +67,22 @@ export const ejesEstrategicos: EjeEstrategico[] = [
       "Propuestas normativas dirigidas a autoridades y órganos del Estado",
       "Canalización de peticiones ciudadanas con respaldo jurídico",
       "Asesoría y acompañamiento en derecho animal e institucional",
+    ],
+  },
+  {
+    id: 3,
+    nombre: "Educación y Concientización",
+    subtitulo: "Formación ciudadana y cultura antiespecista",
+    descripcion:
+      "Desarrollar programas educativos, talleres, charlas y recursos multimedia para promover el respeto, la protección, el asombro y la coexistencia empática con las especies más vulneradas del planeta.",
+    icon: BookOpen,
+    ruta: "/aprende",
+    estado: "activo",
+    objetivosAsociados: [3, 5, 10],
+    puntosClave: [
+      "Cursos, talleres y actividades formativas en establecimientos educativos",
+      "Producción de contenidos visuales e interactivos accesibles",
+      "Transformación cultural hacia una ética antiespecista integral",
     ],
   },
   {
@@ -105,7 +105,7 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     nombre: "Acción Social y Beneficencia",
     subtitulo: "Desarrollo comunitario y bienestar integral",
     descripcion:
-      "Integrar la protección ambiental y animal con programas de beneficencia pública, desarrollo humano y territorial, orientados especialmente a sectores vulnerables.",
+      "Ejecutar programas de beneficencia pública, desarrollo humano y territorial, orientados especialmente a sectores vulnerables.",
     icon: Users,
     estado: "en_desarrollo",
     objetivosAsociados: [10, 11],
@@ -134,20 +134,20 @@ export const ejesEstrategicos: EjeEstrategico[] = [
 
 export const fundadores = [
   {
-    nombre: "Bárbara Manquilef Aburto",
+    nombre: "Bárbara Manquilef",
     rol: "Cofundadora",
     descripcion:
-      "Abogada especializada en Derecho Animal, Docente de la Universidad Católica de Temuco, apasionada por la investigación jurídica y con un profundo compromiso hacia la defensa, protección y cuidado de todos los seres humanos y no humanos.",
+      "Abogada especializada en Derecho Animal, Docente de la Universidad Católica de Temuco.",
     emoji: "🦋",
     iniciales: "BM",
     tema: "primary",
     foto: "/assets/barbara2.jpeg",
   },
   {
-    nombre: "Felipe Calderón Espinoza",
+    nombre: "Felipe Calderón",
     rol: "Cofundador",
     descripcion:
-      "Ingeniero de Software apasionado por la tecnología con enfoque ambientalista, científico de salón y autodidacta que desarrolla código con rigor lógico y observa el mundo desde la filosofía de la mente y la ciencia.",
+      "Ingeniero de software apasionado por la tecnología con enfoque ambientalista.",
     emoji: "💻",
     iniciales: "FC",
     tema: "tertiary",
@@ -158,26 +158,26 @@ export const fundadores = [
 export const valores = [
   {
     icon: Microscope,
-    titulo: "Evidencia y Rigor Científico",
+    titulo: "Evidencia y rigor científico",
     descripcion:
-      "Nuestras posturas y acciones se fundamentan en investigación empírica, biología de avanzada y pensamiento crítico.",
+      "Nuestras posturas y acciones se fundamentan en investigación empírica y pensamiento crítico.",
   },
   {
     icon: Heart,
-    titulo: "Ética Multiespecie",
+    titulo: "Ética animal",
     descripcion:
-      "Rechazamos el especismo: toda forma de vida sintiente merece consideración moral y resguardo de su bienestar.",
+      "Rechazamos el especismo, toda forma de vida sintiente merece consideración moral, derechos y resguardo de su bienestar.",
   },
   {
     icon: Sparkles,
     titulo: "Educación Transformadora",
     descripcion:
-      "Construimos puentes pedagógicos para desarmar prejuicios y despertar empatía hacia los seres invisibilizados.",
+      "Construimos puentes pedagógicos para desarmar prejuicios y despertar empatía hacia los seres más vulnerados del planeta.",
   },
   {
     icon: Leaf,
     titulo: "Regeneración Ecosistémica",
     descripcion:
-      "Comprendemos que resguardar a los invertebrados es proteger la base viva de los suelos, polinizadores y bosques.",
+      "Comprendemos que resguardar a los invertebrados también es proteger la base de la vida en la tierra.",
   },
 ];

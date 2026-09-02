@@ -1,10 +1,11 @@
 import { z } from "zod";
 
 export const AREAS_VOLUNTARIADO = [
-  "Educación y Talleres",
   "Investigación y Ciencia Ciudadana",
-  "Diseño y Comunicación Audiovisual",
   "Incidencia Legal y Políticas Públicas",
+  "Gestiones judiciales y extrajudiciales",
+  "Educación y Talleres",
+  "Diseño y Comunicación Audiovisual",
   "Acción Comunitaria y Territorial",
   "Logística y Organización de Eventos",
 ] as const;

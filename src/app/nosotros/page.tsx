@@ -63,33 +63,9 @@ export default function NosotrosPage() {
           <FundadoresSection />
         </Revelar>
 
-        {/* ── Quote 1 (Bárbara) ────────────────────────────── */}
-        <Revelar delay={0.1}>
-          <QuoteSection
-            quote="Los insectos y demás seres vivos son la prueba de que el universo no buscó contemplarse de una sola manera. La evolución junto al universo crearon millones de ojos, cerebros y formas de percibir el mismo mundo. Y nosotros los humanos solo somos una pequeña parte de ellas."
-            author="Bárbara Manquilef, cofundadora"
-            Icon={Bug}
-            color="primary"
-            bgIconLeft={Worm}
-            bgIconRight={Rabbit}
-          />
-        </Revelar>
-
         {/* ── Valores Institucionales ──────────────────────── */}
         <Revelar delay={0.1}>
           <ValoresSection />
-        </Revelar>
-
-        {/* ── Quote 2 (Felipe) ──────────────────────────────── */}
-        <Revelar delay={0.1} desde="izquierda">
-          <QuoteSection
-            quote='Nuestros sentidos son la manera en que el universo se observa a sí mismo, ya sean de seres humanos como seres no humanos, dichos sentidos no son más que otra perspectiva de la misma realidad. Ignorar su bienestar es empobrecer la mirada del propio cosmos ya que cada especie es un tipo de "filtro" que observa una parte de la verdad.'
-            author="Felipe Calderón, cofundador"
-            Icon={Leaf}
-            color="tertiary"
-            bgIconLeft={Bug}
-            bgIconRight={Fish}
-          />
         </Revelar>
 
         {/* ── Red Oficial de Voluntariado (Formulario) ─────── */}
@@ -100,11 +76,6 @@ export default function NosotrosPage() {
         {/* ── Llamado a la Acción ──────────────────────────── */}
         <Revelar delay={0.1}>
           <CTASection />
-        </Revelar>
-
-        {/* ── Responsabilidad Universal ────────────────────── */}
-        <Revelar delay={0.1}>
-          <ResponsabilidadSection />
         </Revelar>
       </div>
     </div>

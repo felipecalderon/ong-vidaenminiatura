@@ -13,11 +13,6 @@ export const EjesAccionSection = () => {
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black tracking-tighter text-on-background">
           Nuestros 6 Ejes de Acción
         </h2>
-        <p className="text-sm md:text-base text-on-surface-variant font-body leading-relaxed">
-          Estructura de trabajo basada en los estatutos fundacionales de la
-          Fundación Más Insectos para la protección integral de los
-          invertebrados.
-        </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -67,22 +62,6 @@ export const EjesAccionSection = () => {
                 <p className="text-xs md:text-sm text-on-surface-variant font-body leading-relaxed pt-1">
                   {eje.descripcion}
                 </p>
-              </div>
-
-              {/* Puntos clave */}
-              <div className="mt-auto pt-4 border-t border-outline-variant/30 space-y-2">
-                <p className="text-[11px] font-label uppercase tracking-widest text-on-surface-variant/70 font-semibold flex items-center gap-1.5">
-                  <Layers className="h-3 w-3" />
-                  Líneas de trabajo
-                </p>
-                <ul className="space-y-1.5 text-xs text-on-surface-variant font-body">
-                  {eje.puntosClave.map((punto, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="h-3.5 w-3.5 text-primary/60 shrink-0 mt-0.5" />
-                      <span className="leading-tight">{punto}</span>
-                    </li>
-                  ))}
-                </ul>
               </div>
             </div>
           );

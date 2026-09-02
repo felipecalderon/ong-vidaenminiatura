@@ -19,10 +19,10 @@ export const MisionSection = () => {
           <br />y restaurar
         </p>
         <p className="text-on-surface-variant font-body leading-relaxed text-sm md:text-base">
-          Garantizar la defensa jurídica, la protección y el bienestar de los
-          animales no humanos, con especial enfoque en insectos, arácnidos y
-          otros invertebrados, reconociendo su valor intrínseco y su rol
-          fundamental en el sostenimiento de la vida en la Tierra. Desde el
+          Proteger los animales no humanos, con enfoque prioritario en la
+          defensa y conservación de los insectos, arácnidos y otros
+          invertebrados, instaurando cambios legislativos, institucionales,
+          culturales, sociales y medioambientales en relación a ellos. Desde el
           corazón de La Araucanía, promovemos una convivencia multiespecie justa
           a través de la educación, la investigación y la incidencia,
           transformando la relación de la humanidad con los habitantes más
