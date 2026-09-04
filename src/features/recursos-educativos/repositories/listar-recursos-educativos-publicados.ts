@@ -44,7 +44,7 @@ export async function listarRecursosEducativosPublicados(
   };
 
   const tiposValidos = Object.values(TipoRecursoEducativo) as string[];
-  if (params.tipo && tiposValidos.includes(params.tipo)) {
+  if (params.tipo && tiposValidos.includes(params.tipo as string)) {
     whereClause.tipo = params.tipo as TipoRecursoEducativo;
   }
 
