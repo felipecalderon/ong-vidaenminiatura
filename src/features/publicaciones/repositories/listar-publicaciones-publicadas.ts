@@ -33,7 +33,7 @@ export async function listarPublicacionesPublicadas(
   };
 
   const tiposValidos = Object.values(TipoPublicacion) as string[];
-  if (params.tipo && tiposValidos.includes(params.tipo)) {
+  if (params.tipo && tiposValidos.includes(params.tipo as string)) {
     whereClause.tipo = params.tipo as TipoPublicacion;
   }
 
