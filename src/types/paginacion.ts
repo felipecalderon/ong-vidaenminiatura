@@ -5,7 +5,8 @@ export interface QueryParams {
   categoriaId?: string;
   orderBy?: string;
   orderDir?: "asc" | "desc";
-  [key: string]: string | undefined;
+  destacado?: boolean | string;
+  [key: string]: string | boolean | undefined;
 }
 
 export interface PaginatedResult<T> {

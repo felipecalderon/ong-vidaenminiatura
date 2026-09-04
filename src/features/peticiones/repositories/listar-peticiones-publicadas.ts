@@ -13,8 +13,12 @@ export type PeticionConRelaciones = Prisma.peticionGetPayload<{
   include: typeof peticionInclude;
 }>;
 
+export interface ListarPeticionesParams extends QueryParams {
+  destacado?: boolean | string;
+}
+
 export async function listarPeticionesPublicadas(
-  params: QueryParams = {},
+  params: ListarPeticionesParams = {},
 ): Promise<PaginatedResult<PeticionConRelaciones>> {
   const { skip, take, orderBy } = parsePaginationParams(
     params,
@@ -25,6 +29,13 @@ export async function listarPeticionesPublicadas(
   const whereClause: Prisma.peticionWhereInput = {
     estado: EstadoPeticion.PUBLICADA,
   };
+
+  if (params.destacado !== undefined) {
+    whereClause.destacado =
+      typeof params.destacado === "string"
+        ? params.destacado === "true"
+        : Boolean(params.destacado);
+  }
 
   if (params.search) {
     whereClause.OR = [

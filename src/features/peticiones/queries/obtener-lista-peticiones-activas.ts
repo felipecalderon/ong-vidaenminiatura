@@ -1,10 +1,12 @@
 import "server-only";
 import { cache } from "react";
-import type { QueryParams } from "@/types/paginacion";
-import { listarPeticionesPublicadas } from "../repositories/listar-peticiones-publicadas";
+import {
+  type ListarPeticionesParams,
+  listarPeticionesPublicadas,
+} from "../repositories/listar-peticiones-publicadas";
 
 export const obtenerListaPeticionesActivas = cache(
-  async (params: QueryParams = {}) => {
+  async (params: ListarPeticionesParams = {}) => {
     return listarPeticionesPublicadas(params);
   },
 );

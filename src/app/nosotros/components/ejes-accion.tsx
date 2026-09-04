@@ -1,4 +1,4 @@
-import { ArrowUpRight, CheckCircle, Compass, Layers } from "lucide-react";
+import { ArrowUpRight, Compass } from "lucide-react";
 import Link from "next/link";
 import { ejesEstrategicos } from "../nosotros-data";
 

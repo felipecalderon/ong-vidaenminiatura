@@ -1,31 +1,24 @@
-import { ArrowRight, Edit } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { NoticiaCard } from "@/features/noticias/components/noticia-card";
-import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
 import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries/obtener-lista-peticiones-activas";
-import { PublicacionCard } from "@/features/publicaciones/components/publicacion-card";
-import { obtenerPublicacionesRecientes } from "@/features/publicaciones/queries/obtener-publicaciones-recientes";
-import { RecursoEducativoCard } from "@/features/recursos-educativos/components/recurso-educativo-card";
-import { obtenerRecursosEducativosRecientes } from "@/features/recursos-educativos/queries/obtener-recursos-educativos-recientes";
-import { HeroSection } from "./nosotros/components/hero";
 import { EjesAccionSection } from "./nosotros/components/ejes-accion";
+import { HeroSection } from "./nosotros/components/hero";
 import { VoluntariadoSection } from "./nosotros/components/voluntariado-section";
 
 export default async function HomePage() {
-  const [
-    { data: peticiones },
-    { data: noticias },
-    publicaciones,
-    recursosEducativos,
-  ] = await Promise.all([
-    obtenerListaPeticionesActivas({ limit: "4" }),
-    obtenerListaNoticiasPublicadas({ limit: "3" }),
-    obtenerPublicacionesRecientes("3"),
-    obtenerRecursosEducativosRecientes("3"),
-  ]);
-  const featuredPeticion = peticiones[0];
-  const _otherPeticiones = peticiones.slice(1);
+  const { data: peticionesDestacadas } = await obtenerListaPeticionesActivas({
+    limit: "1",
+    destacado: true,
+  });
+
+  let featuredPeticion = peticionesDestacadas[0];
+  if (!featuredPeticion) {
+    const { data: peticionesRecientes } = await obtenerListaPeticionesActivas({
+      limit: "1",
+    });
+    featuredPeticion = peticionesRecientes[0];
+  }
 
   return (
     /*

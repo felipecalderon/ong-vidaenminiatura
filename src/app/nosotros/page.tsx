@@ -1,4 +1,3 @@
-import { Bug, Fish, Leaf, Rabbit, Worm } from "lucide-react";
 import type { Metadata } from "next";
 import { Revelar } from "@/components/compartido/revelar";
 import { CTASection } from "./components/call-to-action";
@@ -7,8 +6,6 @@ import { FundadoresSection } from "./components/fundadores";
 import { MarcoEstatutarioSection } from "./components/marco-estatutario";
 import { MisionSection } from "./components/mision";
 import { PerspectivasSection } from "./components/perspectivas-realidad";
-import { QuoteSection } from "./components/quote";
-import { ResponsabilidadSection } from "./components/responsabilidad-cosmica";
 import { ValoresSection } from "./components/valores";
 import { VisionSection } from "./components/vision";
 import { VoluntariadoSection } from "./components/voluntariado-section";
