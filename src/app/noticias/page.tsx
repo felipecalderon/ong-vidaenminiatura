@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BarraFiltros } from "@/components/compartido/barra-filtros";
 import { Paginacion } from "@/components/compartido/paginacion";
+import { Botones } from "@/components/compartido/seccion-botones";
 import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
 import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
@@ -83,6 +84,8 @@ export default async function NoticiasPage({ searchParams }: PageProps) {
           />
         </>
       )}
+      {/* Cómo puedes actuar */}
+      <Botones />
     </div>
   );
 }

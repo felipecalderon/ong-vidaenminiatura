@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { BarraFiltros } from "@/components/compartido/barra-filtros";
 import { Paginacion } from "@/components/compartido/paginacion";
+import { Botones } from "@/components/compartido/seccion-botones";
 import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { PeticionCard } from "@/features/peticiones/components/peticion-card";
 import { obtenerListaPeticionesActivas } from "@/features/peticiones/queries/obtener-lista-peticiones-activas";
@@ -82,6 +83,8 @@ export default async function PeticionesPage({ searchParams }: PageProps) {
           />
         </>
       )}
+      {/* Cómo puedes actuar */}
+      <Botones />
     </div>
   );
 }

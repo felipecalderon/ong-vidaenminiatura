@@ -2,6 +2,7 @@ import { ArrowRight, FlaskConical, Microscope } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Paginacion } from "@/components/compartido/paginacion";
+import { Botones } from "@/components/compartido/seccion-botones";
 import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { NoticiaCard } from "@/features/noticias/components/noticia-card";
 import { obtenerListaNoticiasPublicadas } from "@/features/noticias/queries/obtener-lista-noticias-publicadas";
@@ -158,29 +159,8 @@ export default async function InvestigacionPage({
         </section>
       )}
 
-      {/* CTA */}
-      <section className="mt-20 rounded-2xl border border-primary/30 bg-primary/5 p-8 text-center md:p-12">
-        <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tighter text-on-background mb-4">
-          El conocimiento también moviliza
-        </h2>
-        <p className="text-lg text-on-surface-variant font-body mb-8 max-w-2xl mx-auto">
-          Si este material te resultó útil, compártelo o súmate a las causas que
-          protegen a los invertebrados.
-        </p>
-        <div className="flex flex-col gap-3 sm:flex-row justify-center">
-          <Link href="/peticiones">
-            <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary transition-colors hover:bg-primary-fixed-dim sm:w-auto">
-              Firmar una petición
-              <ArrowRight className="h-5 w-5" />
-            </span>
-          </Link>
-          <Link href="/peticiones/crear">
-            <span className="flex w-full items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high sm:w-auto">
-              Crear una petición
-            </span>
-          </Link>
-        </div>
-      </section>
+      {/* Cómo puedes actuar */}
+      <Botones />
     </div>
   );
 }
