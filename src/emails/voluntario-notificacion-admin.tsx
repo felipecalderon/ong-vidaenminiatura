@@ -5,11 +5,17 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
   Text,
 } from "react-email";
+
+const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ||
+  process.env.BASE_URL ||
+  "https://masinsectos.org";
 
 interface VoluntarioNotificacionAdminEmailProps {
   nombre: string;
@@ -44,9 +50,39 @@ export function VoluntarioNotificacionAdminEmail({
         <Container style={container}>
           {/* Header */}
           <Section style={header}>
-            <Text style={badge}>Panel de Gestión</Text>
-            <Heading style={h1}>Nueva Postulación a Voluntariado</Heading>
-            <Text style={subHeader}>Fundación Más Insectos (+ Insectos)</Text>
+            <table
+              role="presentation"
+              border={0}
+              cellPadding={0}
+              cellSpacing={0}
+              style={brandTable}
+            >
+              <tbody>
+                <tr>
+                  <td style={brandIconCell}>
+                    <div style={iconWrapper}>
+                      <Img
+                        src={`${BASE_URL}/apple-touch-icon.png`}
+                        width="36"
+                        height="36"
+                        alt="Isotipo Más Insectos"
+                        style={iconImg}
+                      />
+                    </div>
+                  </td>
+                  <td style={brandTextCell}>
+                    <div style={brandMas}>MÁS</div>
+                    <div style={brandInsectos}>Insectos</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div style={adminTitleWrapper}>
+              <Text style={badge}>Panel de Gestión</Text>
+              <Heading style={h1}>Nueva Postulación a Voluntariado</Heading>
+              <Text style={subHeader}>Fundación Más Insectos</Text>
+            </div>
           </Section>
 
           {/* Body Content */}
@@ -167,7 +203,7 @@ export function VoluntarioNotificacionAdminEmail({
 
 // Estilos
 const main = {
-  backgroundColor: "#f4f6f4",
+  backgroundColor: "#f8fafc",
   fontFamily:
     '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif',
 };
@@ -179,17 +215,69 @@ const container = {
 };
 
 const header = {
-  backgroundColor: "#1b3323",
+  backgroundColor: "#120a2d",
   borderRadius: "16px 16px 0 0",
   padding: "24px",
   textAlign: "center" as const,
 };
 
+const brandTable = {
+  margin: "0 auto",
+  textAlign: "left" as const,
+};
+
+const brandIconCell = {
+  verticalAlign: "middle" as const,
+  paddingRight: "10px",
+};
+
+const iconWrapper = {
+  backgroundColor: "#ffffff",
+  borderRadius: "8px",
+  padding: "4px",
+  display: "inline-block",
+  lineHeight: "0",
+};
+
+const iconImg = {
+  display: "block",
+  borderRadius: "4px",
+};
+
+const brandTextCell = {
+  verticalAlign: "middle" as const,
+  textAlign: "left" as const,
+};
+
+const brandMas = {
+  color: "#34d399",
+  fontSize: "10px",
+  fontWeight: "800",
+  letterSpacing: "0.15em",
+  textTransform: "uppercase" as const,
+  lineHeight: "1",
+};
+
+const brandInsectos = {
+  color: "#ffffff",
+  fontSize: "20px",
+  fontWeight: "900",
+  letterSpacing: "-0.04em",
+  lineHeight: "1.1",
+  marginTop: "2px",
+};
+
+const adminTitleWrapper = {
+  marginTop: "16px",
+  borderTop: "1px solid rgba(255, 255, 255, 0.1)",
+  paddingTop: "16px",
+};
+
 const badge = {
   display: "inline-block",
-  backgroundColor: "rgba(164, 226, 168, 0.2)",
-  border: "1px solid #a4e2a8",
-  color: "#a4e2a8",
+  backgroundColor: "rgba(192, 132, 252, 0.2)",
+  border: "1px solid #c084fc",
+  color: "#c084fc",
   fontSize: "11px",
   fontWeight: "700",
   textTransform: "uppercase" as const,
@@ -207,7 +295,7 @@ const h1 = {
 };
 
 const subHeader = {
-  color: "#c2d4c5",
+  color: "#ede9fe",
   fontSize: "12px",
   margin: "0",
   letterSpacing: "0.05em",
@@ -216,33 +304,33 @@ const subHeader = {
 const content = {
   backgroundColor: "#ffffff",
   padding: "28px 24px",
-  borderLeft: "1px solid #e2e8e0",
-  borderRight: "1px solid #e2e8e0",
+  borderLeft: "1px solid #cbd5e1",
+  borderRight: "1px solid #cbd5e1",
 };
 
 const introText = {
-  color: "#4a594c",
+  color: "#52525b",
   fontSize: "14px",
   margin: "0 0 20px 0",
   lineHeight: "1.5",
 };
 
 const card = {
-  backgroundColor: "#f9faf9",
-  border: "1px solid #e2e8e0",
+  backgroundColor: "#f8fafc",
+  border: "1px solid #cbd5e1",
   borderRadius: "12px",
   padding: "16px",
   margin: "0 0 16px 0",
 };
 
 const cardTitle = {
-  color: "#1b3323",
+  color: "#4c1d95",
   fontSize: "13px",
   fontWeight: "700",
   textTransform: "uppercase" as const,
   letterSpacing: "0.08em",
   margin: "0 0 12px 0",
-  borderBottom: "1px solid #e8ede8",
+  borderBottom: "1px solid #e2e8f0",
   paddingBottom: "6px",
 };
 
@@ -251,7 +339,7 @@ const fieldGroup = {
 };
 
 const fieldLabel = {
-  color: "#728375",
+  color: "#6b7280",
   fontSize: "11px",
   textTransform: "uppercase" as const,
   letterSpacing: "0.05em",
@@ -260,7 +348,7 @@ const fieldLabel = {
 };
 
 const fieldValue = {
-  color: "#1f2921",
+  color: "#18181b",
   fontSize: "14px",
   margin: "0",
   fontWeight: "500",
@@ -272,19 +360,19 @@ const list = {
 };
 
 const listItem = {
-  color: "#2a5235",
+  color: "#4c1d95",
   fontSize: "13px",
   lineHeight: "1.5",
   marginBottom: "4px",
 };
 
 const quoteText = {
-  color: "#2a3d2e",
+  color: "#18181b",
   fontSize: "13px",
   fontStyle: "italic",
   lineHeight: "1.6",
   backgroundColor: "#ffffff",
-  border: "1px solid #e2e8e0",
+  border: "1px solid #cbd5e1",
   borderRadius: "8px",
   padding: "12px",
   margin: "0",
@@ -296,7 +384,7 @@ const ctaSection = {
 };
 
 const button = {
-  backgroundColor: "#225932",
+  backgroundColor: "#7c3aed",
   borderRadius: "8px",
   color: "#ffffff",
   fontSize: "13px",
@@ -310,27 +398,27 @@ const button = {
 };
 
 const hr = {
-  borderColor: "#e2e8e0",
+  borderColor: "#cbd5e1",
   margin: "0",
 };
 
 const footer = {
-  backgroundColor: "#f9faf9",
+  backgroundColor: "#f8fafc",
   borderRadius: "0 0 16px 16px",
-  border: "1px solid #e2e8e0",
+  border: "1px solid #cbd5e1",
   borderTop: "none",
   padding: "16px 24px",
   textAlign: "center" as const,
 };
 
 const footerText = {
-  color: "#728375",
+  color: "#6b7280",
   fontSize: "11px",
   lineHeight: "1.5",
   margin: "0",
 };
 
 const link = {
-  color: "#225932",
+  color: "#7c3aed",
   textDecoration: "underline",
 };
