@@ -7,6 +7,7 @@ import {
   CreateLink,
   headingsPlugin,
   ListsToggle,
+  linkDialogPlugin,
   linkPlugin,
   listsPlugin,
   MDXEditor,
@@ -51,7 +52,7 @@ export function NoticiaContentEditor({
     <div className={cn("space-y-2", className)}>
       <input type="hidden" name={name} value={markdown} readOnly />
 
-      <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+      <div className="rounded-xl border border-outline-variant bg-card">
         <MDXEditor
           markdown={markdown}
           onChange={(value) => {
@@ -61,17 +62,18 @@ export function NoticiaContentEditor({
             }
           }}
           placeholder={placeholder}
-          contentEditableClassName="min-h-[320px] px-4 py-4 text-base leading-7"
+          contentEditableClassName="min-h-[320px] max-h-[600px] overflow-y-auto px-4 py-4 text-base leading-7"
           plugins={[
             headingsPlugin(),
             listsPlugin(),
             quotePlugin(),
             tablePlugin(),
             linkPlugin(),
+            linkDialogPlugin(),
             markdownShortcutPlugin(),
             toolbarPlugin({
               toolbarClassName:
-                "border-b border-outline-variant bg-surface-container px-3 py-2",
+                "border-b border-outline-variant bg-surface-container px-3 py-2 rounded-t-xl",
               toolbarContents: () => (
                 <>
                   <UndoRedo />

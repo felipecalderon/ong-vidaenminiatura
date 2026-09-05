@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Revelar } from "@/components/compartido/revelar";
+import { Botones } from "@/components/compartido/seccion-botones";
 import { EjesAccionSection } from "./components/ejes-accion";
 import { FundadoresSection } from "./components/fundadores";
 import { MarcoEstatutarioSection } from "./components/marco-estatutario";
@@ -7,8 +8,6 @@ import { MisionSection } from "./components/mision";
 import { PerspectivasSection } from "./components/perspectivas-realidad";
 import { ValoresSection } from "./components/valores";
 import { VisionSection } from "./components/vision";
-import { VoluntariadoSection } from "./components/voluntariado-section";
-import { Botones } from "@/components/compartido/seccion-botones";
 
 export const metadata: Metadata = {
   title: "Nosotros | Fundación Más Insectos",

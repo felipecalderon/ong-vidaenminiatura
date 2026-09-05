@@ -359,4 +359,14 @@
   .mdxeditor [contenteditable="true"] li {
     margin-bottom: 0.25rem;
   }
+
+  .mdxeditor [contenteditable="true"] a {
+    color: var(--primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .mdxeditor [contenteditable="true"] a:hover {
+    opacity: 0.8;
+  }
 }

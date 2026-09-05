@@ -1,11 +1,11 @@
 "use client";
 
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { SheetClose } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
-import { ChevronDown } from "lucide-react";
 
 // ── Nav structure ─────────────────────────────────────────────────────────────
 
