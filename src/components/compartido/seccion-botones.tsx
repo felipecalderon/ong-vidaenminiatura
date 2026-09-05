@@ -32,16 +32,16 @@ export function Botones() {
         </Link>
         <div className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background">
           <Share2 className="h-5 w-5" />
-          Compartir hub
+          Compartir
           <BotonCompartirFacebook slug="" tipo="recurso" className="h-7 w-7" />
         </div>
-        <a
-          href="mailto:hola@masinsectos.org?subject=Voluntariado"
+        <Link
+          href="/voluntarios"
           className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high"
         >
           <Users className="h-5 w-5" />
           Ser voluntario/a
-        </a>
+        </Link>
       </div>
     </section>
   );
