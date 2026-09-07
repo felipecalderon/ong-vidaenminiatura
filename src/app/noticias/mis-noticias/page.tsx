@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { MisNoticiasTable } from "@/features/noticias/components/mis-noticias-table";
 import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-noticias-para-gestion";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
@@ -13,6 +15,10 @@ export default async function MisNoticiasPage() {
 
   if (!usuario || !usuario.acceso.puedeAcceder) {
     redirect("/auth/login?returnTo=/noticias/mis-noticias");
+  }
+
+  if (!usuario.acceso.puedeCrearContenido) {
+    redirect("/noticias");
   }
 
   const noticias = await obtenerNoticiasParaGestion();
@@ -36,6 +42,13 @@ export default async function MisNoticiasPage() {
               : "Gestiona las noticias que has creado"}
           </p>
         </div>
+        <Button
+          asChild
+          variant="outline"
+          className="border border-outline-variant"
+        >
+          <Link href="/noticias/crear">Nueva noticia</Link>
+        </Button>
       </div>
 
       <MisNoticiasTable noticias={noticias} esAdmin={esAdmin} />

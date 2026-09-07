@@ -2,9 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { EstadoNoticia } from "@/generated/prisma/enums";
-import { actualizarEstadoNoticia } from "../repositories/actualizar-estado-noticia";
-import { obtenerNoticiaPorId } from "../repositories/obtener-noticia-por-id";
+import type { EstadoNoticia } from "@/generated/prisma/enums";
+import { cambiarEstadoNoticia } from "../services/cambiar-estado-noticia";
 
 export async function actualizarEstadoNoticiaAction(
   id: string,
@@ -17,35 +16,7 @@ export async function actualizarEstadoNoticiaAction(
   }
 
   try {
-    const noticia = await obtenerNoticiaPorId(id);
-
-    if (!noticia) {
-      return { success: false, error: "La noticia no existe." };
-    }
-
-    if (noticia.autor_id !== usuario.id && usuario.rol !== "ADMINISTRADOR") {
-      return {
-        success: false,
-        error: "No tienes permisos para modificar esta noticia.",
-      };
-    }
-
-    // Solo el ADMINISTRADOR puede aprobar contenido en cola de revisión
-    if (
-      noticia.estado === EstadoNoticia.REVISION &&
-      usuario.rol !== "ADMINISTRADOR"
-    ) {
-      return {
-        success: false,
-        error:
-          "Solo un administrador puede aprobar o rechazar contenido en revisión.",
-      };
-    }
-
-    const fechaPublicacion =
-      estado === EstadoNoticia.PUBLICADA ? new Date() : null;
-
-    await actualizarEstadoNoticia(id, estado, fechaPublicacion);
+    const noticia = await cambiarEstadoNoticia(id, estado, usuario);
 
     revalidatePath("/");
     revalidatePath("/noticias");

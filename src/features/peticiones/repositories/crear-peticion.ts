@@ -7,11 +7,8 @@ export async function crearPeticion(
   usuarioId: string,
   slug: string,
   input: CrearPeticionInput,
-  omitirRevision: boolean,
 ) {
-  const estado = omitirRevision
-    ? EstadoPeticion.BORRADOR
-    : EstadoPeticion.REVISION;
+  const estado = EstadoPeticion.BORRADOR;
   return prisma.peticion.create({
     data: {
       titulo: input.titulo,

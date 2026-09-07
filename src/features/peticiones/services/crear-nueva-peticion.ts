@@ -6,11 +6,10 @@ import type { CrearPeticionInput } from "../schemas/crear-peticion.schema";
 export async function crearNuevaPeticion(
   usuarioId: string,
   input: CrearPeticionInput,
-  omitirRevision: boolean,
 ) {
   const slug = await generarSlugUnico(input.titulo);
   try {
-    return await crearPeticion(usuarioId, slug, input, omitirRevision);
+    return await crearPeticion(usuarioId, slug, input);
   } catch (error) {
     if (
       error instanceof Prisma.PrismaClientKnownRequestError &&

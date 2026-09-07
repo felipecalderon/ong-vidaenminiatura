@@ -12,7 +12,7 @@ import { GestionCategorias } from "@/features/categorias/components/gestion-cate
 import { obtenerTodasLasCategorias } from "@/features/categorias/queries/obtener-todas-las-categorias";
 import { GestionNoticias } from "@/features/noticias/components/gestion-noticias";
 import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-noticias-para-gestion";
-import { PeticionesTable } from "@/features/peticiones/components/peticiones-table";
+import { GestionPeticiones } from "@/features/peticiones/components/gestion-peticiones";
 import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obtener-peticiones-para-gestion";
 import { GestionPublicaciones } from "@/features/publicaciones/components/gestion-publicaciones";
 import { obtenerPublicacionesParaGestion } from "@/features/publicaciones/queries/obtener-publicaciones-para-gestion";
@@ -130,9 +130,8 @@ export default async function AdministracionPage() {
           </TabsContent>
 
           <TabsContent value="peticiones" className="space-y-4">
-            <PeticionesTable
+            <GestionPeticiones
               peticiones={peticiones}
-              esAdmin
               categorias={categorias.map((c) => ({
                 id: c.id,
                 nombre: c.nombre,

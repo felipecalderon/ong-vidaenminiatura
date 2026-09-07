@@ -1,5 +1,6 @@
 "use client";
 
+import { AdminHeader } from "@/components/admin/admin-header";
 import { Badge } from "@/components/ui/badge";
 import {
   Table,
@@ -30,11 +31,10 @@ export function GestionUsuarios({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-extrabold text-foreground uppercase tracking-tight">
-          Gestión de Usuarios
-        </h2>
-      </div>
+      <AdminHeader
+        title="Gestión de Usuarios"
+        description="Administra los roles y estados de los usuarios de la plataforma."
+      />
 
       <div className="border border-outline-variant bg-card dark:">
         <Table>

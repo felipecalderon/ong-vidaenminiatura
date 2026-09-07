@@ -16,6 +16,10 @@ export default async function CrearNoticiaPage() {
     redirect("/auth/login?returnTo=/noticias/crear");
   }
 
+  if (!usuario.acceso.puedeCrearContenido) {
+    redirect("/noticias");
+  }
+
   const categorias = await obtenerCategoriasActivas();
 
   return (

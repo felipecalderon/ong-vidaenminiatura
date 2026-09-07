@@ -8,6 +8,7 @@ export interface AccesoUsuario {
   autenticado: true;
   puedeAcceder: boolean;
   puedeCrearContenido: boolean;
+  puedeCrearPeticiones: boolean;
   puedeGestionarContenidoPropio: boolean;
   puedeGestionarBackoffice: boolean;
   esAutor: boolean;

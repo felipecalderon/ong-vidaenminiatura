@@ -2,48 +2,25 @@
 
 import { revalidatePath } from "next/cache";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { EstadoPeticion } from "@/generated/prisma/enums";
-import { actualizarEstadoPeticion } from "../repositories/actualizar-estado-peticion";
-import { obtenerPeticionPorId } from "../repositories/obtener-peticion-por-id";
+import { publicarPeticion } from "../services/publicar-peticion";
 
 export async function publicarPeticionAction(
   id: string,
 ): Promise<{ success: boolean; error?: string }> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeCrearContenido) {
-    return { success: false, error: "No autorizado." };
+  if (!usuario) {
+    return { success: false, error: "No autenticado." };
   }
 
   try {
-    const peticion = await obtenerPeticionPorId(id);
+    const peticion = await publicarPeticion(id, usuario);
 
-    if (!peticion) {
-      return { success: false, error: "La petición no existe." };
-    }
-
-    if (peticion.usuario_id !== usuario.id && usuario.rol !== "ADMINISTRADOR") {
-      return {
-        success: false,
-        error: "No tienes permisos para publicar esta petición.",
-      };
-    }
-
-    // Solo el ADMINISTRADOR puede publicar contenido en cola de revisión
-    if (
-      peticion.estado === EstadoPeticion.REVISION &&
-      usuario.rol !== "ADMINISTRADOR"
-    ) {
-      return {
-        success: false,
-        error: "Solo un administrador puede publicar contenido en revisión.",
-      };
-    }
-
-    await actualizarEstadoPeticion(id, EstadoPeticion.PUBLICADA, new Date());
     revalidatePath("/");
     revalidatePath("/peticiones");
+    revalidatePath("/peticiones/mis-peticiones");
     revalidatePath(`/peticiones/${peticion.slug}`);
+    revalidatePath("/administracion");
 
     return { success: true };
   } catch (error) {

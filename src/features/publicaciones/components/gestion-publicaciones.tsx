@@ -2,6 +2,7 @@
 
 import { Edit, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { AdminHeader } from "@/components/admin/admin-header";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -39,10 +40,7 @@ export function GestionPublicaciones({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-extrabold text-foreground uppercase tracking-tight">
-          Gestión de Publicaciones
-        </h2>
+      <AdminHeader title="Gestión de Publicaciones">
         <Button
           asChild
           variant="outline"
@@ -50,7 +48,7 @@ export function GestionPublicaciones({
         >
           <Link href="/investigacion/crear">Nueva publicación</Link>
         </Button>
-      </div>
+      </AdminHeader>
 
       <div className="border border-outline-variant bg-card dark:">
         <Table>

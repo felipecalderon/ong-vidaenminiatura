@@ -6,17 +6,17 @@ export function resolverAccesoUsuario(
 ): AccesoUsuario {
   const esSuspendido = usuario.estado === EstadoUsuario.SUSPENDIDO;
   const esAdministrador = usuario.rol === Rol.ADMINISTRADOR;
-  const esAutor =
-    usuario.rol === Rol.AUTOR || usuario.rol === Rol.USUARIO || esAdministrador;
+  const esAutor = usuario.rol === Rol.AUTOR || esAdministrador;
 
   // Solo AUTOR y ADMINISTRADOR omiten la cola de moderación
-  const omitirRevision = usuario.rol === Rol.AUTOR || esAdministrador;
+  const omitirRevision = esAutor;
 
   return {
     autenticado: true,
     puedeAcceder: !esSuspendido,
     puedeCrearContenido: !esSuspendido && esAutor,
-    puedeGestionarContenidoPropio: !esSuspendido && esAutor,
+    puedeCrearPeticiones: !esSuspendido,
+    puedeGestionarContenidoPropio: !esSuspendido,
     puedeGestionarBackoffice: !esSuspendido && esAdministrador,
     esAutor,
     esAdministrador,

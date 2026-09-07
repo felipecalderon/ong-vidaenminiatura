@@ -329,6 +329,24 @@ export function PeticionesTable({
                         <RotateCcw className="h-4 w-4" />
                       </Button>
                     )}
+                    {!esAdmin &&
+                      peticion.estado === EstadoPeticion.BORRADOR && (
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          className="border border-outline-variant text-xs font-bold"
+                          onClick={() =>
+                            handleEstadoChange(
+                              peticion.id,
+                              EstadoPeticion.REVISION,
+                            )
+                          }
+                          disabled={isPending}
+                          title="Enviar a moderación"
+                        >
+                          Enviar a revisión
+                        </Button>
+                      )}
                     <Button
                       onClick={() => abrirModal(peticion)}
                       variant="outline"
@@ -362,7 +380,7 @@ export function PeticionesTable({
           open={modalAbierto}
           onOpenChange={setModalAbierto}
           categorias={categorias}
-          onPublicar={handlePublicar}
+          onPublicar={esAdmin ? handlePublicar : undefined}
           publicandoId={publicandoId}
         />
       )}

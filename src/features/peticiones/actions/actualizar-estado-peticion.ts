@@ -2,9 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { EstadoPeticion } from "@/generated/prisma/enums";
-import { actualizarEstadoPeticion } from "../repositories/actualizar-estado-peticion";
-import { obtenerPeticionPorId } from "../repositories/obtener-peticion-por-id";
+import type { EstadoPeticion } from "@/generated/prisma/enums";
+import { cambiarEstadoPeticion } from "../services/cambiar-estado-peticion";
 
 export async function actualizarEstadoPeticionAction(
   id: string,
@@ -12,44 +11,16 @@ export async function actualizarEstadoPeticionAction(
 ): Promise<{ success: boolean; error?: string }> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeCrearContenido) {
-    return { success: false, error: "No autorizado." };
+  if (!usuario) {
+    return { success: false, error: "No autenticado." };
   }
 
   try {
-    const peticion = await obtenerPeticionPorId(id);
-
-    if (!peticion) {
-      return { success: false, error: "La petición no existe." };
-    }
-
-    if (peticion.usuario_id !== usuario.id && usuario.rol !== "ADMINISTRADOR") {
-      return {
-        success: false,
-        error: "No tienes permisos para modificar esta petición.",
-      };
-    }
-
-    // Solo el ADMINISTRADOR puede aprobar contenido en cola de revisión
-    if (
-      peticion.estado === EstadoPeticion.REVISION &&
-      usuario.rol !== "ADMINISTRADOR"
-    ) {
-      return {
-        success: false,
-        error:
-          "Solo un administrador puede aprobar o rechazar contenido en revisión.",
-      };
-    }
-
-    const fechaPublicacion =
-      estado === EstadoPeticion.PUBLICADA ? new Date() : null;
-
-    await actualizarEstadoPeticion(id, estado, fechaPublicacion);
+    await cambiarEstadoPeticion(id, estado, usuario);
 
     revalidatePath("/");
     revalidatePath("/peticiones");
-    revalidatePath(`/peticiones/${peticion.slug}`);
+    revalidatePath("/peticiones/mis-peticiones");
     revalidatePath("/administracion");
 
     return { success: true };

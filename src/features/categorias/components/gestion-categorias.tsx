@@ -1,6 +1,7 @@
 "use client";
 
 import { Edit2, Plus, Trash2 } from "lucide-react";
+import { AdminHeader } from "@/components/admin/admin-header";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -62,10 +63,7 @@ export function GestionCategorias({
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-extrabold text-foreground uppercase tracking-tight">
-          Lista de Categorías
-        </h2>
+      <AdminHeader title="Lista de Categorías">
         <Button
           onClick={() => setIsNewCategoryOpen(true)}
           className="flex items-center gap-2 border border-outline-variant font-bold hover: dark: dark:hover:"
@@ -73,7 +71,7 @@ export function GestionCategorias({
           <Plus className="size-4" />
           Nueva Categoría
         </Button>
-      </div>
+      </AdminHeader>
 
       <div className="border border-outline-variant bg-card dark:">
         <Table>

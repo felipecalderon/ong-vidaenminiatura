@@ -101,26 +101,30 @@ export function DesktopAccountAccess({
               : "Mis Peticiones"}
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link
-            href="/noticias/crear"
-            className="flex w-full items-center gap-2"
-          >
-            <Newspaper className="size-4" />
-            Crear Noticia
-          </Link>
-        </DropdownMenuItem>
-        <DropdownMenuItem asChild>
-          <Link
-            href="/noticias/mis-noticias"
-            className="flex w-full items-center gap-2"
-          >
-            <Edit className="size-4" />
-            {usuario.rol === "ADMINISTRADOR"
-              ? "Gestión de Noticias"
-              : "Mis Noticias"}
-          </Link>
-        </DropdownMenuItem>
+        {usuario.acceso.puedeCrearContenido && (
+          <>
+            <DropdownMenuItem asChild>
+              <Link
+                href="/noticias/crear"
+                className="flex w-full items-center gap-2"
+              >
+                <Newspaper className="size-4" />
+                Crear Noticia
+              </Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <Link
+                href="/noticias/mis-noticias"
+                className="flex w-full items-center gap-2"
+              >
+                <Edit className="size-4" />
+                {usuario.rol === "ADMINISTRADOR"
+                  ? "Gestión de Noticias"
+                  : "Mis Noticias"}
+              </Link>
+            </DropdownMenuItem>
+          </>
+        )}
         <DropdownMenuItem asChild>
           <Link
             href="/auth/logout"

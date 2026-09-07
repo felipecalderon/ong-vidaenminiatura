@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import { obtenerCategoriasActivas } from "@/features/categorias/queries/obtener-categorias-activas";
 import { PeticionesTable } from "@/features/peticiones/components/peticiones-table";
 import { obtenerPeticionesParaGestion } from "@/features/peticiones/queries/obtener-peticiones-para-gestion";
@@ -38,6 +40,13 @@ export default async function MisPeticionesPage() {
               : "Gestiona las peticiones que has creado"}
           </p>
         </div>
+        <Button
+          asChild
+          variant="outline"
+          className="border border-outline-variant"
+        >
+          <Link href="/peticiones/crear">Nueva petición</Link>
+        </Button>
       </div>
 
       <PeticionesTable

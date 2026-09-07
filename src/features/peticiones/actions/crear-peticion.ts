@@ -15,11 +15,11 @@ export async function crearPeticionAction(
 ): Promise<ActionState> {
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeCrearContenido) {
+  if (!usuario || !usuario.acceso.puedeCrearPeticiones) {
     return {
       success: false,
       error:
-        "No autorizado. Tu usuario no tiene permisos para crear contenido o se encuentra suspendido.",
+        "No autorizado. Tu usuario no tiene permisos para crear peticiones o se encuentra suspendido.",
     };
   }
 
@@ -89,22 +89,16 @@ export async function crearPeticionAction(
   let redirectPath: string | undefined;
 
   try {
-    const peticion = await crearNuevaPeticion(
-      usuario.id,
-      {
-        ...parseResult.data,
-        resumen: extractoResult.extracto,
-        imagen: imagenUrl,
-      },
-      usuario.acceso.omitirRevision,
-    );
+    const _peticion = await crearNuevaPeticion(usuario.id, {
+      ...parseResult.data,
+      resumen: extractoResult.extracto,
+      imagen: imagenUrl,
+    });
     revalidatePath("/");
     revalidatePath("/peticiones");
-    if (usuario.acceso.omitirRevision) {
-      redirectPath = `/peticiones/${peticion.slug}`;
-    } else {
-      redirectPath = "/usuario/mis-datos?tab=peticiones&status=revision";
-    }
+    revalidatePath("/peticiones/mis-peticiones");
+    revalidatePath("/administracion");
+    redirectPath = "/peticiones/mis-peticiones";
   } catch (error) {
     const errorMsg =
       error instanceof Error

@@ -2,6 +2,7 @@
 
 import { Edit, Eye, Trash2 } from "lucide-react";
 import Link from "next/link";
+import { AdminHeader } from "@/components/admin/admin-header";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -34,11 +35,15 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
-        <h2 className="text-2xl font-extrabold text-foreground uppercase tracking-tight">
-          Gestión de Noticias
-        </h2>
-      </div>
+      <AdminHeader title="Gestión de Noticias">
+        <Button
+          asChild
+          variant="outline"
+          className="border border-outline-variant"
+        >
+          <Link href="/noticias/crear">Nueva noticia</Link>
+        </Button>
+      </AdminHeader>
 
       <div className="border border-outline-variant bg-card dark:">
         <Table>

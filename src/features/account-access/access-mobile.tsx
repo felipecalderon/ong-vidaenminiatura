@@ -77,26 +77,30 @@ export function MobileAccountAccess({
               : "Mis Peticiones"}
           </Link>
         </SheetClose>
-        <SheetClose asChild>
-          <Link
-            href="/noticias/crear"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
-          >
-            <Newspaper className="size-4" />
-            Crear Noticia
-          </Link>
-        </SheetClose>
-        <SheetClose asChild>
-          <Link
-            href="/noticias/mis-noticias"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
-          >
-            <Edit className="size-4" />
-            {usuario.rol === "ADMINISTRADOR"
-              ? "Gestión de Noticias"
-              : "Mis Noticias"}
-          </Link>
-        </SheetClose>
+        {usuario.acceso.puedeCrearContenido && (
+          <>
+            <SheetClose asChild>
+              <Link
+                href="/noticias/crear"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
+              >
+                <Newspaper className="size-4" />
+                Crear Noticia
+              </Link>
+            </SheetClose>
+            <SheetClose asChild>
+              <Link
+                href="/noticias/mis-noticias"
+                className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-outline-variant bg-background px-4 py-2.5 text-sm font-semibold transition-[background-color,transform] hover:bg-surface-container-high active:scale-[0.98]"
+              >
+                <Edit className="size-4" />
+                {usuario.rol === "ADMINISTRADOR"
+                  ? "Gestión de Noticias"
+                  : "Mis Noticias"}
+              </Link>
+            </SheetClose>
+          </>
+        )}
         <SheetClose asChild>
           <Link
             href="/auth/logout"
