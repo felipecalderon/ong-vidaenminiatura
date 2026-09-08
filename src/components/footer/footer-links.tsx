@@ -49,7 +49,7 @@ export function FooterLinks() {
         </li>
         <li>
           <Link
-            href="/nosotros#voluntariado"
+            href="/voluntarios"
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
             Voluntariado
@@ -57,19 +57,11 @@ export function FooterLinks() {
         </li>
         <li>
           <Link
-            href="/nosotros#ejes-estrategicos"
+            href="/recursos-digitales"
             className="text-on-surface-variant hover:text-primary transition-colors"
           >
-            Ejes Estatutarios
+            Recursos Digitales
           </Link>
-        </li>
-        <li>
-          <a
-            href="/peticiones/crear"
-            className="text-on-surface-variant hover:text-primary transition-colors"
-          >
-            Crear Petición
-          </a>
         </li>
       </ul>
     </div>
