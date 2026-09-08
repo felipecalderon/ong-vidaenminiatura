@@ -1,10 +1,11 @@
-import { Users } from "lucide-react";
+import { ArrowRight, Users } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { cache } from "react";
 import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-facebook";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { SignPetitionForm } from "@/features/firmas/components/sign-petition-form";
 import { correoYaFirmoPeticion } from "@/features/firmas/repositories/usuario-ya-firmo-peticion";
@@ -134,6 +135,11 @@ export default async function PeticionDetailPage({
               />
             </div>
           )}
+          <BotonCompartirFacebook slug={slug} tipo="peticion" asChild>
+            <Button className="w-full font-bold py-3 border border-outline-variant disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer bg-sky-800 hover:bg-sky-950">
+              Compartir en Facebook <ArrowRight />
+            </Button>
+          </BotonCompartirFacebook>
 
           <article className="prose dark:prose-invert max-w-none border-t border-outline-variant pt-8 whitespace-pre-line">
             {peticion.contenido}
@@ -176,26 +182,18 @@ export default async function PeticionDetailPage({
           </div>
 
           {peticion.estado === EstadoPeticion.PUBLICADA && (
-            <>
-              <SignPetitionForm
-                peticionId={peticion.id}
-                yaFirmoOriginal={yaFirmo}
-                usuarioSesion={
-                  usuario
-                    ? {
-                        nombre: usuario.nombre,
-                        correo: usuario.correo,
-                      }
-                    : null
-                }
-              />
-
-              <BotonCompartirFacebook
-                slug={slug}
-                tipo="peticion"
-                className="w-full"
-              />
-            </>
+            <SignPetitionForm
+              peticionId={peticion.id}
+              yaFirmoOriginal={yaFirmo}
+              usuarioSesion={
+                usuario
+                  ? {
+                      nombre: usuario.nombre,
+                      correo: usuario.correo,
+                    }
+                  : null
+              }
+            />
           )}
         </div>
       </div>

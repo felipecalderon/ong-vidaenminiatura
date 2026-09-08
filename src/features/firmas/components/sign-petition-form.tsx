@@ -52,7 +52,7 @@ export function SignPetitionForm({
       const result = await firmarPeticionAction({
         peticionId,
         nombre: nombre.trim(),
-        correo: correoFinal!.trim().toLowerCase(),
+        correo: correoFinal?.trim().toLowerCase(),
       });
 
       if (result.success) {

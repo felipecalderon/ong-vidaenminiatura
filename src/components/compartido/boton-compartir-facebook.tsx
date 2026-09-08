@@ -1,23 +1,29 @@
 "use client";
 
+import { Slot } from "@radix-ui/react-slot";
 import { cn } from "@/lib/utils";
 import { Facebook } from "../ui/facebook-icon";
 
-interface BotonCompartirFacebookProps {
+interface BotonCompartirFacebookProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   slug: string;
   tipo: "peticion" | "noticia" | "publicacion" | "recurso";
-  className?: string;
+  asChild?: boolean;
 }
 
 export function BotonCompartirFacebook({
   slug,
   tipo,
-  className = "",
+  asChild = false,
+  children,
+  className,
+  ...props
 }: BotonCompartirFacebookProps) {
-  const handleShare = (e: React.MouseEvent) => {
+  const handleShare = (e: React.MouseEvent<HTMLButtonElement>) => {
+    props.onClick?.(e);
+    if (e.defaultPrevented) return;
     e.preventDefault();
 
-    // Determinar URL de forma dinámica
     const origin =
       process.env.NEXT_PUBLIC_BASE_URL || "https://masinsectos.org";
     const pathMap = {
@@ -26,15 +32,13 @@ export function BotonCompartirFacebook({
       publicacion: `/investigacion/${slug}`,
       recurso: slug ? `/aprende/${slug}` : "/aprende",
     } as const;
+
     const path = pathMap[tipo];
     const shareUrl = `${origin}${path}`;
-
     const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}`;
 
-    // Especificaciones del popup centrado en pantalla
     const width = 600;
     const height = 450;
-
     let left = 0;
     let top = 0;
 
@@ -50,14 +54,17 @@ export function BotonCompartirFacebook({
     );
   };
 
+  const Comp = asChild ? Slot : "button";
+
   return (
-    <button
+    <Comp
       type="button"
       onClick={handleShare}
-      className={cn("w-10 h-10 cursor-pointer", className)}
-      title="compartir en Facebook"
+      className={cn(!asChild && "w-10 h-10 cursor-pointer", className)}
+      title="Compartir en Facebook"
+      {...props}
     >
-      <Facebook />
-    </button>
+      {children ?? <Facebook />}
+    </Comp>
   );
 }
