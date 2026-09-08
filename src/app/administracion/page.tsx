@@ -10,6 +10,7 @@ import { redirect } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { GestionCategorias } from "@/features/categorias/components/gestion-categorias";
 import { obtenerTodasLasCategorias } from "@/features/categorias/queries/obtener-todas-las-categorias";
+import { obtenerInvitacionesParaGestion } from "@/features/invitaciones/queries/obtener-todas-las-invitaciones.query";
 import { GestionNoticias } from "@/features/noticias/components/gestion-noticias";
 import { obtenerNoticiasParaGestion } from "@/features/noticias/queries/obtener-noticias-para-gestion";
 import { GestionPeticiones } from "@/features/peticiones/components/gestion-peticiones";
@@ -37,6 +38,7 @@ export default async function AdministracionPage() {
 
   const [
     usuarios,
+    invitaciones,
     categorias,
     peticionesData,
     noticiasData,
@@ -44,6 +46,7 @@ export default async function AdministracionPage() {
     recursosEducativosData,
   ] = await Promise.all([
     obtenerTodosLosUsuarios(),
+    obtenerInvitacionesParaGestion(),
     obtenerTodasLasCategorias(),
     obtenerPeticionesParaGestion(),
     obtenerNoticiasParaGestion(),
@@ -125,6 +128,7 @@ export default async function AdministracionPage() {
           <TabsContent value="usuarios" className="space-y-4">
             <GestionUsuarios
               initialUsuarios={usuarios}
+              initialInvitaciones={invitaciones}
               currentUser={usuarioAutenticado}
             />
           </TabsContent>

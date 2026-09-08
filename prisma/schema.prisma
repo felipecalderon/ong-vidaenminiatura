@@ -67,6 +67,13 @@ enum EstadoVoluntario {
   INACTIVO
 }
 
+enum EstadoInvitacion {
+  PENDIENTE
+  ACEPTADA
+  EXPIRADA
+  CANCELADA
+}
+
 model usuario {
   id                  String        @id @default(uuid()) @db.Uuid
   auth0_id            String        @unique
@@ -87,6 +94,8 @@ model usuario {
   publicaciones publicacion[] @relation("AutorPublicaciones")
   recursosEducativos recursoEducativo[] @relation("AutorRecursosEducativos")
   firmas     firma[]
+  invitacionesCreadas   invitacion[] @relation("InvitacionesCreadas")
+  invitacionesAceptadas invitacion[] @relation("InvitacionAceptada")
 
   @@index([rol])
   @@index([estado])
@@ -244,5 +253,28 @@ model voluntario {
   @@index([correo])
   @@index([estado])
   @@index([fecha_creacion])
+}
+
+model invitacion {
+  id                  String           @id @default(uuid()) @db.Uuid
+  correo              String
+  rol                 Rol              @default(USUARIO)
+  token_hash          String           @unique
+  estado              EstadoInvitacion @default(PENDIENTE)
+  expira_at           DateTime
+  creada_por_id       String           @db.Uuid
+  usuario_id          String?          @db.Uuid
+  fecha_creacion      DateTime         @default(now())
+  fecha_actualizacion DateTime         @updatedAt
+  aceptada_at         DateTime?
+  cancelada_at        DateTime?
+
+  creada_por       usuario  @relation("InvitacionesCreadas", fields: [creada_por_id], references: [id], onDelete: Restrict)
+  usuario_aceptado usuario? @relation("InvitacionAceptada", fields: [usuario_id], references: [id], onDelete: SetNull)
+
+  @@index([correo])
+  @@index([estado])
+  @@index([expira_at])
+  @@index([creada_por_id])
 }
 
