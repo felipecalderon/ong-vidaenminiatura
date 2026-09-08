@@ -7,7 +7,7 @@ import {
   Microscope,
   Scale,
   Sparkles,
-  Users,
+  Sprout,
 } from "lucide-react";
 
 export const denominacionInstitucional = {
@@ -33,7 +33,6 @@ export interface EjeEstrategico {
   ruta?: string;
   estado: "activo" | "en_desarrollo";
   objetivosAsociados: number[];
-  puntosClave: string[];
 }
 
 export const ejesEstrategicos: EjeEstrategico[] = [
@@ -47,11 +46,6 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     ruta: "/investigacion",
     estado: "activo",
     objetivosAsociados: [2, 4, 13],
-    puntosClave: [
-      "Producción de informes técnicos y bibliografía especializada",
-      "Estudios de percepción pública sobre artrópodos e invertebrados",
-      "Repositorio abierto de conocimiento científico para la comunidad",
-    ],
   },
   {
     id: 2,
@@ -63,11 +57,6 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     ruta: "/peticiones",
     estado: "activo",
     objetivosAsociados: [1, 6],
-    puntosClave: [
-      "Propuestas normativas dirigidas a autoridades y órganos del Estado",
-      "Canalización de peticiones ciudadanas con respaldo jurídico",
-      "Asesoría y acompañamiento en derecho animal e institucional",
-    ],
   },
   {
     id: 3,
@@ -79,11 +68,6 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     ruta: "/aprende",
     estado: "activo",
     objetivosAsociados: [3, 5, 10],
-    puntosClave: [
-      "Cursos, talleres y actividades formativas en establecimientos educativos",
-      "Producción de contenidos visuales e interactivos accesibles",
-      "Transformación cultural hacia una ética antiespecista integral",
-    ],
   },
   {
     id: 4,
@@ -94,26 +78,16 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     icon: Handshake,
     estado: "en_desarrollo",
     objetivosAsociados: [7, 8],
-    puntosClave: [
-      "Convenios académicos y de investigación colaborativa",
-      "Fortalecimiento mutuo con la sociedad civil organizada",
-      "Mecanismos de cooperación técnica y de intercambio de saberes",
-    ],
   },
   {
     id: 5,
-    nombre: "Acción Social y Beneficencia",
-    subtitulo: "Desarrollo comunitario y bienestar integral",
+    nombre: "Cultura vegana y alternativas éticas",
+    subtitulo: "Fomento de alimentación basada en plantas.",
     descripcion:
-      "Ejecutar programas de beneficencia pública, desarrollo humano y territorial, orientados especialmente a sectores vulnerables.",
-    icon: Users,
+      "Implementar acciones y campañas para masificar el veganismo y asesorar en nutrición basada en plantas.",
+    icon: Sprout,
     estado: "en_desarrollo",
     objetivosAsociados: [10, 11],
-    puntosClave: [
-      "Talleres y capacitaciones comunitarias en territorios prioritarios",
-      "Vinculación con el marco de la Ley N° 19.885 de Donaciones Sociales",
-      "Promoción activa de brigadas de voluntariado y acción comunitaria",
-    ],
   },
   {
     id: 6,
@@ -124,11 +98,6 @@ export const ejesEstrategicos: EjeEstrategico[] = [
     icon: Landmark,
     estado: "en_desarrollo",
     objetivosAsociados: [9, 12],
-    puntosClave: [
-      "Postulación a fondos concursables nacionales e internacionales",
-      "Administración transparente orientada 100% al objeto fundacional",
-      "Canales de patrocinio institucional y donaciones verificables",
-    ],
   },
 ];
 
@@ -141,7 +110,7 @@ export const fundadores = [
     emoji: "🦋",
     iniciales: "BM",
     tema: "primary",
-    foto: "/assets/barbara2.jpeg",
+    foto: "/assets/barbara-2.jpeg",
   },
   {
     nombre: "Felipe Calderón",

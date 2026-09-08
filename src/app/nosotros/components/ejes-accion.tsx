@@ -41,7 +41,7 @@ export const EjesAccionSection = () => {
                         : "bg-surface-container text-on-surface-variant/80 border-outline-variant/40"
                     }`}
                   >
-                    {esActivo ? "Operativo" : "Línea Declarada"}
+                    {esActivo ? "Operativo" : "Implementando"}
                   </span>
                   {eje.ruta && (
                     <div className="h-7 w-7 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant group-hover:text-primary group-hover:bg-primary/10 transition-colors">

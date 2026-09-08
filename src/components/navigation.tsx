@@ -33,6 +33,7 @@ export const navStructure: NavItem[] = [
       { href: "/voluntarios", label: "Voluntariado" },
     ],
   },
+  { type: "link", href: "/recursos-digitales", label: "Recursos digitales" },
 ];
 
 // Backward-compat flat list
