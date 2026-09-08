@@ -103,24 +103,34 @@ export const ejesEstrategicos: EjeEstrategico[] = [
 
 export const fundadores = [
   {
-    nombre: "Bárbara Manquilef",
-    rol: "Cofundadora",
-    descripcion:
-      "Abogada especializada en Derecho Animal, Docente de la Universidad Católica de Temuco.",
-    emoji: "🦋",
-    iniciales: "BM",
-    tema: "primary",
-    foto: "/assets/barbara-2.jpeg",
-  },
-  {
     nombre: "Felipe Calderón",
-    rol: "Cofundador",
+    rol: "Cofundador - Tesorero",
     descripcion:
       "Ingeniero de software apasionado por la tecnología con enfoque ambientalista.",
     emoji: "💻",
     iniciales: "FC",
-    tema: "tertiary",
+    tema: "primary",
     foto: "/assets/felipe.jpeg",
+  },
+  {
+    nombre: "Bárbara Manquilef",
+    rol: "Cofundadora - Presidenta",
+    descripcion:
+      "Abogada especializada en Derecho Animal, Docente de la Universidad Católica de Temuco.",
+    emoji: "🦋",
+    iniciales: "BM",
+    tema: "tertiary",
+    foto: "/assets/barbara-2.jpeg",
+  },
+  {
+    nombre: "Catalina Luchsinger",
+    rol: "Cofundadora - Secretaria",
+    descripcion:
+      "Estudiante de nutrición de la Universidad de la Frontera de Temuco.",
+    emoji: "🌸",
+    iniciales: "CL",
+    tema: "primary",
+    foto: "/assets/cata.jpeg",
   },
 ];
 

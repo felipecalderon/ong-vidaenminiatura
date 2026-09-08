@@ -17,14 +17,14 @@ export const FundadoresSection = () => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-7xl mx-auto">
         {fundadores.map((f) => (
           <div
             key={f.nombre}
-            className="group relative flex flex-col overflow-hidden rounded-3xl border border-outline-variant/60 bg-surface transition-[transform,box-shadow] duration-300 hover:-translate-y-1.5 hover:shadow-lg"
+            className="group relative flex flex-col overflow-hidden rounded-3xl border border-outline-variant/60 bg-surface transition-[transform,box-shadow] hover:shadow-lg"
           >
             {/* Image Container */}
-            <div className="relative aspect-4/3 w-full transition-transform duration-500 group-hover:scale-103">
+            <div className="relative aspect-3/4 w-full transition-transform duration-500 group-hover:scale-103">
               <Image
                 src={f.foto}
                 alt={f.nombre}
