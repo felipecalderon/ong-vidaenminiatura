@@ -148,16 +148,19 @@ model peticion {
 
 model firma {
   id             String   @id @default(uuid()) @db.Uuid
-  usuario_id     String   @db.Uuid
   peticion_id    String   @db.Uuid
+  usuario_id     String?  @db.Uuid
+  nombre         String
+  correo         String
   fecha_creacion DateTime @default(now())
 
-  usuario  usuario  @relation(fields: [usuario_id], references: [id], onDelete: Restrict)
+  usuario  usuario? @relation(fields: [usuario_id], references: [id], onDelete: SetNull)
   peticion peticion @relation(fields: [peticion_id], references: [id], onDelete: Cascade)
 
-  @@unique([usuario_id, peticion_id])
+  @@unique([peticion_id, correo])
   @@index([usuario_id])
   @@index([peticion_id])
+  @@index([correo])
 }
 
 model noticia {

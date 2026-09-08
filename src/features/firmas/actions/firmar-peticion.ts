@@ -2,29 +2,40 @@
 
 import { revalidatePath } from "next/cache";
 import { obtenerPeticionPorId } from "@/features/peticiones/repositories/obtener-peticion-por-id";
-import { firmarPeticionSchema } from "@/features/peticiones/schemas/firmar-peticion.schema";
+import {
+  type FirmarPeticionInput,
+  firmarPeticionSchema,
+} from "@/features/peticiones/schemas/firmar-peticion.schema";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { firmarPeticion } from "../services/firmar-peticion";
 
 export async function firmarPeticionAction(
-  peticionId: string,
+  input: FirmarPeticionInput,
 ): Promise<{ success: boolean; error?: string }> {
-  const validation = firmarPeticionSchema.safeParse({ peticionId });
+  const validation = firmarPeticionSchema.safeParse(input);
   if (!validation.success) {
+    const errorMsg =
+      validation.error.issues[0]?.message || "Datos de firma inválidos.";
     return {
       success: false,
-      error: validation.error.message || "ID de petición inválido",
+      error: errorMsg,
     };
   }
 
+  const { peticionId, nombre, correo } = validation.data;
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || !usuario.acceso.puedeAcceder) {
+  // Si hay usuario logueado pero está suspendido o bloqueado
+  if (usuario && !usuario.acceso.puedeAcceder) {
     return {
       success: false,
-      error: "No autorizado. Inicia sesión para firmar.",
+      error: "Tu cuenta de usuario no tiene permisos para realizar acciones.",
     };
   }
+
+  const usuarioId = usuario?.id ?? null;
+  // Si está autenticado, se utiliza el correo de su cuenta
+  const correoFinal = usuario ? usuario.correo.toLowerCase().trim() : correo;
 
   try {
     const peticion = await obtenerPeticionPorId(peticionId);
@@ -32,7 +43,12 @@ export async function firmarPeticionAction(
       return { success: false, error: "La petición no existe." };
     }
 
-    await firmarPeticion(usuario.id, peticionId);
+    await firmarPeticion({
+      peticionId,
+      nombre,
+      correo: correoFinal,
+      usuarioId,
+    });
 
     revalidatePath("/");
     revalidatePath("/peticiones");

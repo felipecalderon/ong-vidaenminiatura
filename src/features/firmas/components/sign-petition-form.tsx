@@ -1,30 +1,60 @@
 "use client";
 
-import { Check, Loader2 } from "lucide-react";
-import Link from "next/link";
-import { useState, useTransition } from "react";
+import { Check, Info, Loader2 } from "lucide-react";
+import { type FormEvent, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { firmarPeticionAction } from "@/features/firmas/actions/firmar-peticion";
+
+interface UsuarioSesion {
+  nombre: string;
+  correo: string;
+}
 
 interface SignPetitionFormProps {
   peticionId: string;
-  usuarioAutenticado: boolean;
   yaFirmoOriginal: boolean;
+  usuarioSesion?: UsuarioSesion | null;
 }
 
 export function SignPetitionForm({
   peticionId,
-  usuarioAutenticado,
   yaFirmoOriginal,
+  usuarioSesion,
 }: SignPetitionFormProps) {
   const [isPending, startTransition] = useTransition();
   const [signed, setSigned] = useState(yaFirmoOriginal);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSign = () => {
+  const [nombre, setNombre] = useState(usuarioSesion?.nombre ?? "");
+  const [correo, setCorreo] = useState(usuarioSesion?.correo ?? "");
+
+  const estaLogueado = Boolean(usuarioSesion);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setError(null);
+
+    const correoFinal = estaLogueado ? usuarioSesion?.correo : correo;
+
+    if (!nombre.trim()) {
+      setError("Por favor, ingresa tu nombre completo.");
+      return;
+    }
+
+    if (!correoFinal && !correoFinal?.trim()) {
+      setError("Por favor, ingresa tu correo electrónico.");
+      return;
+    }
+
     startTransition(async () => {
-      const result = await firmarPeticionAction(peticionId);
+      const result = await firmarPeticionAction({
+        peticionId,
+        nombre: nombre.trim(),
+        correo: correoFinal!.trim().toLowerCase(),
+      });
+
       if (result.success) {
         setSigned(true);
       } else {
@@ -32,27 +62,6 @@ export function SignPetitionForm({
       }
     });
   };
-
-  if (!usuarioAutenticado) {
-    return (
-      <div className="p-6 border border-outline-variant bg-card text-center space-y-4 dark:">
-        <h3 className="text-xl font-bold">Únete y firma esta causa</h3>
-        <p className="text-sm text-muted-foreground">
-          Necesitas iniciar sesión con tu cuenta para poder firmar esta petición
-          y ayudarnos a proteger la biodiversidad.
-        </p>
-        <Button
-          asChild
-          size="lg"
-          className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover:"
-        >
-          <Link href="/auth/login" prefetch={false}>
-            Iniciar sesión
-          </Link>
-        </Button>
-      </div>
-    );
-  }
 
   if (signed) {
     return (
@@ -71,38 +80,99 @@ export function SignPetitionForm({
 
   return (
     <div className="space-y-4 p-6 border border-outline-variant bg-card dark:">
-      <h3 className="text-xl font-bold border-b border-outline-variant pb-2">
-        Firmar petición
-      </h3>
-      <p className="text-sm text-muted-foreground">
-        Al hacer clic en el botón de abajo, registrarás tu apoyo con tu perfil
-        verificado.
-      </p>
+      <div className="border-b border-outline-variant pb-2">
+        <h3 className="text-xl font-bold">Firmar petición</h3>
+        <p className="text-xs text-muted-foreground mt-1">
+          Súmate con tu apoyo para hacer visible esta causa ante las
+          autoridades.
+        </p>
+      </div>
 
       {error && (
-        <div className="p-3 border border-red-600 bg-red-100 text-red-800 text-sm font-semibold">
+        <div className="p-3 border border-red-600 bg-red-100 dark:bg-red-950/40 text-red-800 dark:text-red-300 text-sm font-semibold rounded-sm">
           {error}
         </div>
       )}
 
-      <Button
-        onClick={handleSign}
-        disabled={isPending}
-        className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: disabled:opacity-50 disabled:cursor-not-allowed"
-      >
-        {isPending ? (
-          <>
-            <Loader2 className="h-5 w-5 animate-spin mr-2" />
-            Registrando firma...
-          </>
-        ) : (
-          "Firmar esta petición"
-        )}
-      </Button>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="space-y-1.5">
+          <Label htmlFor="nombre" className="font-semibold text-sm">
+            Nombre completo
+          </Label>
+          <Input
+            id="nombre"
+            name="nombre"
+            type="text"
+            placeholder="Ej. Francisca Pérez"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+            disabled={isPending}
+            required
+            minLength={2}
+            maxLength={100}
+            className="border-outline-variant"
+          />
+        </div>
 
-      <p className="text-xs text-muted-foreground text-center">
-        Tu firma se asociará públicamente a tu cuenta de usuario.
-      </p>
+        <div className="space-y-1.5">
+          <div className="flex items-center justify-between">
+            <Label htmlFor="correo" className="font-semibold text-sm">
+              Correo electrónico
+            </Label>
+            {estaLogueado && (
+              <span className="text-[11px] text-muted-foreground bg-muted px-2 py-0.5 rounded">
+                Cuenta activa
+              </span>
+            )}
+          </div>
+          <Input
+            id="correo"
+            name="correo"
+            type="email"
+            placeholder="tu@correo.com"
+            value={estaLogueado ? usuarioSesion?.correo : correo}
+            onChange={(e) => setCorreo(e.target.value)}
+            readOnly={estaLogueado}
+            disabled={isPending}
+            required
+            className={`border-outline-variant ${
+              estaLogueado ? "bg-muted/50 cursor-not-allowed opacity-90" : ""
+            }`}
+          />
+          {estaLogueado ? (
+            <p className="text-xs text-muted-foreground">
+              Tu firma se vinculará al correo de tu cuenta iniciada.
+            </p>
+          ) : (
+            <p className="text-xs text-muted-foreground">
+              Solo se permite una firma por correo electrónico.
+            </p>
+          )}
+        </div>
+
+        <div className="flex items-start gap-2 p-2.5 bg-muted/30 border border-outline-variant rounded-sm text-xs text-muted-foreground">
+          <Info className="h-4 w-4 shrink-0 mt-0.5 text-primary" />
+          <span>
+            La fecha y hora de tu firma se registrarán automáticamente al
+            confirmar el formulario.
+          </span>
+        </div>
+
+        <Button
+          type="submit"
+          disabled={isPending}
+          className="w-full font-bold text-lg py-6 border border-outline-variant dark: hover: dark:hover: disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+        >
+          {isPending ? (
+            <>
+              <Loader2 className="h-5 w-5 animate-spin mr-2" />
+              Registrando firma...
+            </>
+          ) : (
+            "Firmar esta petición"
+          )}
+        </Button>
+      </form>
     </div>
   );
 }

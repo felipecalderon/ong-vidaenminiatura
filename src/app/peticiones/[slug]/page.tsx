@@ -7,7 +7,7 @@ import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { SignPetitionForm } from "@/features/firmas/components/sign-petition-form";
-import { usuarioYaFirmopeticion } from "@/features/firmas/repositories/usuario-ya-firmo-peticion";
+import { correoYaFirmoPeticion } from "@/features/firmas/repositories/usuario-ya-firmo-peticion";
 import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries/obtener-peticion-detalle-por-slug";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
 import { EstadoPeticion } from "@/generated/prisma/enums";
@@ -86,7 +86,7 @@ export default async function PeticionDetailPage({
   let yaFirmo = false;
 
   if (usuario && peticion.estado === EstadoPeticion.PUBLICADA) {
-    yaFirmo = await usuarioYaFirmopeticion(usuario.id, peticion.id);
+    yaFirmo = await correoYaFirmoPeticion(usuario.correo, peticion.id);
   }
 
   const metaFirmas = peticion.meta_firmas ?? 1000;
@@ -179,8 +179,15 @@ export default async function PeticionDetailPage({
             <>
               <SignPetitionForm
                 peticionId={peticion.id}
-                usuarioAutenticado={!!usuario}
                 yaFirmoOriginal={yaFirmo}
+                usuarioSesion={
+                  usuario
+                    ? {
+                        nombre: usuario.nombre,
+                        correo: usuario.correo,
+                      }
+                    : null
+                }
               />
 
               <BotonCompartirFacebook

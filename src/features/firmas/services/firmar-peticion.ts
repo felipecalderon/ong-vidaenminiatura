@@ -5,10 +5,25 @@ import { Prisma } from "@/generated/prisma/client";
 import { EstadoPeticion } from "@/generated/prisma/enums";
 import { prisma } from "@/lib/prisma";
 import { registrarFirma } from "../repositories/registrar-firma";
-import { usuarioYaFirmopeticion } from "../repositories/usuario-ya-firmo-peticion";
+import { correoYaFirmoPeticion } from "../repositories/usuario-ya-firmo-peticion";
 
-export async function firmarPeticion(usuarioId: string, peticionId: string) {
-  const yaFirmo = await usuarioYaFirmopeticion(usuarioId, peticionId);
+export interface FirmarPeticionParams {
+  peticionId: string;
+  nombre: string;
+  correo: string;
+  usuarioId?: string | null;
+}
+
+export async function firmarPeticion({
+  peticionId,
+  nombre,
+  correo,
+  usuarioId,
+}: FirmarPeticionParams) {
+  const correoNormalizado = correo.trim().toLowerCase();
+  const nombreLimpio = nombre.trim();
+
+  const yaFirmo = await correoYaFirmoPeticion(correoNormalizado, peticionId);
   if (yaFirmo) {
     throw new Error("Ya has firmado esta petición anteriormente.");
   }
@@ -24,7 +39,15 @@ export async function firmarPeticion(usuarioId: string, peticionId: string) {
 
   try {
     return await prisma.$transaction(async (tx) => {
-      const firma = await registrarFirma(usuarioId, peticionId, tx);
+      const firma = await registrarFirma(
+        {
+          peticionId,
+          nombre: nombreLimpio,
+          correo: correoNormalizado,
+          usuarioId: usuarioId ?? null,
+        },
+        tx,
+      );
       await incrementarContadorFirmas(peticionId, tx);
       return firma;
     });

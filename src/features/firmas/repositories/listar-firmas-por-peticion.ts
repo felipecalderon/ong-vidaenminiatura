@@ -9,13 +9,5 @@ export async function listarFirmasPorPeticion(peticionId: string) {
     orderBy: {
       fecha_creacion: "asc",
     },
-    include: {
-      usuario: {
-        select: {
-          nombre: true,
-          correo: true,
-        },
-      },
-    },
   });
 }

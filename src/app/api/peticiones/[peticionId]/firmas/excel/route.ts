@@ -41,8 +41,8 @@ export async function generateExcel(
 
   const filas = firmas.map((firma, index) => ({
     "#": index + 1,
-    Nombre: firma.usuario.nombre,
-    Correo: firma.usuario.correo,
+    Nombre: firma.nombre,
+    Correo: firma.correo,
     "Fecha de firma": new Date(firma.fecha_creacion).toLocaleString("es-ES", {
       day: "2-digit",
       month: "2-digit",

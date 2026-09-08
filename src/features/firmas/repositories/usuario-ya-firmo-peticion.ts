@@ -13,3 +13,16 @@ export async function usuarioYaFirmopeticion(
   });
   return conteo > 0;
 }
+
+export async function correoYaFirmoPeticion(
+  correo: string,
+  peticionId: string,
+): Promise<boolean> {
+  const conteo = await prisma.firma.count({
+    where: {
+      correo: correo.trim().toLowerCase(),
+      peticion_id: peticionId,
+    },
+  });
+  return conteo > 0;
+}
