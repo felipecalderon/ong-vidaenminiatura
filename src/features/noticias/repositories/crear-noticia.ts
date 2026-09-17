@@ -19,6 +19,7 @@ export async function crearNoticia(
       resumen: input.resumen,
       contenido: input.contenido,
       imagen: input.imagen ?? null,
+      imagenes: input.imagenes ?? [],
       categoria_id: input.categoriaId,
       autor_id: autorId,
       estado,

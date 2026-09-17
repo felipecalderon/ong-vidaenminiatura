@@ -51,6 +51,7 @@ export default async function EditarNoticiaPage({
           contenido: noticia.contenido,
           categoriaId: noticia.categoria_id,
           imagen: noticia.imagen,
+          imagenes: noticia.imagenes ?? [],
         }}
         categorias={categorias.map((categoria) => ({
           id: categoria.id,

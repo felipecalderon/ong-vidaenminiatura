@@ -1,3 +1,4 @@
+"use server";
 import { AlertCircle, CheckCircle, LogOut } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";

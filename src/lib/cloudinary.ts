@@ -33,4 +33,16 @@ export async function subirImagenSiExiste(
   return subirImagenACloudinary(file);
 }
 
+export async function subirImagenesACloudinary(
+  files: File[],
+): Promise<string[]> {
+  const urls: string[] = [];
+
+  for (const file of files) {
+    urls.push(await subirImagenACloudinary(file));
+  }
+
+  return urls;
+}
+
 export { cloudinary };

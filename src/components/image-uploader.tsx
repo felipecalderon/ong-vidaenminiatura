@@ -3,19 +3,64 @@
 import { Upload, X } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
+import { prepararImagenParaSubir } from "@/lib/preparar-imagen";
 
 interface ImageUploaderProps {
   previewUrl: string | null;
   onFileSelect: (file: File | undefined) => void;
+  /** Valida y comprime la imagen en el navegador antes de enviarla. */
+  comprimir?: boolean;
 }
 
 export function ImageUploader({
   previewUrl,
   onFileSelect,
+  comprimir = false,
 }: ImageUploaderProps) {
   const [isDragging, setIsDragging] = useState(false);
+  const [comprimiendo, setComprimiendo] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const escribirArchivoEnInput = (file: File | undefined) => {
+    if (!fileInputRef.current) return;
+
+    if (!file) {
+      fileInputRef.current.value = "";
+      return;
+    }
+
+    const dataTransfer = new DataTransfer();
+    dataTransfer.items.add(file);
+    fileInputRef.current.files = dataTransfer.files;
+  };
+
+  const aplicarArchivo = async (file: File | undefined) => {
+    if (!file) {
+      onFileSelect(undefined);
+      return;
+    }
+
+    if (!comprimir) {
+      onFileSelect(file);
+      return;
+    }
+
+    setComprimiendo(true);
+    const resultado = await prepararImagenParaSubir(file);
+    setComprimiendo(false);
+
+    if (!resultado.ok) {
+      toast.error(resultado.mensaje);
+      escribirArchivoEnInput(undefined);
+      onFileSelect(undefined);
+      return;
+    }
+
+    escribirArchivoEnInput(resultado.file);
+    onFileSelect(resultado.file);
+  };
 
   const handleDragOver = (e: React.DragEvent) => {
     e.preventDefault();
@@ -31,12 +76,8 @@ export function ImageUploader({
     setIsDragging(false);
     const file = e.dataTransfer.files?.[0];
     if (file) {
-      onFileSelect(file);
-      if (fileInputRef.current) {
-        const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(file);
-        fileInputRef.current.files = dataTransfer.files;
-      }
+      escribirArchivoEnInput(file);
+      void aplicarArchivo(file);
     }
   };
 
@@ -46,15 +87,13 @@ export function ImageUploader({
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    onFileSelect(file);
+    void aplicarArchivo(file);
   };
 
   const handleRemove = (e: React.MouseEvent) => {
     e.stopPropagation();
     onFileSelect(undefined);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
+    escribirArchivoEnInput(undefined);
   };
 
   return (
@@ -113,13 +152,15 @@ export function ImageUploader({
             isDragging
               ? "border-primary bg-primary/5 scale-[0.99]"
               : "border-outline-variant hover:border-primary/50 hover:bg-muted/30"
-          }`}
+          } ${comprimiendo ? "opacity-60" : ""}`}
         >
           <div className="p-4 rounded-full bg-muted border border-outline-variant mb-4 group-hover:scale-110 transition-transform">
             <Upload className="h-8 w-8 text-muted-foreground" />
           </div>
           <p className="font-semibold text-lg">
-            Arrastra tu imagen de portada aquí
+            {comprimiendo
+              ? "Optimizando imagen..."
+              : "Arrastra tu imagen de portada aquí"}
           </p>
           <p className="text-sm text-muted-foreground mt-1">
             o haz clic para buscar en tus archivos

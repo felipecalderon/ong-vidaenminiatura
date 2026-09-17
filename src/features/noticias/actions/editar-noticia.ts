@@ -4,7 +4,15 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { generarExtractoAction } from "@/actions/generar-extracto";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { subirImagenSiExiste } from "@/lib/cloudinary";
+import {
+  subirImagenesACloudinary,
+  subirImagenSiExiste,
+} from "@/lib/cloudinary";
+import { validarArchivosImagenServidor } from "@/lib/preparar-imagen";
+import {
+  extraerArchivosGaleria,
+  resolverOrdenGaleria,
+} from "../lib/galeria-orden";
 import { editarNoticiaSchema } from "../schemas/editar-noticia.schema";
 import { editarNoticiaExistente } from "../services/editar-noticia-existente";
 import type { NoticiaActionState } from "./noticia-action-state";
@@ -43,6 +51,47 @@ export async function editarNoticiaAction(
     };
   }
 
+  const archivosGaleria = extraerArchivosGaleria(formData);
+  const errorGaleria = validarArchivosImagenServidor(archivosGaleria);
+
+  if (errorGaleria) {
+    return {
+      success: false,
+      error: errorGaleria,
+      fields: rawData,
+    };
+  }
+
+  let urlsNuevasGaleria: string[] = [];
+
+  if (archivosGaleria.length > 0) {
+    try {
+      urlsNuevasGaleria = await subirImagenesACloudinary(archivosGaleria);
+    } catch (_e) {
+      return {
+        success: false,
+        error: "Error al subir las imágenes de la galería a la nube.",
+        fields: rawData,
+      };
+    }
+  }
+
+  const ordenGaleriaRaw = formData.get("imagenesOrden");
+  // Un cliente que no envía el orden (ni archivos nuevos) no debe borrar la
+  // galería ya guardada.
+  const imagenesGaleria =
+    ordenGaleriaRaw === null && archivosGaleria.length === 0
+      ? undefined
+      : resolverOrdenGaleria(ordenGaleriaRaw, urlsNuevasGaleria);
+
+  if (imagenesGaleria && !imagenesGaleria.ok) {
+    return {
+      success: false,
+      error: imagenesGaleria.error,
+      fields: rawData,
+    };
+  }
+
   // Generar el extracto SEO con IA automáticamente
   const extractoResult = await generarExtractoAction({
     titulo: rawData.titulo,
@@ -61,6 +110,7 @@ export async function editarNoticiaAction(
     ...rawData,
     resumen: extractoResult.extracto,
     imagen: imagenUrl,
+    imagenes: imagenesGaleria?.imagenes,
   });
 
   if (!parseResult.success) {

@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { MAX_IMAGENES_GALERIA } from "@/lib/preparar-imagen";
 
 export const crearNoticiaSchema = z.object({
   titulo: z
@@ -15,6 +16,14 @@ export const crearNoticiaSchema = z.object({
     .string()
     .min(100, "El contenido debe tener al menos 100 caracteres"),
   imagen: z.string().optional().nullable(),
+  imagenes: z
+    .array(z.string().url("La URL de una imagen de la galería no es válida"))
+    .max(
+      MAX_IMAGENES_GALERIA,
+      `Puedes subir hasta ${MAX_IMAGENES_GALERIA} imágenes por noticia`,
+    )
+    .optional()
+    .default([]),
   categoriaId: z.string().uuid("La categoría seleccionada no es válida"),
 });
 

@@ -36,6 +36,12 @@ export async function comprimirImagenCliente(
           }
         }
 
+        // Si la imagen no expone dimensiones válidas (algunos SVG sin tamaño
+        // definido), se sube el archivo original para no generar un blob vacío.
+        if (width <= 0 || height <= 0) {
+          return resolve(file);
+        }
+
         const canvas = document.createElement("canvas");
         canvas.width = width;
         canvas.height = height;
@@ -62,16 +68,13 @@ export async function comprimirImagenCliente(
                 calidad -= 0.1;
                 exportarBlob(calidad);
               } else {
-                // Crear un nuevo File a partir del Blob
-                const extension = file.name.split(".").pop() || "jpg";
-                const nombreBase = file.name.substring(
-                  0,
-                  file.name.lastIndexOf("."),
-                );
+                // Crear un nuevo File a partir del Blob (siempre JPEG)
+                const nombreBase =
+                  file.name.replace(/\.[^./\\]+$/, "") || "imagen";
                 const nuevoArchivo = new File(
                   [blob],
-                  `${nombreBase}_compressed.${extension}`,
-                  { type: blob.type, lastModified: Date.now() },
+                  `${nombreBase}_compressed.jpg`,
+                  { type: "image/jpeg", lastModified: Date.now() },
                 );
                 resolve(nuevoArchivo);
               }

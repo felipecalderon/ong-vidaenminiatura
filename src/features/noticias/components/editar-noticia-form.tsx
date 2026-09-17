@@ -2,6 +2,7 @@
 
 import { Loader2 } from "lucide-react";
 import { ImageUploader } from "@/components/image-uploader";
+import { MultiImageUploader } from "@/components/multi-image-uploader";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -23,6 +24,7 @@ interface EditarNoticiaFormProps {
     contenido: string;
     categoriaId: string;
     imagen: string | null;
+    imagenes: string[];
   };
   categorias: {
     id: string;
@@ -39,8 +41,14 @@ export function EditarNoticiaForm({
     formAction,
     isPending,
     previewUrl,
+    itemsGaleria,
+    ordenGaleria,
+    comprimiendoGaleria,
     validateField,
     processImageFile,
+    agregarImagenesGaleria,
+    moverImagenGaleria,
+    eliminarImagenGaleria,
     handleSubmit,
     getFieldError,
   } = useEditarNoticiaForm(noticia);
@@ -67,6 +75,7 @@ export function EditarNoticiaForm({
         name="imagenExistente"
         value={noticia.imagen || ""}
       />
+      <input type="hidden" name="imagenesOrden" value={ordenGaleria} readOnly />
 
       {/* Titulo */}
       <div className="space-y-2">
@@ -139,10 +148,35 @@ export function EditarNoticiaForm({
         <ImageUploader
           previewUrl={previewUrl}
           onFileSelect={processImageFile}
+          comprimir
         />
         {getFieldError("imagen") && (
           <p className="text-red-600 text-sm font-semibold">
             {getFieldError("imagen")}
+          </p>
+        )}
+      </div>
+
+      {/* Galería */}
+      <div className="space-y-3">
+        <Label htmlFor="imagenesArchivos" className="text-lg font-bold">
+          Galería de imágenes (opcional)
+        </Label>
+        <p className="text-sm text-muted-foreground">
+          Se mostrarán al final de la noticia, en el orden que definas aquí.
+        </p>
+
+        <MultiImageUploader
+          items={itemsGaleria}
+          onFilesSelected={agregarImagenesGaleria}
+          onRemove={eliminarImagenGaleria}
+          onMove={moverImagenGaleria}
+          comprimiendo={comprimiendoGaleria}
+        />
+
+        {getFieldError("imagenes") && (
+          <p className="text-red-600 text-sm font-semibold">
+            {getFieldError("imagenes")}
           </p>
         )}
       </div>

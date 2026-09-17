@@ -4,7 +4,12 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { generarExtractoAction } from "@/actions/generar-extracto";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { subirImagenACloudinary } from "@/lib/cloudinary";
+import {
+  subirImagenACloudinary,
+  subirImagenesACloudinary,
+} from "@/lib/cloudinary";
+import { validarArchivosImagenServidor } from "@/lib/preparar-imagen";
+import { extraerArchivosGaleria } from "../lib/galeria-orden";
 import { crearNoticiaSchema } from "../schemas/crear-noticia.schema";
 import { crearNuevaNoticia } from "../services/crear-nueva-noticia";
 import type { NoticiaActionState } from "./noticia-action-state";
@@ -44,10 +49,36 @@ export async function crearNoticiaAction(
     }
   }
 
+  const archivosGaleria = extraerArchivosGaleria(formData);
+  const errorGaleria = validarArchivosImagenServidor(archivosGaleria);
+
+  if (errorGaleria) {
+    return {
+      success: false,
+      error: errorGaleria,
+      fields: rawData,
+    };
+  }
+
+  let imagenesUrls: string[] = [];
+
+  if (archivosGaleria.length > 0) {
+    try {
+      imagenesUrls = await subirImagenesACloudinary(archivosGaleria);
+    } catch (_e) {
+      return {
+        success: false,
+        error: "Error al subir las imágenes de la galería a la nube.",
+        fields: rawData,
+      };
+    }
+  }
+
   // Pre-validar campos básicos antes de llamar a la IA
   const parseResult = crearNoticiaSchema.safeParse({
     ...rawData,
     imagen: imagenUrl,
+    imagenes: imagenesUrls,
   });
 
   if (!parseResult.success) {

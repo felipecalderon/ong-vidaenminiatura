@@ -9,9 +9,11 @@ import { Button } from "@/components/ui/button";
 import { Progress } from "@/components/ui/progress";
 import { SignPetitionForm } from "@/features/firmas/components/sign-petition-form";
 import { correoYaFirmoPeticion } from "@/features/firmas/repositories/usuario-ya-firmo-peticion";
+import { BotonEnviarRevisionPeticion } from "@/features/peticiones/components/boton-enviar-revision-peticion";
+import { BotonPublicarPeticion } from "@/features/peticiones/components/boton-publicar-peticion";
 import { obtenerPeticionDetallePorSlug } from "@/features/peticiones/queries/obtener-peticion-detalle-por-slug";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { EstadoPeticion } from "@/generated/prisma/enums";
+import { EstadoPeticion, Rol } from "@/generated/prisma/enums";
 
 interface PeticionDetailPageProps {
   params: Promise<{
@@ -32,7 +34,15 @@ const obtenerPeticionVisiblePorSlug = cache(async (slug: string) => {
 
   const usuario = await obtenerUsuarioAutenticado();
 
-  if (!usuario || usuario.id !== peticion.usuario.id) {
+  if (!usuario) {
+    return null;
+  }
+
+  const esPropia = usuario.id === peticion.usuario.id;
+  const esAdmin = usuario.rol === Rol.ADMINISTRADOR;
+
+  // Una petición sin publicar solo es visible para su creador o un administrador
+  if (!esPropia && !esAdmin) {
     return null;
   }
 
@@ -90,6 +100,23 @@ export default async function PeticionDetailPage({
     yaFirmo = await correoYaFirmoPeticion(usuario.correo, peticion.id);
   }
 
+  const esPropia = usuario?.id === peticion.usuario.id;
+  const esAdmin = usuario?.rol === Rol.ADMINISTRADOR;
+
+  // Publicar una petición es una acción exclusiva del administrador
+  const puedePublicar =
+    esAdmin &&
+    usuario?.acceso.puedeAcceder === true &&
+    (peticion.estado === EstadoPeticion.BORRADOR ||
+      peticion.estado === EstadoPeticion.REVISION);
+
+  // El creador solo puede enviar su propio borrador a moderación
+  const puedeEnviarARevision =
+    !esAdmin &&
+    esPropia &&
+    peticion.estado === EstadoPeticion.BORRADOR &&
+    usuario?.acceso.puedeGestionarContenidoPropio === true;
+
   const metaFirmas = peticion.meta_firmas ?? 1000;
   const progress = Math.min((peticion.cantidad_firmas / metaFirmas) * 100, 100);
 
@@ -122,6 +149,21 @@ export default async function PeticionDetailPage({
               {peticion.resumen}
             </p>
           </div>
+
+          {(puedePublicar || puedeEnviarARevision) && (
+            <div className="flex flex-col gap-3 border border-amber-300 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between dark:border-amber-900 dark:bg-amber-950/30">
+              <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
+                {peticion.estado === EstadoPeticion.BORRADOR
+                  ? "Esta petición está en borrador y todavía no es visible para el público."
+                  : "Esta petición está en revisión y todavía no es visible para el público."}
+              </p>
+              {puedePublicar ? (
+                <BotonPublicarPeticion peticionId={peticion.id} />
+              ) : (
+                <BotonEnviarRevisionPeticion peticionId={peticion.id} />
+              )}
+            </div>
+          )}
 
           {peticion.imagen && (
             <div className="relative aspect-video border border-outline-variant overflow-hidden dark:">

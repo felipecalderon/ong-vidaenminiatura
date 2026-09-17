@@ -6,8 +6,27 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 # Reglas estrictas
 
-**Toda la lógica de negocio ocurre en Services. Las consultas se realizan desde Server Components mediante Repositories o Queries. Las mutaciones se realizan mediante Server Actions. Los componentes React sólo presentan datos y capturan interacción del usuario. page.tsx coordina la carga inicial de datos y compone la página entregando props a los componentes hijos**
+## Arquitectura
 
-**Jamas hacer build ni lint, se hará siempre manualmente al final de cada hito**
+- Preferir **Server Components** por defecto. Utilizar `"use client"` únicamente cuando sea necesario para interacción o estado del navegador.
+- `page.tsx` coordina la carga inicial de datos y compone la página pasando props a componentes hijos.
+- Los componentes React son exclusivamente de **presentación e interacción**. No contienen lógica de negocio ni acceden directamente a MongoDB, Resend u otros servicios externos.
+- Toda la lógica de negocio debe vivir en `Services`.
+- Las consultas se realizan desde **Server Components** mediante `Queries` y/o `Repositories`.
+- Las mutaciones se realizan mediante **Server Actions**. Los Client Components pueden invocarlas mediante `useTransition` cuando necesiten gestionar estado `pending`.
+- Jamás utilizar `useEffect` + `fetch` para obtener datos iniciales cuando puedan utilizarse Server Components.
+- Mantener los Client Components pequeños y atomizados.
+- Mantener las funcionalidades de Client Components en custom hooks.
+
+## Organización del código
+
+- Mantener constantes, tipos y funciones utilitarias fuera de los componentes y organizados según su responsabilidad.
+- Evitar abstracciones innecesarias y mantener una arquitectura simple y consistente.
+- No duplicar lógica de negocio entre Actions, Services, Queries o componentes.
+
+## Validaciones
+
+**No ejecutar `build`, `lint` ni procesos equivalentes automáticamente.** Se ejecutarán manualmente al finalizar cada hito.
+**Búsqueda de archivos, carpetas y navegación: Utilizar skill de codegraph**
 
 <!-- END:nextjs-agent-rules -->

@@ -6,10 +6,12 @@ import { notFound } from "next/navigation";
 import { BotonCompartirFacebook } from "@/components/compartido/boton-compartir-facebook";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { BotonPublicarNoticia } from "@/features/noticias/components/boton-publicar-noticia";
+import { NoticiaGaleria } from "@/features/noticias/components/noticia-galeria";
 import { NoticiaMarkdownContent } from "@/features/noticias/components/noticia-markdown-content";
 import { obtenerNoticiaDetallePorSlug } from "@/features/noticias/queries/obtener-noticia-detalle-por-slug";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { EstadoNoticia } from "@/generated/prisma/enums";
+import { EstadoNoticia, Rol } from "@/generated/prisma/enums";
 
 interface NoticiaDetailPageProps {
   params: Promise<{
@@ -29,7 +31,11 @@ export async function generateMetadata({
 
   if (noticia.estado !== EstadoNoticia.PUBLICADA) {
     const usuario = await obtenerUsuarioAutenticado();
-    if (!usuario || usuario.id !== noticia.autor_id) {
+
+    if (
+      !usuario ||
+      (usuario.id !== noticia.autor_id && usuario.rol !== Rol.ADMINISTRADOR)
+    ) {
       return { title: "Noticia no encontrada" };
     }
   }
@@ -66,12 +72,25 @@ export default async function NoticiaDetailPage({
     notFound();
   }
 
-  if (noticia.estado !== EstadoNoticia.PUBLICADA) {
-    const usuario = await obtenerUsuarioAutenticado();
-    if (!usuario || usuario.id !== noticia.autor_id) {
-      notFound();
-    }
+  const estaPublicada = noticia.estado === EstadoNoticia.PUBLICADA;
+  const usuario = estaPublicada ? null : await obtenerUsuarioAutenticado();
+  const esPropia = usuario?.id === noticia.autor_id;
+  const esAdmin = usuario?.rol === Rol.ADMINISTRADOR;
+
+  // Una noticia sin publicar solo es visible para su autor o un administrador
+  if (!estaPublicada && !esPropia && !esAdmin) {
+    notFound();
   }
+
+  // Solo puede publicar el administrador, o el autor cuando está en borrador
+  const estadoPublicable =
+    noticia.estado === EstadoNoticia.BORRADOR ||
+    noticia.estado === EstadoNoticia.REVISION;
+
+  const puedePublicar =
+    estadoPublicable &&
+    usuario?.acceso.puedeCrearContenido === true &&
+    (esAdmin || (esPropia && noticia.estado === EstadoNoticia.BORRADOR));
 
   const formattedDate = noticia.fecha_publicacion
     ? new Date(noticia.fecha_publicacion).toLocaleDateString("es-ES", {
@@ -110,16 +129,6 @@ export default async function NoticiaDetailPage({
 
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight flex flex-wrap items-center gap-3">
           <span>{noticia.titulo}</span>
-          {noticia.estado !== EstadoNoticia.PUBLICADA && (
-            <Badge
-              variant="secondary"
-              className="bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border-amber-200 dark:border-amber-900 text-sm font-semibold"
-            >
-              {noticia.estado === EstadoNoticia.BORRADOR
-                ? "Borrador - Solo visible para ti"
-                : "En revisión - Solo visible para ti"}
-            </Badge>
-          )}
         </h1>
 
         <p className="text-lg font-semibold text-muted-foreground leading-relaxed">
@@ -142,6 +151,17 @@ export default async function NoticiaDetailPage({
         </div>
       </div>
 
+      {puedePublicar && (
+        <div className="mb-8 flex flex-col gap-3 border border-amber-300 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between dark:border-amber-900 dark:bg-amber-950/30">
+          <p className="text-sm font-semibold text-amber-900 dark:text-amber-200">
+            {noticia.estado === EstadoNoticia.BORRADOR
+              ? "Esta noticia está en borrador y todavía no es visible para el público."
+              : "Esta noticia está en revisión y puedes publicarla para el público."}
+          </p>
+          <BotonPublicarNoticia noticiaId={noticia.id} />
+        </div>
+      )}
+
       <BotonCompartirFacebook slug={slug} tipo="noticia" />
 
       {/* Image */}
@@ -159,6 +179,11 @@ export default async function NoticiaDetailPage({
       )}
 
       <NoticiaMarkdownContent content={noticia.contenido} />
+
+      <NoticiaGaleria
+        imagenes={noticia.imagenes ?? []}
+        titulo={noticia.titulo}
+      />
     </div>
   );
 }

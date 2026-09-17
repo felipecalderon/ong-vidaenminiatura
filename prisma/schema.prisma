@@ -170,6 +170,7 @@ model noticia {
   resumen             String
   contenido           String
   imagen              String?
+  imagenes            String[]       @default([])
   estado              EstadoNoticia  @default(BORRADOR)
   categoria_id        String         @db.Uuid
   autor_id            String         @db.Uuid
@@ -280,4 +281,3 @@ model invitacion {
   @@index([expira_at])
   @@index([creada_por_id])
 }
-

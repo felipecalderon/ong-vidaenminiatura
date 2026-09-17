@@ -17,6 +17,7 @@ export async function actualizarNoticia(
       resumen: input.resumen,
       contenido: input.contenido,
       imagen: input.imagen ?? null,
+      imagenes: input.imagenes ?? undefined,
       categoria_id: input.categoriaId,
       estado,
     },

@@ -12,6 +12,7 @@ export type NoticiaConRelaciones = {
   resumen: string;
   contenido: string;
   imagen: string | null;
+  imagenes: string[];
   categoria_id: string;
   autor_id: string;
   fecha_publicacion: Date | null;
