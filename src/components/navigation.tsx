@@ -72,35 +72,32 @@ function DesktopGroup({
         aria-expanded={open}
         aria-haspopup="true"
         className={cn(
-          "relative px-3 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all duration-200 active:scale-95 flex items-center gap-1.5 overflow-hidden border",
+          "relative px-3.5 py-1.5 text-sm font-semibold font-headline tracking-tight rounded-full transition-all duration-200 active:scale-95 flex items-center gap-1.5",
           isActive
-            ? "bg-primary/12 text-primary border-primary/25"
-            : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 border-transparent",
+            ? "bg-primary/12 text-primary font-bold dark:bg-primary/20"
+            : "text-on-surface-variant hover:text-on-surface hover:bg-foreground/5",
         )}
       >
-        <span className="relative z-10">{label}</span>
+        <span>{label}</span>
         <ChevronDown
           className={cn(
-            "relative z-10 w-3.5 h-3.5 transition-transform duration-200",
+            "w-3.5 h-3.5 transition-transform duration-200 opacity-70",
             open && "rotate-180",
           )}
         />
-        {isActive && (
-          <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full mx-4" />
-        )}
       </button>
 
       {/* Popover panel */}
       <div
         className={cn(
-          "absolute top-full left-1/2 -translate-x-1/2 mt-2 min-w-40 rounded-xl border border-outline-variant bg-surface-container shadow-md overflow-hidden z-50",
+          "absolute top-full left-1/2 -translate-x-1/2 mt-2.5 min-w-44 rounded-2xl border border-outline-variant/60 dark:border-white/10 bg-surface/95 dark:bg-surface-container/90 backdrop-blur-xl shadow-xl overflow-hidden z-50 p-1.5",
           "transition-all duration-200 origin-top",
           open
-            ? "opacity-100 scale-y-100 translate-y-0 pointer-events-auto"
-            : "opacity-0 scale-y-95 -translate-y-1 pointer-events-none",
+            ? "opacity-100 scale-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 scale-95 -translate-y-1 pointer-events-none",
         )}
       >
-        <div className="flex flex-col py-1.5">
+        <div className="flex flex-col gap-0.5">
           {items.map((item) => {
             const active = pathname.startsWith(item.href);
             return (
@@ -109,10 +106,10 @@ function DesktopGroup({
                 href={item.href}
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "px-4 py-2.5 text-sm font-semibold font-headline tracking-tight transition-colors duration-150 flex items-center justify-between",
+                  "px-3.5 py-2 text-sm font-medium font-headline tracking-tight rounded-xl transition-colors duration-150 flex items-center justify-between",
                   active
-                    ? "text-primary bg-primary/8"
-                    : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60",
+                    ? "text-primary font-bold bg-primary/10 dark:bg-primary/20"
+                    : "text-on-surface-variant hover:text-on-surface hover:bg-foreground/5",
                 )}
               >
                 <span>{item.label}</span>
@@ -149,16 +146,16 @@ function MobileGroup({
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         className={cn(
-          "relative px-4 py-3.5 text-base font-bold rounded-xl transition-all duration-300 active:scale-[0.98] flex items-center justify-between border",
+          "relative px-4 py-3 text-base font-bold rounded-2xl transition-all duration-200 active:scale-[0.98] flex items-center justify-between",
           isActive
-            ? "bg-primary/10 text-primary border-primary/20"
-            : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 border-transparent",
+            ? "bg-primary/10 text-primary"
+            : "text-on-surface-variant hover:text-on-surface hover:bg-foreground/5",
         )}
       >
         <span>{label}</span>
         <ChevronDown
           className={cn(
-            "w-4 h-4 transition-transform duration-300",
+            "w-4 h-4 transition-transform duration-200 opacity-70",
             open && "rotate-180",
           )}
         />
@@ -179,10 +176,10 @@ function MobileGroup({
                 <Link
                   href={item.href}
                   className={cn(
-                    "relative px-4 py-3 text-sm font-semibold rounded-lg transition-all duration-200 active:scale-[0.98] flex items-center justify-between border",
+                    "relative px-4 py-2.5 text-sm font-medium rounded-xl transition-all duration-200 active:scale-[0.98] flex items-center justify-between",
                     active
-                      ? "bg-primary/10 text-primary border-primary/20"
-                      : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 border-transparent",
+                      ? "bg-primary/10 text-primary font-bold"
+                      : "text-on-surface-variant hover:text-on-surface hover:bg-foreground/5",
                   )}
                 >
                   <span>{item.label}</span>
@@ -224,7 +221,7 @@ export function Navigation({
 
   if (variant === "mobile") {
     return (
-      <nav className={cn("flex flex-col gap-2 w-full", className)}>
+      <nav className={cn("flex flex-col gap-1.5 w-full", className)}>
         {navStructure.map((item) => {
           if (item.type === "link") {
             const active = isLinkActive(item.href);
@@ -233,10 +230,10 @@ export function Navigation({
                 <Link
                   href={item.href}
                   className={cn(
-                    "relative px-4 py-3.5 text-base font-bold rounded-xl transition-all duration-300 active:scale-[0.98] flex items-center justify-between group border",
+                    "relative px-4 py-3 text-base font-bold rounded-2xl transition-all duration-200 active:scale-[0.98] flex items-center justify-between group",
                     active
-                      ? "bg-primary/10 text-primary border-primary/20"
-                      : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/50 border-transparent",
+                      ? "bg-primary/10 text-primary"
+                      : "text-on-surface-variant hover:text-on-surface hover:bg-foreground/5",
                   )}
                 >
                   <span>{item.label}</span>
@@ -272,16 +269,13 @@ export function Navigation({
               key={item.href}
               href={item.href}
               className={cn(
-                "relative px-3 py-2 text-sm font-semibold font-headline tracking-tight rounded-lg transition-all duration-200 active:scale-95 flex items-center justify-center overflow-hidden border",
+                "relative px-3.5 py-1.5 text-sm font-semibold font-headline tracking-tight rounded-full transition-all duration-200 active:scale-95 flex items-center justify-center",
                 active
-                  ? "bg-primary/12 text-primary border-primary/25"
-                  : "text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60 border-transparent",
+                  ? "bg-primary/12 text-primary font-bold dark:bg-primary/20"
+                  : "text-on-surface-variant hover:text-on-surface hover:bg-foreground/5",
               )}
             >
-              <span className="relative z-10">{item.label}</span>
-              {active && (
-                <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full mx-4" />
-              )}
+              <span>{item.label}</span>
             </Link>
           );
         }

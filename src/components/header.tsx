@@ -21,22 +21,20 @@ interface HeaderProps {
 
 export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-outline-variant/70 bg-background/85 backdrop-blur-xl">
-      <div className="container mx-auto flex h-18 items-center justify-between px-4 sm:px-6">
+    <header className="sticky top-0 z-50 w-full px-3 pt-3 sm:px-6 sm:pt-4 pointer-events-none transition-all duration-300">
+      <div className="container mx-auto max-w-6xl pointer-events-auto flex h-16 items-center justify-between px-4 sm:px-6 rounded-2xl sm:rounded-full bg-surface/80 dark:bg-surface-container-low/75 backdrop-blur-xl border border-outline-variant/50 dark:border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.04)] dark:shadow-[0_8px_30px_rgb(0,0,0,0.35)] transition-all duration-300">
         <Link
           href="/"
-          className="group flex items-center gap-3 active:scale-95 transition-transform duration-100"
+          className="group flex items-center gap-2.5 active:scale-95 transition-transform duration-150"
         >
-          <div className="flex items-center justify-center text-primary">
-            <LogoIcon size={45} />
+          <div className="flex items-center justify-center text-primary transition-transform duration-300 group-hover:scale-105">
+            <LogoIcon size={38} />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-[0.8rem] font-extrabold uppercase tracking-[0.12em] text-green-600">
+            <span className="text-[0.75rem] font-extrabold uppercase tracking-[0.12em] text-green-600 dark:text-emerald-400">
               Más
             </span>
-            <span className="text-xl font-black tracking-[-0.06em]">
-              Insectos
-            </span>
+            <span className="text-lg font-black tracking-tight">Insectos</span>
           </div>
         </Link>
 
@@ -49,7 +47,7 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
           {usuarioAutenticado?.acceso.esAdministrador && (
             <Link
               href="/administracion"
-              className="hidden sm:flex h-9 w-9 items-center justify-center rounded-lg text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
+              className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface"
               title="Administración"
             >
               <Settings className="h-5 w-5" />
@@ -58,7 +56,7 @@ export function Header({ usuarioAutenticado, currentTheme }: HeaderProps) {
           )}
 
           <Sheet>
-            <SheetTrigger className="inline-flex size-10 items-center justify-center rounded-lg border border-outline-variant text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface md:hidden">
+            <SheetTrigger className="inline-flex size-10 items-center justify-center rounded-full border border-outline-variant/60 dark:border-white/10 text-on-surface-variant transition-colors hover:bg-surface-container-high hover:text-on-surface md:hidden">
               <Menu className="h-5 w-5" />
               <span className="sr-only">Abrir menú</span>
             </SheetTrigger>
