@@ -25,13 +25,13 @@ const DAMPING = 0.9;
 const MAX_SPEED = 5.2;
 const ORBIT_PULL = 0.012; // how strongly they settle onto their ring
 const TANGENT = 0.09; // orbiting force
-const FLEE_FORCE = 26; // repulsion strength
+const FLEE_FORCE = 1.3; // effective repulsion strength
 
 export function CursorSwarm() {
-  const containerRef = useRef<HTMLDivElement>(null);
   const nodesRef = useRef<(HTMLDivElement | null)[]>([]);
   const bugsRef = useRef<Bug[]>([]);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
+  const viewportRef = useRef({ width: 0, height: 0 });
 
   // Per-insect visual traits generated on the client only (avoids SSR/client
   // hydration mismatch from Math.random()).
@@ -50,8 +50,16 @@ export function CursorSwarm() {
   }, []);
 
   useEffect(() => {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
+    const updateDimensions = () => {
+      viewportRef.current = {
+        width: window.innerWidth,
+        height: window.innerHeight,
+      };
+    };
+
+    updateDimensions();
+    const w = viewportRef.current.width;
+    const h = viewportRef.current.height;
     mouseRef.current = { x: w / 2, y: h / 2, active: false };
 
     // Seed the swarm around the centre
@@ -84,7 +92,10 @@ export function CursorSwarm() {
 
     window.addEventListener("mousemove", onMove);
     window.addEventListener("touchmove", onTouch, { passive: true });
-    window.addEventListener("mouseout", onLeave);
+    window.addEventListener("touchend", onLeave, { passive: true });
+    window.addEventListener("touchcancel", onLeave, { passive: true });
+    document.addEventListener("mouseleave", onLeave);
+    window.addEventListener("resize", updateDimensions);
 
     let raf = 0;
     let last = performance.now();
@@ -94,14 +105,11 @@ export function CursorSwarm() {
       last = now;
       const t = now / 1000;
       const m = mouseRef.current;
+      const { width: vw, height: vh } = viewportRef.current;
 
       // Idle target drifts gently if the pointer isn't active
-      const targetX = m.active
-        ? m.x
-        : window.innerWidth / 2 + Math.cos(t * 0.3) * 120;
-      const targetY = m.active
-        ? m.y
-        : window.innerHeight / 2 + Math.sin(t * 0.4) * 90;
+      const targetX = m.active ? m.x : vw / 2 + Math.cos(t * 0.3) * 120;
+      const targetY = m.active ? m.y : vh / 2 + Math.sin(t * 0.4) * 90;
 
       for (let i = 0; i < bugsRef.current.length; i++) {
         const b = bugsRef.current[i];
@@ -124,8 +132,8 @@ export function CursorSwarm() {
         // Flee: sharp, smooth repulsion when the cursor gets close
         if (dist < FLEE_RADIUS) {
           const push = (1 - dist / FLEE_RADIUS) ** 2 * FLEE_FORCE;
-          ax -= nx * push * 0.05;
-          ay -= ny * push * 0.05;
+          ax -= nx * push;
+          ay -= ny * push;
         }
 
         // Organic wander so flight never looks robotic
@@ -145,13 +153,14 @@ export function CursorSwarm() {
         b.x += b.vx * dt;
         b.y += b.vy * dt;
 
-        // Smoothly rotate toward direction of travel
+        // Smoothly rotate toward direction of travel (framerate-independent)
         if (sp > 0.15) {
           const target = Math.atan2(b.vy, b.vx);
           let diff = target - b.angle;
           while (diff > Math.PI) diff -= Math.PI * 2;
           while (diff < -Math.PI) diff += Math.PI * 2;
-          b.angle += diff * 0.15;
+          const rotationSmoothing = 1 - (1 - 0.15) ** dt;
+          b.angle += diff * rotationSmoothing;
         }
 
         const node = nodesRef.current[i];
@@ -172,13 +181,15 @@ export function CursorSwarm() {
       cancelAnimationFrame(raf);
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("touchmove", onTouch);
-      window.removeEventListener("mouseout", onLeave);
+      window.removeEventListener("touchend", onLeave);
+      window.removeEventListener("touchcancel", onLeave);
+      document.removeEventListener("mouseleave", onLeave);
+      window.removeEventListener("resize", updateDimensions);
     };
   }, []);
 
   return (
     <div
-      ref={containerRef}
       className="pointer-events-none fixed inset-0 z-50 overflow-hidden"
       aria-hidden="true"
     >
