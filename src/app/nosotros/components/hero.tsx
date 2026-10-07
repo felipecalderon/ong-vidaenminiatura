@@ -21,7 +21,7 @@ export const HeroSection = () => {
               </span>
             </h1>
 
-            <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
+            <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg text-balance">
               Somos una organización de derecho animal nacida en el corazón de
               La Araucanía. Bajo la firme convicción de que los insectos,
               arácnidos y todos los animales no humanos son seres sintientes,

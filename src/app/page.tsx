@@ -59,7 +59,7 @@ export default async function HomePage() {
               <h1 className="mb-5 text-4xl font-headline font-black leading-[0.95] tracking-[-0.045em] text-on-background md:text-6xl lg:text-7xl">
                 {featuredPeticion.titulo}
               </h1>
-              <p className="mb-8 max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg">
+              <p className="mb-8 max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg text-balance">
                 {featuredPeticion.resumen}
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">

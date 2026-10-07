@@ -1,4 +1,4 @@
-import { ArrowLeft, Calendar, User } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, User } from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -131,7 +131,7 @@ export default async function NoticiaDetailPage({
           <span>{noticia.titulo}</span>
         </h1>
 
-        <p className="text-lg font-semibold text-muted-foreground leading-relaxed">
+        <p className="text-lg font-semibold text-balance text-muted-foreground leading-relaxed">
           {noticia.resumen}
         </p>
 
@@ -162,8 +162,6 @@ export default async function NoticiaDetailPage({
         </div>
       )}
 
-      <BotonCompartirFacebook slug={slug} tipo="noticia" />
-
       {/* Image */}
       {noticia.imagen && (
         <div className="relative aspect-video w-full mb-10 border border-outline-variant overflow-hidden">
@@ -178,7 +176,13 @@ export default async function NoticiaDetailPage({
         </div>
       )}
 
-      <NoticiaMarkdownContent content={noticia.contenido} />
+      <BotonCompartirFacebook slug={slug} tipo="noticia" asChild>
+        <Button className="inline-flex items-center gap-2 rounded-lg cursor-pointer px-5 py-2.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary transition-colors bg-sky-800 hover:bg-sky-950">
+          Compartir en Facebook <ArrowRight />
+        </Button>
+      </BotonCompartirFacebook>
+
+      <NoticiaMarkdownContent content={noticia.contenido} className="pt-8" />
 
       <NoticiaGaleria
         imagenes={noticia.imagenes ?? []}

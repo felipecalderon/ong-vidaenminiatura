@@ -1,6 +1,6 @@
 "use client";
 
-import { Check, Info, Loader2 } from "lucide-react";
+import { Check, Loader2 } from "lucide-react";
 import { type FormEvent, useState, useTransition } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -148,14 +148,6 @@ export function SignPetitionForm({
               Solo se permite una firma por correo electrónico.
             </p>
           )}
-        </div>
-
-        <div className="flex items-start gap-2 p-2.5 bg-muted/30 border border-outline-variant rounded-sm text-xs text-muted-foreground">
-          <Info className="h-4 w-4 shrink-0 mt-0.5 text-primary" />
-          <span>
-            La fecha y hora de tu firma se registrarán automáticamente al
-            confirmar el formulario.
-          </span>
         </div>
 
         <Button

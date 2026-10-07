@@ -27,6 +27,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Validaciones
 
 **No ejecutar `build`, `lint` ni procesos equivalentes automáticamente.** Se ejecutarán manualmente al finalizar cada hito.
-**Búsqueda de archivos, carpetas y navegación: Utilizar skill de codegraph**
+**Búsqueda de código, archivos, carpetas y navegación: Utilizar skill de codegraph**
 
 <!-- END:nextjs-agent-rules -->

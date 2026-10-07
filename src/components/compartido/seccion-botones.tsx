@@ -1,5 +1,6 @@
-import { Megaphone, PenLine, Share2, Users } from "lucide-react";
+import { ArrowRight, Megaphone, PenLine, Share2, Users } from "lucide-react";
 import Link from "next/link";
+import { Button } from "../ui/button";
 import { BotonCompartirFacebook } from "./boton-compartir-facebook";
 
 export function Botones() {
@@ -31,6 +32,15 @@ export function Botones() {
           Crear una petición
         </Link>
         <div className="flex items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background">
+          <BotonCompartirFacebook
+            slug="https://masinsectos.org"
+            tipo="noticia"
+            asChild
+          >
+            <Button className="inline-flex items-center gap-2 rounded-lg cursor-pointer px-5 py-2.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary transition-colors bg-sky-800 hover:bg-sky-950">
+              Compartir en Facebook <ArrowRight />
+            </Button>
+          </BotonCompartirFacebook>
           <Share2 className="h-5 w-5" />
           Compartir
           <BotonCompartirFacebook slug="" tipo="recurso" className="h-7 w-7" />

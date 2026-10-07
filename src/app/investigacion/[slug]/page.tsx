@@ -1,4 +1,11 @@
-import { ArrowLeft, Calendar, ExternalLink, MapPin, Users } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  Calendar,
+  ExternalLink,
+  MapPin,
+  Users,
+} from "lucide-react";
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -119,7 +126,8 @@ export default async function PublicacionDetailPage({
           {autoresTexto && (
             <span className="flex items-center gap-2 font-medium">
               <Users className="h-4 w-4" />
-              {autoresTexto}
+              {publicacion.autores.length > 1 ? "Autores: " : "Autor/a: "}
+              <strong>{autoresTexto}</strong>
             </span>
           )}
           {publicacion.anio && (
@@ -140,11 +148,6 @@ export default async function PublicacionDetailPage({
               {fechaEvento}
             </span>
           )}
-          {publicacion.autor && (
-            <span className="flex items-center gap-2 font-medium">
-              Publicado por {publicacion.autor.nombre}
-            </span>
-          )}
           {!publicacion.anio && fechaPublicacion && (
             <span className="flex items-center gap-2 font-medium">
               <Calendar className="h-4 w-4" />
@@ -155,18 +158,22 @@ export default async function PublicacionDetailPage({
       </div>
 
       <div className="flex flex-wrap items-center gap-4 mb-8">
-        <BotonCompartirFacebook slug={slug} tipo="publicacion" />
         {publicacion.enlace && (
           <a
             href={publicacion.enlace}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary transition-colors hover:bg-primary-fixed-dim"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2 font-label text-sm font-bold uppercase tracking-widest text-on-primary transition-colors hover:bg-primary-fixed-dim"
           >
-            Ver fuente original
+            Ir al documento oficial
             <ExternalLink className="h-4 w-4" />
           </a>
         )}
+        <BotonCompartirFacebook slug={slug} tipo="peticion" asChild>
+          <Button className="inline-flex items-center gap-2 rounded-lg cursor-pointer px-5 py-2.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary transition-colors bg-sky-800 hover:bg-sky-950">
+            Compartir en Facebook <ArrowRight />
+          </Button>
+        </BotonCompartirFacebook>
       </div>
 
       {publicacion.imagen && (

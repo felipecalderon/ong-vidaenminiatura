@@ -52,7 +52,7 @@ export const EjesAccionSection = () => {
               </div>
 
               {/* Títulos y descripción */}
-              <div className="space-y-2 mb-4">
+              <div className="space-y-2 mb-4 text-center">
                 <h3 className="text-lg font-headline font-bold text-on-background group-hover:text-primary transition-colors">
                   {eje.nombre}
                 </h3>

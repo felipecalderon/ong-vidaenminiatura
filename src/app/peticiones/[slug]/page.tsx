@@ -121,7 +121,7 @@ export default async function PeticionDetailPage({
   const progress = Math.min((peticion.cantidad_firmas / metaFirmas) * 100, 100);
 
   return (
-    <div className="container mx-auto px-4 py-12">
+    <div className="container mx-auto max-w-6xl px-4 py-12">
       <div className="grid lg:grid-cols-3 gap-12 items-start">
         {/* Main Content */}
         <div className="lg:col-span-2 space-y-8">
@@ -135,17 +135,11 @@ export default async function PeticionDetailPage({
               >
                 {peticion.categoria.nombre}
               </Badge>
-              <span className="text-sm text-muted-foreground">
-                Creado por{""}
-                <span className="font-bold text-foreground">
-                  {peticion.usuario.nombre}
-                </span>
-              </span>
             </div>
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               {peticion.titulo}
             </h1>
-            <p className="text-lg font-semibold text-muted-foreground leading-relaxed">
+            <p className="text-lg font-semibold text-muted-foreground text-pretty leading-relaxed">
               {peticion.resumen}
             </p>
           </div>
@@ -183,7 +177,7 @@ export default async function PeticionDetailPage({
             </Button>
           </BotonCompartirFacebook>
 
-          <article className="prose dark:prose-invert max-w-none border-t border-outline-variant pt-8 whitespace-pre-line">
+          <article className="prose dark:prose-invert max-w-none text-balance border-t border-outline-variant pt-8 whitespace-pre-line">
             {peticion.contenido}
           </article>
         </div>
