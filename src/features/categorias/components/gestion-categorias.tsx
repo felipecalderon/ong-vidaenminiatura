@@ -62,37 +62,40 @@ export function GestionCategorias({
   } = useGestionCategorias(initialCategorias);
 
   return (
-    <div className="space-y-4">
-      <AdminHeader title="Lista de Categorías">
+    <div className="space-y-6">
+      <AdminHeader
+        title="Categorías"
+        description="Organiza el contenido con etiquetas coherentes y fáciles de encontrar."
+      >
         <Button
           onClick={() => setIsNewCategoryOpen(true)}
-          className="flex items-center gap-2 border border-outline-variant font-bold hover: dark: dark:hover:"
+          className="flex items-center gap-2 font-semibold"
         >
           <Plus className="size-4" />
           Nueva Categoría
         </Button>
       </AdminHeader>
 
-      <div className="border border-outline-variant bg-card dark:">
-        <Table>
-          <TableHeader className="bg-muted border-b border-outline-variant">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+        <Table className={categorias.length > 0 ? "min-w-[900px]" : undefined}>
+          <TableHeader className="bg-surface-container/70">
             <TableRow>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Color
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Nombre
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Slug
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Descripción
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Estado
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase text-right">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground text-right">
                 Acción
               </TableHead>
             </TableRow>
@@ -100,7 +103,10 @@ export function GestionCategorias({
           <TableBody>
             {categorias.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={6} className="h-24 text-center font-bold">
+                <TableCell
+                  colSpan={6}
+                  className="h-36 px-4 text-center text-sm text-muted-foreground"
+                >
                   No hay categorías registradas.
                 </TableCell>
               </TableRow>
@@ -108,11 +114,13 @@ export function GestionCategorias({
               categorias.map((categoria) => (
                 <TableRow
                   key={categoria.id}
-                  className="border-b border-outline-variant/10"
+                  className="border-b border-outline-variant/70"
                 >
                   <TableCell>
                     <div
-                      className="size-6 border border-outline-variant dark:"
+                      className="size-6 rounded-sm border border-outline-variant"
+                      role="img"
+                      aria-label={`Color de ${categoria.nombre}: ${categoria.color ?? "#ccc"}`}
                       style={{ backgroundColor: categoria.color ?? "#ccc" }}
                     />
                   </TableCell>
@@ -131,8 +139,8 @@ export function GestionCategorias({
                     <Badge
                       className={`border border-outline-variant font-extrabold ${
                         categoria.activo
-                          ? "bg-green-300 text-black hover:bg-green-300"
-                          : "bg-red-300 text-black hover:bg-red-300"
+                          ? "border-emerald-700/20 bg-emerald-500/10 text-emerald-800 hover:bg-emerald-500/10 dark:text-emerald-300"
+                          : "border-destructive/20 bg-destructive/10 text-destructive hover:bg-destructive/10"
                       }`}
                     >
                       {categoria.activo ? "ACTIVO" : "INACTIVO"}
@@ -144,7 +152,8 @@ export function GestionCategorias({
                         onClick={() => handleOpenEdit(categoria)}
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
+                        aria-label={`Editar categoría: ${categoria.nombre}`}
                         title="Editar categoría"
                       >
                         <Edit2 className="size-3.5" />
@@ -154,7 +163,12 @@ export function GestionCategorias({
                         disabled={isPending || categorias.length <= 1}
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10 dark:"
+                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10"
+                        aria-label={
+                          categorias.length <= 1
+                            ? "No se puede eliminar la última categoría"
+                            : `Eliminar categoría: ${categoria.nombre}`
+                        }
                         title={
                           categorias.length <= 1
                             ? "No se puede eliminar la última categoría"

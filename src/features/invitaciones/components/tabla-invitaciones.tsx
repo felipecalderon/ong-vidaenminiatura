@@ -58,7 +58,10 @@ export function TablaInvitaciones({ invitaciones }: TablaInvitacionesProps) {
   if (invitaciones.length === 0) {
     return (
       <div className="border border-outline-variant rounded-xl p-8 text-center bg-card">
-        <Clock className="size-8 mx-auto text-muted-foreground mb-2" />
+        <Clock
+          className="mx-auto mb-3 size-8 text-muted-foreground"
+          aria-hidden="true"
+        />
         <p className="text-sm font-bold text-foreground">
           No hay invitaciones registradas
         </p>
@@ -71,26 +74,26 @@ export function TablaInvitaciones({ invitaciones }: TablaInvitacionesProps) {
   }
 
   return (
-    <div className="border border-outline-variant bg-card overflow-hidden">
-      <Table>
-        <TableHeader className="bg-muted border-b border-outline-variant">
+    <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+      <Table className="min-w-[900px]">
+        <TableHeader className="bg-surface-container/70">
           <TableRow>
-            <TableHead className="font-extrabold text-black dark:text-white uppercase text-xs">
+            <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
               Correo
             </TableHead>
-            <TableHead className="font-extrabold text-black dark:text-white uppercase text-xs">
+            <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
               Rol Asignado
             </TableHead>
-            <TableHead className="font-extrabold text-black dark:text-white uppercase text-xs">
+            <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
               Estado
             </TableHead>
-            <TableHead className="font-extrabold text-black dark:text-white uppercase text-xs">
+            <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
               Invitado Por
             </TableHead>
-            <TableHead className="font-extrabold text-black dark:text-white uppercase text-xs">
+            <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
               Vigencia / Expiración
             </TableHead>
-            <TableHead className="font-extrabold text-black dark:text-white uppercase text-xs text-right">
+            <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground text-right">
               Acciones
             </TableHead>
           </TableRow>
@@ -106,9 +109,9 @@ export function TablaInvitaciones({ invitaciones }: TablaInvitacionesProps) {
             return (
               <TableRow
                 key={inv.id}
-                className="border-b border-outline-variant/10 text-xs"
+                className="border-b border-outline-variant/70 text-xs"
               >
-                <TableCell className="font-mono font-medium">
+                <TableCell className="px-4 py-3 text-sm font-medium text-foreground">
                   {inv.correo}
                 </TableCell>
 
@@ -117,7 +120,7 @@ export function TablaInvitaciones({ invitaciones }: TablaInvitacionesProps) {
                     variant="outline"
                     className={`font-black uppercase text-[10px] tracking-wider ${
                       inv.rol === Rol.ADMINISTRADOR
-                        ? "border-amber-500/50 bg-amber-500/10 text-amber-600 dark:text-amber-400"
+                        ? "border-amber-700/20 bg-amber-500/10 text-amber-900 dark:text-amber-300"
                         : inv.rol === Rol.AUTOR
                           ? "border-primary/50 bg-primary/10 text-primary"
                           : "border-muted-foreground/30 bg-muted/40 text-muted-foreground"
@@ -129,14 +132,14 @@ export function TablaInvitaciones({ invitaciones }: TablaInvitacionesProps) {
 
                 <TableCell>
                   <Badge
-                    className={`font-extrabold text-[10px] border border-outline-variant ${
+                    className={`border px-2.5 py-1 text-[11px] font-semibold ${
                       estadoEfectivo === EstadoInvitacion.ACEPTADA
-                        ? "bg-green-300 text-black hover:bg-green-300"
+                        ? "border-emerald-700/20 bg-emerald-500/10 text-emerald-800 hover:bg-emerald-500/10 dark:text-emerald-300"
                         : estadoEfectivo === EstadoInvitacion.PENDIENTE
-                          ? "bg-amber-300 text-black hover:bg-amber-300"
+                          ? "border-amber-700/20 bg-amber-500/10 text-amber-900 hover:bg-amber-500/10 dark:text-amber-300"
                           : estadoEfectivo === EstadoInvitacion.CANCELADA
-                            ? "bg-red-300 text-black hover:bg-red-300"
-                            : "bg-zinc-300 text-black hover:bg-zinc-300"
+                            ? "border-destructive/20 bg-destructive/10 text-destructive hover:bg-destructive/10"
+                            : "border-outline-variant bg-surface-container text-muted-foreground hover:bg-surface-container"
                     }`}
                   >
                     {estadoEfectivo}
@@ -149,8 +152,8 @@ export function TablaInvitaciones({ invitaciones }: TablaInvitacionesProps) {
 
                 <TableCell className="text-muted-foreground">
                   {inv.estado === EstadoInvitacion.ACEPTADA ? (
-                    <span className="flex items-center gap-1 text-green-600 dark:text-green-400 font-semibold">
-                      <Check className="size-3.5" />
+                    <span className="flex items-center gap-1 font-semibold text-emerald-800 dark:text-emerald-300">
+                      <Check className="size-3.5" aria-hidden="true" />
                       {inv.aceptada_at
                         ? new Date(inv.aceptada_at).toLocaleDateString("es-CL")
                         : "Aceptada"}

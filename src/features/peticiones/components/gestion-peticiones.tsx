@@ -16,8 +16,11 @@ export function GestionPeticiones({
   categorias,
 }: GestionPeticionesProps) {
   return (
-    <div className="space-y-4">
-      <AdminHeader title="Gestión de Peticiones">
+    <div className="space-y-6">
+      <AdminHeader
+        title="Peticiones"
+        description="Modera las propuestas y supervisa su estado y participación."
+      >
         <Button
           asChild
           variant="outline"

@@ -29,6 +29,7 @@ export async function reenviarInvitacionAction(
 
     if (resultado.exito) {
       revalidatePath("/administracion");
+      revalidatePath("/administracion/invitaciones");
     }
 
     return {

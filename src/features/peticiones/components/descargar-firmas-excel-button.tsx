@@ -55,7 +55,9 @@ export function DescargarFirmasExcelButton({
       disabled={isLoading || cantidadFirmas === 0}
       variant="ghost"
       size="icon"
-      className="border border-outline-variant bg-card hover:bg-muted dark:"
+      className="border border-outline-variant bg-card hover:bg-muted"
+      aria-label={`Descargar firmas de ${tituloPeticion} en Excel`}
+      aria-busy={isLoading}
       title="Descargar firmas en Excel"
     >
       {isLoading ? (

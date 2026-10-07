@@ -12,16 +12,22 @@ export function AdminHeader({
   children,
 }: AdminHeaderProps) {
   return (
-    <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h2 className="text-2xl font-extrabold uppercase tracking-tight text-foreground">
+    <header className="flex flex-col gap-4 border-b border-outline-variant pb-5 sm:flex-row sm:items-end sm:justify-between">
+      <div className="min-w-0">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
           {title}
-        </h2>
+        </h1>
         {description && (
-          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
+          <p className="mt-2 max-w-prose text-sm leading-6 text-muted-foreground">
+            {description}
+          </p>
         )}
       </div>
-      {children && <div className="flex items-center gap-2">{children}</div>}
-    </div>
+      {children && (
+        <div className="flex flex-wrap items-center gap-2 sm:shrink-0">
+          {children}
+        </div>
+      )}
+    </header>
   );
 }

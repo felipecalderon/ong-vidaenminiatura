@@ -41,6 +41,7 @@ export async function invitarUsuarioAction(
 
     if (resultado.exito) {
       revalidatePath("/administracion");
+      revalidatePath("/administracion/invitaciones");
     }
 
     return {

@@ -34,8 +34,11 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
     useGestionNoticias(initialNoticias);
 
   return (
-    <div className="space-y-4">
-      <AdminHeader title="Gestión de Noticias">
+    <div className="space-y-6">
+      <AdminHeader
+        title="Noticias"
+        description="Revisa las publicaciones, actualiza su estado y conserva el contenido vigente."
+      >
         <Button
           asChild
           variant="outline"
@@ -45,20 +48,20 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
         </Button>
       </AdminHeader>
 
-      <div className="border border-outline-variant bg-card dark:">
-        <Table>
-          <TableHeader className="bg-muted border-b border-outline-variant">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+        <Table className={noticias.length > 0 ? "min-w-[720px]" : undefined}>
+          <TableHeader className="bg-surface-container/70">
             <TableRow>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Noticia
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Autor
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Estado
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase text-right">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground text-right">
                 Acciones
               </TableHead>
             </TableRow>
@@ -66,7 +69,10 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
           <TableBody>
             {noticias.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={4} className="h-24 text-center font-bold">
+                <TableCell
+                  colSpan={4}
+                  className="h-36 px-4 text-center text-sm text-muted-foreground"
+                >
                   No hay noticias registradas.
                 </TableCell>
               </TableRow>
@@ -74,7 +80,7 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
               noticias.map((noticia) => (
                 <TableRow
                   key={noticia.id}
-                  className="border-b border-outline-variant/10"
+                  className="border-b border-outline-variant/70"
                 >
                   <TableCell>
                     <div>
@@ -108,7 +114,10 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
                         handleStatusChange(noticia.id, val as EstadoNoticia)
                       }
                     >
-                      <SelectTrigger className="w-36 border border-outline-variant font-semibold bg-background dark:">
+                      <SelectTrigger
+                        aria-label={`Estado de la noticia: ${noticia.titulo}`}
+                        className="w-36 border border-outline-variant bg-background font-medium"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="border border-outline-variant bg-popover font-semibold">
@@ -133,12 +142,14 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
                         title="Ver noticia"
                       >
                         <Link
                           href={`/noticias/${noticia.slug}`}
                           target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Ver noticia: ${noticia.titulo} (se abre en una pestaña nueva)`}
                         >
                           <Eye className="size-3.5" />
                         </Link>
@@ -147,7 +158,8 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
+                        aria-label={`Editar noticia: ${noticia.titulo}`}
                         title="Editar noticia"
                       >
                         <Link href={`/noticias/${noticia.slug}/editar`}>
@@ -159,7 +171,8 @@ export function GestionNoticias({ initialNoticias }: GestionNoticiasProps) {
                         disabled={isPending}
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10 dark:"
+                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10"
+                        aria-label={`Eliminar noticia: ${noticia.titulo}`}
                         title="Eliminar noticia"
                       >
                         <Trash2 className="size-3.5" />

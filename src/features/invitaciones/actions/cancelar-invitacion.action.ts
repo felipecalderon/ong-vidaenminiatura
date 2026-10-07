@@ -26,6 +26,7 @@ export async function cancelarInvitacionAction(
 
     if (resultado.exito) {
       revalidatePath("/administracion");
+      revalidatePath("/administracion/invitaciones");
     }
 
     return {

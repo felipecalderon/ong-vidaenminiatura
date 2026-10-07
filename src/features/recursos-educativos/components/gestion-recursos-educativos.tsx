@@ -39,8 +39,11 @@ export function GestionRecursosEducativos({
   } = useGestionRecursosEducativos(initialRecursosEducativos);
 
   return (
-    <div className="space-y-4">
-      <AdminHeader title="Gestión de Recursos Educativos">
+    <div className="space-y-6">
+      <AdminHeader
+        title="Recursos educativos"
+        description="Mantén organizados los materiales para aprender y compartir."
+      >
         <Button
           asChild
           variant="outline"
@@ -50,23 +53,27 @@ export function GestionRecursosEducativos({
         </Button>
       </AdminHeader>
 
-      <div className="border border-outline-variant bg-card dark:">
-        <Table>
-          <TableHeader className="bg-muted border-b border-outline-variant">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+        <Table
+          className={
+            recursosEducativos.length > 0 ? "min-w-[840px]" : undefined
+          }
+        >
+          <TableHeader className="bg-surface-container/70">
             <TableRow>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Recurso educativo
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Tipo
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Autor
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Estado
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase text-right">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground text-right">
                 Acciones
               </TableHead>
             </TableRow>
@@ -74,7 +81,10 @@ export function GestionRecursosEducativos({
           <TableBody>
             {recursosEducativos.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="h-24 text-center font-bold">
+                <TableCell
+                  colSpan={5}
+                  className="h-36 px-4 text-center text-sm text-muted-foreground"
+                >
                   No hay recursos educativos registrados.
                 </TableCell>
               </TableRow>
@@ -82,7 +92,7 @@ export function GestionRecursosEducativos({
               recursosEducativos.map((recurso) => (
                 <TableRow
                   key={recurso.id}
-                  className="border-b border-outline-variant/10"
+                  className="border-b border-outline-variant/70"
                 >
                   <TableCell>
                     <p className="font-bold text-foreground line-clamp-1">
@@ -112,7 +122,10 @@ export function GestionRecursosEducativos({
                         )
                       }
                     >
-                      <SelectTrigger className="w-36 border border-outline-variant font-semibold bg-background dark:">
+                      <SelectTrigger
+                        aria-label={`Estado del recurso: ${recurso.titulo}`}
+                        className="w-36 border border-outline-variant bg-background font-medium"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="border border-outline-variant bg-popover font-semibold">
@@ -137,10 +150,15 @@ export function GestionRecursosEducativos({
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
                         title="Ver recurso educativo"
                       >
-                        <Link href={`/aprende/${recurso.slug}`} target="_blank">
+                        <Link
+                          href={`/aprende/${recurso.slug}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Ver recurso educativo: ${recurso.titulo} (se abre en una pestaña nueva)`}
+                        >
                           <Eye className="size-3.5" />
                         </Link>
                       </Button>
@@ -148,7 +166,8 @@ export function GestionRecursosEducativos({
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
+                        aria-label={`Editar recurso educativo: ${recurso.titulo}`}
                         title="Editar recurso educativo"
                       >
                         <Link href={`/aprende/${recurso.slug}/editar`}>
@@ -160,7 +179,8 @@ export function GestionRecursosEducativos({
                         disabled={isPending}
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10 dark:"
+                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10"
+                        aria-label={`Eliminar recurso educativo: ${recurso.titulo}`}
                         title="Eliminar recurso educativo"
                       >
                         <Trash2 className="size-3.5" />

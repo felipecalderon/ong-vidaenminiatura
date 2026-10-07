@@ -158,14 +158,14 @@ export function PeticionesTable({
 
   if (peticiones.length === 0) {
     return (
-      <div className="text-center p-8 border border-outline-variant dark:">
-        <p className="text-lg font-bold mb-4">No hay peticiones registradas.</p>
+      <div className="rounded-xl border border-outline-variant bg-card p-8 text-center">
+        <p className="text-base font-semibold text-foreground">
+          No hay peticiones registradas.
+        </p>
         {emptyCtaHref && emptyCtaLabel && (
-          <Link href={emptyCtaHref}>
-            <Button className="border border-outline-variant font-bold hover: dark: dark:hover:">
-              {emptyCtaLabel}
-            </Button>
-          </Link>
+          <Button asChild className="mt-4">
+            <Link href={emptyCtaHref}>{emptyCtaLabel}</Link>
+          </Button>
         )}
       </div>
     );
@@ -173,28 +173,28 @@ export function PeticionesTable({
 
   return (
     <>
-      <div className="overflow-x-auto border border-outline-variant dark:">
-        <Table>
-          <TableHeader className="bg-secondary border-b border-outline-variant">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+        <Table className="min-w-[900px]">
+          <TableHeader className="bg-surface-container/70">
             <TableRow>
-              <TableHead className="font-bold text-black dark:text-white">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Título
               </TableHead>
               {esAdmin && (
-                <TableHead className="font-bold text-black dark:text-white">
+                <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                   Usuario
                 </TableHead>
               )}
-              <TableHead className="font-bold text-black dark:text-white">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Categoría
               </TableHead>
-              <TableHead className="font-bold text-black dark:text-white">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Estado
               </TableHead>
-              <TableHead className="text-right font-bold text-black dark:text-white">
+              <TableHead className="text-right h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Firmas
               </TableHead>
-              <TableHead className="text-right font-bold text-black dark:text-white">
+              <TableHead className="text-right h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Acciones
               </TableHead>
             </TableRow>
@@ -203,7 +203,7 @@ export function PeticionesTable({
             {peticiones.map((peticion) => (
               <TableRow
                 key={peticion.id}
-                className="border-b border-outline-variant/20"
+                className="border-b border-outline-variant/70"
               >
                 <TableCell
                   className="font-medium max-w-50 truncate"
@@ -239,7 +239,10 @@ export function PeticionesTable({
                         handleEstadoChange(peticion.id, val as EstadoPeticion)
                       }
                     >
-                      <SelectTrigger className="w-36 border border-outline-variant font-semibold bg-background dark:">
+                      <SelectTrigger
+                        aria-label={`Estado de la petición: ${peticion.titulo}`}
+                        className="w-36 border border-outline-variant bg-background font-medium"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="border border-outline-variant bg-popover font-semibold">
@@ -288,12 +291,14 @@ export function PeticionesTable({
                       asChild
                       variant="ghost"
                       size="icon"
-                      className="border border-outline-variant bg-card hover:bg-muted dark:"
+                      className="border border-outline-variant bg-card hover:bg-muted"
                       title="Ver petición"
                     >
                       <Link
                         href={`/peticiones/${peticion.slug}`}
                         target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Ver petición: ${peticion.titulo} (se abre en una pestaña nueva)`}
                       >
                         <Eye className="size-3.5" />
                       </Link>
@@ -309,9 +314,10 @@ export function PeticionesTable({
                       <Button
                         variant="outline"
                         size="icon"
-                        className="border border-outline-variant hover:border-red-500 hover:text-red-500 dark: hover:shadow-none"
+                        className="border border-outline-variant hover:border-red-500 hover:text-red-500 hover:shadow-none"
                         onClick={() => handleCerrar(peticion.id)}
                         disabled={cerrandoId === peticion.id}
+                        aria-label={`Cerrar petición: ${peticion.titulo}`}
                         title="Cerrar petición"
                       >
                         <XCircle className="h-4 w-4" />
@@ -321,9 +327,10 @@ export function PeticionesTable({
                       <Button
                         variant="outline"
                         size="icon"
-                        className="border border-outline-variant hover:border-primary hover:text-primary dark: hover:shadow-none"
+                        className="border border-outline-variant hover:border-primary hover:text-primary hover:shadow-none"
                         onClick={() => handleReabrir(peticion.id)}
                         disabled={reabriendoId === peticion.id}
+                        aria-label={`Reabrir petición: ${peticion.titulo}`}
                         title="Reabrir petición"
                       >
                         <RotateCcw className="h-4 w-4" />
@@ -351,7 +358,8 @@ export function PeticionesTable({
                       onClick={() => abrirModal(peticion)}
                       variant="outline"
                       size="icon"
-                      className="border border-outline-variant bg-card hover:bg-muted dark:"
+                      className="border border-outline-variant bg-card hover:bg-muted"
+                      aria-label={`Editar petición: ${peticion.titulo}`}
                       title="Editar petición"
                     >
                       <Edit className="size-3.5" />
@@ -359,9 +367,10 @@ export function PeticionesTable({
                     <Button
                       variant="destructive"
                       size="icon"
-                      className="border border-outline-variant dark: hover:shadow-none"
+                      className="border border-outline-variant hover:shadow-none"
                       onClick={() => handleEliminar(peticion.id)}
                       disabled={eliminandoId === peticion.id}
+                      aria-label={`Eliminar petición: ${peticion.titulo}`}
                       title="Eliminar petición"
                     >
                       <Trash2 className="size-3.5" />

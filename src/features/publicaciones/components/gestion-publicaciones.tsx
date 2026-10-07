@@ -39,8 +39,11 @@ export function GestionPublicaciones({
   } = useGestionPublicaciones(initialPublicaciones);
 
   return (
-    <div className="space-y-4">
-      <AdminHeader title="Gestión de Publicaciones">
+    <div className="space-y-6">
+      <AdminHeader
+        title="Publicaciones"
+        description="Administra estudios, publicaciones y eventos de investigación."
+      >
         <Button
           asChild
           variant="outline"
@@ -50,23 +53,25 @@ export function GestionPublicaciones({
         </Button>
       </AdminHeader>
 
-      <div className="border border-outline-variant bg-card dark:">
-        <Table>
-          <TableHeader className="bg-muted border-b border-outline-variant">
+      <div className="overflow-hidden rounded-xl border border-outline-variant bg-card">
+        <Table
+          className={publicaciones.length > 0 ? "min-w-[820px]" : undefined}
+        >
+          <TableHeader className="bg-surface-container/70">
             <TableRow>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Publicación
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Tipo
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Autor
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground">
                 Estado
               </TableHead>
-              <TableHead className="font-extrabold text-black dark:text-white uppercase text-right">
+              <TableHead className="h-11 px-4 text-xs font-semibold tracking-wide text-muted-foreground text-right">
                 Acciones
               </TableHead>
             </TableRow>
@@ -74,7 +79,10 @@ export function GestionPublicaciones({
           <TableBody>
             {publicaciones.length === 0 ? (
               <TableRow>
-                <TableCell colSpan={5} className="h-24 text-center font-bold">
+                <TableCell
+                  colSpan={5}
+                  className="h-36 px-4 text-center text-sm text-muted-foreground"
+                >
                   No hay publicaciones registradas.
                 </TableCell>
               </TableRow>
@@ -82,7 +90,7 @@ export function GestionPublicaciones({
               publicaciones.map((publicacion) => (
                 <TableRow
                   key={publicacion.id}
-                  className="border-b border-outline-variant/10"
+                  className="border-b border-outline-variant/70"
                 >
                   <TableCell>
                     <p className="font-bold text-foreground line-clamp-1">
@@ -112,7 +120,10 @@ export function GestionPublicaciones({
                         )
                       }
                     >
-                      <SelectTrigger className="w-36 border border-outline-variant font-semibold bg-background dark:">
+                      <SelectTrigger
+                        aria-label={`Estado de la publicación: ${publicacion.titulo}`}
+                        className="w-36 border border-outline-variant bg-background font-medium"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent className="border border-outline-variant bg-popover font-semibold">
@@ -137,12 +148,14 @@ export function GestionPublicaciones({
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
                         title="Ver publicación"
                       >
                         <Link
                           href={`/investigacion/${publicacion.slug}`}
                           target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Ver publicación: ${publicacion.titulo} (se abre en una pestaña nueva)`}
                         >
                           <Eye className="size-3.5" />
                         </Link>
@@ -151,7 +164,8 @@ export function GestionPublicaciones({
                         asChild
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card hover:bg-muted dark:"
+                        className="border border-outline-variant bg-card hover:bg-muted"
+                        aria-label={`Editar publicación: ${publicacion.titulo}`}
                         title="Editar publicación"
                       >
                         <Link
@@ -165,7 +179,8 @@ export function GestionPublicaciones({
                         disabled={isPending}
                         variant="ghost"
                         size="icon"
-                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10 dark:"
+                        className="border border-outline-variant bg-card text-destructive hover:bg-destructive/10"
+                        aria-label={`Eliminar publicación: ${publicacion.titulo}`}
                         title="Eliminar publicación"
                       >
                         <Trash2 className="size-3.5" />
