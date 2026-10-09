@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { Theme } from "@/lib/theme";
+import { Bee } from "./bee";
 import { Insect } from "./insect";
 
 type Trait = { hue: number; flap: number; scale: number };
@@ -27,7 +29,7 @@ const ORBIT_PULL = 0.012; // how strongly they settle onto their ring
 const TANGENT = 0.09; // orbiting force
 const FLEE_FORCE = 1.3; // effective repulsion strength
 
-export function CursorSwarm() {
+export function CursorSwarm({ theme }: { theme: Theme }) {
   const nodesRef = useRef<(HTMLDivElement | null)[]>([]);
   const bugsRef = useRef<Bug[]>([]);
   const mouseRef = useRef({ x: 0, y: 0, active: false });
@@ -36,7 +38,6 @@ export function CursorSwarm() {
   // Per-insect visual traits generated on the client only (avoids SSR/client
   // hydration mismatch from Math.random()).
   const [traits, setTraits] = useState<Trait[]>([]);
-
   useEffect(() => {
     setTraits(
       Array.from({ length: COUNT }, (_, i) => ({
@@ -201,7 +202,11 @@ export function CursorSwarm() {
           }}
           className="absolute left-0 top-0 will-change-transform"
         >
-          <Insect hue={tr.hue} flap={tr.flap} scale={tr.scale} />
+          {theme === "light" ? (
+            <Insect hue={tr.hue} flap={tr.flap} scale={tr.scale} />
+          ) : (
+            <Bee flap={tr.flap} scale={tr.scale} />
+          )}
         </div>
       ))}
     </div>

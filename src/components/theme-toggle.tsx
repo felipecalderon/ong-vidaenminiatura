@@ -1,3 +1,4 @@
+import { MdLightMode, MdNightlight } from "react-icons/md";
 import { cambiarTema } from "@/actions/theme";
 import { Button } from "@/components/ui/button";
 import {
@@ -31,11 +32,11 @@ export function ThemeToggle({ currentTheme }: ThemeToggleProps) {
           >
             {currentTheme === "dark" ? (
               <span role="img" aria-label="Cambiar a modo claro">
-                😉
+                <MdLightMode />
               </span>
             ) : (
               <span role="img" aria-label="Cambiar a visión ultravioleta">
-                🐝
+                <MdNightlight />
               </span>
             )}
             <span className="sr-only">

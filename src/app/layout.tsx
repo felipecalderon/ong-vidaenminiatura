@@ -42,7 +42,7 @@ export default async function RootLayout({
             usuarioAutenticado={usuarioAutenticado}
             currentTheme={theme}
           />
-          <CursorSwarm />
+          <CursorSwarm theme={theme} />
           <main className="flex-1">{children}</main>
           <Footer />
         </div>
