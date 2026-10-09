@@ -7,8 +7,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: "Geist", sans-serif;
-  --font-mono: "Geist Mono", monospace;
 
   --color-primary: var(--primary);
   --color-primary-fixed-dim: var(--primary-fixed-dim);
@@ -254,7 +252,7 @@
     @apply border-outline-variant outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground font-sans selection:bg-primary/20 selection:text-primary;
+    @apply bg-background text-foreground selection:bg-primary/20 selection:text-primary;
     letter-spacing: normal;
   }
   h1,
@@ -319,7 +317,7 @@
   }
 
   .noticia-markdown code {
-    @apply rounded bg-surface-container-high px-1.5 py-0.5 font-mono text-sm text-foreground;
+    @apply rounded bg-surface-container-high px-1.5 py-0.5 text-sm text-foreground;
   }
 
   .noticia-markdown pre code {

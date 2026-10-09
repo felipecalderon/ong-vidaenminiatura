@@ -21,13 +21,6 @@ export default async function HomePage() {
   }
 
   return (
-    /*
-     * THESIS: La portada es una ventana de observación ultravioleta, no un mosaico de tarjetas.
-     * OWN-WORLD: superficies violetas profundas, bordes precisos, cian para vida y tipografía compacta.
-     * STORY: comprender por qué importan los insectos, descubrir una causa y participar.
-     * FIRST VIEWPORT: declaración + ojo de abeja arriba; la petición activa aparece como acción inmediata.
-     * FORM: Persuade / editorial de campo, con composición asimétrica y paneles de lectura corta.
-     */
     <main className="min-h-screen text-on-background">
       {/* Hero Section */}
       <HeroSection />
@@ -53,10 +46,10 @@ export default async function HomePage() {
           </div>
           <div className="relative z-10 mx-auto flex min-h-136 max-w-7xl flex-col items-start justify-end gap-10 px-4 py-12 sm:px-6 md:flex-row md:items-end md:justify-between md:py-16 lg:min-h-156">
             <div className="max-w-3xl">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-tertiary/30 bg-tertiary/10 px-3 py-2 text-xs font-label uppercase tracking-widest text-tertiary">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-lg border border-tertiary/30 bg-tertiary/10 px-3 py-2 text-xs uppercase tracking-widest text-tertiary">
                 {featuredPeticion.categoria.nombre}
               </div>
-              <h1 className="mb-5 text-4xl font-headline font-black leading-[0.95] tracking-[-0.045em] text-on-background md:text-6xl lg:text-7xl">
+              <h1 className="mb-5 text-4xl font-black leading-[0.95] tracking-[-0.045em] text-on-background md:text-6xl lg:text-7xl">
                 {featuredPeticion.titulo}
               </h1>
               <p className="mb-8 max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg text-balance">
@@ -64,13 +57,13 @@ export default async function HomePage() {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Link href={`/peticiones/${featuredPeticion.slug}`}>
-                  <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-primary shadow-[0_12px_30px_-14px_var(--primary)] transition-colors hover:bg-primary-fixed-dim sm:w-auto">
+                  <span className="flex w-full items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3.5 text-sm font-bold uppercase tracking-widest text-on-primary shadow-[0_12px_30px_-14px_var(--primary)] transition-colors hover:bg-primary-fixed-dim sm:w-auto">
                     Ver Petición
                     <ArrowRight className="w-5 h-5" />
                   </span>
                 </Link>
                 <Link href="/peticiones">
-                  <span className="flex w-full items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 font-label text-sm font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high sm:w-auto">
+                  <span className="flex w-full items-center justify-center gap-2 rounded-lg border border-outline-variant bg-background/40 px-6 py-3.5 text-sm font-bold uppercase tracking-widest text-on-background transition-colors hover:bg-surface-container-high sm:w-auto">
                     Todas las peticiones
                   </span>
                 </Link>
@@ -78,7 +71,7 @@ export default async function HomePage() {
             </div>
 
             <div className="w-full rounded-2xl border border-outline-variant/80 bg-background/75 p-5 backdrop-blur-md md:w-80">
-              <div className="mb-3 text-[0.68rem] font-label uppercase tracking-widest text-on-surface-variant line-clamp-1">
+              <div className="mb-3 text-[0.68rem] uppercase tracking-widest text-on-surface-variant line-clamp-1">
                 Destacado: {featuredPeticion.titulo}
               </div>
               <div className="mb-4 text-4xl font-headline font-black tracking-[-0.04em] text-on-background">

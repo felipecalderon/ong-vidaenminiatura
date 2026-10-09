@@ -5,7 +5,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { SiteBackground } from "@/components/site-background";
 import { obtenerUsuarioAutenticado } from "@/features/usuarios/queries/obtener-usuario-autenticado";
-import { figtree, geistMono, geistSans } from "@/lib/fonts";
+import { baseFont } from "@/lib/fonts";
 import { metadataSEO } from "@/lib/metadata-seo";
 import { getTheme } from "@/lib/theme";
 import { cn } from "@/lib/utils";
@@ -28,10 +28,7 @@ export default async function RootLayout({
       className={cn(
         "h-full",
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
-        "font-sans",
-        figtree.variable,
+        baseFont,
         theme === "dark" && "dark",
       )}
     >

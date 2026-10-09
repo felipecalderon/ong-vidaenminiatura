@@ -1,13 +1,7 @@
-import { Figtree, Geist, Geist_Mono } from "next/font/google";
+import { Sulphur_Point } from "next/font/google";
 
-export const figtree = Figtree({ subsets: ["latin"], variable: "--font-sans" });
-
-export const geistSans = Geist({
-  variable: "--font-geist-sans",
+export const baseFont = Sulphur_Point({
+  weight: "300",
   subsets: ["latin"],
-});
-
-export const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-sulphur-point",
 });

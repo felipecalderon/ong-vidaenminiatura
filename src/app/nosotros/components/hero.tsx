@@ -6,14 +6,14 @@ export const HeroSection = () => {
     <section className="relative overflow-hidden">
       <div className="relative z-10 mx-auto max-w-7xl px-4 pb-20 pt-16 sm:px-6 md:pb-28 md:pt-24">
         {/* Eyebrow */}
-        <div className="mb-8 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-[0.68rem] font-label uppercase tracking-[0.18em] text-primary">
+        <div className="mb-8 inline-flex animate-[fadeIn_0.6s_ease-out] items-center gap-2 rounded-lg border border-primary/25 bg-primary/10 px-3 py-2 text-[0.68rem] uppercase tracking-[0.18em] text-primary">
           <MapPin className="h-3 w-3" />
           Temuco, Chile · Fundada en septiembre, 2026
         </div>
 
         <div className="grid items-end gap-12 md:grid-cols-[1.3fr_0.7fr] md:gap-20">
           <div className="animate-[fadeIn_0.8s_ease-out]">
-            <h1 className="mb-7 text-[clamp(3rem,8vw,6.5rem)] font-headline font-black leading-[0.8] tracking-tight text-on-background">
+            <h1 className="mb-7 text-[clamp(3rem,8vw,6.5rem)] font-black leading-[0.8] tracking-tight text-on-background">
               Cada insecto <span className="text-primary">importa.</span>
               <br />
               <span className="mt-5 block max-w-md text-[0.27em] font-semibold leading-[1.2] tracking-[-0.02em] text-on-surface-variant">
@@ -21,7 +21,7 @@ export const HeroSection = () => {
               </span>
             </h1>
 
-            <p className="max-w-2xl text-base leading-relaxed text-on-surface-variant md:text-lg text-balance">
+            <p className="max-w-2xl leading-relaxed text-on-surface-variant md:text-lg text-balance">
               Somos una organización de derecho animal nacida en el corazón de
               La Araucanía. Bajo la firme convicción de que los insectos,
               arácnidos y todos los animales no humanos son seres sintientes,
